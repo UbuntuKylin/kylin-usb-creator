@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>data/min_h.png</file>
+        <file>data/close_h.png</file>
+        <file>data/min_d.png</file>
+        <file>data/loading.gif</file>
+        <file>data/icon.png</file>
+        <file>data/finish.gif</file>
+        <file>data/close_d.png</file>
+        <file>data/comboboxIcon_d.png</file>
+        <file>data/comboboxIcon_c.png</file>
+        <file>data/warning.png</file>
+    </qresource>
+</RCC>

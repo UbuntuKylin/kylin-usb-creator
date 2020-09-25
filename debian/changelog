@@ -1,0 +1,11 @@
+kylin-usb-creator (1.0.0-4) v101; urgency=medium
+
+  * 修复找不到镜像路径的问题
+
+ -- liuyuhui <liuyuhui@kylinos.cn>  Thu, 23 Sep 2020 17:30:45 +0800
+
+kylin-usb-creator (1.0.0-2) v101; urgency=medium
+
+  * first commit
+
+ -- liuyuhui <liuyuhui@kylinos.cn>  Mon, 21 Sep 2020 16:32:14 +0800
