@@ -2,7 +2,7 @@
 Name=Kylin Usb Creator
 Name[zh_CN]=麒麟U盘启动器
 Comment[zh_CN]=A tool for making USB falsh disk made by Kylin software
-Exec=/opt/kylin-usb-creator/bin/kylin-usb-creator
+Exec=/usr/bin/kylin-usb-creator %u
 Icon=/usr/share/pixmaps/kylin-usb-creator.png
 Type=Application
 Categories=Qt;USB;Generator,Setting
