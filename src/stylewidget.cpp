@@ -53,7 +53,14 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     widgetMin->setObjectName("widgetMin");
     widgetMin->setIconSize(smallWidgetSize);
     widgetMin->setFixedSize(smallWidgetSize);
-    connect(widgetMin,&QPushButton::clicked,this,[=]{this->setWindowState(Qt::WindowMinimized);});
+    connect(widgetMin,&QPushButton::clicked,this,[=]{
+//        qDebug()<<"最小化";
+        swshadow->setWindowState(Qt::WindowMinimized);
+//        this->setWindowState(Qt::WindowMinimized);}
+//        this->setWindowFlags( windowFlags() | Qt::WindowMaximizeButtonHint | Qt::WindowMinimizeButtonHint | Qt::WindowStaysOnTopHint );}
+//        this->hide();
+    }
+    );
 
     widgetClose =new QPushButton;//关闭按钮
     widgetClose->setObjectName("widgetClose");
