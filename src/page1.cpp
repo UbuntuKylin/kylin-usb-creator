@@ -22,6 +22,8 @@ void Page1::initControlQss()
     tabIso->setFixedHeight(20);
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
+    tabIso->setStyleSheet("font-size:14px;");
+    tabUdisk->setStyleSheet("font-size:14px;");
     tabUdisk->setObjectName("tabLable");
     comboUdisk=new StyleComboBox(swa);
     warnningIcon=new QLabel;
@@ -38,6 +40,7 @@ void Page1::initControlQss()
     findIso=new QPushButton(this);
     findIso->setText(tr("浏览"));
     findIso->setFixedSize(56,30);
+    findIso->setStyleSheet("font-size:14px;");
     connect(findIso,&QPushButton::clicked,this,[=]{
         urlIso->setText( QFileDialog::getOpenFileName(0,tr("选择镜像文件"),QDir::homePath(),"ISO(*.iso)"));
         });
@@ -46,6 +49,7 @@ void Page1::initControlQss()
     creatStart->setFixedSize(200,30);
     creatStart->setText(tr("开始制作"));
     creatStart->setEnabled(false);
+    creatStart->setStyleSheet("font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;");
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
 //    connect(createStart,)
