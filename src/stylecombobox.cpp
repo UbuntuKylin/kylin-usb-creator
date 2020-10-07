@@ -42,23 +42,34 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
 
 void StyleComboBox::on_pushButton_click()
 {
-    deleteShadow();
-    int listWidgetHeight=listWidget->count() * swa.itemHeight+swa.shadow;
-    listWidget->setFixedHeight(listWidgetHeight);
-    swa.setH(listWidgetHeight);
-    //设置阴影
-    swshadow =new StyleWidgetShadow(swa);
-    QVBoxLayout *vblayout=new QVBoxLayout(swshadow);
-    QPoint point= pushButton->mapToGlobal(QPoint(0,0));
-    vblayout->setMargin(0);//控件间距
-    vblayout->setSpacing(0);//控件间距
-    vblayout->addWidget(listWidget);
-    icon->setStyleSheet("border-image:url(:/data/comboboxIcon_c.png);border:0px;");
-    pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(100, 105, 241, 1);}");
-    swshadow->move(point.rx()-swa.shadow/2,point.ry()+pushButton->height()+swa.shadow);
-    swshadow->show();
-    listWidget->move(swa.shadow/2,swa.shadow);
-    listWidget->show();
+    qDebug()<<"isdiskopen:"<<isDiskListOpen;
+    if(!isDiskListOpen)
+    {
+        deleteShadow();
+        int listWidgetHeight=listWidget->count() * swa.itemHeight+swa.shadow;
+        listWidget->setFixedHeight(listWidgetHeight);
+        swa.setH(listWidgetHeight);
+        //设置阴影
+        swshadow =new StyleWidgetShadow(swa);
+        QVBoxLayout *vblayout=new QVBoxLayout(swshadow);
+        QPoint point= pushButton->mapToGlobal(QPoint(0,0));
+        vblayout->setMargin(0);//控件间距
+        vblayout->setSpacing(0);//控件间距
+        vblayout->addWidget(listWidget);
+        icon->setStyleSheet("border-image:url(:/data/comboboxIcon_c.png);border:0px;");
+        pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(100, 105, 241, 1);}");
+        swshadow->move(point.rx()-swa.shadow/2,point.ry()+pushButton->height()+swa.shadow);
+        swshadow->show();
+        listWidget->move(swa.shadow/2,swa.shadow);
+        listWidget->show();
+        isDiskListOpen = true;
+    }
+    else
+    {
+        deleteShadow();
+        isDiskListOpen = false;
+    }
+
 }
 
 //void StyleComboBox::addItem(QString lable, QByteArray data)

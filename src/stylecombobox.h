@@ -31,6 +31,7 @@ private:
     QPushButton *pushButton = nullptr;//点击部分
     void on_pushButton_click();//点击事件
     StyleWidgetAttribute swa;//属性
+    bool isDiskListOpen = false;
     bool mouseInListWidget=false;
     QLabel *text=nullptr;
     QLabel *icon=nullptr;

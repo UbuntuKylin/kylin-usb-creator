@@ -74,6 +74,7 @@ void MainWindow::createTrayActions()
     m_mainTray = new QSystemTrayIcon(this);
 //    QIcon icon = QIcon::fromTheme("kylin-usb-creator",QIcon(":data/kylin-usb-creator.png"));
     m_mainTray->setIcon(QIcon(":/data/kylin-usb-creator.png"));
+    this->setWindowIcon(QIcon(":/data/kylin-usb-creator.png"));
     m_mainTray->setToolTip(tr("麒麟U盘启动器"));
     m_mainTray->show();
 }
