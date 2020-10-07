@@ -51,3 +51,5 @@ void StyleWidgetShadow::paintEvent(QPaintEvent *evet)//重绘窗口
     }
     paintOnce++;
 }
+
+

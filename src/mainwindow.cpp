@@ -19,7 +19,6 @@ void MainWindow::myStyle()
     StyleWidget *styleWidget=new StyleWidget(swa,tr("麒麟U盘启动器"));
     timer = new QTimer(this);
     page1 = new Page1(swa);
-    //connect(styleWidget,&StyleWidget::allClose,page1,&Page1::doSomethig);
     connect(styleWidget,&StyleWidget::allClose,page1,&Page1::allClose);
     connect(page1,&Page1::makeStart,this,&MainWindow::passwdCheck);
     connect(this,&MainWindow::dealWrongPasswd,page1,&Page1::dealWrongPasswd);
@@ -63,6 +62,20 @@ void MainWindow::myStyle()
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);
     this->setLayout(vlt);
+    // 状态栏初始化
+    createTrayActions();
+}
+void MainWindow::createTrayActions()
+{
+    if(!QSystemTrayIcon::isSystemTrayAvailable())
+    {
+        return;
+    }
+    m_mainTray = new QSystemTrayIcon(this);
+//    QIcon icon = QIcon::fromTheme("kylin-usb-creator",QIcon(":data/kylin-usb-creator.png"));
+    m_mainTray->setIcon(QIcon(":/data/kylin-usb-creator.png"));
+    m_mainTray->setToolTip(tr("麒麟U盘启动器"));
+    m_mainTray->show();
 }
 
 void MainWindow::makeStart()
@@ -72,7 +85,6 @@ void MainWindow::makeStart()
     stackedWidget->setCurrentIndex(changePage());
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
-//    emit setMakeStart();
 }
 
 int MainWindow::changePage()
@@ -86,7 +98,6 @@ int MainWindow::changePage()
 
 void MainWindow::makeFinish()
 {
-//    stackedWidget->setCurrentIndex(changePage());
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
 }
@@ -107,7 +118,6 @@ void MainWindow::passwdCheck()
     QTimer::singleShot(3000,[=](){
         if(!isInPage2)
         {
-//            qDebug()<<"passwd wrong signal emited";
             emit dealWrongPasswd();
         }
     });

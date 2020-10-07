@@ -14,6 +14,7 @@
 #include "page2.h"
 #include <QWidget>
 #include <QTimer>
+#include <QSystemTrayIcon> //状态栏
 //滑动效果
 #include <QStackedWidget>
 class MainWindow : public QWidget
@@ -35,6 +36,7 @@ public slots:
 private:
     int changePage();
     void myStyle();//设定样式
+    void createTrayActions();
     QStackedWidget *stackedWidget= nullptr;
     //页面小圆点
     QLabel *pointLable1 = nullptr;
@@ -42,6 +44,7 @@ private:
     QLabel *pointLable3 = nullptr;
     Page1 *page1=nullptr;
     Page2 *page2=nullptr;
+    QSystemTrayIcon *m_mainTray = nullptr;
     QTimer *timer;
     bool isInPage2  = false; //程序是否处在页面2
 };
