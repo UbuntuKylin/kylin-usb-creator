@@ -33,12 +33,13 @@ HEADERS += \
     src/stylewidget.h \
     src/stylewidgetattribute.h \
     src/stylewidgetshadow.h
+
 # bin file output dir
 TARGET = kylin-usb-creator
 target.source += $$TARGET
 target.path = /usr/bin
 
-icons.files = data/kylin-usb-creator.png
+icons.files = data/icon.png
 icons.path = /usr/share/pixmaps/
 
 desktop.path = /usr/share/applications
@@ -51,7 +52,7 @@ INSTALLS += \
 
 
 TRANSLATIONS += \
-    kylin-usb-creator_zh_CN.ts
+    src/translations/kylin-usb-creator_zh_CN.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -59,6 +60,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    data.qrc
+    data.qrc \
+    translations.qrc
 
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
+
+DISTFILES += \
+    src/translations/qt_zh_CN.qm

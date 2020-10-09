@@ -22,6 +22,8 @@ void Page1::initControlQss()
     tabIso->setFixedHeight(20);
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
+    tabIso->setStyleSheet("font-size:14px;");
+    tabUdisk->setStyleSheet("font-size:14px;");
     tabUdisk->setObjectName("tabLable");
     comboUdisk=new StyleComboBox(swa);
     warnningIcon=new QLabel;
@@ -46,7 +48,7 @@ void Page1::initControlQss()
     creatStart->setFixedSize(200,30);
     creatStart->setText(tr("开始制作"));
     creatStart->setEnabled(false);
-    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;");
+    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
 //    connect(createStart,)
 
@@ -93,7 +95,7 @@ void Page1::initControlQss()
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:#000;border-radius:4px;}"
+    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:#000;border-radius:4px;font-size:14px;}"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(240, 240, 240, 1);color:rgba(96, 98, 101, 1);font-size:12px;");
@@ -246,6 +248,7 @@ bool Page1::event(QEvent *event)
     }
     return QWidget::event(event);
 }
+
 bool Page1::mouseIsLeave()
 {
     QPoint mouse=QCursor::pos();
