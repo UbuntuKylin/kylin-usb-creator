@@ -69,10 +69,8 @@ void StyleComboBox::on_pushButton_click()
         deleteShadow();
         isDiskListOpen = false;
     }
-
 }
 
-//void StyleComboBox::addItem(QString lable, QByteArray data)
 void StyleComboBox::addItem(QString lable, QString data)
 {
     QListWidgetItem *item=new QListWidgetItem;

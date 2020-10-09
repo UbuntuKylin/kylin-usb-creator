@@ -28,7 +28,7 @@ class Page1 : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Page1( StyleWidgetAttribute);
+    explicit Page1(StyleWidgetAttribute);
     void ifStartBtnChange();//开始制作按钮是否可以点击
 //
 signals:

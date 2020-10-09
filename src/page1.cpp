@@ -250,6 +250,7 @@ bool Page1::event(QEvent *event)
     }
     return QWidget::event(event);
 }
+
 bool Page1::mouseIsLeave()
 {
     QPoint mouse=QCursor::pos();

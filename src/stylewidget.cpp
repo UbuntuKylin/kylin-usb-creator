@@ -15,7 +15,6 @@ StyleWidget::~StyleWidget()
 
 void StyleWidget::WidgetStyleClose()
 {
-    //emit doSomethig();
     emit allClose();
     swshadow->close();
 }
@@ -54,14 +53,9 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     widgetMin->setIconSize(smallWidgetSize);
     widgetMin->setFixedSize(smallWidgetSize);
     connect(widgetMin,&QPushButton::clicked,this,[=]{
-//        qDebug()<<"最小化";
         swshadow->setWindowState(Qt::WindowMinimized);
-//        this->setWindowState(Qt::WindowMinimized);}
-//        this->setWindowFlags( windowFlags() | Qt::WindowMaximizeButtonHint | Qt::WindowMinimizeButtonHint | Qt::WindowStaysOnTopHint );}
-//        this->hide();
     }
     );
-
     widgetClose =new QPushButton;//关闭按钮
     widgetClose->setObjectName("widgetClose");
     widgetClose->setIconSize(smallWidgetSize);
@@ -134,8 +128,6 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
                              +QString::number(swa.radius)+"px;border-top-right-radius:"+QString::number(swa.radius)+"px;}");
         widgetClose->hide();//初版在dialog中先暂时隐藏最小化和最大化按钮
         widgetMin->hide();
-
-
     }
     else
     {
@@ -143,8 +135,6 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
                              +QString::number(swa.radius)+"px;border-top-right-radius:"+QString::number(swa.radius)+"px;}");
     }
 }
-
-
 void StyleWidget::paintEvent(QPaintEvent *event)//重绘窗口
 {
     if(paintOnce)return;
