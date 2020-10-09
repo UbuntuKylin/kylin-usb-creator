@@ -42,7 +42,7 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
 
 void StyleComboBox::on_pushButton_click()
 {
-    qDebug()<<"isdiskopen:"<<isDiskListOpen;
+//    qDebug()<<"isdiskopen:"<<isDiskListOpen;
     if(!isDiskListOpen)
     {
         deleteShadow();

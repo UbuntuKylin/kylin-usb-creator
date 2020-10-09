@@ -40,7 +40,6 @@ void Page1::initControlQss()
     findIso=new QPushButton(this);
     findIso->setText(tr("浏览"));
     findIso->setFixedSize(56,30);
-    findIso->setStyleSheet("font-size:14px;");
     connect(findIso,&QPushButton::clicked,this,[=]{
         urlIso->setText( QFileDialog::getOpenFileName(0,tr("选择镜像文件"),QDir::homePath(),"ISO(*.iso)"));
         });
@@ -49,8 +48,7 @@ void Page1::initControlQss()
     creatStart->setFixedSize(200,30);
     creatStart->setText(tr("开始制作"));
     creatStart->setEnabled(false);
-    creatStart->setStyleSheet("font-size:14px;");
-    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;");
+    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
 //    connect(createStart,)
 
@@ -97,7 +95,7 @@ void Page1::initControlQss()
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:#000;border-radius:4px;}"
+    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:#000;border-radius:4px;font-size:14px;}"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(240, 240, 240, 1);color:rgba(96, 98, 101, 1);font-size:12px;");

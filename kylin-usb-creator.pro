@@ -39,7 +39,7 @@ TARGET = kylin-usb-creator
 target.source += $$TARGET
 target.path = /usr/bin
 
-icons.files = data/kylin-usb-creator.png
+icons.files = data/icon.png
 icons.path = /usr/share/pixmaps/
 
 desktop.path = /usr/share/applications

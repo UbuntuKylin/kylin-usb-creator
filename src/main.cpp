@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
 
     //标准对话框汉化
     QTranslator* pTranslator = new QTranslator();
-    qDebug()<<"load"<<pTranslator->load(":src/translations/qt_zh_CN.qm");
-    qDebug()<<"translator"<<a.installTranslator(pTranslator);
+    pTranslator->load(":src/translations/qt_zh_CN.qm");
+    a.installTranslator(pTranslator);
 
     MainWindow w;
 
