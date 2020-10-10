@@ -50,7 +50,6 @@ void Page1::initControlQss()
     creatStart->setEnabled(false);
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
-//    connect(createStart,)
 
     QHBoxLayout *hl1=new QHBoxLayout;
     hl1->setMargin(0);
@@ -113,6 +112,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     QPushButton *dialogYes=new QPushButton;
     dialogYes->setFixedSize(64,30);
     dialogYes->setText(tr("授权"));
+    dialogYes->setStyleSheet("font-size:14px;");
     dialogYes->setObjectName("dialogYes");
     connect(dialogYes,&QPushButton::clicked,this,&Page1::onDialogYesClick);
     connect(dialogYes,&QPushButton::clicked,this,[=]{styleDialog->showOrHide();});
@@ -121,16 +121,19 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     dialogNo->setFixedSize(64,30);
     dialogNo->setText(tr("取消"));
     dialogNo->setObjectName("dialogNo");
+    dialogNo->setStyleSheet("font-size:14px;");
     QLabel *dialogWarnningLable=new QLabel;
     dialogWarnningLable->setText(tr("要安装或卸载软件，您需要进行验证："));
     QLabel *dialogWarnningLable2=new QLabel;
     dialogWarnningLable2->setText(tr("一个程序正试图执行一个需要特权的动作。要求授权以执行该动作。"));
     QLabel *dialogKeyLable=new QLabel;
     dialogKeyLable->setText(tr("输入密码:"));
+    dialogKeyLable->setStyleSheet("font-size:14px;");
     dialogKey=new QLineEdit;
     dialogKey->setPlaceholderText(tr("请输入密码"));
     dialogKey->setEchoMode(QLineEdit::Password);
     dialogKey->setFixedSize(296,32);
+    dialogKey->setStyleSheet("font-size:14px;");
 
     QHBoxLayout *hlt1=new QHBoxLayout;
     hlt1->setMargin(0);
@@ -173,13 +176,13 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     vlt1->addSpacing(24);
     styleDialog->body->setLayout(vlt1);
 
-    dialogKey->setStyleSheet("border:1px solid rgba(221, 223, 231, 1);");
+    dialogKey->setStyleSheet("border:1px solid rgba(221, 223, 231, 1);font-size:14px;");
     dialogWarnningLable->setStyleSheet("font-size:14px;");
     dialogWarnningLable2->setStyleSheet("font-size:12px;");
-    dialogNo->setStyleSheet("StyleWidget #dialogNo{background-color:rgba(255,255,255,0);border-radius:4px;border:1px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);}"
+    dialogNo->setStyleSheet("StyleWidget #dialogNo{background-color:rgba(255,255,255,0);border-radius:4px;border:1px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}"
                              "StyleWidget #dialogNo:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:#fff;}"
                              "StyleWidget #dialogNo:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:#fff;}");
-    dialogYes->setStyleSheet("StyleWidget #dialogYes{background-color:rgba(100, 105, 241, 1);border-radius:4px;color:#fff;}"
+    dialogYes->setStyleSheet("StyleWidget #dialogYes{background-color:rgba(100, 105, 241, 1);border-radius:4px;color:#fff;font-size:14px;}"
                                "StyleWidget #dialogYes:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:#fff;}"
                                "StyleWidget #dialogYes:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:#fff;}");
 }
@@ -228,7 +231,7 @@ void Page1::allClose()
 void Page1::creatStartSlots()
 {
     creatStart->setEnabled(false);
-    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;");
+    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     dialogKey->clear();
     styleDialog->showOrHide();
 }
@@ -271,12 +274,12 @@ void Page1::ifStartBtnChange()
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
-        creatStart->setStyleSheet("background-color:rgba(100,105,241,1);border-radius:15px;");//开始制作按钮是否可以点击的逻辑判断以及按钮样式修改部分
+        creatStart->setStyleSheet("background-color:rgba(100,105,241,1);border-radius:15px;font-size:14px;");//开始制作按钮是否可以点击的逻辑判断以及按钮样式修改部分
     }
     else
     {
         creatStart->setEnabled(false);
-        creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;");
+        creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     }
 }
 

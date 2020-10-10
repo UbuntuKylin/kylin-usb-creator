@@ -16,7 +16,6 @@ void MainWindow::myStyle()
     //设置外观
     //int w, int h, bool allRadius, int radius,int shadow,double shadowAlpha, int titleHeight, int itemHeight, bool middle
     StyleWidgetAttribute swa(WINDOWW,WINDOWH,0,WIDGETRADIUS,SHADOW,SHADOWALPHA,TITLEH);
-//    this->setWindowIcon(QIcon(":data/icon.png"));
     StyleWidget *styleWidget=new StyleWidget(swa,tr("麒麟U盘启动器"));
     timer = new QTimer(this);
     page1 = new Page1(swa);
@@ -63,6 +62,7 @@ void MainWindow::myStyle()
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);
     this->setLayout(vlt);
+
     // 状态栏初始化
     createTrayActions();
 }
@@ -75,8 +75,6 @@ void MainWindow::createTrayActions()
     }
     m_mainTray = new QSystemTrayIcon(this);
     m_mainTray->setIcon(QIcon(":/data/icon.png"));
-//    QFile f;
-//    qDebug()<<f.exists(":/data/icon.png");
     m_mainTray->setToolTip(tr("麒麟U盘启动器"));
     m_mainTray->show();
 }
