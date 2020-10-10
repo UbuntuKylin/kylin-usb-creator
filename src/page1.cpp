@@ -50,7 +50,6 @@ void Page1::initControlQss()
     creatStart->setEnabled(false);
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
-//    connect(createStart,)
 
     QHBoxLayout *hl1=new QHBoxLayout;
     hl1->setMargin(0);

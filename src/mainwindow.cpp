@@ -16,10 +16,7 @@ void MainWindow::myStyle()
     //设置外观
     //int w, int h, bool allRadius, int radius,int shadow,double shadowAlpha, int titleHeight, int itemHeight, bool middle
     StyleWidgetAttribute swa(WINDOWW,WINDOWH,0,WIDGETRADIUS,SHADOW,SHADOWALPHA,TITLEH);
-//    this->setWindowIcon(QIcon(":data/icon.png"));
     StyleWidget *styleWidget=new StyleWidget(swa,tr("麒麟U盘启动器"));
-//    styleWidget->setWindowTitle(tr("麒麟U盘启动器"));
-//    styleWidget->setWindowIcon(QIcon(":data/icon.png"));
     timer = new QTimer(this);
     page1 = new Page1(swa);
     connect(styleWidget,&StyleWidget::allClose,page1,&Page1::allClose);
