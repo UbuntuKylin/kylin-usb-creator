@@ -59,8 +59,9 @@ void Page2::playLoadingGif()
     lableNum->show();
     returnPushButton->setEnabled(false);
     returnPushButton->setText(tr("正在制作中"));
-    returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(100, 105, 241, 1)");
+    returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(100, 105, 241, 1);font-size:14px;");
     lableText->setText(tr("制作时请不要移除磁盘或关机"));
+    lableText->setStyleSheet("font-size:14px;");
     lableMovie->setMovie(movieLoading); //为label设置movie
     movieLoading->start();         //开始显示
 }
@@ -70,10 +71,11 @@ void Page2::playFinishGif()
     lableNum->hide();
     returnPushButton->setEnabled(true);
     returnPushButton->setText(tr("返回"));
-    returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
+    returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;font-size:14px;}"
                           ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
     lableText->setText(tr("制作完成"));
+    lableText->setStyleSheet("font-size:14px;");
     lableMovie->clear();
     lableMovie->setMovie(movieFinish);
     movieFinish->start();
