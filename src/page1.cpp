@@ -134,6 +134,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     dialogKey->setEchoMode(QLineEdit::Password);
     dialogKey->setFixedSize(296,32);
     dialogKey->setStyleSheet("font-size:14px;");
+    connect(dialogKey,&QLineEdit::returnPressed,dialogYes,&QAbstractButton::click,Qt::UniqueConnection);
 
     QHBoxLayout *hlt1=new QHBoxLayout;
     hlt1->setMargin(0);
@@ -289,10 +290,10 @@ void Page1::dealWrongPasswd()
     dialogKey->setPlaceholderText(tr("密码错误，请重新输入。"));
 }
 
-void Page1::doSomethig()
-{
-    ifStartBtnChange();
-}
+//void Page1::doSomethig()
+//{
+//    ifStartBtnChange();
+//}
 
 void Page1::dealDialogCancel()
 {

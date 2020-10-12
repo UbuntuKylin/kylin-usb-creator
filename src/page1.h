@@ -35,7 +35,7 @@ signals:
     void makeStart(QString key,QString sourcePath,QString targetPath);
 //    void changePage1Btn();
 public slots:
-    void doSomethig();
+//    void doSomethig();
     void allClose();
     void onDialogYesClick();
     void dealWrongPasswd();
