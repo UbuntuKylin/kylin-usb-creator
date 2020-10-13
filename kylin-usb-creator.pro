@@ -39,7 +39,7 @@ TARGET = kylin-usb-creator
 target.source += $$TARGET
 target.path = /usr/bin
 
-icons.files = data/icon.png
+icons.files = data/logo/128.png
 icons.path = /usr/share/pixmaps/
 
 desktop.path = /usr/share/applications
@@ -66,4 +66,14 @@ RESOURCES += \
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
 DISTFILES += \
+#    data/logo/128.png \
+#    data/logo/16.png \
+#    data/logo/22.png \
+#    data/logo/24.png \
+#    data/logo/256.png \
+#    data/logo/32.png \
+#    data/logo/48.png \
+#    data/logo/512.png \
+#    data/logo/64.png \
+#    data/logo/96.png \
     src/translations/qt_zh_CN.qm

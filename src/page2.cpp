@@ -7,10 +7,12 @@ Page2::Page2(QWidget *parent) : QWidget(parent)
     frameCount=movieFinish->frameCount();
     connect(movieFinish,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish->stop();});
     lableMovie=new QLabel;
-    QSize movieSize(130,130);
+//    QSize movieSize(130,130);
+    QSize movieSize(91,91);
     lableMovie->setFixedSize(movieSize);
     movieLoading->setScaledSize(movieSize);
     movieFinish->setScaledSize(movieSize);
+
     lableText=new QLabel;
     lableNum=new QLabel(lableMovie);
     lableNum->setFixedSize(36,22);

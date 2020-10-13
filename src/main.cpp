@@ -13,7 +13,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    a.setWindowIcon(QIcon(":data/icon.png"));
+    a.setWindowIcon(QIcon(":data/logo/96.png"));
     //标准对话框汉化
     QTranslator* pTranslator = new QTranslator();
     pTranslator->load(":src/translations/qt_zh_CN.qm");
