@@ -17,12 +17,14 @@
 #include <QComboBox>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QTimer>
 //布局
 #include <QBoxLayout>
 //打开文件
 #include <QFileDialog>
 //硬盘信息
 #include <QStorageInfo>
+#include <QFileSystemWatcher>
 
 class Page1 : public QWidget
 {
@@ -30,15 +32,15 @@ class Page1 : public QWidget
 public:
     explicit Page1(StyleWidgetAttribute);
     void ifStartBtnChange();//开始制作按钮是否可以点击
-//
+
 signals:
     void makeStart(QString key,QString sourcePath,QString targetPath);
-//    void changePage1Btn();
+
 public slots:
-//    void doSomethig();
     void allClose();
     void onDialogYesClick();
     void dealWrongPasswd();
+    void refreshDiskList();
 private:
     bool event(QEvent *event);
     void creatStartSlots();//开始制作
@@ -47,8 +49,9 @@ private:
     void dialogInitControlQss(StyleWidgetAttribute page_swa);//初始化对话框控件及其样式
     bool mouseIsLeave();//鼠标是否离开
     void dealDialogCancel();
+    void udiskPlugWatcherInit(); //U盘插拔监控初始化
 
-    //QComboBox *comboUdisk = nullptr;//U盘列表
+    QTimer *diskRefreshDelay; //U盘插入后等待系统挂载的时间
     StyleComboBox *comboUdisk = nullptr;//U盘列表
     QLabel *tabIso = nullptr;//选择镜像标签
     QLabel *tabUdisk = nullptr;//选择U盘标签
@@ -59,9 +62,8 @@ private:
     QPushButton *creatStart = nullptr;//开始制作
     StyleWidget *styleDialog = nullptr;//提醒对话框
     QLineEdit *dialogKey= nullptr;//
-
+    QFileSystemWatcher *udiskplugwatcher; //U盘插拔监控器
     bool paintOnce=false;//只绘制一次
-
     StyleWidgetAttribute swa;//属性
 
     bool leaveThis=true;

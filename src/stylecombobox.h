@@ -18,7 +18,7 @@ public:
     QListWidget *listWidget = nullptr;//列表部分
     void addItem(QString lable, QString data);//添加到列表
     StyleWidgetShadow *swshadow = nullptr;//列表阴影
-
+    void clear(); //清空U盘的listWidget
 
 public slots:
     QString getDiskPath();

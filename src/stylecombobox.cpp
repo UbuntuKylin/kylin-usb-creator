@@ -39,7 +39,16 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
     listWidget->setStyleSheet("QListWidget::Item{background-color:#fff;color:rgba(96, 98, 102, 1);padding-left:10px;}"
                               "QListWidget::Item:hover,QListWidget::Item:selected {background-color:rgba(246, 246, 246, 1);color:rgba(96, 98, 102, 1);}");
 }
-
+void StyleComboBox::clear()
+{
+    listWidget->clear();
+    if(isDiskListOpen)
+    {
+        on_pushButton_click();
+    }else{
+        return;
+    }
+}
 void StyleComboBox::on_pushButton_click()
 {
 //    qDebug()<<"isdiskopen:"<<isDiskListOpen;

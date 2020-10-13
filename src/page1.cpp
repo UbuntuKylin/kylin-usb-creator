@@ -10,7 +10,6 @@ Page1::Page1( StyleWidgetAttribute page_swa)
     initControlQss();//初始化样式
     dialogInitControlQss(page_swa);
     getStorageInfo();//获取磁盘信息
-
 }
 
 void Page1::initControlQss()
@@ -50,7 +49,6 @@ void Page1::initControlQss()
     creatStart->setEnabled(false);
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
-
     QHBoxLayout *hl1=new QHBoxLayout;
     hl1->setMargin(0);
     hl1->setSpacing(0);
@@ -90,7 +88,6 @@ void Page1::initControlQss()
     vl00->addLayout(vl0,8);
     vl00->addStretch(3);
     this->setLayout(vl00);
-
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
@@ -99,9 +96,26 @@ void Page1::initControlQss()
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(240, 240, 240, 1);color:rgba(96, 98, 101, 1);font-size:12px;");
     comboUdisk->setStyleSheet("font-size:12px;");
-
+    udiskPlugWatcherInit();
 }
-
+void Page1::udiskPlugWatcherInit()
+{
+    diskRefreshDelay = new QTimer;
+    connect(diskRefreshDelay,&QTimer::timeout,this,&Page1::getStorageInfo);
+    udiskplugwatcher = new QFileSystemWatcher(this);
+    udiskplugwatcher->addPath("/dev");
+    connect(udiskplugwatcher,&QFileSystemWatcher::directoryChanged,this,&Page1::refreshDiskList);
+}
+void Page1::refreshDiskList()
+{
+    qDebug()<<"disk state changed";
+    if(diskRefreshDelay->isActive())
+    {
+        return;
+    }
+    comboUdisk->clear();
+    diskRefreshDelay->start(1000);
+}
 void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 {
     page_swa.setW(424);
@@ -190,6 +204,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 
 void Page1::getStorageInfo()//获取磁盘信息
 {
+    diskRefreshDelay->stop();
     QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes();//获取磁盘列表
 
     for(QStorageInfo& disk : diskList)
@@ -229,6 +244,7 @@ void Page1::allClose()
 {
     styleDialog->allClose();
 }
+
 void Page1::creatStartSlots()
 {
     creatStart->setEnabled(false);
@@ -236,6 +252,7 @@ void Page1::creatStartSlots()
     dialogKey->clear();
     styleDialog->showOrHide();
 }
+
 bool Page1::event(QEvent *event)
 {
     if(comboUdisk->swshadow == nullptr)return QWidget::event(event);
@@ -289,11 +306,6 @@ void Page1::dealWrongPasswd()
     creatStartSlots();
     dialogKey->setPlaceholderText(tr("密码错误，请重新输入。"));
 }
-
-//void Page1::doSomethig()
-//{
-//    ifStartBtnChange();
-//}
 
 void Page1::dealDialogCancel()
 {
