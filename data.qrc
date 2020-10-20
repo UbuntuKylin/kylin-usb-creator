@@ -21,5 +21,6 @@
         <file>data/logo/256.png</file>
         <file>data/logo/512.png</file>
         <file>data/kylin-usb-creator.png</file>
+        <file>data/menu.png</file>
     </qresource>
 </RCC>

@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#define FITTHEMEWINDOW "org.ukui.style"
+#define KYLINUSBCREATORDATA "org.kylin-usb-creator-data.settings"
 #define WINDOWW 680 //窗口宽度
 #define WINDOWH 510//窗口高度
 #define TITLEH 50//标题栏高度
@@ -15,6 +16,7 @@
 #include <QWidget>
 #include <QTimer>
 #include <QSystemTrayIcon> //状态栏
+#include <QGSettings>
 //滑动效果
 #include <QStackedWidget>
 class MainWindow : public QWidget
@@ -37,6 +39,8 @@ private:
     int changePage();
     void myStyle();//设定样式
     void createTrayActions();
+    void initGsetting();
+
     QStackedWidget *stackedWidget= nullptr;
     //页面小圆点
     QLabel *pointLable1 = nullptr;
@@ -47,5 +51,6 @@ private:
     QSystemTrayIcon *m_mainTray = nullptr;
     QTimer *timer;
     bool isInPage2  = false; //程序是否处在页面2
+    QGSettings *m_pGsettingTestData = nullptr;
 };
 #endif // MAINWINDOW_H

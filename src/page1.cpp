@@ -96,8 +96,10 @@ void Page1::initControlQss()
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(240, 240, 240, 1);color:rgba(96, 98, 101, 1);font-size:12px;");
     comboUdisk->setStyleSheet("font-size:12px;");
+
     udiskPlugWatcherInit();
 }
+
 void Page1::udiskPlugWatcherInit()
 {
     diskRefreshDelay = new QTimer;
@@ -106,6 +108,7 @@ void Page1::udiskPlugWatcherInit()
     udiskplugwatcher->addPath("/dev");
     connect(udiskplugwatcher,&QFileSystemWatcher::directoryChanged,this,&Page1::refreshDiskList);
 }
+
 void Page1::refreshDiskList()
 {
     qDebug()<<"disk state changed";
@@ -113,9 +116,10 @@ void Page1::refreshDiskList()
     {
         return;
     }
-    comboUdisk->clear();
+    comboUdisk->clearDiskList();
     diskRefreshDelay->start(1000);
 }
+
 void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 {
     page_swa.setW(424);
@@ -204,7 +208,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 
 void Page1::getStorageInfo()//获取磁盘信息
 {
-    diskRefreshDelay->stop();
+    diskRefreshDelay->stop();//U盘动态刷新相关代码
     QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes();//获取磁盘列表
 
     for(QStorageInfo& disk : diskList)
@@ -258,19 +262,21 @@ bool Page1::event(QEvent *event)
     if(comboUdisk->swshadow == nullptr)return QWidget::event(event);
     if (event->type() == QEvent::Leave)
     {
-        if(mouseIsLeave())
+        if(mouseIsLeaveUdiskWidget())
         {
+            qDebug()<<"mouse leave,udisk close";
             comboUdisk->deleteShadow();
         }
     }
     else if (event->type() == QEvent::MouseButtonPress)
     {
+        qDebug()<<"mouse pressed,udisk close";
         comboUdisk->deleteShadow();
     }
     return QWidget::event(event);
 }
 
-bool Page1::mouseIsLeave()
+bool Page1::mouseIsLeaveUdiskWidget()
 {
     QPoint mouse=QCursor::pos();
     QPoint thisWidget=this->mapToGlobal(this->pos());

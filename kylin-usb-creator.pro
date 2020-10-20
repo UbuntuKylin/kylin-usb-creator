@@ -42,14 +42,19 @@ target.path = /usr/bin
 icons.files = data/kylin-usb-creator
 icons.path = /usr/share/pixmaps/
 
+# gsettings
+schemes.file = /data/org.kylin-usb.creator.gschema.xml
+schemes.path = /usr/share/glib-2.0/schemas/
+
 desktop.path = /usr/share/applications
 desktop.files = kylin-usb-creator.desktop
 
-INSTALLS += \
-    target \
-    desktop \
-    icons
+INSTALLS += target desktop icons \
+        schemas
 
+CONFIG += link_pkgconfig
+
+PKGCONFIG += gsettings-qt
 
 TRANSLATIONS += \
     src/translations/kylin-usb-creator_zh_CN.ts
@@ -59,9 +64,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    data.qrc \
-    translations.qrc
+RESOURCES += data.qrc translations.qrc
 
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
@@ -76,4 +79,5 @@ DISTFILES += \
 #    data/logo/512.png \
 #    data/logo/64.png \
 #    data/logo/96.png \
+    data/org.china-weather-data.gschema.xml \
     src/translations/qt_zh_CN.qm

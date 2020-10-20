@@ -4,6 +4,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
     myStyle();
+    initGsetting();
 }
 
 MainWindow::~MainWindow()
@@ -63,10 +64,49 @@ void MainWindow::myStyle()
     vlt->addSpacing(7);
     this->setLayout(vlt);
 
-    // 状态栏初始化
+    // 状态栏初始化部分，需要时打开注释
     createTrayActions();
 }
 
+void MainWindow::initGsetting()
+{
+    if(QGSettings::isSchemaInstalled(KYLINUSBCREATORDATA)){
+        m_pGsettingThemeData = new QGSettings(KYLINUSBCREATORDATA);
+        if(keyList.contains("mode"))
+        {
+            qDebug()<<"Local gsettings init success.";
+        }
+        // 主题适配
+        if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW))
+        {
+            m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
+
+            connect(m_pGsettingThemeData,&QGSettings::changed,this, [=] (const QString &key)
+            {
+                if(key == "styleName")
+                {
+
+                        setThemeStyle();
+                }
+            });
+        }
+    }
+    return ;
+}
+
+void MainWindow::setThemeStyle()
+{
+    QString nowThemeStyle = m_pGsettingThemeData->get("stylename").toString();
+    if("ukui-dark" == nowThemeStyle || "ukui-black" == nowThemeStyle)
+    {
+//        子类在这里调用对应方法做深色渲染
+        qDebug()<<"深色渲染start";
+    }else{
+//        子类在这里调用方法做对应浅色渲染
+        qDebug()<<"浅色渲染start";
+    }
+
+}
 void MainWindow::createTrayActions()
 {
     if(!QSystemTrayIcon::isSystemTrayAvailable())
@@ -74,7 +114,7 @@ void MainWindow::createTrayActions()
         return;
     }
     m_mainTray = new QSystemTrayIcon(this);
-    m_mainTray->setIcon(QIcon(":/data/icon.png"));
+    m_mainTray->setIcon(QIcon(":/data/logo/48.png"));
     m_mainTray->setToolTip(tr("麒麟U盘启动器"));
     m_mainTray->show();
 }

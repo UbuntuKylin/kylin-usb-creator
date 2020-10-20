@@ -66,7 +66,7 @@ void Page2::playLoadingGif()
     lableText->setText(tr("制作时请不要移除磁盘或关机"));
     lableText->setStyleSheet("font-size:14px;");
     lableMovie->setMovie(movieLoading); //为label设置movie
-    movieLoading->start();         //开始显示
+    movieLoading->start();         //开始播放动画
 }
 
 void Page2::playFinishGif()

@@ -20,6 +20,7 @@ void StyleWidget::WidgetStyleClose()
     swshadow->close();
 }
 
+
 void StyleWidget::myStyle(StyleWidgetAttribute swa)
 {
     //窗口设置
@@ -44,7 +45,8 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     body->setObjectName("body");
 
     icon = new QLabel;//图标
-    icon->setPixmap(QPixmap::fromImage(QImage(":/data/icon.png")));
+//    icon->setFixedSize(24,24);
+    icon->setPixmap(QPixmap::fromImage(QImage(":/data/logo/24.png")));
 
     text = new QLabel;//标题
 
@@ -55,18 +57,25 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     widgetMin->setFixedSize(smallWidgetSize);
     connect(widgetMin,&QPushButton::clicked,this,[=]{
         swshadow->setWindowState(Qt::WindowMinimized);
-    }
-    );
+    });
     widgetClose =new QPushButton;//关闭按钮
     widgetClose->setObjectName("widgetClose");
     widgetClose->setIconSize(smallWidgetSize);
     widgetClose->setFixedSize(smallWidgetSize);
     connect(widgetClose,&QPushButton::clicked,this,&StyleWidget::WidgetStyleClose);
 
+    widgetMenu = new QPushButton;//菜单按钮
+    widgetMenu->setObjectName("widgetMenu");
+    widgetMenu->setIconSize(smallWidgetSize);
+    widgetMenu->setFixedSize(smallWidgetSize);
+    connect(widgetMenu,&QPushButton::clicked,this,&StyleWidget::on_menuButton_click);
+
     //布局
     QHBoxLayout *hlt0=new QHBoxLayout;//右上角按钮内部
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
+    hlt0->addWidget(widgetMenu,1);
+    hlt0->setSpacing(4);
     hlt0->addWidget(widgetMin,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(widgetClose,1);
@@ -115,12 +124,19 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     else
         body->setStyleSheet("background-color:rgba(255,255,255,1);");
     text->setStyleSheet("color:#303133");
+
+    // 设置page1中菜单、最小化、关闭三个按钮样式
     widgetMin->setStyleSheet("StyleWidget #widgetMin{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:hover{background-color:rgba(100,105,241,1);border-image:url(:/data/min_h.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:pressed{background-color:rgba(82,87,217,1);border-image:url(:/data/min_h.png);border-radius:4px;}");
+                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
+                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
+
     widgetClose->setStyleSheet("StyleWidget #widgetClose{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
-                               "StyleWidget #widgetClose:hover{background-color:rgba(240,64,52,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
-                               "StyleWidget #widgetClose:pressed{background-color:rgba(215,51,53,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
+                               "StyleWidget #widgetClose:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
+                               "StyleWidget #widgetClose:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
+
+    widgetMenu->setStyleSheet("StyleWidget #widgetMenu{background-color:rgba(255,255,255,0);border-image:url(:/data/menu.png);border-radius:4px;}"
+                              "StyleWidget #widgetMenu:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/menu.png);border-radius:4px;}"
+                              "StyleWidget #widgetMenu:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/menu.png);border-radius:4px;}");
 
     if(m_isDialog)
     {
@@ -134,8 +150,44 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     {
         title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,0.7);border-top-left-radius:"
                              +QString::number(swa.radius)+"px;border-top-right-radius:"+QString::number(swa.radius)+"px;}");
+        initMenuListWidget(swa);
     }
 }
+
+void StyleWidget::initMenuListWidget(StyleWidgetAttribute swa)
+{
+        qDebug()<<"initMenuListWidget";
+        menuShadow = new StyleWidgetShadow(swa); //带阴影的菜单项
+        menuListWidget = new QListWidget;
+        QVBoxLayout *vblayout = new QVBoxLayout(menuShadow);
+        vblayout->setMargin(0);//控件间距
+        vblayout->setSpacing(0); //控件间距
+        menuListWidget->addItem(tr("Theme"));
+        vblayout->addSpacing(2);
+        menuListWidget->addItem(tr("Help"));
+        vblayout->addSpacing(2);
+        menuListWidget->addItem(tr("About"));
+        vblayout->addSpacing(2);
+        menuListWidget->addItem(tr("Quit"));
+        menuListWidget->setStyleSheet("QListWidget::Item{background-color:#F7F7F7;color:rgba(96, 98, 102, 1);padding-left:10px;border-radius:2px;height:30px;border-radius:2px;}"
+                                      "QListWidget::Item:hover,QListWidget::Item:selected {background-color:rgba(247, 247, 247, 1);color:rgba(96, 98, 102, 1);}"
+                                      "QListWidget{font-size:14px;}");
+        menuShadow->setFixedSize(97,138);
+        QPoint windowPos = this->mapToGlobal(QPoint(0,0));
+        menuShadow->move(windowPos.rx()+589,windowPos.ry()+46);
+//        qDebug()<<windowPos;
+        menuShadow->setStyleSheet("QWidget{height:138px;width:97px;}");
+        vblayout->addWidget(menuListWidget);
+        menuShadow->hide();
+        menuListWidget->hide();
+}
+
+void StyleWidget::on_menuButton_click()
+{
+        menuShadow->show();
+        menuListWidget->show();
+}
+
 void StyleWidget::paintEvent(QPaintEvent *event)//重绘窗口
 {
     if(paintOnce)return;
@@ -158,4 +210,34 @@ void StyleWidget::showOrHide()
         swshadow->hide();
         this->hide();
     }
+}
+
+bool StyleWidget::event(QEvent *event)
+{
+    if(nullptr == menuShadow)
+    {
+        return QWidget::event(event);
+    }
+    if(event->type() == QEvent::Leave)
+    {
+        if(isMouseLeavedMenuWidget())
+        {
+            menuShadow->close();
+        }
+    }else if(event->type() == QEvent::MouseButtonPress)
+    {
+        menuShadow->close();
+    }
+    return QWidget::event(event);
+}
+
+bool StyleWidget::isMouseLeavedMenuWidget()
+{
+    QPoint mouse = QCursor::pos();
+    QPoint thisWidget = this->mapToGlobal(this->pos());
+    QSize thisWidgetSize = this->size();
+    if(mouse.rx()<=thisWidget.rx() || mouse.rx()>=thisWidget.rx()+thisWidgetSize.width() || mouse.ry()<=thisWidget.ry() || mouse.ry()>=thisWidget.ry()+thisWidgetSize.height())
+        return true;
+    else
+        return false;
 }

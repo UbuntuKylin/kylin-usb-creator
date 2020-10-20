@@ -16,12 +16,12 @@
 //鼠标拖动事件
 #include <QMouseEvent>
 #include <QPoint>
+#include <QListWidget>
 class StyleWidget : public QWidget
 {
     Q_OBJECT
 signals:
     void allClose();
-    void doSomethig();
 
 public:
     StyleWidget(StyleWidgetAttribute swa, QString dialogTitleText,bool isDialog=false);
@@ -30,19 +30,29 @@ public:
     void showOrHide();//切换显示和隐藏状态
 
 private:
+    bool event(QEvent *event); //鼠标离开菜单栏事件
     virtual void paintEvent(QPaintEvent *ev);//重绘窗口
     void WidgetStyleClose();//点击关闭事件
+//    void WidgetStyleMenu();//点击打开菜单事件
     void myStyle(StyleWidgetAttribute swa);//设定样式
-    StyleWidgetShadow *swshadow = nullptr;//阴影
+    void initMenuListWidget(StyleWidgetAttribute swa);//初始化菜单窗口
+    void on_menuButton_click();//菜单栏点击事件
+    bool isMouseLeavedMenuWidget(); //鼠标是否离开菜单栏
+
+    StyleWidgetShadow *swshadow = nullptr;//U盘列表阴影
+    StyleWidgetShadow *menuShadow = nullptr; //菜单阴影
     QWidget *title = nullptr;//标题栏
     QLabel *text = nullptr;//标题
     QLabel *icon = nullptr;//图标
     QPushButton *widgetClose = nullptr;//关闭窗口
     QPushButton *widgetMin = nullptr;//最小化窗口
+    QPushButton *widgetMenu = nullptr;//菜单
+    QListWidget *menuListWidget = nullptr;//菜单列表部分
     bool m_isDialog =false;//如果是窗口
     bool paintOnce=false;//只绘制一次
     bool m_isLeftButtonPressed = false;
     QPoint m_last;
+
 };
 
 #endif // STYLEWIDGET_H

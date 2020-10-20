@@ -41,13 +41,14 @@ public slots:
     void onDialogYesClick();
     void dealWrongPasswd();
     void refreshDiskList();
+
 private:
-    bool event(QEvent *event);
+    bool event(QEvent *event); // 鼠标离开U盘列表事件
     void creatStartSlots();//开始制作
     void initControlQss();//初始化控件及其样式
     void getStorageInfo();//获取磁盘信息
     void dialogInitControlQss(StyleWidgetAttribute page_swa);//初始化对话框控件及其样式
-    bool mouseIsLeave();//鼠标是否离开
+    bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
     void dealDialogCancel();
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
 
