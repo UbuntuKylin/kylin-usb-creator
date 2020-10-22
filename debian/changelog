@@ -1,3 +1,15 @@
+kylin-usb-creator (1.0.0-8kord) V101; urgency=medium
+
+  * 增加了U盘动态插拔检测功能，前端页面设计微调。
+
+ -- liuyuhui <liuyuhui@kylinos.cn>  Thur, 22 Oct 2020 11:21:23 +0800
+
+kylin-usb-creator (1.0.0-7kord) V101; urgency=medium
+
+  * 修复字号异常问题，小窗title显示异常问题。增加了菜单栏图标。
+
+ -- liuyuhui <liuyuhui@kylinos.cn>  Fri, 16 Oct 2020 19:32:15 +0800
+
 kylin-usb-creator (1.0.0-6kord) v101; urgency=medium
 
   * 修复字号异常问题，小窗title显示异常问题。增加了菜单栏图标。

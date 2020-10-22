@@ -74,8 +74,8 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     QHBoxLayout *hlt0=new QHBoxLayout;//右上角按钮内部
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
-    hlt0->addWidget(widgetMenu,1);
-    hlt0->setSpacing(4);
+//    hlt0->addWidget(widgetMenu,1);
+//    hlt0->setSpacing(4);
     hlt0->addWidget(widgetMin,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(widgetClose,1);

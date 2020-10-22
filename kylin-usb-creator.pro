@@ -39,18 +39,18 @@ TARGET = kylin-usb-creator
 target.source += $$TARGET
 target.path = /usr/bin
 
-icons.files = data/kylin-usb-creator
+icons.files = data/kylin-usb-creator.png
 icons.path = /usr/share/pixmaps/
 
 # gsettings
-schemes.file = /data/org.kylin-usb.creator.gschema.xml
-schemes.path = /usr/share/glib-2.0/schemas/
+#schemes.file = /data/org.kylin-usb.creator.gschema.xml
+#schemes.path = /usr/share/glib-2.0/schemas/
 
 desktop.path = /usr/share/applications
 desktop.files = kylin-usb-creator.desktop
 
-INSTALLS += target desktop icons \
-        schemas
+INSTALLS += target desktop icons
+#        schemas
 
 #CONFIG += link_pkgconfig
 
@@ -68,16 +68,6 @@ RESOURCES += data.qrc translations.qrc
 
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
-DISTFILES += \
-#    data/logo/128.png \
-#    data/logo/16.png \
-#    data/logo/22.png \
-#    data/logo/24.png \
-#    data/logo/256.png \
-#    data/logo/32.png \
-#    data/logo/48.png \
-#    data/logo/512.png \
-#    data/logo/64.png \
-#    data/logo/96.png \
-    data/org.china-weather-data.gschema.xml \
-    src/translations/qt_zh_CN.qm
+DISTFILES += src/translations/qt_zh_CN.qm
+#    data/org.china-weather-data.gschema.xml \
+
