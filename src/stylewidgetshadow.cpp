@@ -8,6 +8,7 @@ StyleWidgetShadow::StyleWidgetShadow(StyleWidgetAttribute s)
     this->setAttribute(Qt::WA_TranslucentBackground, true);//窗体透明
     this->setFixedSize(swa.w,swa.h);
     if(swa.middle)handleIconClickedSub();//在屏幕中央显示
+    this->setStyleSheet("background:black;");
 }
 
 void StyleWidgetShadow::handleIconClickedSub()//在屏幕中央显示

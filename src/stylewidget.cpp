@@ -20,10 +20,10 @@ void StyleWidget::WidgetStyleClose()
     swshadow->close();
 }
 
-
 void StyleWidget::myStyle(StyleWidgetAttribute swa)
 {
     //窗口设置
+    m_swa = swa;
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);//无边框
     this->setAttribute(Qt::WA_TranslucentBackground, true);//窗体透明
     this->setFixedSize(swa.w,swa.h);
@@ -117,41 +117,44 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     this->setLayout(vl);
 
     //样式表stylesheet//测试用border:1px solid red;
-    QString bodyStyleSheet="StyleWidget #body{background-color:rgba(255,255,255,1);border-bottom-left-radius:"+QString::number(swa.radius)+
-                            "px;border-bottom-right-radius:"+QString::number(swa.radius)+"px;}";
-    if(swa.allRadius)
-        body->setStyleSheet(bodyStyleSheet);
-    else
-        body->setStyleSheet("background-color:rgba(255,255,255,1);");
-    text->setStyleSheet("color:#303133");
+//    QString bodyStyleSheet="StyleWidget #body{background-color:rgba(255,255,255,1);border-bottom-left-radius:"+QString::number(swa.radius)+
+//                            "px;border-bottom-right-radius:"+QString::number(swa.radius)+"px;}";
+//    if(swa.allRadius)
+//        body->setStyleSheet(bodyStyleSheet);
+//    else
+//        body->setStyleSheet("background-color:rgba(255,255,255,1);");
+//    text->setStyleSheet("color:#303133");
 
-    // 设置page1中菜单、最小化、关闭三个按钮样式
-    widgetMin->setStyleSheet("StyleWidget #widgetMin{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
+//    // 设置page1中菜单、最小化、关闭三个按钮样式
+//    widgetMin->setStyleSheet("StyleWidget #widgetMin{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
+//                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
+//                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
 
-    widgetClose->setStyleSheet("StyleWidget #widgetClose{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
-                               "StyleWidget #widgetClose:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
-                               "StyleWidget #widgetClose:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
+//    widgetClose->setStyleSheet("StyleWidget #widgetClose{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
+//                               "StyleWidget #widgetClose:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
+//                               "StyleWidget #widgetClose:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
 
-    widgetMenu->setStyleSheet("StyleWidget #widgetMenu{background-color:rgba(255,255,255,0);border-image:url(:/data/menu.png);border-radius:4px;}"
-                              "StyleWidget #widgetMenu:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/menu.png);border-radius:4px;}"
-                              "StyleWidget #widgetMenu:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/menu.png);border-radius:4px;}");
+//    widgetMenu->setStyleSheet("StyleWidget #widgetMenu{background-color:rgba(255,255,255,0);border-image:url(:/data/menu.png);border-radius:4px;}"
+//                              "StyleWidget #widgetMenu:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/menu.png);border-radius:4px;}"
+//                              "StyleWidget #widgetMenu:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/menu.png);border-radius:4px;}");
 
     if(m_isDialog)
     {
         icon->hide();
-        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,1);border-top-left-radius:"
-                             +QString::number(swa.radius)+"px;border-top-right-radius:"+QString::number(swa.radius)+"px;}");
+//        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,1);border-top-left-radius:"
+//                             +QString::number(swa.radius)+"px;border-top-right-radius:"+QString::number(swa.radius)+"px;}");
         widgetClose->hide();//初版在dialog中先暂时隐藏最小化和最大化按钮
         widgetMin->hide();
     }
     else
     {
-        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,0.7);border-top-left-radius:"
-                             +QString::number(swa.radius)+"px;border-top-right-radius:"+QString::number(swa.radius)+"px;}");
+//        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,0.7);border-top-left-radius:"
+//                             +QString::number(swa.radius)+"px;border-top-right-radius:"+QString::number(swa.radius)+"px;}");
         initMenuListWidget(swa);
+        // 在资源初始化完毕只有在这里重新调用资源，绘制前端页面
+
     }
+    setThemeLight();
 }
 
 void StyleWidget::initMenuListWidget(StyleWidgetAttribute swa)
@@ -240,4 +243,48 @@ bool StyleWidget::isMouseLeavedMenuWidget()
         return true;
     else
         return false;
+}
+
+void StyleWidget::setThemeLight()
+{
+    qDebug()<<"StyleWidget::setThemeLight被调用";
+    //样式表stylesheet//测试用border:1px solid red;
+    QString bodyStyleSheet="StyleWidget #body{background-color:rgba(255,255,255,1);border-bottom-left-radius:"+QString::number(m_swa.radius)+
+                            "px;border-bottom-right-radius:"+QString::number(m_swa.radius)+"px;}";
+    if(m_swa.allRadius)
+    {
+        body->setStyleSheet(bodyStyleSheet);
+    }else{
+        body->setStyleSheet("background-color:rgba(255,255,255,1);");
+    }
+    text->setStyleSheet("color:#303133");
+
+    // 设置page1中菜单、最小化、关闭三个按钮样式
+    widgetMin->setStyleSheet("StyleWidget #widgetMin{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
+                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
+                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
+
+    widgetClose->setStyleSheet("StyleWidget #widgetClose{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
+                               "StyleWidget #widgetClose:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
+                               "StyleWidget #widgetClose:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
+
+    widgetMenu->setStyleSheet("StyleWidget #widgetMenu{background-color:rgba(255,255,255,0);border-image:url(:/data/menu.png);border-radius:4px;}"
+                              "StyleWidget #widgetMenu:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/menu.png);border-radius:4px;}"
+                              "StyleWidget #widgetMenu:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/menu.png);border-radius:4px;}");
+    if(m_isDialog)
+    {
+        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,1);border-top-left-radius:"
+                             +QString::number(m_swa.radius)+"px;border-top-right-radius:"+QString::number(m_swa.radius)+"px;}");
+    }
+    else
+    {
+        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,0.7);border-top-left-radius:"
+                             +QString::number(m_swa.radius)+"px;border-top-right-radius:"+QString::number(m_swa.radius)+"px;}");
+    }
+
+}
+
+void StyleWidget::setThemeDark()
+{
+    qDebug()<<"StyleWidget::setThemeDark被调用";
 }

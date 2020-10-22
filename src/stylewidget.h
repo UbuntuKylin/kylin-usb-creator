@@ -28,6 +28,8 @@ public:
     ~StyleWidget();
     QWidget *body  = nullptr;//窗体
     void showOrHide();//切换显示和隐藏状态
+    void setThemeLight(); //  设置主题为浅色状态
+    void setThemeDark();
 
 private:
     bool event(QEvent *event); //鼠标离开菜单栏事件
@@ -38,6 +40,7 @@ private:
     void initMenuListWidget(StyleWidgetAttribute swa);//初始化菜单窗口
     void on_menuButton_click();//菜单栏点击事件
     bool isMouseLeavedMenuWidget(); //鼠标是否离开菜单栏
+
 
     StyleWidgetShadow *swshadow = nullptr;//U盘列表阴影
     StyleWidgetShadow *menuShadow = nullptr; //菜单阴影
@@ -52,6 +55,7 @@ private:
     bool paintOnce=false;//只绘制一次
     bool m_isLeftButtonPressed = false;
     QPoint m_last;
+    StyleWidgetAttribute m_swa;
 
 };
 

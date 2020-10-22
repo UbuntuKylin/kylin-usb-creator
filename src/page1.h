@@ -32,6 +32,8 @@ class Page1 : public QWidget
 public:
     explicit Page1(StyleWidgetAttribute);
     void ifStartBtnChange();//开始制作按钮是否可以点击
+    void setThemeStyleLight(); //设置浅色主题
+    void setThemeStyleDark(); //设置深色主题
 
 signals:
     void makeStart(QString key,QString sourcePath,QString targetPath);
@@ -52,6 +54,7 @@ private:
     void dealDialogCancel();
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
 
+
     QTimer *diskRefreshDelay; //U盘插入后等待系统挂载的时间
     StyleComboBox *comboUdisk = nullptr;//U盘列表
     QLabel *tabIso = nullptr;//选择镜像标签
@@ -66,8 +69,11 @@ private:
     QFileSystemWatcher *udiskplugwatcher; //U盘插拔监控器
     bool paintOnce=false;//只绘制一次
     StyleWidgetAttribute swa;//属性
-
     bool leaveThis=true;
+    QLabel *dialogWarnningLable; //授权框警告label
+    QLabel *dialogWarnningLable2;
+    QPushButton *dialogNo;
+    QPushButton *dialogYes;
 
 };
 

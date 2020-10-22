@@ -52,9 +52,9 @@ desktop.files = kylin-usb-creator.desktop
 INSTALLS += target desktop icons \
         schemas
 
-CONFIG += link_pkgconfig
+#CONFIG += link_pkgconfig
 
-PKGCONFIG += gsettings-qt
+#PKGCONFIG += gsettings-qt
 
 TRANSLATIONS += \
     src/translations/kylin-usb-creator_zh_CN.ts
