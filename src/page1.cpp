@@ -10,7 +10,7 @@ Page1::Page1( StyleWidgetAttribute page_swa)
     initControlQss();//初始化样式
     dialogInitControlQss(page_swa);
     getStorageInfo();//获取磁盘信息
-    setThemeStyleLight();
+//    setThemeStyleLight();
 }
 
 void Page1::initControlQss()
@@ -29,8 +29,9 @@ void Page1::initControlQss()
     warnningIcon=new QLabel;
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
+    warnningIcon->hide();
     warnningText=new QLabel;
-    warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
+//    warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
 //    warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
 
     urlIso=new QLineEdit;
@@ -89,6 +90,7 @@ void Page1::initControlQss()
     vl00->addLayout(vl0,8);
     vl00->addStretch(3);
     this->setLayout(vl00);
+    warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
     udiskPlugWatcherInit(); //监控U盘插拔
 
 //    this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
@@ -233,14 +235,19 @@ void Page1::getStorageInfo()//获取磁盘信息
         diskSize=diskSize/1048576/1024;
 
         QString diskUrl=disk.device();
-        diskUrl=diskUrl.mid(0,8);
+        diskUrl=diskUrl.mid(0,9);
 
         QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
         comboUdisk->addItem(info,diskUrl);
+        warnningIcon->show();
+//        warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
+        warnningText->show();
     }
     if(0==comboUdisk->listWidget->count())
     {
         comboUdisk->addItem(tr("无可用U盘"),NOUDISK);
+        warnningText->hide();
+        warnningIcon->hide();
         creatStart->setEnabled(false);
     }
 }
@@ -299,7 +306,10 @@ void Page1::ifStartBtnChange()
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
-        creatStart->setStyleSheet("background-color:rgba(100,105,241,1);border-radius:15px;font-size:14px;");//开始制作按钮是否可以点击的逻辑判断以及按钮样式修改部分
+//        "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
+        creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);border-radius:15px;font-size:14px;}"
+                                  "QPushButton:hover{background-color:rgba(130,140,255,1);border-radius:15px;font-size:14px;}"
+                                  "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:15px;font-size:14px;}");
     }
     else
     {
@@ -324,6 +334,7 @@ void Page1::setThemeStyleLight()
 {
     qDebug()<<"Page1::setThemeStyleLight被调用";
     styleDialog->setThemeLight();
+
     tabIso->setStyleSheet("font-size:14px;");
     warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
@@ -334,7 +345,7 @@ void Page1::setThemeStyleLight()
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;");
-    comboUdisk->setStyleSheet("font-size:12px;");
+    comboUdisk->setStyleSheet("font-size:14px;");
     dialogKey->setStyleSheet("border:1px solid rgba(221, 223, 231, 1);font-size:14px;");
     dialogWarnningLable->setStyleSheet("font-size:14px;");
     dialogWarnningLable2->setStyleSheet("font-size:12px;");
@@ -350,14 +361,12 @@ void Page1::setThemeStyleDark()
 {
     qDebug()<<"Page1::setThemeStyleDark被调用";
     styleDialog->setThemeDark();
+
     tabIso->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
     warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
-    this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:rgba(249,249,249,1);border-radius:4px;}"
-                        ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
-                        ".QPushButton:pressed{background-color:rgba(82,87,217,1);}"
-                        "background-color:black;");
-    this->setStyleSheet("background-color:black");
+    this->setStyleSheet("background-color:rgba(31,32,34,1);");
+
     findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");

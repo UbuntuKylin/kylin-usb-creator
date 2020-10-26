@@ -2,7 +2,7 @@
 #define PAGE1_H
 
 #define NOUDISK "noUDisk"
-#define UDISK_NAME_MAX_LENGTH 30//U盘名称最大长度
+#define UDISK_NAME_MAX_LENGTH 27//U盘名称最大长度
 #define COMBOBOXW 370 //下拉框宽度
 #define COMBOBOXH 30//下拉框高度
 #define ITEMHEIGHT 30//下拉框标签高度
@@ -11,19 +11,15 @@
 #include "stylewidget.h"
 #include "stylecombobox.h"
 #include <QDebug>
-//控件
-#include <QWidget>
+#include <QWidget> //控件
 #include <QLabel>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTimer>
-//布局
-#include <QBoxLayout>
-//打开文件
-#include <QFileDialog>
-//硬盘信息
-#include <QStorageInfo>
+#include <QBoxLayout> //布局
+#include <QFileDialog>//打开文件
+#include <QStorageInfo>//硬盘信息
 #include <QFileSystemWatcher>
 
 class Page1 : public QWidget
@@ -67,6 +63,7 @@ private:
     StyleWidget *styleDialog = nullptr;//提醒对话框
     QLineEdit *dialogKey= nullptr;//
     QFileSystemWatcher *udiskplugwatcher; //U盘插拔监控器
+
     bool paintOnce=false;//只绘制一次
     StyleWidgetAttribute swa;//属性
     bool leaveThis=true;

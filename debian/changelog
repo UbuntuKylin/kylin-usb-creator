@@ -1,8 +1,14 @@
+kylin-usb-creator (1.0.0-9kord) V101; urgency=medium
+
+  * 增加了VNC支持
+
+ -- zoujunnan <zoujunnan@kylinos.cn>  Mon, 26 Oct 2020 20:26:03 +0800
+
 kylin-usb-creator (1.0.0-8kord) V101; urgency=medium
 
   * 增加了U盘动态插拔检测功能，前端页面设计微调。
 
- -- liuyuhui <liuyuhui@kylinos.cn>  Thur, 22 Oct 2020 11:21:23 +0800
+ -- liuyuhui <liuyuhui@kylinos.cn>  Thu, 22 Oct 2020 11:21:23 +0800
 
 kylin-usb-creator (1.0.0-7kord) V101; urgency=medium
 

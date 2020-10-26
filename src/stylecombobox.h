@@ -1,6 +1,8 @@
 #ifndef STYLECOMBOBOX_H
 #define STYLECOMBOBOX_H
 
+#define UDISKLISTWIDGETWIDTH 330
+
 #include "stylewidgetshadow.h"
 #include <QDebug>
 #include <QWidget>

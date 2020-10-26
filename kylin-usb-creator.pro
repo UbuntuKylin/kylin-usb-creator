@@ -23,7 +23,7 @@ SOURCES += \
     src/stylecombobox.cpp \
     src/stylewidget.cpp \
     src/stylewidgetattribute.cpp \
-    src/stylewidgetshadow.cpp
+    src/stylewidgetshadow.cpp \
 
 HEADERS += \
     src/mainwindow.h \
@@ -32,7 +32,7 @@ HEADERS += \
     src/stylecombobox.h \
     src/stylewidget.h \
     src/stylewidgetattribute.h \
-    src/stylewidgetshadow.h
+    src/stylewidgetshadow.h \
 
 # bin file output dir
 TARGET = kylin-usb-creator
@@ -49,15 +49,14 @@ icons.path = /usr/share/pixmaps/
 desktop.path = /usr/share/applications
 desktop.files = kylin-usb-creator.desktop
 
-INSTALLS += target desktop icons
+INSTALLS += target desktop icons \
 #        schemas
 
 #CONFIG += link_pkgconfig
 
 #PKGCONFIG += gsettings-qt
 
-TRANSLATIONS += \
-    src/translations/kylin-usb-creator_zh_CN.ts
+TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -68,6 +67,5 @@ RESOURCES += data.qrc translations.qrc
 
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
-DISTFILES += src/translations/qt_zh_CN.qm
+DISTFILES += src/translations/qt_zh_CN.qm \
 #    data/org.china-weather-data.gschema.xml \
-

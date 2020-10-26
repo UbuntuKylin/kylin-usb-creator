@@ -16,18 +16,22 @@ void MainWindow::myStyle()
 {
     //设置外观
     //int w, int h, bool allRadius, int radius,int shadow,double shadowAlpha, int titleHeight, int itemHeight, bool middle
-    StyleWidgetAttribute swa(WINDOWW,WINDOWH,0,WIDGETRADIUS,SHADOW,SHADOWALPHA,TITLEH);
+    StyleWidgetAttribute swa(WINDOWW,WINDOWH,1,WIDGETRADIUS,SHADOW,SHADOWALPHA,TITLEH);
     StyleWidget *styleWidget=new StyleWidget(swa,tr("麒麟U盘启动器"));
     timer = new QTimer(this);
     page1 = new Page1(swa);
+//    page1->setThemeStyleDark();
+    page1->setThemeStyleLight();
     connect(styleWidget,&StyleWidget::allClose,page1,&Page1::allClose);
     connect(page1,&Page1::makeStart,this,&MainWindow::passwdCheck);
     connect(this,&MainWindow::dealWrongPasswd,page1,&Page1::dealWrongPasswd);
+
     page2 = new Page2;
     connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
     connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
     connect(page2,&Page2::returnMain,this,&MainWindow::returnMain);
+    connect(this,&MainWindow::dealWrongPasswd,page2,&Page2::stopMission);
     QHBoxLayout *hblayout=new QHBoxLayout(styleWidget->body);
     hblayout->setMargin(0);//控件间距
     hblayout->setSpacing(0);//控件间距
@@ -125,6 +129,7 @@ void MainWindow::makeStart()
     stackedWidget->setCurrentIndex(changePage());
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
+    pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
 }
 
 int MainWindow::changePage()
@@ -138,8 +143,9 @@ int MainWindow::changePage()
 
 void MainWindow::makeFinish()
 {
-    pointLable3->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
-    pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
+    pointLable3->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
+    pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
+    pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
 }
 
 void MainWindow::returnMain()
@@ -147,8 +153,9 @@ void MainWindow::returnMain()
     isInPage2 = false;
     stackedWidget->setCurrentIndex(changePage());
     page1->ifStartBtnChange();
-    pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
-    pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
+    pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
+    pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
+    pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
 }
 
 void MainWindow::passwdCheck()

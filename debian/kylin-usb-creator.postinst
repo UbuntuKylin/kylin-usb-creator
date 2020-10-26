@@ -1,1 +1,2 @@
 cp /opt/kylin-usb-creator/bin/kylin-usb-creator /usr/bin
+glib-compile-schemas /usr/share/glib-2.0/schemas

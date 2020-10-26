@@ -4,7 +4,7 @@
 #define KYLINUSBCREATORDATA "org.kylin-usb-creator-data.settings"
 #define WINDOWW 680 //窗口宽度
 #define WINDOWH 510//窗口高度
-#define TITLEH 50//标题栏高度
+#define TITLEH 40//标题栏高度
 #define SHADOW 6//阴影宽度
 #define WIDGETRADIUS 12//窗口圆角
 //#define BUTTONRADIUS 4//按钮圆角

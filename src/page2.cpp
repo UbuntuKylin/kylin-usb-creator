@@ -62,7 +62,7 @@ void Page2::playLoadingGif()
     lableNum->show();
     returnPushButton->setEnabled(false);
     returnPushButton->setText(tr("正在制作中"));
-    returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(100, 105, 241, 1);font-size:14px;");
+    returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(100, 105, 241, 1);font-size:14px;border-radius:15px;");
     lableText->setText(tr("制作时请不要移除磁盘或关机"));
     lableText->setStyleSheet("font-size:14px;");
     lableMovie->setMovie(movieLoading); //为label设置movie
@@ -74,7 +74,7 @@ void Page2::playFinishGif()
     lableNum->hide();
     returnPushButton->setEnabled(true);
     returnPushButton->setText(tr("返回"));
-    returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;font-size:14px;}"
+    returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:15px;font-size:14px;}"
                           ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
     lableText->setText(tr("制作完成"));
@@ -95,11 +95,17 @@ void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
     command_dd->start("bash");
     command_dd->waitForStarted();
 //    正式版本中使用的ddshell
-    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of="+targetPath.toLocal8Bit()+" status=progress";
+//    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of="+targetPath.toLocal8Bit()+" status=progress";
 //    测试用shell
-//    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if=/dev/zero of=/home/andrew/test.iso bs=1M count=2000 status=progress";
+    QString ddshell = "dd if=/dev/zero of=/home/kylin/test.iso  bs=1M count=2000  status=progress";
     qDebug()<<"ddshell is: "<<ddshell;
     command_dd->write(ddshell.toLocal8Bit() + '\n');
+}
+
+void Page2::stopMission()
+{
+    qDebug()<<"age2::stopMission()";
+    command_dd->kill();
 }
 
 qint64 Page2::getFileSize(QString filePath)

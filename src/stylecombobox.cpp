@@ -23,7 +23,7 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
     hlt->addWidget(icon);
 
     listWidget=new QListWidget;
-    listWidget->setFixedWidth(swa.w-swa.shadow);
+    listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //关闭水平滚动条
     connect(listWidget,&QListWidget::itemClicked,this,&StyleComboBox::setPushKey);
 
     QFont ft;
@@ -32,12 +32,12 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
     ft.setPixelSize(12);
     text->setFont(ft);
 
-    pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(213, 216, 222, 1);}"
-                              ".QPushButton:hover{background-color:#fff;border:1px solid rgba(100, 105, 241, 1);}");
+    pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(213,216,222,1);}"
+                              ".QPushButton:hover{background-color:#fff;border:1px solid rgba(100,105,241,1);}");
     icon->setStyleSheet("border-image:url(:/data/comboboxIcon_d.png);border:0px;");
-    text->setStyleSheet("color:rgba(96, 98, 101, 1);border:0px;");
-    listWidget->setStyleSheet("QListWidget::Item{background-color:#fff;color:rgba(96, 98, 102, 1);padding-left:10px;}"
-                              "QListWidget::Item:hover,QListWidget::Item:selected {background-color:rgba(246, 246, 246, 1);color:rgba(96, 98, 102, 1);}");
+    text->setStyleSheet("color:rgba(96,98,101,1);border:0px;");
+    listWidget->setStyleSheet("QListWidget::Item{background-color:#fff;color:rgba(96,98,102,1);padding-left:10px;}"
+                              "QListWidget::Item:hover,QListWidget::Item:selected {background-color:rgba(246, 246, 246, 1);color:rgba(96,98,102,1);}");
 }
 void StyleComboBox::clearDiskList()
 {
@@ -57,7 +57,11 @@ void StyleComboBox::on_diskButton_click()
         deleteShadow();
         int listWidgetHeight=listWidget->count() * swa.itemHeight+swa.shadow;
         listWidget->setFixedHeight(listWidgetHeight);
+        listWidget->setFixedWidth(UDISKLISTWIDGETWIDTH);
         swa.setH(listWidgetHeight);
+        swa.w = UDISKLISTWIDGETWIDTH + 6;
+        qDebug()<<"swa.w="<<swa.w;
+        qDebug()<<"listWidgetHeight="<<listWidgetHeight;
         //设置阴影
         swshadow =new StyleWidgetShadow(swa);
         QVBoxLayout *vblayout=new QVBoxLayout(swshadow);

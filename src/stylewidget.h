@@ -4,19 +4,16 @@
 #define VALUE_DIS 2000
 
 #include "stylewidgetshadow.h"
-
-//控件
 #include <QWidget>
 #include <QLabel>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QPushButton>
-//布局
-#include <QBoxLayout>
-//鼠标拖动事件
-#include <QMouseEvent>
+#include <QBoxLayout> //布局
+#include <QMouseEvent> //鼠标拖动事件
 #include <QPoint>
 #include <QListWidget>
+
 class StyleWidget : public QWidget
 {
     Q_OBJECT

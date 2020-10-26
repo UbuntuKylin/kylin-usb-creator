@@ -18,6 +18,7 @@ void StyleWidget::WidgetStyleClose()
 {
     emit allClose();
     swshadow->close();
+    menuListWidget->close();
 }
 
 void StyleWidget::myStyle(StyleWidgetAttribute swa)
@@ -45,7 +46,7 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     body->setObjectName("body");
 
     icon = new QLabel;//图标
-//    icon->setFixedSize(24,24);
+    icon->setFixedSize(24,24);
     icon->setPixmap(QPixmap::fromImage(QImage(":/data/logo/24.png")));
 
     text = new QLabel;//标题
@@ -74,26 +75,29 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     QHBoxLayout *hlt0=new QHBoxLayout;//右上角按钮内部
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
+    hlt0->addStretch();
 //    hlt0->addWidget(widgetMenu,1);
 //    hlt0->setSpacing(4);
     hlt0->addWidget(widgetMin,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(widgetClose,1);
+    hlt0->addSpacing(4);
     QVBoxLayout *vlt0=new QVBoxLayout;//右上角按钮外部
     vlt0->setMargin(0);
     vlt0->setSpacing(0);
+    vlt0->addSpacing(4);
     vlt0->addLayout(hlt0);
-    vlt0->addSpacing(10);
+    vlt0->addStretch(); // 顶上充满
     QHBoxLayout *hlt=new QHBoxLayout;//标题栏内部
     hlt->setMargin(0);
     hlt->setSpacing(0);
-    hlt->addSpacing(swa.radius);
+    hlt->addSpacing(8);
     hlt->addWidget(icon,1);
-    hlt->addSpacing(5);
+    hlt->addSpacing(8);
     hlt->addWidget(text,1);
     hlt->addStretch(99);
     hlt->addLayout(vlt0);
-    hlt->addSpacing(2);
+//    hlt->addSpacing(2);
     title->setLayout(hlt);
     QHBoxLayout *hlt2=new QHBoxLayout;//标题栏外部
     hlt2->setMargin(0);
@@ -143,8 +147,9 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
         icon->hide();
 //        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,1);border-top-left-radius:"
 //                             +QString::number(swa.radius)+"px;border-top-right-radius:"+QString::number(swa.radius)+"px;}");
-        widgetClose->hide();//初版在dialog中先暂时隐藏最小化和最大化按钮
+        widgetClose->hide();//dialog中隐藏min close和menu按钮
         widgetMin->hide();
+        widgetMenu->hide();
     }
     else
     {
@@ -155,11 +160,12 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
 
     }
     setThemeLight();
+//    setThemeDark();
 }
 
 void StyleWidget::initMenuListWidget(StyleWidgetAttribute swa)
 {
-        qDebug()<<"initMenuListWidget";
+//        qDebug()<<"initMenuListWidget";
         menuShadow = new StyleWidgetShadow(swa); //带阴影的菜单项
         menuListWidget = new QListWidget;
         QVBoxLayout *vblayout = new QVBoxLayout(menuShadow);
@@ -275,8 +281,7 @@ void StyleWidget::setThemeLight()
     {
         title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,1);border-top-left-radius:"
                              +QString::number(m_swa.radius)+"px;border-top-right-radius:"+QString::number(m_swa.radius)+"px;}");
-    }
-    else
+    }else
     {
         title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,0.7);border-top-left-radius:"
                              +QString::number(m_swa.radius)+"px;border-top-right-radius:"+QString::number(m_swa.radius)+"px;}");
@@ -287,4 +292,24 @@ void StyleWidget::setThemeLight()
 void StyleWidget::setThemeDark()
 {
     qDebug()<<"StyleWidget::setThemeDark被调用";
+    QString bodyStyleSheet="StyleWidget #body{background-color:rgba(255,255,255,1);border-bottom-left-radius:"+QString::number(m_swa.radius)+
+                            "px;border-bottom-right-radius:"+QString::number(m_swa.radius)+"px;}";
+    if(m_swa.allRadius)
+    {
+        body->setStyleSheet(bodyStyleSheet);
+    }else{
+        body->setStyleSheet("background-color:rgba(31,32,34,1);");
+    }
+
+    if(m_isDialog)
+    {
+        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,1);border-top-left-radius:"
+                             +QString::number(m_swa.radius)+"px;border-top-right-radius:"+QString::number(m_swa.radius)+"px;}");
+    }else
+    {
+        title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,0.7);border-top-left-radius:"
+                             +QString::number(m_swa.radius)+"px;border-top-right-radius:"+QString::number(m_swa.radius)+"px;}");
+    }
+
+
 }
