@@ -10,7 +10,10 @@
 
 #include "stylewidget.h"
 #include "stylecombobox.h"
+#include "rootauthdialog.h"
+
 #include <QDebug>
+#include <QRect>
 #include <QWidget> //控件
 #include <QLabel>
 #include <QComboBox>
@@ -34,11 +37,13 @@ public:
 signals:
     void makeStart(QString key,QString sourcePath,QString targetPath);
 
+
 public slots:
     void allClose();
-    void onDialogYesClick();
-    void dealWrongPasswd();
     void refreshDiskList();
+    void dealRightPasswd(); //处理密码正确
+    void dealAuthDialogClose();  //处理授权框关闭
+
 
 private:
     bool event(QEvent *event); // 鼠标离开U盘列表事件
@@ -47,11 +52,15 @@ private:
     void getStorageInfo();//获取磁盘信息
     void dialogInitControlQss(StyleWidgetAttribute page_swa);//初始化对话框控件及其样式
     bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
-    void dealDialogCancel();
+    void dealDialogCancel();     // 处理授权框关闭及取消
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
 
-
-    QTimer *diskRefreshDelay; //U盘插入后等待系统挂载的时间
+    QWidget *rootWindowTitle = nullptr; //root授权框状态栏
+    QLabel *rootDialogTitleText = nullptr; //root授权框标题
+    QPushButton *rootDialogClose = nullptr; //root授权框关闭按钮
+    QPushButton *rootDialogMin = nullptr; //root授权框最小化按钮
+    QLabel *divingLine = nullptr;    //授权框1px分割线
+    QTimer *diskRefreshDelay = nullptr; //U盘插入后等待系统挂载的时间
     StyleComboBox *comboUdisk = nullptr;//U盘列表
     QLabel *tabIso = nullptr;//选择镜像标签
     QLabel *tabUdisk = nullptr;//选择U盘标签
@@ -60,17 +69,17 @@ private:
     QLineEdit *urlIso = nullptr;//显示镜像路径
     QPushButton *findIso = nullptr;//浏览文件按钮
     QPushButton *creatStart = nullptr;//开始制作
-    StyleWidget *styleDialog = nullptr;//提醒对话框
-    QLineEdit *dialogKey= nullptr;//
-    QFileSystemWatcher *udiskplugwatcher; //U盘插拔监控器
+    rootAuthDialog *authDialog = nullptr;//root授权对话框
+    QFileSystemWatcher *udiskplugwatcher = nullptr; //U盘插拔监控器
+    StyleWidgetAttribute swa;//属性
+    QLabel *dialogWarningIcon = nullptr; //授权框警告Icon
+    QLabel *dialogWarningLable = nullptr; //授权框警告label
+    QLabel *dialogWarningLable2 = nullptr;
+    QPushButton *dialogNo = nullptr;
+    QPushButton *dialogYes = nullptr;
 
     bool paintOnce=false;//只绘制一次
-    StyleWidgetAttribute swa;//属性
     bool leaveThis=true;
-    QLabel *dialogWarnningLable; //授权框警告label
-    QLabel *dialogWarnningLable2;
-    QPushButton *dialogNo;
-    QPushButton *dialogYes;
 
 };
 

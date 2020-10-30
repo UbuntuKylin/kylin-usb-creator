@@ -24,21 +24,23 @@ signals:
 public slots:
     void startMaking(QString key,QString sourcePath,QString targetPath); //接收page1传来的制作参数
     void finishEvent();
-    void stopMission();
+//    void stopMission();
 private:
     void playLoadingGif();
     void playFinishGif();
+
     QMovie *movieLoading=nullptr;
     QMovie *movieFinish=nullptr;
     QLabel *lableMovie=nullptr;
     QLabel *lableText=nullptr;
     QLabel *lableNum=nullptr;
-    QPushButton *returnPushButton=nullptr;
-    int frameCount=0;
+    QPushButton *returnPushButton=nullptr; // 回page1的按钮
     QProcess *command_dd;
+
+    int frameCount=0;
     void readBashStandardErrorInfo();
     qint64 sourceFileSize = 0;
-    bool isInPage2 = false;
+//    bool isInPage2 = false;
     QTimer *timer;
 };
 

@@ -87,25 +87,19 @@ void Page2::playFinishGif()
 
 void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
 {
+    emit swToPage2();
     playLoadingGif();
-//    qDebug()<<"source file size:"<<getFileSize(sourcePath);
     sourceFileSize = getFileSize(sourcePath);
     command_dd = new QProcess();
     connect(command_dd,&QProcess::readyReadStandardError,this,&Page2::readBashStandardErrorInfo);
     command_dd->start("bash");
     command_dd->waitForStarted();
-//    正式版本中使用的ddshell
-//    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of="+targetPath.toLocal8Bit()+" status=progress";
+    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of="+targetPath.toLocal8Bit()+" status=progress";
 //    测试用shell
-    QString ddshell = "dd if=/dev/zero of=/home/kylin/test.iso  bs=1M count=2000  status=progress";
-    qDebug()<<"ddshell is: "<<ddshell;
+//    QString ddshell = "dd if=/dev/zero of=/home/kylin/test.iso  bs=1M count=2000  status=progress";
+//    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of=/dev/null status=progress";
+//    qDebug()<<"ddshell is: "<<ddshell;
     command_dd->write(ddshell.toLocal8Bit() + '\n');
-}
-
-void Page2::stopMission()
-{
-    qDebug()<<"age2::stopMission()";
-    command_dd->kill();
 }
 
 qint64 Page2::getFileSize(QString filePath)
@@ -119,25 +113,16 @@ void Page2::readBashStandardErrorInfo()
     QByteArray cmdout = command_dd->readAllStandardError();
     if(!cmdout.isEmpty() && cmdout != "\r" && cmdout != "\n"){
         QString str = cmdout;
+        qDebug()<<str;
         str = str.replace(" ","");
-        qDebug()<<"Str value:"<<str;
-        if(str =="" || str.contains("[sudo]"))
-        {
-            return;
-        }
+        if(str =="" || str.contains("[sudo]")) {return;}
         str = str.replace("\r","");
         QStringList bytes2 =  str.split("bytes");
-
          QString size_progress = bytes2.first();
          bool ok = false;
          qulonglong progress_num = size_progress.toDouble(&ok)/1048576;
          int mission_percent = progress_num*100/sourceFileSize;
          lableNum->setText(QString::number(mission_percent)+ "%");
-         if(bytes2.count() == 2 && !isInPage2)
-         {
-            emit swToPage2();
-            isInPage2 = true;
-         }
          if(bytes2.count() == 1 || !ok){
              finishEvent();
          }

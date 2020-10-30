@@ -27,6 +27,7 @@ public:
     void showOrHide();//切换显示和隐藏状态
     void setThemeLight(); //  设置主题为浅色状态
     void setThemeDark();
+    QPoint windowPos = QPoint(0,0);
 
 private:
     bool event(QEvent *event); //鼠标离开菜单栏事件

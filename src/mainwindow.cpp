@@ -20,18 +20,14 @@ void MainWindow::myStyle()
     StyleWidget *styleWidget=new StyleWidget(swa,tr("麒麟U盘启动器"));
     timer = new QTimer(this);
     page1 = new Page1(swa);
-//    page1->setThemeStyleDark();
     page1->setThemeStyleLight();
     connect(styleWidget,&StyleWidget::allClose,page1,&Page1::allClose);
-    connect(page1,&Page1::makeStart,this,&MainWindow::passwdCheck);
-    connect(this,&MainWindow::dealWrongPasswd,page1,&Page1::dealWrongPasswd);
 
     page2 = new Page2;
     connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
     connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
     connect(page2,&Page2::returnMain,this,&MainWindow::returnMain);
-    connect(this,&MainWindow::dealWrongPasswd,page2,&Page2::stopMission);
     QHBoxLayout *hblayout=new QHBoxLayout(styleWidget->body);
     hblayout->setMargin(0);//控件间距
     hblayout->setSpacing(0);//控件间距
@@ -69,7 +65,7 @@ void MainWindow::myStyle()
     this->setLayout(vlt);
 
     // 状态栏初始化部分，需要时打开注释
-    createTrayActions();
+//    createTrayActions();
 }
 
 //void MainWindow::initGsetting()
@@ -125,7 +121,7 @@ void MainWindow::createTrayActions()
 
 void MainWindow::makeStart()
 {
-    isInPage2 = true;
+//    isInPage2 = true;
     stackedWidget->setCurrentIndex(changePage());
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
@@ -150,21 +146,11 @@ void MainWindow::makeFinish()
 
 void MainWindow::returnMain()
 {
-    isInPage2 = false;
+//    isInPage2 = false;
+//    qDebug()<<"isInPage2"<<isInPage2;
     stackedWidget->setCurrentIndex(changePage());
     page1->ifStartBtnChange();
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
-}
-
-void MainWindow::passwdCheck()
-{
-    qDebug()<<"isInpage2"<<isInPage2;
-    QTimer::singleShot(3000,[=](){
-        if(!isInPage2)
-        {
-            emit dealWrongPasswd();
-        }
-    });
 }

@@ -34,7 +34,7 @@ public slots:
     void makeStart(); //点击授权按钮后由页面1跳转到页面2
     void makeFinish();
     void returnMain();
-    void passwdCheck();
+//    void passwdCheck();
 private:
     int changePage();
     void myStyle();//设定样式
@@ -51,7 +51,7 @@ private:
     Page2 *page2=nullptr;
     QSystemTrayIcon *m_mainTray = nullptr;
     QTimer *timer;
-    bool isInPage2  = false; //程序是否处在页面2
+//    bool isInPage2  = false; //程序是否处在页面2
 //    QGSettings *m_pGsettingTestData = nullptr;
 };
 #endif // MAINWINDOW_H

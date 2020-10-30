@@ -24,6 +24,7 @@ SOURCES += \
     src/stylewidget.cpp \
     src/stylewidgetattribute.cpp \
     src/stylewidgetshadow.cpp \
+    src/rootauthdialog.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -33,6 +34,7 @@ HEADERS += \
     src/stylewidget.h \
     src/stylewidgetattribute.h \
     src/stylewidgetshadow.h \
+    src/rootauthdialog.h
 
 # bin file output dir
 TARGET = kylin-usb-creator

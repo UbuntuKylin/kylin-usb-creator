@@ -182,7 +182,8 @@ void StyleWidget::initMenuListWidget(StyleWidgetAttribute swa)
                                       "QListWidget::Item:hover,QListWidget::Item:selected {background-color:rgba(247, 247, 247, 1);color:rgba(96, 98, 102, 1);}"
                                       "QListWidget{font-size:14px;}");
         menuShadow->setFixedSize(97,138);
-        QPoint windowPos = this->mapToGlobal(QPoint(0,0));
+//        windowPos = this->mapToGlobal(QPoint(0,0));
+//        qDebug()<<"stylewidget"<<windowPos;
         menuShadow->move(windowPos.rx()+589,windowPos.ry()+46);
 //        qDebug()<<windowPos;
         menuShadow->setStyleSheet("QWidget{height:138px;width:97px;}");
@@ -253,7 +254,7 @@ bool StyleWidget::isMouseLeavedMenuWidget()
 
 void StyleWidget::setThemeLight()
 {
-    qDebug()<<"StyleWidget::setThemeLight被调用";
+//    qDebug()<<"StyleWidget::setThemeLight被调用";
     //样式表stylesheet//测试用border:1px solid red;
     QString bodyStyleSheet="StyleWidget #body{background-color:rgba(255,255,255,1);border-bottom-left-radius:"+QString::number(m_swa.radius)+
                             "px;border-bottom-right-radius:"+QString::number(m_swa.radius)+"px;}";
