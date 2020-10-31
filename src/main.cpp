@@ -12,6 +12,7 @@
 #include <QStringList>
 #include <QStandardPaths>
 #include <fcntl.h>
+#include <QLibraryInfo>
 #include <syslog.h>
 
 int main(int argc, char *argv[])
@@ -34,9 +35,20 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon(":data/logo/96.png"));
 
     //标准对话框汉化
-    QTranslator* pTranslator = new QTranslator();
-    pTranslator->load(":src/translations/qt_zh_CN.qm");
-    a.installTranslator(pTranslator);
+//    QTranslator* pTranslator = new QTranslator();
+//    pTranslator->load(":src/translations/qt_zh_CN.qm");
+//    a.installTranslator(pTranslator);
+
+//    标准对话框汉化
+#ifndef QT_NO_TRANSLATION
+    QString translatorFileName = QLatin1String("qt_");
+    translatorFileName += QLocale::system().name();
+    QTranslator *translator = new QTranslator();
+    if (translator->load(translatorFileName, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        a.installTranslator(translator);
+    else
+        qDebug() << "加载中文失败";
+#endif
 
     MainWindow w;
 
