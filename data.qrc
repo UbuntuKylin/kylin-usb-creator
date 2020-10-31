@@ -10,5 +10,17 @@
         <file>data/comboboxIcon_d.png</file>
         <file>data/comboboxIcon_c.png</file>
         <file>data/warning.png</file>
+        <file>data/logo/16.png</file>
+        <file>data/logo/22.png</file>
+        <file>data/logo/24.png</file>
+        <file>data/logo/32.png</file>
+        <file>data/logo/48.png</file>
+        <file>data/logo/64.png</file>
+        <file>data/logo/96.png</file>
+        <file>data/logo/128.png</file>
+        <file>data/logo/256.png</file>
+        <file>data/logo/512.png</file>
+        <file>data/kylin-usb-creator.png</file>
+        <file>data/menu.png</file>
     </qresource>
 </RCC>

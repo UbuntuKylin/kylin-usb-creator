@@ -43,9 +43,12 @@ void StyleWidgetShadow::paintEvent(QPaintEvent *evet)//重绘窗口
 
         QRect rec2(rec.left(),rec.top()+swa.titleHeight,swa.w-(swa.shadow-i)*2,swa.h-swa.titleHeight-swa.radius);
         if(!swa.allRadius)
+        {
+            qDebug()<<"!swa.allRadius";
             painterPath2.addRect(rec2);
-        else
+        }else{
             painterPath2.addRoundedRect(rec2,swa.radius,swa.radius);
+        }
         painter.setClipRegion(QRegion(0,swa.titleHeight+swa.radius,swa.w,swa.h)); //裁剪区域（窗体）
         painter.drawPath(painterPath2);
     }

@@ -1,0 +1,9 @@
+<schemalist gettext-domain="kylin-usb-creator">
+     <schema id="org.kylin-usb-creator-data.settings"  path="/org/ukui/kylin-usb-creator/">
+        <key name="mode" type="s">
+            <default>"normal"</default>
+            <summary>"gsetting test key"</summary>
+            <description>test</description>
+        </key>
+      </schema>
+</schemalist>

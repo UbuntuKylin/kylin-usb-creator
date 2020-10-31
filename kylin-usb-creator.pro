@@ -23,7 +23,8 @@ SOURCES += \
     src/stylecombobox.cpp \
     src/stylewidget.cpp \
     src/stylewidgetattribute.cpp \
-    src/stylewidgetshadow.cpp
+    src/stylewidgetshadow.cpp \
+    src/rootauthdialog.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -32,38 +33,41 @@ HEADERS += \
     src/stylecombobox.h \
     src/stylewidget.h \
     src/stylewidgetattribute.h \
-    src/stylewidgetshadow.h
+    src/stylewidgetshadow.h \
+    src/rootauthdialog.h
 
 # bin file output dir
 TARGET = kylin-usb-creator
 target.source += $$TARGET
 target.path = /usr/bin
 
-icons.files = data/icon.png
+icons.files = data/kylin-usb-creator.png
 icons.path = /usr/share/pixmaps/
+
+# gsettings
+#schemes.file = /data/org.kylin-usb.creator.gschema.xml
+#schemes.path = /usr/share/glib-2.0/schemas/
 
 desktop.path = /usr/share/applications
 desktop.files = kylin-usb-creator.desktop
 
-INSTALLS += \
-    target \
-    desktop \
-    icons
+INSTALLS += target desktop icons \
+#        schemas
 
+#CONFIG += link_pkgconfig
 
-TRANSLATIONS += \
-    src/translations/kylin-usb-creator_zh_CN.ts
+#PKGCONFIG += gsettings-qt
+
+TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    data.qrc \
-    translations.qrc
+RESOURCES += data.qrc translations.qrc
 
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
-DISTFILES += \
-    src/translations/qt_zh_CN.qm
+DISTFILES += src/translations/qt_zh_CN.qm \
+#    data/org.china-weather-data.gschema.xml \

@@ -15,7 +15,7 @@ class Page2 : public QWidget
     Q_OBJECT
 public:
     explicit Page2(QWidget *parent = nullptr);
-    qint64 getFileSize(QString filePath);//获取文件大小，返回单位mb
+    qint64 getFileSize(QString filePath); //获取文件大小，返回单位mb
 signals:
     void makeFinish();
     void returnMain();
@@ -24,20 +24,23 @@ signals:
 public slots:
     void startMaking(QString key,QString sourcePath,QString targetPath); //接收page1传来的制作参数
     void finishEvent();
+//    void stopMission();
 private:
     void playLoadingGif();
     void playFinishGif();
+
     QMovie *movieLoading=nullptr;
     QMovie *movieFinish=nullptr;
     QLabel *lableMovie=nullptr;
     QLabel *lableText=nullptr;
     QLabel *lableNum=nullptr;
-    QPushButton *returnPushButton=nullptr;
-    int frameCount=0;
+    QPushButton *returnPushButton=nullptr; // 回page1的按钮
     QProcess *command_dd;
+
+    int frameCount=0;
     void readBashStandardErrorInfo();
     qint64 sourceFileSize = 0;
-    bool isInPage2 = false;
+//    bool isInPage2 = false;
     QTimer *timer;
 };
 
