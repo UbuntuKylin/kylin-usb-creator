@@ -9,10 +9,7 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
     this->setFixedSize(swa.w-swa.shadow,swa.h-swa.shadow);
 
     pushButton = new QPushButton(this);
-    //pushButton->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
     pushButton->setFixedSize(swa.w-swa.shadow,swa.h-swa.shadow);
-    //pushButton->setIcon(QIcon(":/data/comboboxIcon_d.png"));
-    //pushButton->setIconSize(QSize(16,16));
     connect(pushButton,&QPushButton::clicked,this,&StyleComboBox::on_diskButton_click);
 
     text=new QLabel;
@@ -61,8 +58,6 @@ void StyleComboBox::on_diskButton_click()
         listWidget->setFixedWidth(UDISKLISTWIDGETWIDTH);
         swa.setH(listWidgetHeight);
         swa.w = UDISKLISTWIDGETWIDTH + 6;
-        qDebug()<<"swa.w="<<swa.w;
-        qDebug()<<"listWidgetHeight="<<listWidgetHeight;
         //设置阴影
         swshadow =new StyleWidgetShadow(swa);
         QVBoxLayout *vblayout=new QVBoxLayout(swshadow);
@@ -118,4 +113,12 @@ void StyleComboBox::setPushKey(QListWidgetItem *item)
 QString StyleComboBox::getDiskPath()
 {
     return text->statusTip();
+}
+
+void StyleComboBox::dealDiskLabelRefresh()
+{
+    if(1 == listWidget->count())
+    {
+        text->setText(listWidget->item(0)->text());
+    }
 }

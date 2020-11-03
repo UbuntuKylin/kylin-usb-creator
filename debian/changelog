@@ -1,3 +1,9 @@
+kylin-usb-creator (1.0.0-12kord) v101; urgency=medium
+
+  * 对话框汉化
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 31 Oct 2020 16:32:04 +0800
+
 kylin-usb-creator (1.0.0-11kord) v101; urgency=medium
 
   * 密码校验类拆分，dd命令优化

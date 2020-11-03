@@ -36,7 +36,7 @@ public:
 
 signals:
     void makeStart(QString key,QString sourcePath,QString targetPath);
-
+    void diskLabelRefresh(); //  已选中U盘刷新
 
 public slots:
     void allClose();

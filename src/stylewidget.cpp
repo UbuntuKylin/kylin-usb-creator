@@ -42,6 +42,10 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     title->setMinimumHeight(swa.titleHeight);
     title->setObjectName("title");
 
+//    titleBlur = new QGraphicsBlurEffect(title);
+//    titleBlur->setBlurRadius(5);
+//    title->setGraphicsEffect(titleBlur);
+
     body = new QWidget;//窗体
     body->setObjectName("body");
 

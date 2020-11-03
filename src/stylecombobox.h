@@ -26,6 +26,7 @@ public:
 public slots:
     QString getDiskPath();
     void setPushKey(QListWidgetItem *item);//将值传递到按键
+    void dealDiskLabelRefresh(); //插拔后U盘选中label的刷新
 
 signals:
 
@@ -37,8 +38,8 @@ private:
     StyleWidgetAttribute swa;//属性
     bool isDiskListOpen = false;
     bool mouseInListWidget=false;
-    QLabel *text=nullptr;
-    QLabel *icon=nullptr;
+    QLabel *text=nullptr; // U盘框选中的部分
+    QLabel *icon=nullptr;   // U盘框上图标
 };
 
 #endif // STYLECOMBOBOX_H

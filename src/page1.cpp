@@ -7,8 +7,6 @@ Page1::Page1( StyleWidgetAttribute page_swa)
     swa.setH(COMBOBOXH);
     swa.itemHeight=ITEMHEIGHT;
     swa.radius=COMBOBOXRADIUS;
-//    QPoint pos = this->mapToGlobal(QPoint(0,0));
-//    qDebug()<<"init"<<pos;
     initControlQss();//初始化样式
     dialogInitControlQss(page_swa);
     getStorageInfo();//获取磁盘信息
@@ -24,16 +22,14 @@ void Page1::initControlQss()
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
 //    tabIso->setStyleSheet("font-size:14px;");
-    tabUdisk->setStyleSheet("font-size:14px;");
     tabUdisk->setObjectName("tabLable");
     comboUdisk=new StyleComboBox(swa);
+    connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
     warnningIcon=new QLabel;
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
     warnningIcon->show();
     warnningText=new QLabel;
-//    warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
-//    warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
 
     urlIso=new QLineEdit;
     urlIso->setEnabled(false);
@@ -50,7 +46,6 @@ void Page1::initControlQss()
     creatStart->setFixedSize(200,30);
     creatStart->setText(tr("开始制作"));
     creatStart->setEnabled(false);
-//    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
     QHBoxLayout *hl1=new QHBoxLayout;
     hl1->setMargin(0);
@@ -94,14 +89,6 @@ void Page1::initControlQss()
     warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
     udiskPlugWatcherInit(); //监控U盘插拔
 
-//    this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
-//                        ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
-//                        ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-//    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:#000;border-radius:4px;font-size:14px;}"
-//                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
-//                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-//    urlIso->setStyleSheet("background-color:rgba(240, 240, 240, 1);color:rgba(96, 98, 101, 1);font-size:12px;");
-//    comboUdisk->setStyleSheet("font-size:12px;");
 
 }
 
@@ -116,7 +103,6 @@ void Page1::udiskPlugWatcherInit()
 
 void Page1::refreshDiskList()
 {
-//    qDebug()<<"disk state changed";
     if(diskRefreshDelay->isActive())
     {
         return;
@@ -284,9 +270,9 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 
 void Page1::getStorageInfo()
 {
-    diskRefreshDelay->stop();//U盘动态刷新
+    diskRefreshDelay->stop();//U盘动态刷新相关
     QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes();//获取磁盘列表
-
+    comboUdisk->clearDiskList();
     for(QStorageInfo& disk : diskList)
     {
         if(""==disk.displayName())//名称为空的磁盘不显示
@@ -299,6 +285,7 @@ void Page1::getStorageInfo()
             continue;
         if("/boot"==disk.displayName())//boot分区不显示
             continue;
+//        comboUdisk->
 
         QString displayName=disk.displayName();
         if(displayName.length()>UDISK_NAME_MAX_LENGTH)
@@ -317,11 +304,13 @@ void Page1::getStorageInfo()
     }
     if(0==comboUdisk->listWidget->count())
     {
+//        comboUdisk->clearDiskList();
         comboUdisk->addItem(tr("无可用U盘"),NOUDISK);
         warnningText->hide();
         warnningIcon->hide();
         creatStart->setEnabled(false);
     }
+    emit diskLabelRefresh();
 }
 
 void Page1::allClose()
@@ -398,7 +387,8 @@ void Page1::dealAuthDialogClose()
 
 void Page1::setThemeStyleLight()
 {
-    tabIso->setStyleSheet("font-size:14px;");
+    tabIso->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
+    tabUdisk->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
     warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
 
