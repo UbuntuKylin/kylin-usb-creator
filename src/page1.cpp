@@ -136,6 +136,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
         authDialog->close();
         ifStartBtnChange();
     });
+//    connect(authDialog->dialogKey,&QLineEdit::)
     authDialog->hide();
     authDialog->btnOk->setFixedSize(64,30);
     authDialog->btnOk->setText(tr("授权"));
@@ -200,7 +201,6 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     titlelyt4->addWidget(fill);
     titlelyt4->addStretch();
     titlelyt4->addLayout(titlelyt1);
-
 
     divingLine = new QLabel;
     divingLine->setFixedSize(424,1);
@@ -279,13 +279,17 @@ void Page1::getStorageInfo()
             continue;
         if("/"==disk.displayName())//系统分区不显示
             continue;
-        if(disk.bytesTotal()/1048576<4096 || disk.bytesTotal()/1048576>1024*65)//小于4G或大于65G的磁盘不显示
+        if(disk.bytesTotal()/1048576<=2048 || disk.bytesTotal()/1048576>1024*65)//小于2G或大于65G的磁盘不显示
             continue;
         if("tmpfs"==disk.fileSystemType())//tmpfs类型的磁盘不显示
             continue;
         if("/boot"==disk.displayName())//boot分区不显示
             continue;
-//        comboUdisk->
+        if(disk.displayName().contains("BACKUP")) //还原分区
+            continue;
+
+
+
 
         QString displayName=disk.displayName();
         if(displayName.length()>UDISK_NAME_MAX_LENGTH)
@@ -293,7 +297,6 @@ void Page1::getStorageInfo()
 
         float diskSize=disk.bytesTotal();
         diskSize=diskSize/1048576/1024;
-
         QString diskUrl=disk.device();
         diskUrl=diskUrl.mid(0,8);
 

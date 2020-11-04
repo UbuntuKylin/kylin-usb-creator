@@ -47,12 +47,10 @@ void rootAuthDialog::readBashOutput()
         dialogKey->clear();
         dialogKey->setPlaceholderText("请输入密码");
         this->close();
-//        qDebug()<<"right";
         return ;
     }else if(err.contains("对不起") || err.contains("Sorry"))
     {
         dealWrongPasswd();
-//        qDebug()<<"wrong";
         return ;
     }
 }

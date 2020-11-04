@@ -41,10 +41,15 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     title->setMaximumHeight(swa.titleHeight);
     title->setMinimumHeight(swa.titleHeight);
     title->setObjectName("title");
+//    此功能有可能导致软件在非v101环境下编译异常
+    title->setProperty("useSystemStyleBlur",true);  //使用V101的系统模糊方案
+
 
 //    titleBlur = new QGraphicsBlurEffect(title);
 //    titleBlur->setBlurRadius(5);
 //    title->setGraphicsEffect(titleBlur);
+
+
 
     body = new QWidget;//窗体
     body->setObjectName("body");

@@ -1,3 +1,10 @@
+kylin-usb-creator (1.0.0-14kord) v101; urgency=medium
+
+  * 设置状态栏模糊跟随v101系统方案，修改了U盘过滤规则及相关阈值。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Web, 04 Nov 2020 14:38:15 +0800
+
+
 kylin-usb-creator (1.0.0-13kord) v101; urgency=medium
 
   * 修复了一些问题，增加了U盘选中框预选功能
