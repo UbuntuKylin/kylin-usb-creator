@@ -150,6 +150,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     rootDialogClose = new QPushButton(rootWindowTitle);
     rootDialogClose->setFixedSize(30,30);
     connect(rootDialogClose,&QPushButton::clicked,authDialog,&rootAuthDialog::close);
+    connect(rootDialogClose,&QPushButton::clicked,[=]{ifStartBtnChange();});
     rootDialogMin = new QPushButton(rootWindowTitle);
     rootDialogMin->setFixedSize(30,30);
 //    connect(rootDialogMin,&QPushButton::clicked,authDialog,&rootAuthDialog::hide);

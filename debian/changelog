@@ -1,3 +1,17 @@
+kylin-usb-creator (1.0.0-16kord) v101; urgency=medium
+
+  * 修复了授权框关闭按钮按下时开始制作按钮无法亮起的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 06 Nov 2020 16:26:42 +0800
+
+
+kylin-usb-creator (1.0.0-15kord) v101; urgency=medium
+
+  * 增加了对于光盘设备的过滤，修复了在U盘动态插拔时开始按钮无法及时亮起的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 06 Nov 2020 15:22:16 +0800
+
+
 kylin-usb-creator (1.0.0-14kord) v101; urgency=medium
 
   * 设置状态栏模糊跟随v101系统方案，修改了U盘过滤规则及相关阈值。
