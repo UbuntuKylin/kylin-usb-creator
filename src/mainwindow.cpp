@@ -20,8 +20,10 @@ void MainWindow::myStyle()
     StyleWidget *styleWidget=new StyleWidget(swa,tr("麒麟U盘启动器"));
     timer = new QTimer(this);
     page1 = new Page1(swa);
-    page1->setThemeStyleLight();
+    connect(page1,&Page1::setStyleWidgetStyle,styleWidget,&StyleWidget::dealSetThemeStyle);
     connect(styleWidget,&StyleWidget::allClose,page1,&Page1::allClose);
+//    page1->setThemeStyleDark();
+    page1->setThemeStyleLight();
 
     page2 = new Page2;
     connect(page1,&Page1::makeStart,page2,&Page2::startMaking);

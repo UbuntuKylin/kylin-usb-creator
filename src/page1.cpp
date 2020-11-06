@@ -25,6 +25,7 @@ void Page1::initControlQss()
     tabUdisk->setObjectName("tabLable");
     comboUdisk=new StyleComboBox(swa);
     connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
+    connect(comboUdisk,&StyleComboBox::ifStartButtonChange,this,&Page1::dealComboBoxChangeButton);
     warnningIcon=new QLabel;
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
@@ -112,19 +113,14 @@ void Page1::refreshDiskList()
 }
 
 
+
 void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 {
     page_swa.setW(424);
     page_swa.setH(264);
     authDialog = new rootAuthDialog();
     authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog );
-//    authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     authDialog->setFixedSize(424,264);
-//    connect(authDialog->btnCancel,&QPushButton::clicked,[=]{
-//        authDialog->dialogKey->clear();
-//        authDialog->close();
-//        ifStartBtnChange();
-//    });
 
 //    授权窗口在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
@@ -285,7 +281,9 @@ void Page1::getStorageInfo()
             continue;
         if("/boot"==disk.displayName())//boot分区不显示
             continue;
-        if(disk.displayName().contains("BACKUP")) //还原分区
+        if(disk.displayName().contains("BACKUP")) //还原分区不显示
+            continue;
+        if(disk.device().contains("/dev/sr0")) //光盘不显示
             continue;
 
 
@@ -314,6 +312,8 @@ void Page1::getStorageInfo()
         creatStart->setEnabled(false);
     }
     emit diskLabelRefresh();
+    qDebug()<<"getstorage中的ifstartbuttoncanged被调用";
+    ifStartBtnChange();
 }
 
 void Page1::allClose()
@@ -358,6 +358,7 @@ bool Page1::mouseIsLeaveUdiskWidget()
 
 void Page1::ifStartBtnChange()
 {
+    qDebug()<<"comboUdisk->getDiskPath()= "<<comboUdisk->getDiskPath()<<"  urlIso->text() = "<<urlIso->text();
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
@@ -372,6 +373,11 @@ void Page1::ifStartBtnChange()
 }
 
 void Page1::dealDialogCancel()
+{
+    ifStartBtnChange();
+}
+
+void Page1::dealComboBoxChangeButton()
 {
     ifStartBtnChange();
 }
@@ -422,6 +428,7 @@ void Page1::setThemeStyleLight()
     authDialog->btnOk->setStyleSheet("QPushButton{background-color:rgba(100, 105, 241, 1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                      "QPushButton:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                      "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");
+    emit setStyleWidgetStyle(LIGHTTHEME);
 }
 
 void Page1::setThemeStyleDark()
@@ -449,4 +456,5 @@ void Page1::setThemeStyleDark()
     authDialog->btnOk->setStyleSheet("StyleWidget #dialogYes{background-color:rgba(100, 105, 241, 1);border-radius:4px;color:#fff;font-size:14px;}"
                                "StyleWidget #dialogYes:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:#fff;}"
                                "StyleWidget #dialogYes:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:#fff;}");
+    emit setStyleWidgetStyle(DARKTHEME); //设置stylewidget响应黑色主题
 }

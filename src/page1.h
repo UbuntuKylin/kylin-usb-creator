@@ -7,6 +7,8 @@
 #define COMBOBOXH 30//下拉框高度
 #define ITEMHEIGHT 30//下拉框标签高度
 #define COMBOBOXRADIUS 6//下拉框窗口圆角
+#define DARKTHEME "dark"
+#define LIGHTTHEME "light"
 
 #include "stylewidget.h"
 #include "stylecombobox.h"
@@ -37,12 +39,14 @@ public:
 signals:
     void makeStart(QString key,QString sourcePath,QString targetPath);
     void diskLabelRefresh(); //  已选中U盘刷新
+    void setStyleWidgetStyle(const QString);
 
 public slots:
     void allClose();
     void refreshDiskList();
     void dealRightPasswd(); //处理密码正确
     void dealAuthDialogClose();  //处理授权框关闭
+    void dealComboBoxChangeButton(); //combobox通知page1检查开始按钮是否可以亮起
 
 
 private:

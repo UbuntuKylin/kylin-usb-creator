@@ -29,6 +29,7 @@ public slots:
     void dealDiskLabelRefresh(); //插拔后U盘选中label的刷新
 
 signals:
+    void ifStartButtonChange();  //通知page1刷新开始制作按钮状态
 
 
 private:

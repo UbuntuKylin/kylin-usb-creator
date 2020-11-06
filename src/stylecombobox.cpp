@@ -34,7 +34,8 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
     icon->setStyleSheet("border-image:url(:/data/comboboxIcon_d.png);border:0px;");
     text->setStyleSheet("color:rgba(96,98,101,1);border:0px;");
     listWidget->setStyleSheet("QListWidget::Item{background-color:#fff;color:rgba(96,98,102,1);padding-left:10px;}"
-                              "QListWidget::Item:hover,QListWidget::Item:selected {background-color:rgba(246, 246, 246, 1);color:rgba(96,98,102,1);}");
+                              "QListWidget::Item:hover{border:1px soild red};");
+//    listWidget->setStyleSheet("QListWidget{border:2px soild red;}");
 }
 
 void StyleComboBox::clearDiskList()
@@ -120,5 +121,7 @@ void StyleComboBox::dealDiskLabelRefresh()
     if(1 == listWidget->count())
     {
         text->setText(listWidget->item(0)->text());
+        qDebug()<<"StyleComboBox::dealDiskLabelRefresh";
+        emit ifStartButtonChange();
     }
 }

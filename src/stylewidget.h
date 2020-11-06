@@ -5,7 +5,7 @@
 
 #include "stylewidgetshadow.h"
 #include <QWidget>
-#include <QGraphicsEffect>
+//#include <QGraphicsEffect>
 #include <QLabel>
 #include <QComboBox>
 #include <QLineEdit>
@@ -29,6 +29,8 @@ public:
     void setThemeLight(); //  设置主题为浅色状态
     void setThemeDark();
     QPoint windowPos = QPoint(0,0);
+public slots:
+    void dealSetThemeStyle(const QString);
 
 private:
     bool event(QEvent *event); //鼠标离开菜单栏事件
