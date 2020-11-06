@@ -287,8 +287,6 @@ void Page1::getStorageInfo()
             continue;
 
 
-
-
         QString displayName=disk.displayName();
         if(displayName.length()>UDISK_NAME_MAX_LENGTH)
             displayName=displayName.mid(0,UDISK_NAME_MAX_LENGTH -1)+"…";

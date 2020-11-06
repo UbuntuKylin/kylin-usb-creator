@@ -121,6 +121,7 @@ void StyleComboBox::dealDiskLabelRefresh()
     if(1 == listWidget->count())
     {
         text->setText(listWidget->item(0)->text());
+        text->setStatusTip(listWidget->item(0)->statusTip());
         qDebug()<<"StyleComboBox::dealDiskLabelRefresh";
         emit ifStartButtonChange();
     }
