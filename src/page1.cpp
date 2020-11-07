@@ -119,7 +119,8 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     page_swa.setW(424);
     page_swa.setH(264);
     authDialog = new rootAuthDialog();
-    authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog );
+//    authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog );
+    authDialog->setWindowFlags(Qt::FramelessWindowHint);
     authDialog->setFixedSize(424,264);
 
 //    授权窗口在屏幕中央显示
@@ -157,7 +158,8 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 
     connect(rootDialogMin,&QPushButton::clicked,[=]{
 //        authDialog->dialogKey->clear();
-        authDialog->close();
+//        authDialog->close();
+        authDialog->showMinimized();
         ifStartBtnChange();
     });
     rootDialogTitleText = new QLabel(rootWindowTitle);//标题
