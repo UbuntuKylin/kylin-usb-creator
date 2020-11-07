@@ -279,20 +279,20 @@ void StyleWidget::setThemeLight()
 
 void StyleWidget::setThemeDark()
 {
-    qDebug()<<"StyleWidget::setThemeDark()被调用";
     QString bodyStyleSheet="StyleWidget #body{background-color:rgba(31,32,34,1);border-bottom-left-radius:"+QString::number(m_swa.radius)+
                             "px;border-bottom-right-radius:"+QString::number(m_swa.radius)+"px;}";
-    widgetMin->setStyleSheet("StyleWidget #widgetMin{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
+    widgetMin->setStyleSheet("StyleWidget #widgetMin{background-color:rgba(255,255,255,0);border-image:url(:/data/min_h.png);border-radius:4px;}"
+                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_h.png);border-radius:4px;}"
+                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_h.png);border-radius:4px;}");
 
-    widgetClose->setStyleSheet("StyleWidget #widgetClose{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
+    widgetClose->setStyleSheet("StyleWidget #widgetClose{background-color:rgba(255,255,255,0);border-image:url(:/data/close_h.png);border-radius:4px;}"
                                "StyleWidget #widgetClose:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
                                "StyleWidget #widgetClose:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
 
     widgetMenu->setStyleSheet("StyleWidget #widgetMenu{background-color:rgba(255,255,255,0);border-image:url(:/data/menu.png);border-radius:4px;}"
                               "StyleWidget #widgetMenu:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/menu.png);border-radius:4px;}"
                               "StyleWidget #widgetMenu:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/menu.png);border-radius:4px;}");
+     text->setStyleSheet("color:rgba(249,249,249,1);");
     if(m_swa.allRadius)
     {
         body->setStyleSheet(bodyStyleSheet);

@@ -69,7 +69,7 @@ private:
     QLabel *tabIso = nullptr;//选择镜像标签
     QLabel *tabUdisk = nullptr;//选择U盘标签
     QLabel *warnningIcon = nullptr;//警告标志
-    QLabel *warnningText = nullptr;//警告标语
+    QLabel *warnningText = nullptr;//警告标语tabUdisk
     QLineEdit *urlIso = nullptr;//显示镜像路径
     QPushButton *findIso = nullptr;//浏览文件按钮
     QPushButton *creatStart = nullptr;//开始制作

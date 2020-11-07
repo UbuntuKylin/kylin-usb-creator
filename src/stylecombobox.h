@@ -2,6 +2,8 @@
 #define STYLECOMBOBOX_H
 
 #define UDISKLISTWIDGETWIDTH 330
+#define DARKTHEME "dark"
+#define LIGHTTHEME "light"
 
 #include "stylewidgetshadow.h"
 #include <QDebug>
@@ -22,6 +24,8 @@ public:
     void addItem(QString lable, QString data);//添加到列表
     StyleWidgetShadow *swshadow = nullptr;//列表阴影
     void clearDiskList(); //清空U盘的listWidget
+    void setThemeDark(); //深色模式
+    void setThemeLight(); //浅色模式
 
 public slots:
     QString getDiskPath();
@@ -34,9 +38,9 @@ signals:
 
 private:
     QPushButton *pushButton = nullptr;//点击部分
-    void on_diskButton_click();//U盘栏点击事件
-//    void on_menuButton_click();//菜单栏点击事件
-    StyleWidgetAttribute swa;//属性
+    void on_diskButton_click(); //U盘栏点击事件
+//    void on_menuButton_click(); //菜单栏点击事件
+    StyleWidgetAttribute swa; //属性
     bool isDiskListOpen = false;
     bool mouseInListWidget=false;
     QLabel *text=nullptr; // U盘框选中的部分
