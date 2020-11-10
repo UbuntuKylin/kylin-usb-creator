@@ -4,7 +4,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
     myStyle();
-//    initGsetting();
+    initGsetting();
 }
 
 MainWindow::~MainWindow()
@@ -22,10 +22,12 @@ void MainWindow::myStyle()
     page1 = new Page1(swa);
     connect(page1,&Page1::setStyleWidgetStyle,styleWidget,&StyleWidget::dealSetThemeStyle);
     connect(styleWidget,&StyleWidget::allClose,page1,&Page1::allClose);
-//    page1->setThemeStyleDark();
-    page1->setThemeStyleLight();
+    page1->setThemeStyleDark();
+//    page1->setThemeStyleLight();
 
     page2 = new Page2;
+//    page2->setThemeStyleLight();
+    page2->setThemeStyleDark();
     connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
     connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
@@ -70,45 +72,52 @@ void MainWindow::myStyle()
 //    createTrayActions();
 }
 
-//void MainWindow::initGsetting()
-//{
-//    if(QGSettings::isSchemaInstalled(KYLINUSBCREATORDATA)){
+void MainWindow::initGsetting()
+{
+    if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW))
+    {
 //        m_pGsettingThemeData = new QGSettings(KYLINUSBCREATORDATA);
-//        if(keyList.contains("mode"))
+//        if(1)
 //        {
 //            qDebug()<<"Local gsettings init success.";
+//            page1->setThemeStyleLight();
+//            page2->setThemeStyleLight();
 //        }
-//        // 主题适配
-//        if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW))
-//        {
-//            m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
+        // 主题适配
+        if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW))
+        {
+            m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
 
-//            connect(m_pGsettingThemeData,&QGSettings::changed,this, [=] (const QString &key)
-//            {
-//                if(key == "styleName")
-//                {
+            connect(m_pGsettingThemeData,&QGSettings::changed,this, [=] (const QString &key)
+            {
+                if(key == "styleName")
+                {
 
-//                        setThemeStyle();
-//                }
-//            });
-//        }
-//    }
-//    return ;
-//}
+                        setThemeStyle();
+                }
+            });
+        }
+    }
+    return ;
+}
 
-//void MainWindow::setThemeStyle()
-//{
-//    QString nowThemeStyle = m_pGsettingThemeData->get("stylename").toString();
-//    if("ukui-dark" == nowThemeStyle || "ukui-black" == nowThemeStyle)
-//    {
+void MainWindow::setThemeStyle()
+{
+    QString nowThemeStyle = m_pGsettingThemeData->get("stylename").toString();
+    if("ukui-dark" == nowThemeStyle || "ukui-black" == nowThemeStyle)
+    {
 //        子类在这里调用对应方法做深色渲染
-//        qDebug()<<"深色渲染start";
-//    }else{
+        qDebug()<<"深色渲染start";
+        page2->setThemeStyleDark();
+        page1->setThemeStyleDark();
+    }else{
 //        子类在这里调用方法做对应浅色渲染
-//        qDebug()<<"浅色渲染start";
-//    }
+        qDebug()<<"浅色渲染start";
+        page1->setThemeStyleLight();
+        page2->setThemeStyleLight();
+    }
 
-//}
+}
 void MainWindow::createTrayActions()
 {
     if(!QSystemTrayIcon::isSystemTrayAvailable())

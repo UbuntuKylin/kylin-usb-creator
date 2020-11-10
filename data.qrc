@@ -4,7 +4,6 @@
         <file>data/close_h.png</file>
         <file>data/min_d.png</file>
         <file>data/loading.gif</file>
-        <file>data/icon.png</file>
         <file>data/finish.gif</file>
         <file>data/close_d.png</file>
         <file>data/comboboxIcon_d.png</file>
@@ -22,5 +21,9 @@
         <file>data/logo/512.png</file>
         <file>data/kylin-usb-creator.png</file>
         <file>data/menu.png</file>
+        <file>data/elements_dark/close.png</file>
+        <file>data/elements_dark/minimize.png</file>
+        <file>data/finish2.gif</file>
+        <file>data/loading2.gif</file>
     </qresource>
 </RCC>

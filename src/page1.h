@@ -59,10 +59,12 @@ private:
     void dealDialogCancel();     // 处理授权框关闭及取消
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
 
+    QString themeStatus = LIGHTTHEME; //主题指示器
     QWidget *rootWindowTitle = nullptr; //root授权框状态栏
     QLabel *rootDialogTitleText = nullptr; //root授权框标题
     QPushButton *rootDialogClose = nullptr; //root授权框关闭按钮
     QPushButton *rootDialogMin = nullptr; //root授权框最小化按钮
+    QLabel *dialogKeyLable = nullptr; //root授权框输入密码label
     QLabel *divingLine = nullptr;    //授权框1px分割线
     QTimer *diskRefreshDelay = nullptr; //U盘插入后等待系统挂载的时间
     StyleComboBox *comboUdisk = nullptr;//U盘列表

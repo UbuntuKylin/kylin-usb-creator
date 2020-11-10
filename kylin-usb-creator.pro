@@ -45,8 +45,8 @@ icons.files = data/kylin-usb-creator.png
 icons.path = /usr/share/pixmaps/
 
 # gsettings
-#schemes.file = /data/org.kylin-usb.creator.gschema.xml
-#schemes.path = /usr/share/glib-2.0/schemas/
+schemes.file = /data/org.kylin-usb.creator.gschema.xml
+schemes.path = /usr/share/glib-2.0/schemas/
 
 desktop.path = /usr/share/applications
 desktop.files = kylin-usb-creator.desktop
@@ -54,9 +54,9 @@ desktop.files = kylin-usb-creator.desktop
 INSTALLS += target desktop icons \
 #        schemas
 
-#CONFIG += link_pkgconfig
+CONFIG += link_pkgconfig
 
-#PKGCONFIG += gsettings-qt
+PKGCONFIG += gsettings-qt
 
 TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts
 
@@ -71,3 +71,17 @@ QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
 DISTFILES += src/translations/qt_zh_CN.qm \
 #    data/org.china-weather-data.gschema.xml \
+    data/elements_light/finish.gif \
+    data/elements_light/loading.gif \
+    data/elements_dark/close_h.png \
+    data/elements_light/close_d.png \
+    data/elements_light/close_h.png \
+    data/elements_light/comboboxIcon_c.png \
+    data/elements_light/comboboxIcon_d.png \
+    data/elements_light/menu.png \
+    data/elements_light/min_d.png \
+    data/elements_light/min_h.png \
+    data/elements_dark/close.png \
+    data/elements_dark/minimize.png \
+    data/elements_dark/close.png \
+    data/elements_dark/minimize.png

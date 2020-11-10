@@ -45,6 +45,7 @@ private:
     bool mouseInListWidget=false;
     QLabel *text=nullptr; // U盘框选中的部分
     QLabel *icon=nullptr;   // U盘框上图标
+    QString themeStatus = LIGHTTHEME; //主题状态标识
 };
 
 #endif // STYLECOMBOBOX_H

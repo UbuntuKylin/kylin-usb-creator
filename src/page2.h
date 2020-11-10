@@ -1,6 +1,9 @@
 #ifndef PAGE2_H
 #define PAGE2_H
 
+#define DARKTHEME "dark"
+#define LIGHTTHEME "light"
+
 #include <QWidget>
 #include <QDebug>
 #include <QPushButton>
@@ -16,6 +19,8 @@ class Page2 : public QWidget
 public:
     explicit Page2(QWidget *parent = nullptr);
     qint64 getFileSize(QString filePath); //获取文件大小，返回单位mb
+    void setThemeStyleDark();
+    void setThemeStyleLight();
 signals:
     void makeFinish();
     void returnMain();
@@ -24,11 +29,11 @@ signals:
 public slots:
     void startMaking(QString key,QString sourcePath,QString targetPath); //接收page1传来的制作参数
     void finishEvent();
-//    void stopMission();
+
 private:
     void playLoadingGif();
     void playFinishGif();
-
+    QString themeStatus = LIGHTTHEME;
     QMovie *movieLoading=nullptr;
     QMovie *movieFinish=nullptr;
     QLabel *lableMovie=nullptr;

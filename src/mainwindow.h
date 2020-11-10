@@ -16,7 +16,7 @@
 #include <QWidget>
 #include <QTimer>
 #include <QSystemTrayIcon> //状态栏
-//#include <QGSettings>
+#include <QGSettings>
 //滑动效果
 #include <QStackedWidget>
 class MainWindow : public QWidget
@@ -39,8 +39,8 @@ private:
     int changePage();
     void myStyle();//设定样式
     void createTrayActions();
-//    void initGsetting();
-//    void setThemeStyle();
+    void initGsetting();
+    void setThemeStyle();
 
     QStackedWidget *stackedWidget= nullptr;
     //页面小圆点
@@ -52,6 +52,6 @@ private:
     QSystemTrayIcon *m_mainTray = nullptr;
     QTimer *timer;
 //    bool isInPage2  = false; //程序是否处在页面2
-//    QGSettings *m_pGsettingTestData = nullptr;
+    QGSettings *m_pGsettingThemeData = nullptr;
 };
 #endif // MAINWINDOW_H
