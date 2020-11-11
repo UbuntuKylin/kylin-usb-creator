@@ -22,12 +22,9 @@ void MainWindow::myStyle()
     page1 = new Page1(swa);
     connect(page1,&Page1::setStyleWidgetStyle,styleWidget,&StyleWidget::dealSetThemeStyle);
     connect(styleWidget,&StyleWidget::allClose,page1,&Page1::allClose);
-    page1->setThemeStyleDark();
-//    page1->setThemeStyleLight();
+
 
     page2 = new Page2;
-//    page2->setThemeStyleLight();
-    page2->setThemeStyleDark();
     connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
     connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
@@ -96,6 +93,7 @@ void MainWindow::initGsetting()
                         setThemeStyle();
                 }
             });
+            setThemeStyle();
         }
     }
     return ;
@@ -103,7 +101,7 @@ void MainWindow::initGsetting()
 
 void MainWindow::setThemeStyle()
 {
-    QString nowThemeStyle = m_pGsettingThemeData->get("stylename").toString();
+    QString nowThemeStyle = m_pGsettingThemeData->get("styleName").toString();
     if("ukui-dark" == nowThemeStyle || "ukui-black" == nowThemeStyle)
     {
 //        子类在这里调用对应方法做深色渲染

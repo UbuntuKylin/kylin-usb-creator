@@ -360,7 +360,13 @@ void Page1::ifStartBtnChange()
                                   "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");
     }else{
         creatStart->setEnabled(false);
-        creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+        if(themeStatus == LIGHTTHEME)
+        {
+            creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
+        }else
+        {
+            creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+        }
     }
 }
 
@@ -393,7 +399,7 @@ void Page1::setThemeStyleLight()
     tabUdisk->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
     warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
-
+    ifStartBtnChange();
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
@@ -434,6 +440,7 @@ void Page1::setThemeStyleDark()
     tabIso->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
     warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    ifStartBtnChange();
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
 
     findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"

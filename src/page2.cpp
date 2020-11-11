@@ -60,7 +60,7 @@ void Page2::playLoadingGif()
     returnPushButton->setEnabled(false);
     returnPushButton->setText(tr("正在制作中"));
     if(LIGHTTHEME == themeStatus){
-        returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(100, 105, 241, 1);font-size:14px;border-radius:15px;");
+        returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(193, 193, 193, 1);font-size:14px;border-radius:15px;");
     }else
     {
         returnPushButton->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);font-size:14px;border-radius:15px;");

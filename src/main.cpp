@@ -18,7 +18,7 @@
 int main(int argc, char *argv[])
 {
 //    高清屏幕自适应
-//    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
 //    添加vnc支持

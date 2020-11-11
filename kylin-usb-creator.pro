@@ -51,9 +51,7 @@ schemes.path = /usr/share/glib-2.0/schemas/
 desktop.path = /usr/share/applications
 desktop.files = kylin-usb-creator.desktop
 
-INSTALLS += target desktop icons \
-#        schemas
-
+INSTALLS += target desktop icons schemes
 CONFIG += link_pkgconfig
 
 PKGCONFIG += gsettings-qt
