@@ -279,6 +279,8 @@ void Page1::getStorageInfo()
             continue;
         if(disk.device().contains("/dev/sr0")) //光盘不显示
             continue;
+        if(disk.device().contains("/dev/sda0")) //内置硬盘不显示
+            continue;
 
 
         QString displayName=disk.displayName();
@@ -406,7 +408,7 @@ void Page1::setThemeStyleLight()
     findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px;font-size:14px;}"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;");
+    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;border:1px  solid rgba(240,240,240,1);border-radius:4px;");
 //    root授权框部分
     rootDialogTitleText->setStyleSheet("font-size:14px;font-weight:600;color:rgba(27,27,27,1);");
     rootDialogClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"

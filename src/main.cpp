@@ -34,11 +34,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(":data/logo/96.png"));
 
-    //标准对话框汉化
-//    QTranslator* pTranslator = new QTranslator();
-//    pTranslator->load(":src/translations/qt_zh_CN.qm");
-//    a.installTranslator(pTranslator);
-
 //    标准对话框汉化
 #ifndef QT_NO_TRANSLATION
     QString translatorFileName = QLatin1String("qt_");
@@ -51,10 +46,6 @@ int main(int argc, char *argv[])
 #endif
 
     MainWindow w;
-
-//    StyleWidgetAttribute swa(WINDOWW,WINDOWH,0,WIDGETRADIUS,SHADOW,SHADOWALPHA,TITLEH);
-//    StyleWidget w(swa,"789798",0);
-
 
     return a.exec();
 }

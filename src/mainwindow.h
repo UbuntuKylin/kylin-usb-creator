@@ -6,7 +6,7 @@
 #define WINDOWH 510//窗口高度
 #define TITLEH 40//标题栏高度
 #define SHADOW 6//阴影宽度
-#define WIDGETRADIUS 12//窗口圆角
+#define WIDGETRADIUS 6//窗口圆角
 //#define BUTTONRADIUS 4//按钮圆角
 #define SHADOWALPHA 0.16//阴影透明度
 

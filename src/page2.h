@@ -13,6 +13,7 @@
 #include <QBoxLayout>
 #include <QString>
 #include <QFileInfo>
+//#include <QDir>
 class Page2 : public QWidget
 {
     Q_OBJECT

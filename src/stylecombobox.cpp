@@ -14,6 +14,7 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
     connect(pushButton,&QPushButton::clicked,this,&StyleComboBox::on_diskButton_click);
 
     text=new QLabel;
+    text->setFixedHeight(16);
     icon=new QLabel;
     icon->setFixedSize(16,16);
     QHBoxLayout *hlt=new QHBoxLayout(pushButton);
