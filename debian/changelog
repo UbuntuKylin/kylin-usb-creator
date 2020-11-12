@@ -1,3 +1,15 @@
+kylin-usb-creator (1.0.0-17kord) v101; urgency=medium
+
+  * 使用矢量图替代了之前png资源
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thur, 12 Nov 2020 20:54:13 +0800
+
+kylin-usb-creator (1.0.0-17kord) v101; urgency=medium
+
+  * 深色模式接入，解决了一些问题。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thur, 12 Nov 2020 13:51:16 +0800
+
 kylin-usb-creator (1.0.0-16kord) v101; urgency=medium
 
   * 修复了授权框关闭按钮按下时开始制作按钮无法亮起的问题

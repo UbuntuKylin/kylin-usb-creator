@@ -96,10 +96,10 @@ void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
     connect(command_dd,&QProcess::readyReadStandardError,this,&Page2::readBashStandardErrorInfo);
     command_dd->start("bash");
     command_dd->waitForStarted();
-//    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of="+targetPath.toLocal8Bit()+" status=progress";
+    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of="+targetPath.toLocal8Bit()+" status=progress";
 //    测试用shell
 //    QString ddshell = "dd if=/dev/zero of=/home/kylin/test.iso  bs=1M count=2000  status=progress";
-    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of=/dev/null status=progress";
+//    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of=/dev/null status=progress";
 
     qDebug()<<"ddshell is: "<<ddshell;
     command_dd->write(ddshell.toLocal8Bit() + '\n');

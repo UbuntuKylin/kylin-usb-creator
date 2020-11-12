@@ -26,7 +26,7 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     //窗口设置
     m_swa = swa;
 //    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);//无边框
-//    this->setAttribute(Qt::WA_TranslucentBackground, true);//窗体透明
+    this->setAttribute(Qt::WA_TranslucentBackground, true);//窗体透明
     this->setFixedSize(swa.w,swa.h);
 
     //设置阴影
@@ -54,8 +54,8 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
 
     icon = new QLabel;//图标
     icon->setFixedSize(24,24);
-    icon->setPixmap(QPixmap::fromImage(QImage(":/data/logo/24.png")));
-
+    icon->setPixmap(QPixmap::fromImage(QImage(":/data/kylin-usb-creator.svg")));
+    icon->setScaledContents(true);
     text = new QLabel;//标题
 
     QSize smallWidgetSize(30,30);//小按钮大小

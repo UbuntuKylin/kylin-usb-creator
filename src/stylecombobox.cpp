@@ -9,7 +9,6 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
     this->setFixedSize(swa.w-swa.shadow,swa.h-swa.shadow);
 
     pushButton = new QPushButton(this);
-    qDebug()<<"pushbuttonsize"<<swa.w-swa.shadow<<"*****"<<swa.h-swa.shadow;
     pushButton->setFixedSize(swa.w-swa.shadow,swa.h-swa.shadow);
     connect(pushButton,&QPushButton::clicked,this,&StyleComboBox::on_diskButton_click);
 
@@ -30,13 +29,6 @@ StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
     listWidget->setFont(ft);
     ft.setPixelSize(12);
     text->setFont(ft);
-//    pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(213,216,222,1);}"
-//                              ".QPushButton:hover{background-color:#fff;border:1px solid rgba(100,105,241,1);}");
-//    icon->setStyleSheet("border-image:url(:/data/comboboxIcon_d.png);border:0px;");
-//    text->setStyleSheet("color:rgba(96,98,101,1);border:0px;");
-//    listWidget->setStyleSheet("QListWidget::Item{background-color:#fff;color:rgba(96,98,102,1);padding-left:10px;}"
-//                              "QListWidget::Item:hover{border:1px soild red};");
-//    listWidget->setStyleSheet("QListWidget{border:2px soild red;}");
 }
 
 void StyleComboBox::clearDiskList()
@@ -64,7 +56,6 @@ void StyleComboBox::on_diskButton_click()
         swshadow =new StyleWidgetShadow(swa);
         QVBoxLayout *vblayout=new QVBoxLayout(swshadow);
         QPoint point= pushButton->mapToGlobal(QPoint(0,0));
-//        qDebug()<<point;//该控件左上角相对整个屏幕的坐标
         vblayout->setMargin(0);//控件间距
         vblayout->setSpacing(0);//控件间距
         vblayout->addWidget(listWidget);

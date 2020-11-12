@@ -25,5 +25,6 @@
         <file>data/elements_dark/minimize.png</file>
         <file>data/finish2.gif</file>
         <file>data/loading2.gif</file>
+        <file>data/kylin-usb-creator.svg</file>
     </qresource>
 </RCC>
