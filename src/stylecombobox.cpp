@@ -62,8 +62,14 @@ void StyleComboBox::on_diskButton_click()
         icon->setStyleSheet("border-image:url(:/data/comboboxIcon_c.png);border:0px;");
         if(LIGHTTHEME == themeStatus){
             pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(100, 105, 241, 1);}");
+            swshadow->setStyleSheet("border:1px solid rgba(255,255,255,1);border-radius:4px;background-color:rgba(255,255,255,1);");
+            listWidget->setStyleSheet("QListWidget::Item{background-color:rgba(255,255,255,1);border-radius:2px;padding-left:20px;color:rgba(96,98,102,1);}"
+                                      "QListWidget::Item:hover{background-color:rgba(246,246,246,1);}");
         }else if(DARKTHEME == themeStatus){
-            pushButton->setStyleSheet(".QPushButton{background-color:rgba(31,32,34,1);border:1px solid rgba(100,105,241,1);border-radius:4px;}");
+            pushButton->setStyleSheet(".QPushButton{background-color:rgba(31,32,34,1);border:1px solid rgba(100,105,241,1);border-radius:4px;color:rgba(143,417,153,1);}");
+            swshadow->setStyleSheet("border:1px solid rgba(61,61,65,1);border-radius:4px;background-color:rgba(61,61,65,1);");
+            listWidget->setStyleSheet("QListWidget::Item{background-color:rgba(61,61,65,1);border-radius:2px;color:rgba(249,249,249,1);padding-left:20px;}"
+                                      "QListWidget::Item:hover{background-color:rgba(72,72,76,1);color:rgba(249,249,249,1);}");
         }
         swshadow->move(point.rx()-swa.shadow/2,point.ry()+pushButton->height()+swa.shadow);
         swshadow->show();

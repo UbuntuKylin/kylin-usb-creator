@@ -1,4 +1,10 @@
-kylin-usb-creator (1.0.0-17kord) v101; urgency=medium
+kylin-usb-creator (1.0.0-19kord) v101; urgency=medium
+
+  * 修复了授权框异常的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thur, 12 Nov 2020 21:13:08 +0800
+
+kylin-usb-creator (1.0.0-18kord) v101; urgency=medium
 
   * 使用矢量图替代了之前png资源
 

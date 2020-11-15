@@ -420,7 +420,7 @@ void Page1::setThemeStyleLight()
                                          "QlineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
     dialogKeyLable->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
     divingLine->setStyleSheet("background-color:rgba(242,246,253,1);");
-    authDialog->setStyleSheet("QWidget{background-color:rgba(255,255,255,1);border-radius:20px;border:1px solid red;}");
+    authDialog->setStyleSheet("QWidget{background-color:rgba(255,255,255,1);border-radius:20px;}");
     dialogWarningLable->setStyleSheet("font-size:14px;color:rgba(48,49,51,1);font-weight:600;");
     dialogWarningLable2->setStyleSheet("font-size:14px;color:rgba(48,49,51,1);");
     authDialog->btnCancel->setStyleSheet("QPushButton{background-color:rgba(221,223,231,0);border-radius:4px;border:0.7px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}"
@@ -462,7 +462,7 @@ void Page1::setThemeStyleDark()
 //                                             "QLineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
         dialogKeyLable->setStyleSheet("color:rgba(192,196,204,1);font-size:14px;");
         divingLine->setStyleSheet("background-color:rgba(72,72,76,1);");
-        authDialog->setStyleSheet("background-color:rgba(31,32,34,1);border-radius:6px;border:1px solid red;");
+        authDialog->setStyleSheet("background-color:rgba(31,32,34,1);border-radius:6px;");
         dialogWarningLable->setStyleSheet("font-size:14px;color:rgba(192,196,204,1);font-weight:600;");
         dialogWarningLable2->setStyleSheet("font-size:14px;color:rgba(192,196,204,1);");
         authDialog->btnCancel->setStyleSheet("QPushButton{background-color:rgba(221,223,231,0);border-radius:4px;border:1px solid rgba(96, 98, 101, 1);color:rgba(192, 196, 204, 1);font-size:14px;}"
