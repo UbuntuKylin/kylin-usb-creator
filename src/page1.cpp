@@ -21,7 +21,6 @@ void Page1::initControlQss()
     tabIso->setFixedHeight(20);
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
-//    tabIso->setStyleSheet("font-size:14px;");
     tabUdisk->setObjectName("tabLable");
     comboUdisk=new StyleComboBox(swa);
     connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
@@ -89,8 +88,6 @@ void Page1::initControlQss()
     this->setLayout(vl00);
     warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
     udiskPlugWatcherInit(); //监控U盘插拔
-
-
 }
 
 void Page1::udiskPlugWatcherInit()
@@ -116,10 +113,21 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 {
     page_swa.setW(424);
     page_swa.setH(264);
-    authDialog = new rootAuthDialog();
+    authDialog = new rootAuthDialog(this);
     authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog );
-//    authDialog->setWindowFlags(Qt::FramelessWindowHint);
-    authDialog->setFixedSize(424,264);
+    authDialog->setAttribute(Qt::WA_TranslucentBackground);
+
+    authDialogContentWidget = new QWidget(authDialog);
+    QHBoxLayout *lytMain =new QHBoxLayout(authDialog);
+    lytMain->setMargin(0);
+    lytMain->addWidget(authDialogContentWidget);
+    authDialog->setFixedSize(450,284);
+    authDialogContentWidget->setFixedSize(424,264);
+    // 在非顶级窗口设置阴影效果
+    shadowEffect = new QGraphicsDropShadowEffect();
+    shadowEffect->setOffset(0,0);
+    shadowEffect->setBlurRadius(12);
+
 
 //    授权窗口在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
@@ -158,7 +166,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     rootDialogTitleText->setFixedSize(170,18);
 
     rootDialogTitleText->setText(tr("授权"));
-    QHBoxLayout *titlelyt0=new QHBoxLayout;//右上角按钮内部
+    QHBoxLayout *titlelyt0=new QHBoxLayout();//右上角按钮内部
     titlelyt0->setMargin(0);
     titlelyt0->setSpacing(0);
     titlelyt0->addStretch(99);
@@ -166,27 +174,27 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     titlelyt0->addSpacing(4);
     titlelyt0->addWidget(rootDialogClose,1);
     titlelyt0->addSpacing(4);
-    QVBoxLayout *titlelyt1=new QVBoxLayout;//右上角按钮外部
+    QVBoxLayout *titlelyt1=new QVBoxLayout();//右上角按钮外部
     titlelyt1->setMargin(0);
     titlelyt1->setSpacing(0);
     titlelyt1->addSpacing(4);
     titlelyt1->addLayout(titlelyt0);
     titlelyt1->addSpacing(4);
-    QHBoxLayout *titlelyt2=new QHBoxLayout; //标题内部
+    QHBoxLayout *titlelyt2=new QHBoxLayout(); //标题内部
     titlelyt2->setMargin(0);
     titlelyt2->setSpacing(0);
     titlelyt2->addSpacing(16);
     titlelyt2->addWidget(rootDialogTitleText);
-    QVBoxLayout *titlelyt3 = new QVBoxLayout; //标题外部
+    QVBoxLayout *titlelyt3 = new QVBoxLayout(); //标题外部
     titlelyt3->setMargin(0);
     titlelyt3->setSpacing(0);
     titlelyt3->addSpacing(10);
     titlelyt3->addLayout(titlelyt2);
     titlelyt3->addStretch(99);
-    QHBoxLayout *titlelyt4=new QHBoxLayout;//标题栏
+    QHBoxLayout *titlelyt4=new QHBoxLayout();//标题栏
     titlelyt4->setMargin(0);
     titlelyt4->setSpacing(0);
-    QLabel *fill = new QLabel; //填充label
+    QLabel *fill = new QLabel(); //填充label
     fill->setFixedHeight(38);
     titlelyt4->addLayout(titlelyt3);
     titlelyt4->addWidget(fill);
@@ -195,22 +203,19 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
 
     divingLine = new QLabel;
     divingLine->setFixedSize(424,1);
-    dialogWarningIcon = new QLabel(authDialog);
+    dialogWarningIcon = new QLabel();
     dialogWarningIcon->setStyleSheet("border-image:url(:data/warning.png);border:0px;");
     dialogWarningIcon->setFixedSize(24,24);
-    dialogWarningLable=new QLabel(authDialog);
+    dialogWarningLable=new QLabel();
     dialogWarningLable->setText(tr("当前存在敏感操作，您需要进行验证："));
-    dialogWarningLable2=new QLabel(authDialog);
+    dialogWarningLable2=new QLabel();
     dialogWarningLable2->setText(tr("一个程序正试图执行一个需要特权的动作。要求授权以执行该动作。"));
     dialogWarningLable2->setWordWrap(true);
-    dialogKeyLable=new QLabel(authDialog);
+    dialogKeyLable=new QLabel();
     dialogKeyLable->setText(tr("输入密码:"));
     authDialog->dialogKey->setFixedSize(296,32);
 
-
-
-
-    QHBoxLayout *hlt1=new QHBoxLayout;
+    QHBoxLayout *hlt1=new QHBoxLayout();
     hlt1->setMargin(0);
     hlt1->setSpacing(0);
     hlt1->addSpacing(19);
@@ -218,13 +223,13 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     hlt1->addSpacing(4);
     hlt1->addWidget(dialogWarningLable);
     hlt1->addStretch(9);
-    QHBoxLayout *hlt2=new QHBoxLayout;
+    QHBoxLayout *hlt2=new QHBoxLayout();
     hlt2->setMargin(0);
     hlt2->setSpacing(0);
     hlt2->addSpacing(44);
     hlt2->addWidget(dialogWarningLable2);
     hlt2->addSpacing(16);
-    QHBoxLayout *hlt3=new QHBoxLayout;
+    QHBoxLayout *hlt3=new QHBoxLayout();
     hlt3->setMargin(0);
     hlt3->setSpacing(0);
     hlt3->addSpacing(44);
@@ -232,7 +237,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     hlt3->addSpacing(6);
     hlt3->addWidget(authDialog->dialogKey);
     hlt3->addSpacing(16);
-    QHBoxLayout *hlt4=new QHBoxLayout;
+    QHBoxLayout *hlt4=new QHBoxLayout();
     hlt4->setMargin(0);
     hlt4->setSpacing(0);
     hlt4->addStretch(2);
@@ -240,7 +245,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     hlt4->addSpacing(16);
     hlt4->addWidget(authDialog->btnOk);
     hlt4->addSpacing(16+page_swa.shadow);
-    QVBoxLayout *vlt1=new QVBoxLayout;
+    QVBoxLayout *vlt1=new QVBoxLayout();
     vlt1->setMargin(0);
     vlt1->setSpacing(0);
     vlt1->addLayout(titlelyt4);
@@ -254,7 +259,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     vlt1->addSpacing(31);
     vlt1->addLayout(hlt4);
     vlt1->addSpacing(24);
-    authDialog->setLayout(vlt1);
+    authDialogContentWidget->setLayout(vlt1);
 }
 
 void Page1::getStorageInfo()
@@ -317,8 +322,14 @@ void Page1::allClose()
 void Page1::creatStartSlots()
 {
     creatStart->setEnabled(false);
-//    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);color:(249,249,249,1);border-radius:14px;font-size:14px;");
-    creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    if(DARKTHEME == themeStatus)
+    {
+        creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    }else
+    {
+        creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
+    }
+
     authDialog->show();
 }
 
@@ -418,9 +429,10 @@ void Page1::setThemeStyleLight()
                                  "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
     authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}"
                                          "QlineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
+    shadowEffect->setColor(Qt::lightGray);
+    authDialogContentWidget->setGraphicsEffect(shadowEffect);
     dialogKeyLable->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
     divingLine->setStyleSheet("background-color:rgba(242,246,253,1);");
-    authDialog->setStyleSheet("QWidget{background-color:rgba(255,255,255,1);border-radius:20px;}");
     dialogWarningLable->setStyleSheet("font-size:14px;color:rgba(48,49,51,1);font-weight:600;");
     dialogWarningLable2->setStyleSheet("font-size:14px;color:rgba(48,49,51,1);");
     authDialog->btnCancel->setStyleSheet("QPushButton{background-color:rgba(221,223,231,0);border-radius:4px;border:0.7px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}"
@@ -429,7 +441,10 @@ void Page1::setThemeStyleLight()
     authDialog->btnOk->setStyleSheet("QPushButton{background-color:rgba(100, 105, 241, 1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                      "QPushButton:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                      "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");
+    authDialogContentWidget->setStyleSheet("background-color:rgba(255,255,255,1);border-radius:6px;");
     comboUdisk->setThemeLight();    //设置combobox响应浅色主题
+//    rootWindowTitle->setStyleSheet("border-top-left-radius:20px;border-top-right-radius:40px;border:1px solid blue;");
+//    rootDialogTitleText->setStyleSheet("border:1px solid blue;");
     emit setStyleWidgetStyle(LIGHTTHEME);   //设置stylewidget响应浅色主题
 }
 
@@ -451,6 +466,7 @@ void Page1::setThemeStyleDark()
 
 
     //    root授权框部分
+        authDialogContentWidget->setStyleSheet("background-color:rgba(61,61,65,1);border-radius:6px;");
         rootDialogTitleText->setStyleSheet("font-size:14px;font-weight:600;color:rgba(249,249,249,1);");
         rootDialogClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_dark/close.png);border-radius:4px;}"
                                         "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/elements_dark/close.png);border-radius:4px;}"
@@ -462,7 +478,8 @@ void Page1::setThemeStyleDark()
 //                                             "QLineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
         dialogKeyLable->setStyleSheet("color:rgba(192,196,204,1);font-size:14px;");
         divingLine->setStyleSheet("background-color:rgba(72,72,76,1);");
-        authDialog->setStyleSheet("background-color:rgba(31,32,34,1);border-radius:6px;");
+        shadowEffect->setColor(Qt::black);
+        authDialogContentWidget->setGraphicsEffect(shadowEffect);
         dialogWarningLable->setStyleSheet("font-size:14px;color:rgba(192,196,204,1);font-weight:600;");
         dialogWarningLable2->setStyleSheet("font-size:14px;color:rgba(192,196,204,1);");
         authDialog->btnCancel->setStyleSheet("QPushButton{background-color:rgba(221,223,231,0);border-radius:4px;border:1px solid rgba(96, 98, 101, 1);color:rgba(192, 196, 204, 1);font-size:14px;}"

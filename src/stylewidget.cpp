@@ -255,8 +255,8 @@ void StyleWidget::setThemeLight()
 
     // 设置page1中菜单、最小化、关闭三个按钮样式
     widgetMin->setStyleSheet("StyleWidget #widgetMin{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
+                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.15);border-image:url(:/data/min_d.png);border-radius:4px;}"
+                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.3);border-image:url(:/data/min_d.png);border-radius:4px;}");
 
     widgetClose->setStyleSheet("StyleWidget #widgetClose{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
                                "StyleWidget #widgetClose:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
@@ -274,7 +274,6 @@ void StyleWidget::setThemeLight()
         title->setStyleSheet("StyleWidget #title{background-color:rgba(255,255,255,0.7);border-top-left-radius:"
                              +QString::number(m_swa.radius)+"px;border-top-right-radius:"+QString::number(m_swa.radius)+"px;}");
     }
-
 }
 
 void StyleWidget::setThemeDark()
@@ -282,8 +281,8 @@ void StyleWidget::setThemeDark()
     QString bodyStyleSheet="StyleWidget #body{background-color:rgba(31,32,34,1);border-bottom-left-radius:"+QString::number(m_swa.radius)+
                             "px;border-bottom-right-radius:"+QString::number(m_swa.radius)+"px;}";
     widgetMin->setStyleSheet("StyleWidget #widgetMin{background-color:rgba(255,255,255,0);border-image:url(:/data/min_h.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_h.png);border-radius:4px;}"
-                             "StyleWidget #widgetMin:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_h.png);border-radius:4px;}");
+                             "StyleWidget #widgetMin:hover{background-color:rgba(61,61,61,1);border-image:url(:/data/min_h.png);border-radius:4px;}"
+                             "StyleWidget #widgetMin:pressed{background-color:rgba(73,73,73,1);border-image:url(:/data/min_h.png);border-radius:4px;}");
 
     widgetClose->setStyleSheet("StyleWidget #widgetClose{background-color:rgba(255,255,255,0);border-image:url(:/data/close_h.png);border-radius:4px;}"
                                "StyleWidget #widgetClose:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"

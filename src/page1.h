@@ -26,6 +26,7 @@
 #include <QFileDialog>//打开文件
 #include <QStorageInfo>//硬盘信息
 #include <QFileSystemWatcher>
+#include <QGraphicsDropShadowEffect>
 
 class Page1 : public QWidget
 {
@@ -76,6 +77,8 @@ private:
     QPushButton *findIso = nullptr;//浏览文件按钮
     QPushButton *creatStart = nullptr;//开始制作
     rootAuthDialog *authDialog = nullptr;//root授权对话框
+    QGraphicsDropShadowEffect *shadowEffect = nullptr; //root授权框阴影
+    QWidget *authDialogContentWidget = nullptr; //root授权对话框的子窗口，用来在上边加载控件。
     QFileSystemWatcher *udiskplugwatcher = nullptr; //U盘插拔监控器
     StyleWidgetAttribute swa;//属性
     QLabel *dialogWarningIcon = nullptr; //授权框警告Icon

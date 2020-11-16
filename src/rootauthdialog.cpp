@@ -67,3 +67,5 @@ void rootAuthDialog::dealTooShort()
 {
     dialogKey->setPlaceholderText("请输入密码");
 }
+
+

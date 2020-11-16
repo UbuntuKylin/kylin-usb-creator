@@ -9,6 +9,8 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QStyleOption>
+#include <QPainter>
 #include <QPushButton>
 
 class rootAuthDialog:public QWidget
