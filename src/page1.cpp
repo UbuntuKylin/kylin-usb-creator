@@ -114,14 +114,14 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     page_swa.setW(424);
     page_swa.setH(264);
     authDialog = new rootAuthDialog(this);
-    authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog );
-    authDialog->setAttribute(Qt::WA_TranslucentBackground);
+    authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+    authDialog->setAttribute(Qt::WA_TranslucentBackground); //全透明
 
     authDialogContentWidget = new QWidget(authDialog);
     QHBoxLayout *lytMain =new QHBoxLayout(authDialog);
     lytMain->setMargin(0);
     lytMain->addWidget(authDialogContentWidget);
-    authDialog->setFixedSize(450,284);
+    authDialog->setFixedSize(430,270);
     authDialogContentWidget->setFixedSize(424,264);
     // 在非顶级窗口设置阴影效果
     shadowEffect = new QGraphicsDropShadowEffect();
@@ -273,7 +273,7 @@ void Page1::getStorageInfo()
             continue;
         if("/"==disk.displayName())//系统分区不显示
             continue;
-        if(disk.bytesTotal()/1048576<=2048 || disk.bytesTotal()/1048576>1024*65)//小于2G或大于65G的磁盘不显示
+        if(disk.bytesTotal()/1000000<=2000 || disk.bytesTotal()/1000000>1000*65)//小于2G或大于65G的磁盘不显示
             continue;
         if("tmpfs"==disk.fileSystemType())//tmpfs类型的磁盘不显示
             continue;
@@ -292,7 +292,7 @@ void Page1::getStorageInfo()
             displayName=displayName.mid(0,UDISK_NAME_MAX_LENGTH -1)+"…";
 
         float diskSize=disk.bytesTotal();
-        diskSize=diskSize/1048576/1024;
+        diskSize=diskSize/1000000/1000;
         QString diskUrl=disk.device();
         diskUrl=diskUrl.mid(0,8);
 
