@@ -2,8 +2,15 @@
 
 Page2::Page2(QWidget *parent) : QWidget(parent)
 {
-    movieLoading = new QMovie(":/data/loading2.gif");
-    movieFinish = new QMovie(":/data/finish2.gif");
+//    qDebug()<<"***"<<themeStatus;
+    if(DARKTHEME == themeStatus)
+    {
+        movieLoading = new QMovie(":/data/elements_dark/loading.gif");
+        movieFinish = new QMovie(":/data/elements_dark/finish.gif");
+    }else{
+        movieLoading = new QMovie(":/data/elements_light/loading.gif");
+        movieFinish = new QMovie(":/data/elements_light/finish.gif");
+    }
     frameCount=movieFinish->frameCount();
     connect(movieFinish,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish->stop();});
     lableMovie=new QLabel;
@@ -51,8 +58,8 @@ Page2::Page2(QWidget *parent) : QWidget(parent)
     vlt1->addLayout(hlt3);
     vlt1->addSpacing(31);
     this->setLayout(vlt1);
-}
 
+}
 void Page2::playLoadingGif()
 {
     lableNum->setText("0%");
@@ -138,15 +145,42 @@ void Page2::finishEvent()
     emit makeFinish();
 }
 
+void Page2::refreshGifStatus()
+{
+//    qDebug()<<"void Page2::refreshGifStatus()";
+//    if(movieLoading != nullptr)
+//    {
+//        delete movieLoading;
+//        delete movieFinish;
+//    }
+//    if(DARKTHEME == themeStatus)
+//    {
+//        movieLoading = new QMovie(":/data/elements_dark/loading.gif");
+//        movieFinish = new QMovie(":/data/elements_dark/finish.gif");
+//    }else{
+//        movieLoading = new QMovie(":/data/elements_light/loading.gif");
+//        movieFinish = new QMovie(":/data/elements_light/finish.gif");
+//    }
+//    frameCount=movieFinish->frameCount();
+//    connect(movieFinish,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish->stop();});
+//    lableMovie=new QLabel;
+
+//    QSize movieSize(95,95);
+//    lableMovie->setFixedSize(movieSize);
+//    movieLoading->setScaledSize(movieSize);
+//    movieFinish->setScaledSize(movieSize);
+}
 void Page2::setThemeStyleLight()
 {
     themeStatus = LIGHTTHEME;
     lableNum->setStyleSheet("background-color:rgba(236, 236, 236,0);color:rgba(100, 105, 241, 1);font-size:16px;");
-    lableText->setStyleSheet("font-size:14px;color:");
+    lableText->setStyleSheet("font-size:14px;");
+
 }
 
 void Page2::setThemeStyleDark()
 {
+    qDebug()<<"void Page2::setThemeStyleDark()";
     themeStatus = DARKTHEME;
     lableNum->setStyleSheet("background-color:rgba(236, 236, 236,0);color:rgba(100, 105, 241, 1);font-size:16px;");
     lableText->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");

@@ -33,7 +33,7 @@ class Page1 : public QWidget
     Q_OBJECT
 public:
     explicit Page1(StyleWidgetAttribute);
-    void ifStartBtnChange();//开始制作按钮是否可以点击
+    bool ifStartBtnChange();//开始制作按钮是否可以点击
     void setThemeStyleLight(); //设置浅色主题
     void setThemeStyleDark(); //设置深色主题
 

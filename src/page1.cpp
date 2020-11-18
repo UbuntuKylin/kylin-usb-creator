@@ -361,15 +361,16 @@ bool Page1::mouseIsLeaveUdiskWidget()
         return false;
 }
 
-void Page1::ifStartBtnChange()
+bool Page1::ifStartBtnChange()
 {
-    qDebug()<<"comboUdisk->getDiskPath()= "<<comboUdisk->getDiskPath()<<"  urlIso->text() = "<<urlIso->text();
+//    qDebug()<<"comboUdisk->getDiskPath()= "<<comboUdisk->getDiskPath()<<"  urlIso->text() = "<<urlIso->text();
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
         creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
                                   "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
                                   "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");
+        return true;
     }else{
         creatStart->setEnabled(false);
         if(themeStatus == LIGHTTHEME)
@@ -379,6 +380,7 @@ void Page1::ifStartBtnChange()
         {
             creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
         }
+        return false;
     }
 }
 

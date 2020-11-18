@@ -26,11 +26,11 @@ void rootAuthDialog::checkPassWord()
     connect(command_sudo,&QProcess::readyReadStandardError,this,&rootAuthDialog::readBashOutput);
     command_sudo->start("bash");
     command_sudo->waitForStarted();
-    if(m_key.isEmpty())
-    {
-        dealTooShort();
-        return ;
-    }
+//    if(m_key.isEmpty())
+//    {
+//        dealTooShort();
+//        return ;
+//    }
     QString str1 = "echo " + m_key + "| sudo -S -l ";
     command_sudo->write(str1.toLocal8Bit() + "\n");
 }
@@ -63,9 +63,9 @@ void rootAuthDialog::dealWrongPasswd()
     command_sudo->waitForFinished(-1);
 }
 
-void rootAuthDialog::dealTooShort()
-{
-    dialogKey->setPlaceholderText("请输入密码");
-}
+//void rootAuthDialog::dealTooShort()
+//{
+//    dialogKey->setPlaceholderText("请输入密码");
+//}
 
 

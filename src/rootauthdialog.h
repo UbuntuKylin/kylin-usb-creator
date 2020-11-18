@@ -33,7 +33,7 @@ private:
     void Init();
     void readBashOutput();
     void dealWrongPasswd();
-    void dealTooShort(); //未输入密码直接点击了确认的情况
+//    void dealTooShort(); //未输入密码直接点击了确认的情况
     QProcess *command_sudo = nullptr;
 
     QString m_key ;     //密码

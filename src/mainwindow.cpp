@@ -93,7 +93,7 @@ void MainWindow::initGsetting()
                         setThemeStyle();
                 }
             });
-            setThemeStyle();
+            setThemeStyle(); //主题安装成功之后默认做一次主题状态的判断
         }
     }
     return ;
@@ -148,6 +148,10 @@ int MainWindow::changePage()
 
 void MainWindow::makeFinish()
 {
+    if(!page1->ifStartBtnChange())
+    {
+
+    }
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");

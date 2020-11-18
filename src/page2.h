@@ -34,6 +34,7 @@ public slots:
 private:
     void playLoadingGif();
     void playFinishGif();
+    void refreshGifStatus(); //更新动画资源状态
     QString themeStatus = LIGHTTHEME;
     QMovie *movieLoading=nullptr;
     QMovie *movieFinish=nullptr;
