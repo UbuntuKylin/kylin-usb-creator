@@ -56,7 +56,8 @@ CONFIG += link_pkgconfig
 
 PKGCONFIG += gsettings-qt
 
-TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts
+TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts \
+                src/translations/kylin-usb-creator_bo_CN.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
