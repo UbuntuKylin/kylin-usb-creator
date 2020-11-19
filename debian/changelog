@@ -1,3 +1,12 @@
+kylin-usb-creator (1.0.0-21kord) v101; urgency=medium
+
+  * 增加了藏文支持
+  * 修复了iso文件包含特殊制作导致dd命令失败的问题
+  * U盘容量的显示进制由之前的1024进制改为了1000进制
+  * 取消了空密码的处理逻辑，用来解决无密码即可提权用户循环输入密码的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 19 Nov 2020 15:03:52 +0800
+
 kylin-usb-creator (1.0.0-20kord) v101; urgency=medium
 
   * 通过嵌套widet的方式解决了授权框无圆角的问题

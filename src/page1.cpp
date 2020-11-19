@@ -285,6 +285,8 @@ void Page1::getStorageInfo()
             continue;
         if(disk.device().contains("/dev/sda0")) //内置硬盘不显示
             continue;
+        if(disk.device().contains("/dev/nvm")) //nvme类型的设备不显示
+            continue;
 
 
         QString displayName=disk.displayName();
