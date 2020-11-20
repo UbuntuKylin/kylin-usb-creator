@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/dbusadaptor.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/page1.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
     src/rootauthdialog.cpp
 
 HEADERS += \
+    src/dbusadaptor.h \
     src/mainwindow.h \
     src/page1.h \
     src/page2.h \
@@ -69,18 +71,17 @@ RESOURCES += data.qrc translations.qrc
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
 DISTFILES += src/translations/qt_zh_CN.qm \
-#    data/org.china-weather-data.gschema.xml \
-    data/elements_light/finish.gif \
-    data/elements_light/loading.gif \
-    data/elements_dark/close_h.png \
-    data/elements_light/close_d.png \
-    data/elements_light/close_h.png \
-    data/elements_light/comboboxIcon_c.png \
-    data/elements_light/comboboxIcon_d.png \
-    data/elements_light/menu.png \
-    data/elements_light/min_d.png \
-    data/elements_light/min_h.png \
-    data/elements_dark/close.png \
-    data/elements_dark/minimize.png \
-    data/elements_dark/close.png \
-    data/elements_dark/minimize.png
+#    data/elements_light/finish.gif \
+#    data/elements_light/loading.gif \
+#    data/elements_dark/close_h.png \
+#    data/elements_light/close_d.png \
+#    data/elements_light/close_h.png \
+#    data/elements_light/comboboxIcon_c.png \
+#    data/elements_light/comboboxIcon_d.png \
+#    data/elements_light/menu.png \
+#    data/elements_light/min_d.png \
+#    data/elements_light/min_h.png \
+#    data/elements_dark/close.png \
+#    data/elements_dark/minimize.png \
+#    data/elements_dark/close.png \
+#    data/elements_dark/minimize.png
