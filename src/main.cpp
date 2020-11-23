@@ -52,12 +52,14 @@ int main(int argc, char *argv[])
     if(QDir("/usr/share/kylin-usb-creator/src/translations").exists()){
         trans_path = "/usr/share/kylin-usb-creator/translations";
     }else{
-        trans_path = qApp->applicationDirPath() + "/src/translations";
+        trans_path = qApp->applicationDirPath() + ":/src/translations";
     }
 //    qDebug()<<"app_trans:"<<app_trans;
     qDebug()<<"trans_path:"<<trans_path;
     if(locale == "zh_CN"){
-        if(!app_trans.load("kylin-usb-creator_zh_CN.qm",trans_path))
+//        if(!app_trans.load("kylin-usb-creator_zh_CN.qm",trans_path))
+        qDebug()<<app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm");
+        if(!app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm"))
         {
             syslog(LOG_ERR, "Load translation file kylin-usb-creator_zh_CN.qm error",trans_path);
         }else{

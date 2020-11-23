@@ -57,7 +57,9 @@ INSTALLS += target desktop icons schemes
 CONFIG += link_pkgconfig
 
 PKGCONFIG += gsettings-qt
-
+# translations
+#qm_files.files = src/translations/*.pm
+#qm_files.path = /usr/share/kylin
 TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts \
                 src/translations/kylin-usb-creator_bo_CN.ts
 

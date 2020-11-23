@@ -1,3 +1,9 @@
+kylin-usb-creator (1.0.0-23kord) v101; urgency=medium
+
+  * 源语言修改为英文，增加中文ts翻译
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 23 Nov 2020 16:46:52 +0800
+
 kylin-usb-creator (1.0.0-22kord) v101; urgency=medium
 
   * 增加制作成功判断逻辑，检测了制作过程中U盘拔出等失败情况。

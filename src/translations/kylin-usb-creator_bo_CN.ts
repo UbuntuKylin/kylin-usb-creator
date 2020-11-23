@@ -22,6 +22,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../page1.cpp" line="89"/>
+        <source>USB drive will be formatted,please backup your files!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../page1.cpp" line="168"/>
         <source>Authorization</source>
         <translation type="unfinished"></translation>
@@ -52,18 +57,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="89"/>
-        <source>USB drive will be formatted,please backup your files</source>
+        <location filename="../page1.cpp" line="210"/>
+        <source>These operations needs to be verified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../page1.cpp" line="143"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../page1.cpp" line="210"/>
-        <source>These operations needs to be verified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <location filename="../page2.cpp" line="75"/>
-        <source>Please do not remove the USB driver or power off now.</source>
+        <source>Please do not remove the USB driver or power off now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -158,7 +158,7 @@
     </message>
     <message>
         <location filename="../rootauthdialog.cpp" line="73"/>
-        <source>Current user is not in the sudoers file,please change another account or change authority.</source>
+        <source>Current user is not in the sudoers file,please change another account or change authority</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

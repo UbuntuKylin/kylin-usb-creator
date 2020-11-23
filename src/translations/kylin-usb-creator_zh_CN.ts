@@ -22,6 +22,11 @@
         <translation>选择光盘镜像文件</translation>
     </message>
     <message>
+        <location filename="../page1.cpp" line="89"/>
+        <source>USB drive will be formatted,please backup your files!</source>
+        <translation>制作启动盘的U盘将被格式化，请先备份好重要文件！</translation>
+    </message>
+    <message>
         <location filename="../page1.cpp" line="168"/>
         <source>Authorization</source>
         <translation>授权</translation>
@@ -34,7 +39,7 @@
     <message>
         <location filename="../page1.cpp" line="19"/>
         <source>Choose iso file</source>
-        <translation></translation>
+        <translation>选择光盘镜像文件</translation>
     </message>
     <message>
         <location filename="../page1.cpp" line="20"/>
@@ -52,9 +57,13 @@
         <translation>开始制作</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="89"/>
+        <location filename="../page1.cpp" line="210"/>
+        <source>These operations needs to be verified:</source>
+        <translation>要安装或卸载软件，您需要进行验证：</translation>
+    </message>
+    <message>
         <source>USB drive will be formatted,please backup your files</source>
-        <translation>制作启动盘的U盘将被格式化，请先备份好重要文件！</translation>
+        <translation type="vanished">制作启动盘的U盘将被格式化，请先备份好重要文件</translation>
     </message>
     <message>
         <location filename="../page1.cpp" line="143"/>
@@ -62,9 +71,8 @@
         <translation>授权</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="210"/>
         <source>These operations needs to be verified.</source>
-        <translation>要安装或卸载软件，您需要进行验证：</translation>
+        <translation type="vanished">要安装或卸载软件，您需要进行验证。</translation>
     </message>
     <message>
         <location filename="../page1.cpp" line="212"/>
@@ -90,8 +98,12 @@
         <translation>正在制作中</translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="75"/>
         <source>Please do not remove the USB driver or power off now.</source>
+        <translation type="obsolete">制作时请不要移除U盘或关机。</translation>
+    </message>
+    <message>
+        <location filename="../page2.cpp" line="75"/>
+        <source>Please do not remove the USB driver or power off now</source>
         <translation>制作时请不要移除U盘或关机</translation>
     </message>
     <message>
@@ -158,8 +170,12 @@
     </message>
     <message>
         <location filename="../rootauthdialog.cpp" line="73"/>
+        <source>Current user is not in the sudoers file,please change another account or change authority</source>
+        <translation>当前用户不在sudoer名单中，请修改账户或权限</translation>
+    </message>
+    <message>
         <source>Current user is not in the sudoers file,please change another account or change authority.</source>
-        <translation>当前用户不在sudoer名单中，请修改账户或权限。</translation>
+        <translation type="vanished">当前用户不在sudoer名单中，请修改账户或权限。</translation>
     </message>
 </context>
 </TS>
