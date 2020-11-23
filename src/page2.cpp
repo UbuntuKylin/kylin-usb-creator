@@ -94,8 +94,24 @@ void Page2::playFinishGif()
 
 }
 
+void Page2::playErrorGif()
+{
+    lableNum->hide();
+    returnPushButton->setEnabled(true);
+    returnPushButton->setText(tr("返回"));
+    returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:15px;font-size:14px;}"
+                          ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
+                          ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
+    lableText->setText(tr("制作失败"));
+
+    lableMovie->clear();
+    lableMovie->setMovie(movieFinish);
+    movieFinish->start();
+}
+
 void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
 {
+    uDiskPath = targetPath; //保存U盘路径 用来做错误检查
     emit swToPage2();
     playLoadingGif();
     sourceFileSize = getFileSize(sourcePath);
@@ -142,10 +158,28 @@ void Page2::readBashStandardErrorInfo()
 
 void Page2::finishEvent()
 {
-    playFinishGif();
+    if(isMakingSuccess())
+    {
+        playFinishGif();
+    }else
+    {
+        playErrorGif();
+    }
+
     emit makeFinish();
 }
-
+bool Page2::isMakingSuccess()
+{
+    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //已挂载设备
+    for(QStorageInfo& disk : diskList)
+    {
+        if(uDiskPath == disk.device())
+        {
+            return true;
+        }
+    }
+    return false;
+}
 void Page2::refreshGifStatus()
 {
 //    qDebug()<<"void Page2::refreshGifStatus()";

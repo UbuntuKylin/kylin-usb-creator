@@ -1,4 +1,4 @@
-# Kyllin-USB-Creator
+# Kylin-USB-Creator
 
 一款U盘启动盘制作工具
 

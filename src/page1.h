@@ -41,6 +41,7 @@ signals:
     void makeStart(QString key,QString sourcePath,QString targetPath);
     void diskLabelRefresh(); //  已选中U盘刷新
     void setStyleWidgetStyle(const QString);
+//    void isMakingSuccess(); //在制作过程U盘拔出检查。
 
 public slots:
     void allClose();

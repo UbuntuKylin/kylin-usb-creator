@@ -13,6 +13,7 @@
 #include <QBoxLayout>
 #include <QString>
 #include <QFileInfo>
+#include <QStorageInfo>
 //#include <QDir>
 class Page2 : public QWidget
 {
@@ -34,7 +35,10 @@ public slots:
 private:
     void playLoadingGif();
     void playFinishGif();
+    void playErrorGif();
     void refreshGifStatus(); //更新动画资源状态
+    bool isMakingSuccess(); //进度到100%之后检查制作是否成功
+    QString uDiskPath = ""; //U盘路径
     QString themeStatus = LIGHTTHEME;
     QMovie *movieLoading=nullptr;
     QMovie *movieFinish=nullptr;

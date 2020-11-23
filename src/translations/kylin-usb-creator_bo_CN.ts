@@ -69,7 +69,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="307"/>
+        <location filename="../page1.cpp" line="310"/>
         <source>无可用U盘</source>
         <translation type="unfinished"></translation>
     </message>
@@ -88,12 +88,18 @@
     </message>
     <message>
         <location filename="../page2.cpp" line="85"/>
+        <location filename="../page2.cpp" line="101"/>
         <source>返回</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../page2.cpp" line="89"/>
         <source>制作完成</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../page2.cpp" line="105"/>
+        <source>制作失败</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -129,7 +135,18 @@
     <name>rootAuthDialog</name>
     <message>
         <location filename="../rootauthdialog.cpp" line="13"/>
+        <location filename="../rootauthdialog.cpp" line="48"/>
         <source>请输入密码</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../rootauthdialog.cpp" line="65"/>
+        <source>密码错误，请重新输入</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../rootauthdialog.cpp" line="73"/>
+        <source>当前用户不在sudoers文件中，请注销更换其他用户。</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -288,7 +288,7 @@ void Page1::getStorageInfo()
         if(disk.device().contains("/dev/nvm")) //nvme类型的设备不显示
             continue;
 
-
+        
         QString displayName=disk.displayName();
         if(displayName.length()>UDISK_NAME_MAX_LENGTH)
             displayName=displayName.mid(0,UDISK_NAME_MAX_LENGTH -1)+"…";
@@ -296,6 +296,7 @@ void Page1::getStorageInfo()
         float diskSize=disk.bytesTotal();
         diskSize=diskSize/1000000/1000;
         QString diskUrl=disk.device();
+//        qDebug()<<"******"<<disk.device();
         diskUrl=diskUrl.mid(0,8);
 
         QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
@@ -312,6 +313,7 @@ void Page1::getStorageInfo()
         creatStart->setEnabled(false);
     }
     emit diskLabelRefresh();
+//    emit isMakingSuccess();
     qDebug()<<"getstorage中的ifstartbuttoncanged被调用";
     ifStartBtnChange();
 }

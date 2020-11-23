@@ -1,3 +1,9 @@
+kylin-usb-creator (1.0.0-22kord) v101; urgency=medium
+
+  * 增加制作成功判断逻辑，检测了制作过程中U盘拔出等失败情况。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 21 Nov 2020 15:03:52 +0800
+
 kylin-usb-creator (1.0.0-21kord) v101; urgency=medium
 
   * 增加了藏文支持

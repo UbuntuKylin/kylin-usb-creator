@@ -45,12 +45,16 @@ void rootAuthDialog::readBashOutput()
     {
         emit passwdCorrect();
         dialogKey->clear();
-        dialogKey->setPlaceholderText("请输入密码");
+        dialogKey->setPlaceholderText(tr("请输入密码"));
         this->close();
         return ;
     }else if(err.contains("对不起") || err.contains("Sorry"))
     {
         dealWrongPasswd();
+        return ;
+    }else if(err.contains("sudoers"))
+    {
+        dealNotSudoers();
         return ;
     }
 }
@@ -58,14 +62,17 @@ void rootAuthDialog::readBashOutput()
 void rootAuthDialog::dealWrongPasswd()
 {
     dialogKey->clear();
-    dialogKey->setPlaceholderText("密码错误，请重新输入");
+    dialogKey->setPlaceholderText(tr("密码错误，请重新输入"));
     command_sudo->kill();
     command_sudo->waitForFinished(-1);
 }
 
-//void rootAuthDialog::dealTooShort()
-//{
-//    dialogKey->setPlaceholderText("请输入密码");
-//}
+void rootAuthDialog::dealNotSudoers()
+{
+    dialogKey->clear();
+    dialogKey->setPlaceholderText(tr("当前用户不在sudoers文件中，请注销更换其他用户。"));
+    command_sudo->kill();
+    command_sudo->waitForFinished(-1);
+}
 
 
