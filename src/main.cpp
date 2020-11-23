@@ -42,8 +42,36 @@ int main(int argc, char *argv[])
     if (translator->load(translatorFileName, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         a.installTranslator(translator);
     else
-        qDebug() << "加载中文失败";
+        qDebug() << "Failed to load Chinese translation file.";
 #endif
+
+    // 应用内翻译
+    QTranslator app_trans;
+    QString locale = QLocale::system().name();
+    QString trans_path;
+    if(QDir("/usr/share/kylin-usb-creator/src/translations").exists()){
+        trans_path = "/usr/share/kylin-usb-creator/translations";
+    }else{
+        trans_path = qApp->applicationDirPath() + "/src/translations";
+    }
+//    qDebug()<<"app_trans:"<<app_trans;
+    qDebug()<<"trans_path:"<<trans_path;
+    if(locale == "zh_CN"){
+        if(!app_trans.load("kylin-usb-creator_zh_CN.qm",trans_path))
+        {
+            syslog(LOG_ERR, "Load translation file kylin-usb-creator_zh_CN.qm error",trans_path);
+        }else{
+            a.installTranslator(&app_trans);
+        }
+    }else if(locale == "bo_CN")
+    {
+        if(!app_trans.load("kylin-usb-creator_bo_CN.qm",trans_path))
+        {
+            syslog(LOG_ERR, "Load translation file kylin-usb-creator_bo_CN.qm error",trans_path);
+        }else{
+            a.installTranslator(&app_trans);
+        }
+    }
 
     MainWindow w;
 

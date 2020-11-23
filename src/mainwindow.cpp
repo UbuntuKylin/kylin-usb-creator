@@ -17,7 +17,7 @@ void MainWindow::myStyle()
     //设置外观
     //int w, int h, bool allRadius, int radius,int shadow,double shadowAlpha, int titleHeight, int itemHeight, bool middle
     StyleWidgetAttribute swa(WINDOWW,WINDOWH,1,WIDGETRADIUS,SHADOW,SHADOWALPHA,TITLEH);
-    StyleWidget *styleWidget=new StyleWidget(swa,tr("麒麟U盘启动器"));
+    StyleWidget *styleWidget=new StyleWidget(swa,tr("Kylin USB Creator"));
     timer = new QTimer(this);
     page1 = new Page1(swa);
     connect(page1,&Page1::setStyleWidgetStyle,styleWidget,&StyleWidget::dealSetThemeStyle);
@@ -124,7 +124,7 @@ void MainWindow::createTrayActions()
     }
     m_mainTray = new QSystemTrayIcon(this);
     m_mainTray->setIcon(QIcon(":/data/logo/48.png"));
-    m_mainTray->setToolTip(tr("麒麟U盘启动器"));
+    m_mainTray->setToolTip(tr("kylin usb creator"));
     m_mainTray->show();
 }
 

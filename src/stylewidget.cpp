@@ -4,7 +4,7 @@ StyleWidget::StyleWidget(StyleWidgetAttribute swa, QString dialogTitleText, bool
 {
     m_isDialog=isDialog;
     swshadow = new StyleWidgetShadow(swa);
-    swshadow->setWindowTitle(tr("麒麟U盘启动器"));
+    swshadow->setWindowTitle(tr("kylin usb creator"));
     myStyle(swa);
     text->setText(dialogTitleText);
 }

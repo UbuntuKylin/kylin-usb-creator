@@ -71,17 +71,5 @@ RESOURCES += data.qrc translations.qrc
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
 DISTFILES += src/translations/qt_zh_CN.qm \
-#    data/elements_light/finish.gif \
-#    data/elements_light/loading.gif \
-#    data/elements_dark/close_h.png \
-#    data/elements_light/close_d.png \
-#    data/elements_light/close_h.png \
-#    data/elements_light/comboboxIcon_c.png \
-#    data/elements_light/comboboxIcon_d.png \
-#    data/elements_light/menu.png \
-#    data/elements_light/min_d.png \
-#    data/elements_light/min_h.png \
-#    data/elements_dark/close.png \
-#    data/elements_dark/minimize.png \
-#    data/elements_dark/close.png \
-#    data/elements_dark/minimize.png
+    src/translations/kylin-usb-creator_bo_CN.qm \
+    src/translations/kylin-usb-creator_zh_CN.qm

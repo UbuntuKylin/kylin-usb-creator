@@ -16,8 +16,8 @@ void Page1::initControlQss()
 {
     tabIso=new QLabel;
     tabUdisk=new QLabel;
-    tabIso->setText(tr("选择光盘镜像文件"));
-    tabUdisk->setText(tr("选择U盘"));
+    tabIso->setText(tr("Choose iso file"));
+    tabUdisk->setText(tr("Select USB drive"));
     tabIso->setFixedHeight(20);
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
@@ -36,15 +36,15 @@ void Page1::initControlQss()
     urlIso->setFixedHeight(30);
 
     findIso=new QPushButton(this);
-    findIso->setText(tr("浏览"));
+    findIso->setText(tr("Open"));
     findIso->setFixedSize(56,30);
     connect(findIso,&QPushButton::clicked,this,[=]{
-        urlIso->setText( QFileDialog::getOpenFileName(0,tr("选择镜像文件"),QDir::homePath(),"ISO(*.iso)"));
+        urlIso->setText( QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)"));
         });
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
     creatStart=new QPushButton(this);
     creatStart->setFixedSize(200,30);
-    creatStart->setText(tr("开始制作"));
+    creatStart->setText(tr("Start"));
     creatStart->setEnabled(false);
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
     QHBoxLayout *hl1=new QHBoxLayout;
@@ -86,7 +86,7 @@ void Page1::initControlQss()
     vl00->addLayout(vl0,8);
     vl00->addStretch(3);
     this->setLayout(vl00);
-    warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
+    warnningText->setText(tr("USB drive will be formatted,please backup your files!"));
     udiskPlugWatcherInit(); //监控U盘插拔
 }
 
@@ -140,11 +140,11 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     });
     authDialog->hide();
     authDialog->btnOk->setFixedSize(64,30);
-    authDialog->btnOk->setText(tr("授权"));
+    authDialog->btnOk->setText(tr("OK"));
     authDialog->btnOk->setStyleSheet("font-size:14px;");
     authDialog->btnOk->setObjectName("dialogYes");
     authDialog->btnCancel->setFixedSize(64,30);
-    authDialog->btnCancel->setText(tr("取消"));
+    authDialog->btnCancel->setText(tr("Cancel"));
     authDialog->btnCancel->setObjectName("dialogNo");
 
 //    标题栏部分样式设置
@@ -165,7 +165,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     rootDialogTitleText = new QLabel(rootWindowTitle);//标题
     rootDialogTitleText->setFixedSize(170,18);
 
-    rootDialogTitleText->setText(tr("授权"));
+    rootDialogTitleText->setText(tr("Authorization"));
     QHBoxLayout *titlelyt0=new QHBoxLayout();//右上角按钮内部
     titlelyt0->setMargin(0);
     titlelyt0->setSpacing(0);
@@ -207,12 +207,12 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     dialogWarningIcon->setStyleSheet("border-image:url(:data/warning.png);border:0px;");
     dialogWarningIcon->setFixedSize(24,24);
     dialogWarningLable=new QLabel();
-    dialogWarningLable->setText(tr("当前存在敏感操作，您需要进行验证："));
+    dialogWarningLable->setText(tr("These operations needs to be verified:"));
     dialogWarningLable2=new QLabel();
-    dialogWarningLable2->setText(tr("一个程序正试图执行一个需要特权的动作。要求授权以执行该动作。"));
+    dialogWarningLable2->setText(tr("Request authorization:"));
     dialogWarningLable2->setWordWrap(true);
     dialogKeyLable=new QLabel();
-    dialogKeyLable->setText(tr("输入密码:"));
+    dialogKeyLable->setText(tr("Password："));
     authDialog->dialogKey->setFixedSize(296,32);
 
     QHBoxLayout *hlt1=new QHBoxLayout();
@@ -307,14 +307,14 @@ void Page1::getStorageInfo()
     if(0==comboUdisk->listWidget->count())
     {
 //        comboUdisk->clearDiskList();
-        comboUdisk->addItem(tr("无可用U盘"),NOUDISK);
+        comboUdisk->addItem(tr("No USB drive available"),NOUDISK);
         warnningText->hide();
         warnningIcon->hide();
         creatStart->setEnabled(false);
     }
     emit diskLabelRefresh();
 //    emit isMakingSuccess();
-    qDebug()<<"getstorage中的ifstartbuttoncanged被调用";
+//    qDebug()<<"getstorage中的ifstartbuttoncanged被调用";
     ifStartBtnChange();
 }
 

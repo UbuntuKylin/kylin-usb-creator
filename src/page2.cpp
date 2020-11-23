@@ -65,14 +65,14 @@ void Page2::playLoadingGif()
     lableNum->setText("0%");
     lableNum->show();
     returnPushButton->setEnabled(false);
-    returnPushButton->setText(tr("正在制作中"));
+    returnPushButton->setText(tr("USB starter in production"));
     if(LIGHTTHEME == themeStatus){
         returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(193, 193, 193, 1);font-size:14px;border-radius:15px;");
     }else
     {
         returnPushButton->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);font-size:14px;border-radius:15px;");
     }
-    lableText->setText(tr("制作时请不要移除磁盘或关机"));
+    lableText->setText(tr("Please do not remove the USB driver or power off now"));
 
     lableMovie->setMovie(movieLoading); //为label设置movie
     movieLoading->start();         //开始播放动画
@@ -82,11 +82,11 @@ void Page2::playFinishGif()
 {
     lableNum->hide();
     returnPushButton->setEnabled(true);
-    returnPushButton->setText(tr("返回"));
+    returnPushButton->setText(tr("return"));
     returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:15px;font-size:14px;}"
                           ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    lableText->setText(tr("制作完成"));
+    lableText->setText(tr("Finish"));
 
     lableMovie->clear();
     lableMovie->setMovie(movieFinish);
@@ -98,11 +98,11 @@ void Page2::playErrorGif()
 {
     lableNum->hide();
     returnPushButton->setEnabled(true);
-    returnPushButton->setText(tr("返回"));
+    returnPushButton->setText(tr("return"));
     returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:15px;font-size:14px;}"
                           ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    lableText->setText(tr("制作失败"));
+    lableText->setText(tr("Creation Failed"));
 
     lableMovie->clear();
     lableMovie->setMovie(movieFinish);
@@ -170,10 +170,14 @@ void Page2::finishEvent()
 }
 bool Page2::isMakingSuccess()
 {
+
     QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //已挂载设备
     for(QStorageInfo& disk : diskList)
     {
-        if(uDiskPath == disk.device())
+        qDebug()<<"目标比对设备"<<uDiskPath<<"***已挂载设备："<<disk.device();
+        QString diskPath = disk.device();
+        diskPath = diskPath.mid(0,8);
+        if(uDiskPath == diskPath)
         {
             return true;
         }

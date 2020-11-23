@@ -10,7 +10,7 @@ void rootAuthDialog::Init()
     btnCancel = new QPushButton;
     btnOk = new QPushButton;
     dialogKey = new QLineEdit;
-    dialogKey->setPlaceholderText(tr("请输入密码"));
+    dialogKey->setPlaceholderText(tr("Input password"));
     dialogKey->setEchoMode(QLineEdit::Password);
     connect(btnOk,&QPushButton::clicked,this,&rootAuthDialog::checkPassWord);
     connect(btnCancel,&QPushButton::clicked,[=]{
@@ -45,7 +45,7 @@ void rootAuthDialog::readBashOutput()
     {
         emit passwdCorrect();
         dialogKey->clear();
-        dialogKey->setPlaceholderText(tr("请输入密码"));
+        dialogKey->setPlaceholderText(tr("please enter the password"));
         this->close();
         return ;
     }else if(err.contains("对不起") || err.contains("Sorry"))
@@ -62,7 +62,7 @@ void rootAuthDialog::readBashOutput()
 void rootAuthDialog::dealWrongPasswd()
 {
     dialogKey->clear();
-    dialogKey->setPlaceholderText(tr("密码错误，请重新输入"));
+    dialogKey->setPlaceholderText(tr("Wrong password!Try again"));
     command_sudo->kill();
     command_sudo->waitForFinished(-1);
 }
@@ -70,7 +70,7 @@ void rootAuthDialog::dealWrongPasswd()
 void rootAuthDialog::dealNotSudoers()
 {
     dialogKey->clear();
-    dialogKey->setPlaceholderText(tr("当前用户不在sudoers文件中，请注销更换其他用户。"));
+    dialogKey->setPlaceholderText(tr("Current user is not in the sudoers file,please change another account or change authority"));
     command_sudo->kill();
     command_sudo->waitForFinished(-1);
 }
