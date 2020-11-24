@@ -24,7 +24,8 @@ Page2::Page2(QWidget *parent) : QWidget(parent)
     lableNum=new QLabel(lableMovie);
     lableNum->setFixedSize(36,22);
     lableNum->move((lableMovie->width()-lableNum->width())/2,(lableMovie->height()-lableNum->height())/2);
-    lableNum->setAlignment(Qt::AlignRight);    // 设置对齐方式
+//    lableNum->setAlignment(Qt::AlignRight);    // 设置对齐方式
+    lableNum->setAlignment(Qt::AlignCenter);    //设置数字居中对齐
     returnPushButton=new QPushButton;
     connect(returnPushButton,&QPushButton::clicked,this,&Page2::returnMain);
     returnPushButton->setFixedSize(200,30);

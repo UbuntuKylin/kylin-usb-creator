@@ -5,6 +5,7 @@ StyleWidget::StyleWidget(StyleWidgetAttribute swa, QString dialogTitleText, bool
     m_isDialog=isDialog;
     swshadow = new StyleWidgetShadow(swa);
     swshadow->setWindowTitle(tr("kylin usb creator"));
+    swshadow->setProperty("useSystemStyleBlur",true);  //使用V101的系统模糊方案
     myStyle(swa);
     text->setText(dialogTitleText);
 }
@@ -41,13 +42,8 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
     title->setMaximumHeight(swa.titleHeight);
     title->setMinimumHeight(swa.titleHeight);
     title->setObjectName("title");
-//    此功能有可能导致软件在非v101环境下编译异常
-//    title->setProperty("useSystemStyleBlur",true);  //使用V101的系统模糊方案
-//    titleBlur = new QGraphicsBlurEffect(title);
-//    titleBlur->setBlurRadius(5);
-//    title->setGraphicsEffect(titleBlur);
-
-
+    title->setAttribute(Qt::WA_TranslucentBackground, true);//窗体透明
+\
 
     body = new QWidget;//窗体
     body->setObjectName("body");
@@ -142,7 +138,6 @@ void StyleWidget::myStyle(StyleWidgetAttribute swa)
 
 void StyleWidget::initMenuListWidget(StyleWidgetAttribute swa)
 {
-//        qDebug()<<"initMenuListWidget";
         menuShadow = new StyleWidgetShadow(swa); //带阴影的菜单项
         menuListWidget = new QListWidget;
         QVBoxLayout *vblayout = new QVBoxLayout(menuShadow);
@@ -159,10 +154,7 @@ void StyleWidget::initMenuListWidget(StyleWidgetAttribute swa)
                                       "QListWidget::Item:hover,QListWidget::Item:selected {background-color:rgba(247, 247, 247, 1);color:rgba(96, 98, 102, 1);}"
                                       "QListWidget{font-size:14px;}");
         menuShadow->setFixedSize(97,138);
-//        windowPos = this->mapToGlobal(QPoint(0,0));
-//        qDebug()<<"stylewidget"<<windowPos;
         menuShadow->move(windowPos.rx()+589,windowPos.ry()+46);
-//        qDebug()<<windowPos;
         menuShadow->setStyleSheet("QWidget{height:138px;width:97px;}");
         vblayout->addWidget(menuListWidget);
         menuShadow->hide();

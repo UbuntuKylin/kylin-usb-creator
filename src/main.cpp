@@ -54,10 +54,7 @@ int main(int argc, char *argv[])
     }else{
         trans_path = qApp->applicationDirPath() + ":/src/translations";
     }
-//    qDebug()<<"app_trans:"<<app_trans;
-    qDebug()<<"trans_path:"<<trans_path;
     if(locale == "zh_CN"){
-//        if(!app_trans.load("kylin-usb-creator_zh_CN.qm",trans_path))
         qDebug()<<app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm");
         if(!app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm"))
         {
@@ -76,6 +73,8 @@ int main(int argc, char *argv[])
     }
 
     MainWindow w;
+//    w.setAttribute(Qt::WA_TranslucentBackground, true);
+//    w.setProperty("useSystemStyleBlur",true);
 
     return a.exec();
 }

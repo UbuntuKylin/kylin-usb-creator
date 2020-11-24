@@ -5,7 +5,6 @@
 
 #include "stylewidgetshadow.h"
 #include <QWidget>
-//#include <QGraphicsEffect>
 #include <QLabel>
 #include <QComboBox>
 #include <QLineEdit>
@@ -45,7 +44,6 @@ private:
 
     StyleWidgetShadow *swshadow = nullptr;//U盘列表阴影
     StyleWidgetShadow *menuShadow = nullptr; //菜单阴影
-//    QGraphicsBlurEffect *titleBlur = nullptr; //状态栏模糊
     QWidget *title = nullptr;//标题栏
     QLabel *text = nullptr;//标题
     QLabel *icon = nullptr;//图标

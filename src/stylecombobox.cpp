@@ -51,18 +51,19 @@ void StyleComboBox::on_diskButton_click()
         listWidget->setFixedHeight(listWidgetHeight);
         listWidget->setFixedWidth(UDISKLISTWIDGETWIDTH);
         swa.setH(listWidgetHeight);
-        swa.w = UDISKLISTWIDGETWIDTH + 6;
+        swa.w = UDISKLISTWIDGETWIDTH + 8;
         //设置阴影
         swshadow =new StyleWidgetShadow(swa);
         QVBoxLayout *vblayout=new QVBoxLayout(swshadow);
         QPoint point= pushButton->mapToGlobal(QPoint(0,0));
-        vblayout->setMargin(0);//控件间距
-        vblayout->setSpacing(0);//控件间距
+        vblayout->setMargin(10);//控件间距
+        vblayout->setSpacing(10);//控件间距
         vblayout->addWidget(listWidget);
         icon->setStyleSheet("border-image:url(:/data/comboboxIcon_c.png);border:0px;");
         if(LIGHTTHEME == themeStatus){
             pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(100, 105, 241, 1);}");
-            swshadow->setStyleSheet("border:1px solid rgba(255,255,255,1);border-radius:4px;background-color:rgba(255,255,255,1);");
+//            swshadow->setStyleSheet("border:1px solid rgba(255,255,255,1);border-radius:4px;background-color:rgba(255,255,255,1);");
+            swshadow->setStyleSheet("border:1px solid rgba(255,255,255,0);border-radius:4px;background-color:rgba(255,255,255,1);");
             listWidget->setStyleSheet("QListWidget::Item{background-color:rgba(255,255,255,1);border-radius:2px;padding-left:20px;color:rgba(96,98,102,1);}"
                                       "QListWidget::Item:hover{background-color:rgba(246,246,246,1);}");
         }else if(DARKTHEME == themeStatus){

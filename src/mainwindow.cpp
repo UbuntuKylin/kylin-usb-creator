@@ -99,6 +99,7 @@ void MainWindow::initGsetting()
     return ;
 }
 
+
 void MainWindow::setThemeStyle()
 {
     QString nowThemeStyle = m_pGsettingThemeData->get("styleName").toString();
