@@ -4,6 +4,8 @@
 #define UDISKLISTWIDGETWIDTH 330
 #define DARKTHEME "dark"
 #define LIGHTTHEME "light"
+#define ITEMHIGHT 30
+#define SHADOW 6
 
 #include "stylewidgetshadow.h"
 #include <QDebug>
@@ -17,8 +19,10 @@ class StyleComboBox : public QWidget
 {
     Q_OBJECT
 public:
-    explicit StyleComboBox(StyleWidgetAttribute scb_swa);
-    void deleteShadow();
+//    explicit StyleComboBox(StyleWidgetAttribute scb_swa);
+    explicit StyleComboBox();
+//    void deleteShadow();
+    void closeListWidget();
     QListWidget *listWidget = nullptr;//U盘列表列表部分
 //    QListWidget *menuListWidget = nullptr;//菜单列表部分
     void addItem(QString lable, QString data);//添加到列表

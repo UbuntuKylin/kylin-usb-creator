@@ -26,5 +26,7 @@
         <file>data/elements_dark/loading.gif</file>
         <file>data/elements_light/finish.gif</file>
         <file>data/elements_light/loading.gif</file>
+        <file>data/elements_light/failed.png</file>
+        <file>data/elements_dark/failed.png</file>
     </qresource>
 </RCC>

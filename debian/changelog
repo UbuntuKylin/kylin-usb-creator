@@ -1,3 +1,16 @@
+kylin-usb-creator (1.0.0-25kord) v101; urgency=medium
+
+  * 代码结构优化
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Wed, 25 Nov 2020 17:24:52 +0800
+
+kylin-usb-creator (1.0.0-24kord) v101; urgency=medium
+
+  * 标题栏改用系统主题效果，调用系统主题实现了毛玻璃效果
+  * 授权窗口提升为模态窗口
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Tue, 24 Nov 2020 11:24:52 +0800
+
 kylin-usb-creator (1.0.0-23kord) v101; urgency=medium
 
   * 源语言修改为英文，增加中文ts翻译

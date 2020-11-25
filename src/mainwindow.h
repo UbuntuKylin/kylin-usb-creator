@@ -36,6 +36,7 @@ public slots:
     void returnMain();
 //    void passwdCheck();
 private:
+    void init(); //初始化mainwindow相关的设置
     int changePage();
     void myStyle();//设定样式
     void createTrayActions();

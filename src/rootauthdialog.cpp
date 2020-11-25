@@ -12,6 +12,7 @@ void rootAuthDialog::Init()
     dialogKey = new QLineEdit;
     dialogKey->setPlaceholderText(tr("Input password"));
     dialogKey->setEchoMode(QLineEdit::Password);
+    setWindowModality(Qt::WindowModal); //设置属性为模态窗口
     connect(btnOk,&QPushButton::clicked,this,&rootAuthDialog::checkPassWord);
     connect(btnCancel,&QPushButton::clicked,[=]{
         emit cancelCheck();}); //取消信号

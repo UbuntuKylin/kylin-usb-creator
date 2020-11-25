@@ -4,12 +4,8 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="20"/>
-        <source>Kylin USB Creator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="127"/>
+        <location filename="../mainwindow.cpp" line="16"/>
+        <location filename="../mainwindow.cpp" line="120"/>
         <source>kylin usb creator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,67 +13,67 @@
 <context>
     <name>Page1</name>
     <message>
-        <location filename="../page1.cpp" line="42"/>
+        <location filename="../page1.cpp" line="43"/>
         <source>choose iso file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="89"/>
+        <location filename="../page1.cpp" line="90"/>
         <source>USB drive will be formatted,please backup your files!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="168"/>
+        <location filename="../page1.cpp" line="167"/>
         <source>Authorization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="147"/>
+        <location filename="../page1.cpp" line="146"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="19"/>
+        <location filename="../page1.cpp" line="20"/>
         <source>Choose iso file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="20"/>
+        <location filename="../page1.cpp" line="21"/>
         <source>Select USB drive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="39"/>
+        <location filename="../page1.cpp" line="40"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="47"/>
+        <location filename="../page1.cpp" line="48"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="210"/>
+        <location filename="../page1.cpp" line="209"/>
         <source>These operations needs to be verified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="143"/>
+        <location filename="../page1.cpp" line="142"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="212"/>
+        <location filename="../page1.cpp" line="211"/>
         <source>Request authorization:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="215"/>
+        <location filename="../page1.cpp" line="214"/>
         <source>Password：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="310"/>
+        <location filename="../page1.cpp" line="308"/>
         <source>No USB drive available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -85,28 +81,28 @@
 <context>
     <name>Page2</name>
     <message>
-        <location filename="../page2.cpp" line="68"/>
+        <location filename="../page2.cpp" line="69"/>
         <source>USB starter in production</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="75"/>
+        <location filename="../page2.cpp" line="76"/>
         <source>Please do not remove the USB driver or power off now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="85"/>
-        <location filename="../page2.cpp" line="101"/>
+        <location filename="../page2.cpp" line="86"/>
+        <location filename="../page2.cpp" line="102"/>
         <source>return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="89"/>
+        <location filename="../page2.cpp" line="90"/>
         <source>Finish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="105"/>
+        <location filename="../page2.cpp" line="106"/>
         <source>Creation Failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -119,22 +115,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stylewidget.cpp" line="151"/>
+        <location filename="../stylewidget.cpp" line="146"/>
         <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stylewidget.cpp" line="153"/>
+        <location filename="../stylewidget.cpp" line="148"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stylewidget.cpp" line="155"/>
+        <location filename="../stylewidget.cpp" line="150"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stylewidget.cpp" line="157"/>
+        <location filename="../stylewidget.cpp" line="152"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -147,17 +143,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rootauthdialog.cpp" line="48"/>
+        <location filename="../rootauthdialog.cpp" line="49"/>
         <source>please enter the password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rootauthdialog.cpp" line="65"/>
+        <location filename="../rootauthdialog.cpp" line="66"/>
         <source>Wrong password!Try again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rootauthdialog.cpp" line="73"/>
+        <location filename="../rootauthdialog.cpp" line="74"/>
         <source>Current user is not in the sudoers file,please change another account or change authority</source>
         <translation type="unfinished"></translation>
     </message>

@@ -3,6 +3,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
+    init();
     myStyle();
     initGsetting();
 }
@@ -11,28 +12,25 @@ MainWindow::~MainWindow()
 {
 
 }
+void MainWindow::init(){
+    this->setWindowTitle(tr("kylin usb creator"));
+    this->setFixedSize(680,467);
+//    在屏幕中央显示
+    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
+    this->move((availableGeometry.width()-this->width())/2,(availableGeometry.height()- this->height())/2);
 
+}
 void MainWindow::myStyle()
 {
-    //设置外观
-    //int w, int h, bool allRadius, int radius,int shadow,double shadowAlpha, int titleHeight, int itemHeight, bool middle
-    StyleWidgetAttribute swa(WINDOWW,WINDOWH,1,WIDGETRADIUS,SHADOW,SHADOWALPHA,TITLEH);
-    StyleWidget *styleWidget=new StyleWidget(swa,tr("Kylin USB Creator"));
     timer = new QTimer(this);
-    page1 = new Page1(swa);
-    connect(page1,&Page1::setStyleWidgetStyle,styleWidget,&StyleWidget::dealSetThemeStyle);
-    connect(styleWidget,&StyleWidget::allClose,page1,&Page1::allClose);
-
-
+    page1 = new Page1();
     page2 = new Page2;
     connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
     connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
     connect(page2,&Page2::returnMain,this,&MainWindow::returnMain);
-    QHBoxLayout *hblayout=new QHBoxLayout(styleWidget->body);
-    hblayout->setMargin(0);//控件间距
-    hblayout->setSpacing(0);//控件间距
-    hblayout->addWidget(this);
+
+
 
     //内部样式
     QSize pointSize(8,8);
@@ -64,6 +62,7 @@ void MainWindow::myStyle()
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);
     this->setLayout(vlt);
+    this->show();
 
     // 状态栏初始化部分，需要时打开注释
 //    createTrayActions();
@@ -108,11 +107,13 @@ void MainWindow::setThemeStyle()
 //        子类在这里调用对应方法做深色渲染
         qDebug()<<"深色渲染start";
         page2->setThemeStyleDark();
+        this->setStyleSheet("background-color:rgba(31,32,34,1);");
         page1->setThemeStyleDark();
     }else{
 //        子类在这里调用方法做对应浅色渲染
         qDebug()<<"浅色渲染start";
         page1->setThemeStyleLight();
+        this->setStyleSheet("background-color:rgba(255,255,255,1);");
         page2->setThemeStyleLight();
     }
 
@@ -151,7 +152,6 @@ void MainWindow::makeFinish()
 {
     if(!page1->ifStartBtnChange())
     {
-
     }
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
@@ -160,8 +160,6 @@ void MainWindow::makeFinish()
 
 void MainWindow::returnMain()
 {
-//    isInPage2 = false;
-//    qDebug()<<"isInPage2"<<isInPage2;
     stackedWidget->setCurrentIndex(changePage());
     page1->ifStartBtnChange();
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");

@@ -1,3 +1,4 @@
+
 #ifndef PAGE2_H
 #define PAGE2_H
 
@@ -23,6 +24,7 @@ public:
     qint64 getFileSize(QString filePath); //获取文件大小，返回单位mb
     void setThemeStyleDark();
     void setThemeStyleLight();
+
 signals:
     void makeFinish();
     void returnMain();
@@ -42,6 +44,7 @@ private:
     QString themeStatus = LIGHTTHEME;
     QMovie *movieLoading=nullptr;
     QMovie *movieFinish=nullptr;
+    QPixmap errLabel;
     QLabel *lableMovie=nullptr;
     QLabel *lableText=nullptr;
     QLabel *lableNum=nullptr;
@@ -51,7 +54,6 @@ private:
     int frameCount=0;
     void readBashStandardErrorInfo();
     qint64 sourceFileSize = 0;
-//    bool isInPage2 = false;
     QTimer *timer;
 };
 

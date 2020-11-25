@@ -1,6 +1,9 @@
 #ifndef STYLEWIDGETSHADOW_H
 #define STYLEWIDGETSHADOW_H
 
+#define SHADOW 6
+#define SHADOWALPHA 0.16
+//#define RADIUS
 #include "stylewidgetattribute.h"
 #include <QDebug>
 #include <QWidget>

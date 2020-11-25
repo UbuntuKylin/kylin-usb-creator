@@ -1,14 +1,15 @@
 #include "page1.h"
 
-Page1::Page1( StyleWidgetAttribute page_swa)
+Page1::Page1()
 {
-    swa=page_swa;
-    swa.setW(COMBOBOXW);
-    swa.setH(COMBOBOXH);
-    swa.itemHeight=ITEMHEIGHT;
-    swa.radius=COMBOBOXRADIUS;
+//    swa=page_swa;
+//    swa.setW(COMBOBOXW);
+//    swa.setH(COMBOBOXH);
+//    swa.itemHeight=ITEMHEIGHT;
+//    swa.radius=COMBOBOXRADIUS;
+
     initControlQss();//初始化样式
-    dialogInitControlQss(page_swa);
+    dialogInitControlQss();
     getStorageInfo();//获取磁盘信息
 }
 
@@ -22,7 +23,7 @@ void Page1::initControlQss()
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
     tabUdisk->setObjectName("tabLable");
-    comboUdisk=new StyleComboBox(swa);
+    comboUdisk=new StyleComboBox();
     connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
     connect(comboUdisk,&StyleComboBox::ifStartButtonChange,this,&Page1::dealComboBoxChangeButton);
     warnningIcon=new QLabel;
@@ -109,10 +110,8 @@ void Page1::refreshDiskList()
     diskRefreshDelay->start(1000);
 }
 
-void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
+void Page1::dialogInitControlQss()
 {
-    page_swa.setW(424);
-    page_swa.setH(264);
     authDialog = new rootAuthDialog(this);
     authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     authDialog->setAttribute(Qt::WA_TranslucentBackground); //全透明
@@ -244,7 +243,7 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     hlt4->addWidget(authDialog->btnCancel);
     hlt4->addSpacing(16);
     hlt4->addWidget(authDialog->btnOk);
-    hlt4->addSpacing(16+page_swa.shadow);
+    hlt4->addSpacing(22);
     QVBoxLayout *vlt1=new QVBoxLayout();
     vlt1->setMargin(0);
     vlt1->setSpacing(0);
@@ -306,21 +305,19 @@ void Page1::getStorageInfo()
     }
     if(0==comboUdisk->listWidget->count())
     {
-//        comboUdisk->clearDiskList();
         comboUdisk->addItem(tr("No USB drive available"),NOUDISK);
         warnningText->hide();
         warnningIcon->hide();
         creatStart->setEnabled(false);
     }
     emit diskLabelRefresh();
-//    emit isMakingSuccess();
-//    qDebug()<<"getstorage中的ifstartbuttoncanged被调用";
     ifStartBtnChange();
 }
 
 void Page1::allClose()
 {
     authDialog->close();
+    comboUdisk->closeListWidget();
 }
 
 void Page1::creatStartSlots()
@@ -339,17 +336,17 @@ void Page1::creatStartSlots()
 
 bool Page1::event(QEvent *event)
 {
-    if(comboUdisk->swshadow == nullptr)return QWidget::event(event);
+    if(comboUdisk->listWidget == nullptr)return QWidget::event(event);
     if (event->type() == QEvent::Leave)
     {
         if(mouseIsLeaveUdiskWidget())
         {
-            comboUdisk->deleteShadow();
+            comboUdisk->closeListWidget();
         }
     }
     else if (event->type() == QEvent::MouseButtonPress)
     {
-        comboUdisk->deleteShadow();
+        comboUdisk->closeListWidget();
     }
     return QWidget::event(event);
 }
