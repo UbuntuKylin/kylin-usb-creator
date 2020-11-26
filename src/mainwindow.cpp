@@ -62,7 +62,7 @@ void MainWindow::myStyle()
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);
     this->setLayout(vlt);
-    this->show();
+//    this->show();
 
     // 状态栏初始化部分，需要时打开注释
 //    createTrayActions();
@@ -147,7 +147,15 @@ int MainWindow::changePage()
     if (index >= count)index = 0;
     return index;
 }
-
+void MainWindow::handleIconClickedSub()
+{
+    qDebug()<<"MainWindow::handleIconClickedSub  iswindowminized:"<<this->isMinimized();
+    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
+    this->move((availableGeometry.width() - this->width())/2, (availableGeometry.height() - this->height())/2);
+    this->showNormal();
+    this->raise();
+    this->activateWindow();
+}
 void MainWindow::makeFinish()
 {
     if(!page1->ifStartBtnChange())

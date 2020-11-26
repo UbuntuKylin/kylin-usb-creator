@@ -2,11 +2,6 @@
 
 Page1::Page1()
 {
-//    swa=page_swa;
-//    swa.setW(COMBOBOXW);
-//    swa.setH(COMBOBOXH);
-//    swa.itemHeight=ITEMHEIGHT;
-//    swa.radius=COMBOBOXRADIUS;
 
     initControlQss();//初始化样式
     dialogInitControlQss();

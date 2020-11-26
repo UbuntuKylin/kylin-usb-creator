@@ -26,6 +26,7 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void handleIconClickedSub();
 
 signals:
     void setMakeStart();
@@ -42,7 +43,6 @@ private:
     void createTrayActions();
     void initGsetting();
     void setThemeStyle();
-
     QStackedWidget *stackedWidget= nullptr;
     //页面小圆点
     QLabel *pointLable1 = nullptr;

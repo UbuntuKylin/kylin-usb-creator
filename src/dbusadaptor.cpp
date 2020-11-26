@@ -17,3 +17,19 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
+DbusAdaptor::DbusAdaptor(MainWindow *parent)
+    : QDBusAbstractAdaptor(parent)
+{
+    // constructor
+    setAutoRelaySignals(true);
+}
+
+DbusAdaptor::~DbusAdaptor()
+{
+    // destructor
+}
+
+void DbusAdaptor::showMainWindow()
+{
+    parent()->handleIconClickedSub();
+}

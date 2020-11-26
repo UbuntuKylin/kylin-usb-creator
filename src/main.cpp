@@ -1,8 +1,6 @@
 #include "mainwindow.h"
-//#define ITEMHEIGHT 60//标签高度
-//#define TITLEH 0//标题栏高度
+#include "dbusadaptor.h"
 #define SHADOW 6//阴影宽度
-//#define WIDGETRADIUS 4//窗口圆角
 #define BUTTONRADIUS 0//按钮圆角
 #define SHADOWALPHA 0.16//阴影透明度
 #include "stylewidget.h"
@@ -14,12 +12,41 @@
 #include <fcntl.h>
 #include <QLibraryInfo>
 #include <syslog.h>
+void responseCommand(QApplication &a) //响应外部dbus命令
+{
+    //提供DBus接口，添加show参数
+    QCommandLineParser parser;
+    parser.setApplicationDescription(QCoreApplication::translate("main", "kylinusbcreator"));
+    parser.addHelpOption();
+    parser.addVersionOption();
 
+    QCommandLineOption swOption(QStringLiteral("show"),QCoreApplication::translate("main", "show kylin-usb-creator test"));
+
+    parser.addOptions({swOption});
+    parser.process(a);
+
+    if(parser.isSet(swOption) || !QDBusConnection::sessionBus().registerService("com.kylin.usbcreator"))
+    {
+//        if(!a.isRunning())return;
+            QDBusInterface *interface = new QDBusInterface("com.kylin.usbcreator",
+                                                           "/com/kylin/usbcreator",
+                                                           "com.kylin.usbcreator",
+                                                           QDBusConnection::sessionBus(),
+                                                           NULL);
+
+            interface->call(QStringLiteral("showMainWindow"));
+    }
+}
 int main(int argc, char *argv[])
 {
 //    高清屏幕自适应
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+
+
+    QApplication a(argc, argv);
+    responseCommand(a);
+    a.setWindowIcon(QIcon(":data/logo/96.png"));
 
 //    添加vnc支持
     QStringList homePath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
@@ -31,10 +58,8 @@ int main(int argc, char *argv[])
         exit(0);
     }
 
-    QApplication a(argc, argv);
-    a.setWindowIcon(QIcon(":data/logo/96.png"));
 
-//    标准对话框汉化
+//    标准对话框汉化(QT标准翻译
 #ifndef QT_NO_TRANSLATION
     QString translatorFileName = QLatin1String("qt_");
     translatorFileName += QLocale::system().name();
@@ -44,7 +69,6 @@ int main(int argc, char *argv[])
     else
         qDebug() << "Failed to load Chinese translation file.";
 #endif
-
     // 应用内翻译
     QTranslator app_trans;
     QString locale = QLocale::system().name();
@@ -73,8 +97,14 @@ int main(int argc, char *argv[])
     }
 
     MainWindow w;
+    DbusAdaptor adaptor(&w);
+    Q_UNUSED(adaptor);
+    auto connection = QDBusConnection::sessionBus();
+    qDebug()<<"建立DBus服务状态： "<< (connection.registerService("com.kylin.usbcreator")&&connection.registerObject("/com/kylin/usbcreator", &w));
+
 //    w.setAttribute(Qt::WA_TranslucentBackground, true);
 //    w.setProperty("useSystemStyleBlur",true);
+    w.show();
 
     return a.exec();
 }

@@ -23,4 +23,28 @@ class QStringList;
 class QVariant;
 QT_END_NAMESPACE
 
+#include "mainwindow.h"
+
+class DbusAdaptor: public QDBusAbstractAdaptor
+{
+    Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "com.kylin.usbcreator")
+    Q_CLASSINFO("D-Bus Introspection", ""
+"  <interface name=\"com.kylin.usbcreator\">\n"
+"    <method name=\"showMainWindow\"/>\n"
+"  </interface>\n"
+        "")
+public:
+    DbusAdaptor(MainWindow *parent);
+    virtual ~DbusAdaptor();
+
+    inline MainWindow *parent() const
+    { return static_cast<MainWindow *>(QObject::parent()); }
+
+public: // PROPERTIES
+public Q_SLOTS: // METHODS
+    void showMainWindow();
+Q_SIGNALS: // SIGNALS
+};
+
 #endif
