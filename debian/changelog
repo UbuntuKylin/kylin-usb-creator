@@ -1,3 +1,11 @@
+kylin-usb-creator (1.0.0-26kord) v101; urgency=medium
+
+  * 移除程序外部透明顶级窗口，改为主题接管状态栏样式及阴影圆角。
+  * 移除模块stylewidget、stylewidgetattribute、stylewidgetshadow。
+  * 注册Dbus服务。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 27 Nov 2020 12:24:52 +0800
+
 kylin-usb-creator (1.0.0-25kord) v101; urgency=medium
 
   * 代码结构优化

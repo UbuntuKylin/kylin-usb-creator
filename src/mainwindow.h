@@ -10,7 +10,6 @@
 //#define BUTTONRADIUS 4//按钮圆角
 #define SHADOWALPHA 0.16//阴影透明度
 
-#include "stylewidget.h"
 #include "page1.h"
 #include "page2.h"
 #include <QWidget>
@@ -18,6 +17,7 @@
 #include <QSystemTrayIcon> //状态栏
 #include <QGSettings>
 //滑动效果
+#include <QWidget>
 #include <QStackedWidget>
 class MainWindow : public QWidget
 {

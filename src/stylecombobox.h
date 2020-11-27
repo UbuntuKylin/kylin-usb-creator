@@ -7,7 +7,6 @@
 #define ITEMHIGHT 30
 #define SHADOW 6
 
-#include "stylewidgetshadow.h"
 #include <QDebug>
 #include <QWidget>
 #include <QPushButton>
@@ -26,7 +25,6 @@ public:
     QListWidget *listWidget = nullptr;//U盘列表列表部分
 //    QListWidget *menuListWidget = nullptr;//菜单列表部分
     void addItem(QString lable, QString data);//添加到列表
-    StyleWidgetShadow *swshadow = nullptr;//列表阴影
     void clearDiskList(); //清空U盘的listWidget
     void setThemeDark(); //深色模式
     void setThemeLight(); //浅色模式
@@ -44,7 +42,6 @@ private:
     QPushButton *pushButton = nullptr;//点击部分
     void on_diskButton_click(); //U盘栏点击事件
 //    void on_menuButton_click(); //菜单栏点击事件
-    StyleWidgetAttribute swa; //属性
     bool isDiskListOpen = false;
     bool mouseInListWidget=false;
     QLabel *text=nullptr; // U盘框选中的部分

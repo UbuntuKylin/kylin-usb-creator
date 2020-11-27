@@ -17,6 +17,7 @@ void MainWindow::init(){
     this->setFixedSize(680,467);
 //    在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
+//    QRect availableGeometry = qApp->
     this->move((availableGeometry.width()-this->width())/2,(availableGeometry.height()- this->height())/2);
 
 }
@@ -24,7 +25,7 @@ void MainWindow::myStyle()
 {
     timer = new QTimer(this);
     page1 = new Page1();
-    page2 = new Page2;
+    page2 = new Page2();
     connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
     connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
@@ -44,7 +45,7 @@ void MainWindow::myStyle()
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
 
-    stackedWidget =new QStackedWidget;
+    stackedWidget =new QStackedWidget(this);
     stackedWidget->addWidget(page1);
     stackedWidget->addWidget(page2);
 
@@ -62,7 +63,6 @@ void MainWindow::myStyle()
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);
     this->setLayout(vlt);
-//    this->show();
 
     // 状态栏初始化部分，需要时打开注释
 //    createTrayActions();
@@ -150,11 +150,26 @@ int MainWindow::changePage()
 void MainWindow::handleIconClickedSub()
 {
     qDebug()<<"MainWindow::handleIconClickedSub  iswindowminized:"<<this->isMinimized();
-    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
-    this->move((availableGeometry.width() - this->width())/2, (availableGeometry.height() - this->height())/2);
+
+//    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
+//    this->move((availableGeometry.width() - this->width())/2, (availableGeometry.height() - this->height())/2);
     this->showNormal();
     this->raise();
     this->activateWindow();
+    qDebug()<<this->parent();
+
+//    this->show();
+
+//    stackedWidget->showNormal();
+//    stackedWidget->raise();
+//    stackedWidget->activateWindow();
+//    stackedWidget->show();
+
+
+//    page1->showNormal();
+//    page1->raise();
+//    page1->activateWindow();
+//    page1->show();
 }
 void MainWindow::makeFinish()
 {

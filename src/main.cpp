@@ -3,7 +3,6 @@
 #define SHADOW 6//阴影宽度
 #define BUTTONRADIUS 0//按钮圆角
 #define SHADOWALPHA 0.16//阴影透明度
-#include "stylewidget.h"
 #include <QTranslator>
 #include <QDebug>
 #include <QApplication>

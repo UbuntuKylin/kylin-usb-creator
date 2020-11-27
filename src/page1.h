@@ -10,10 +10,9 @@
 #define DARKTHEME "dark"
 #define LIGHTTHEME "light"
 
-#include "stylewidget.h"
 #include "stylecombobox.h"
 #include "rootauthdialog.h"
-
+#include <QEvent>
 #include <QDebug>
 #include <QRect>
 #include <QWidget> //控件
@@ -27,6 +26,9 @@
 #include <QStorageInfo>//硬盘信息
 #include <QFileSystemWatcher>
 #include <QGraphicsDropShadowEffect>
+#include <QScreen>
+#include <QCoreApplication>
+#include <QApplication>
 
 class Page1 : public QWidget
 {
@@ -80,7 +82,6 @@ private:
     QGraphicsDropShadowEffect *shadowEffect = nullptr; //root授权框阴影
     QWidget *authDialogContentWidget = nullptr; //root授权对话框的子窗口，用来在上边加载控件。
     QFileSystemWatcher *udiskplugwatcher = nullptr; //U盘插拔监控器
-    StyleWidgetAttribute swa;//属性
     QLabel *dialogWarningIcon = nullptr; //授权框警告Icon
     QLabel *dialogWarningLable = nullptr; //授权框警告label
     QLabel *dialogWarningLable2 = nullptr;

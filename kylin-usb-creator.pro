@@ -22,9 +22,6 @@ SOURCES += \
     src/page1.cpp \
     src/page2.cpp \
     src/stylecombobox.cpp \
-    src/stylewidget.cpp \
-    src/stylewidgetattribute.cpp \
-    src/stylewidgetshadow.cpp \
     src/rootauthdialog.cpp
 
 HEADERS += \
@@ -33,9 +30,6 @@ HEADERS += \
     src/page1.h \
     src/page2.h \
     src/stylecombobox.h \
-    src/stylewidget.h \
-    src/stylewidgetattribute.h \
-    src/stylewidgetshadow.h \
     src/rootauthdialog.h
 
 # bin file output dir
