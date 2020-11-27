@@ -10,8 +10,9 @@ void rootAuthDialog::Init()
     btnCancel = new QPushButton;
     btnOk = new QPushButton;
     dialogKey = new QLineEdit;
-    dialogKey->setPlaceholderText(tr("请输入密码"));
+    dialogKey->setPlaceholderText(tr("Input password"));
     dialogKey->setEchoMode(QLineEdit::Password);
+    setWindowModality(Qt::WindowModal); //设置属性为模态窗口
     connect(btnOk,&QPushButton::clicked,this,&rootAuthDialog::checkPassWord);
     connect(btnCancel,&QPushButton::clicked,[=]{
         emit cancelCheck();}); //取消信号
@@ -26,11 +27,11 @@ void rootAuthDialog::checkPassWord()
     connect(command_sudo,&QProcess::readyReadStandardError,this,&rootAuthDialog::readBashOutput);
     command_sudo->start("bash");
     command_sudo->waitForStarted();
-    if(m_key.isEmpty())
-    {
-        dealTooShort();
-        return ;
-    }
+//    if(m_key.isEmpty())
+//    {
+//        dealTooShort();
+//        return ;
+//    }
     QString str1 = "echo " + m_key + "| sudo -S -l ";
     command_sudo->write(str1.toLocal8Bit() + "\n");
 }
@@ -45,14 +46,16 @@ void rootAuthDialog::readBashOutput()
     {
         emit passwdCorrect();
         dialogKey->clear();
-        dialogKey->setPlaceholderText("请输入密码");
+        dialogKey->setPlaceholderText(tr("please enter the password"));
         this->close();
-//        qDebug()<<"right";
         return ;
     }else if(err.contains("对不起") || err.contains("Sorry"))
     {
         dealWrongPasswd();
-//        qDebug()<<"wrong";
+        return ;
+    }else if(err.contains("sudoers"))
+    {
+        dealNotSudoers();
         return ;
     }
 }
@@ -60,12 +63,17 @@ void rootAuthDialog::readBashOutput()
 void rootAuthDialog::dealWrongPasswd()
 {
     dialogKey->clear();
-    dialogKey->setPlaceholderText("密码错误，请重新输入");
+    dialogKey->setPlaceholderText(tr("Wrong password!Try again"));
     command_sudo->kill();
     command_sudo->waitForFinished(-1);
 }
 
-void rootAuthDialog::dealTooShort()
+void rootAuthDialog::dealNotSudoers()
 {
-    dialogKey->setPlaceholderText("请输入密码");
+    dialogKey->clear();
+    dialogKey->setPlaceholderText(tr("Current user is not in the sudoers file,please change another account or change authority"));
+    command_sudo->kill();
+    command_sudo->waitForFinished(-1);
 }
+
+

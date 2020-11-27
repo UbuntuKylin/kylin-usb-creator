@@ -9,6 +9,8 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QStyleOption>
+#include <QPainter>
 #include <QPushButton>
 
 class rootAuthDialog:public QWidget
@@ -30,8 +32,10 @@ public slots:
 private:
     void Init();
     void readBashOutput();
-    void dealWrongPasswd();
-    void dealTooShort(); //未输入密码直接点击了确认的情况
+    void dealWrongPasswd(); //处理密码错误
+
+    void dealNotSudoers();  //处理当前用户不在sudoers名单中
+//    void dealTooShort(); //未输入密码直接点击了确认的情况
     QProcess *command_sudo = nullptr;
 
     QString m_key ;     //密码

@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui dbus
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,24 +16,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/dbusadaptor.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/page1.cpp \
     src/page2.cpp \
     src/stylecombobox.cpp \
-    src/stylewidget.cpp \
-    src/stylewidgetattribute.cpp \
-    src/stylewidgetshadow.cpp \
     src/rootauthdialog.cpp
 
 HEADERS += \
+    src/dbusadaptor.h \
     src/mainwindow.h \
     src/page1.h \
     src/page2.h \
     src/stylecombobox.h \
-    src/stylewidget.h \
-    src/stylewidgetattribute.h \
-    src/stylewidgetshadow.h \
     src/rootauthdialog.h
 
 # bin file output dir
@@ -45,20 +41,21 @@ icons.files = data/kylin-usb-creator.png
 icons.path = /usr/share/pixmaps/
 
 # gsettings
-#schemes.file = /data/org.kylin-usb.creator.gschema.xml
-#schemes.path = /usr/share/glib-2.0/schemas/
+schemes.file = /data/org.kylin-usb.creator.gschema.xml
+schemes.path = /usr/share/glib-2.0/schemas/
 
 desktop.path = /usr/share/applications
 desktop.files = kylin-usb-creator.desktop
 
-INSTALLS += target desktop icons \
-#        schemas
+INSTALLS += target desktop icons schemes
+CONFIG += link_pkgconfig
 
-#CONFIG += link_pkgconfig
-
-#PKGCONFIG += gsettings-qt
-
-TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts
+PKGCONFIG += gsettings-qt
+# translations
+#qm_files.files = src/translations/*.pm
+#qm_files.path = /usr/share/kylin
+TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts \
+                src/translations/kylin-usb-creator_bo_CN.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -70,4 +67,5 @@ RESOURCES += data.qrc translations.qrc
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
 DISTFILES += src/translations/qt_zh_CN.qm \
-#    data/org.china-weather-data.gschema.xml \
+    src/translations/kylin-usb-creator_bo_CN.qm \
+    src/translations/kylin-usb-creator_zh_CN.qm

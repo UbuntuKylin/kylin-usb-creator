@@ -1,3 +1,102 @@
+kylin-usb-creator (1.0.0-26kord) v101; urgency=medium
+
+  * 移除程序外部透明顶级窗口，改为主题接管状态栏样式及阴影圆角。
+  * 移除模块stylewidget、stylewidgetattribute、stylewidgetshadow。
+  * 注册Dbus服务。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 27 Nov 2020 12:24:52 +0800
+
+kylin-usb-creator (1.0.0-25kord) v101; urgency=medium
+
+  * 代码结构优化
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Wed, 25 Nov 2020 17:24:52 +0800
+
+kylin-usb-creator (1.0.0-24kord) v101; urgency=medium
+
+  * 标题栏改用系统主题效果，调用系统主题实现了毛玻璃效果
+  * 授权窗口提升为模态窗口
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Tue, 24 Nov 2020 11:24:52 +0800
+
+kylin-usb-creator (1.0.0-23kord) v101; urgency=medium
+
+  * 源语言修改为英文，增加中文ts翻译
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 23 Nov 2020 16:46:52 +0800
+
+kylin-usb-creator (1.0.0-22kord) v101; urgency=medium
+
+  * 增加制作成功判断逻辑，检测了制作过程中U盘拔出等失败情况。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 21 Nov 2020 15:03:52 +0800
+
+kylin-usb-creator (1.0.0-21kord) v101; urgency=medium
+
+  * 增加了藏文支持
+  * 修复了iso文件包含特殊制作导致dd命令失败的问题
+  * U盘容量的显示进制由之前的1024进制改为了1000进制
+  * 取消了空密码的处理逻辑，用来解决无密码即可提权用户循环输入密码的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 19 Nov 2020 15:03:52 +0800
+
+kylin-usb-creator (1.0.0-20kord) v101; urgency=medium
+
+  * 通过嵌套widet的方式解决了授权框无圆角的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 16 Nov 2020 14:43:52 +0800
+
+kylin-usb-creator (1.0.0-19kord) v101; urgency=medium
+
+  * 修复了授权框异常的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 12 Nov 2020 21:13:08 +0800
+
+kylin-usb-creator (1.0.0-18kord) v101; urgency=medium
+
+  * 使用矢量图替代了之前png资源
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 12 Nov 2020 20:54:13 +0800
+
+kylin-usb-creator (1.0.0-17kord) v101; urgency=medium
+
+  * 深色模式接入，解决了一些问题。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 12 Nov 2020 13:51:16 +0800
+
+kylin-usb-creator (1.0.0-16kord) v101; urgency=medium
+
+  * 修复了授权框关闭按钮按下时开始制作按钮无法亮起的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 06 Nov 2020 16:26:42 +0800
+
+
+kylin-usb-creator (1.0.0-15kord) v101; urgency=medium
+
+  * 增加了对于光盘设备的过滤，修复了在U盘动态插拔时开始按钮无法及时亮起的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 06 Nov 2020 15:22:16 +0800
+
+
+kylin-usb-creator (1.0.0-14kord) v101; urgency=medium
+
+  * 设置状态栏模糊跟随v101系统方案，修改了U盘过滤规则及相关阈值。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Wed, 04 Nov 2020 14:38:15 +0800
+
+
+kylin-usb-creator (1.0.0-13kord) v101; urgency=medium
+
+  * 修复了一些问题，增加了U盘选中框预选功能
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Tue, 03 Nov 2020 16:32:04 +0800
+
+kylin-usb-creator (1.0.0-12kord) v101; urgency=medium
+
+  * 对话框汉化
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 31 Oct 2020 16:32:04 +0800
+
 kylin-usb-creator (1.0.0-11kord) v101; urgency=medium
 
   * 密码校验类拆分，dd命令优化

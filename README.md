@@ -1,4 +1,4 @@
-# Kyllin-USB-Creator
+# Kylin-USB-Creator
 
 一款U盘启动盘制作工具
 
@@ -14,3 +14,8 @@
 - VNC适配
 - 任务失败处理逻辑完善
 - U盘下拉列表框宽度修改
+
+1.0.0-13kord kylin-usb-creator
+
+- 修复了暗黑主题下文字颜色演示异常的问题
+- 增加了U盘框预选的功能。当有U盘插入时可以自动选中

@@ -1,16 +1,10 @@
 #include "page1.h"
 
-Page1::Page1( StyleWidgetAttribute page_swa)
+Page1::Page1()
 {
-    swa=page_swa;
-    swa.setW(COMBOBOXW);
-    swa.setH(COMBOBOXH);
-    swa.itemHeight=ITEMHEIGHT;
-    swa.radius=COMBOBOXRADIUS;
-//    QPoint pos = this->mapToGlobal(QPoint(0,0));
-//    qDebug()<<"init"<<pos;
+
     initControlQss();//初始化样式
-    dialogInitControlQss(page_swa);
+    dialogInitControlQss();
     getStorageInfo();//获取磁盘信息
 }
 
@@ -18,39 +12,36 @@ void Page1::initControlQss()
 {
     tabIso=new QLabel;
     tabUdisk=new QLabel;
-    tabIso->setText(tr("选择光盘镜像文件"));
-    tabUdisk->setText(tr("选择U盘"));
+    tabIso->setText(tr("Choose iso file"));
+    tabUdisk->setText(tr("Select USB drive"));
     tabIso->setFixedHeight(20);
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
-//    tabIso->setStyleSheet("font-size:14px;");
-    tabUdisk->setStyleSheet("font-size:14px;");
     tabUdisk->setObjectName("tabLable");
-    comboUdisk=new StyleComboBox(swa);
+    comboUdisk=new StyleComboBox();
+    connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
+    connect(comboUdisk,&StyleComboBox::ifStartButtonChange,this,&Page1::dealComboBoxChangeButton);
     warnningIcon=new QLabel;
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
     warnningIcon->show();
     warnningText=new QLabel;
-//    warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
-//    warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
 
     urlIso=new QLineEdit;
     urlIso->setEnabled(false);
     urlIso->setFixedHeight(30);
 
     findIso=new QPushButton(this);
-    findIso->setText(tr("浏览"));
+    findIso->setText(tr("Open"));
     findIso->setFixedSize(56,30);
     connect(findIso,&QPushButton::clicked,this,[=]{
-        urlIso->setText( QFileDialog::getOpenFileName(0,tr("选择镜像文件"),QDir::homePath(),"ISO(*.iso)"));
+        urlIso->setText( QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)"));
         });
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
     creatStart=new QPushButton(this);
     creatStart->setFixedSize(200,30);
-    creatStart->setText(tr("开始制作"));
+    creatStart->setText(tr("Start"));
     creatStart->setEnabled(false);
-//    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
     connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
     QHBoxLayout *hl1=new QHBoxLayout;
     hl1->setMargin(0);
@@ -91,18 +82,8 @@ void Page1::initControlQss()
     vl00->addLayout(vl0,8);
     vl00->addStretch(3);
     this->setLayout(vl00);
-    warnningText->setText(tr("制作启动盘的U盘将被格式化，请先备份好重要文件！"));
+    warnningText->setText(tr("USB drive will be formatted,please backup your files!"));
     udiskPlugWatcherInit(); //监控U盘插拔
-
-//    this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
-//                        ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
-//                        ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-//    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:#000;border-radius:4px;font-size:14px;}"
-//                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
-//                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-//    urlIso->setStyleSheet("background-color:rgba(240, 240, 240, 1);color:rgba(96, 98, 101, 1);font-size:12px;");
-//    comboUdisk->setStyleSheet("font-size:12px;");
-
 }
 
 void Page1::udiskPlugWatcherInit()
@@ -116,7 +97,6 @@ void Page1::udiskPlugWatcherInit()
 
 void Page1::refreshDiskList()
 {
-//    qDebug()<<"disk state changed";
     if(diskRefreshDelay->isActive())
     {
         return;
@@ -125,25 +105,27 @@ void Page1::refreshDiskList()
     diskRefreshDelay->start(1000);
 }
 
-
-void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
+void Page1::dialogInitControlQss()
 {
-    page_swa.setW(424);
-    page_swa.setH(264);
-    authDialog = new rootAuthDialog();
-    authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog );
-//    authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
-    authDialog->setFixedSize(424,264);
-//    connect(authDialog->btnCancel,&QPushButton::clicked,[=]{
-//        authDialog->dialogKey->clear();
-//        authDialog->close();
-//        ifStartBtnChange();
-//    });
+    authDialog = new rootAuthDialog(this);
+    authDialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+    authDialog->setAttribute(Qt::WA_TranslucentBackground); //全透明
+
+    authDialogContentWidget = new QWidget(authDialog);
+    QHBoxLayout *lytMain =new QHBoxLayout(authDialog);
+    lytMain->setMargin(0);
+    lytMain->addWidget(authDialogContentWidget);
+    authDialog->setFixedSize(430,270);
+    authDialogContentWidget->setFixedSize(424,264);
+    // 在非顶级窗口设置阴影效果
+    shadowEffect = new QGraphicsDropShadowEffect();
+    shadowEffect->setOffset(0,0);
+    shadowEffect->setBlurRadius(12);
+
 
 //    授权窗口在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     authDialog->move((availableGeometry.width() - authDialog->width())/2, (availableGeometry.height() - authDialog->height())/2);
-
     connect(authDialog,&rootAuthDialog::passwdCorrect,this,&Page1::dealRightPasswd);
     connect(authDialog,&rootAuthDialog::cancelCheck,[=]{
         authDialog->dialogKey->clear();
@@ -152,13 +134,12 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     });
     authDialog->hide();
     authDialog->btnOk->setFixedSize(64,30);
-    authDialog->btnOk->setText(tr("授权"));
+    authDialog->btnOk->setText(tr("OK"));
     authDialog->btnOk->setStyleSheet("font-size:14px;");
     authDialog->btnOk->setObjectName("dialogYes");
     authDialog->btnCancel->setFixedSize(64,30);
-    authDialog->btnCancel->setText(tr("取消"));
+    authDialog->btnCancel->setText(tr("Cancel"));
     authDialog->btnCancel->setObjectName("dialogNo");
-    authDialog->btnCancel->setStyleSheet("font-size:14px;");
 
 //    标题栏部分样式设置
     rootWindowTitle = new QWidget;
@@ -167,20 +148,19 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     rootDialogClose = new QPushButton(rootWindowTitle);
     rootDialogClose->setFixedSize(30,30);
     connect(rootDialogClose,&QPushButton::clicked,authDialog,&rootAuthDialog::close);
+    connect(rootDialogClose,&QPushButton::clicked,[=]{ifStartBtnChange();});
     rootDialogMin = new QPushButton(rootWindowTitle);
     rootDialogMin->setFixedSize(30,30);
-//    connect(rootDialogMin,&QPushButton::clicked,authDialog,&rootAuthDialog::hide);
 
     connect(rootDialogMin,&QPushButton::clicked,[=]{
-//        authDialog->dialogKey->clear();
-        authDialog->close();
+        authDialog->showMinimized();
         ifStartBtnChange();
     });
     rootDialogTitleText = new QLabel(rootWindowTitle);//标题
     rootDialogTitleText->setFixedSize(170,18);
-    rootDialogTitleText->setStyleSheet("font-size:14px;font-weight:600;");
-    rootDialogTitleText->setText(tr("授权"));
-    QHBoxLayout *titlelyt0=new QHBoxLayout;//右上角按钮内部
+
+    rootDialogTitleText->setText(tr("Authorization"));
+    QHBoxLayout *titlelyt0=new QHBoxLayout();//右上角按钮内部
     titlelyt0->setMargin(0);
     titlelyt0->setSpacing(0);
     titlelyt0->addStretch(99);
@@ -188,54 +168,48 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     titlelyt0->addSpacing(4);
     titlelyt0->addWidget(rootDialogClose,1);
     titlelyt0->addSpacing(4);
-    QVBoxLayout *titlelyt1=new QVBoxLayout;//右上角按钮外部
+    QVBoxLayout *titlelyt1=new QVBoxLayout();//右上角按钮外部
     titlelyt1->setMargin(0);
     titlelyt1->setSpacing(0);
     titlelyt1->addSpacing(4);
     titlelyt1->addLayout(titlelyt0);
     titlelyt1->addSpacing(4);
-    QHBoxLayout *titlelyt2=new QHBoxLayout; //标题内部
+    QHBoxLayout *titlelyt2=new QHBoxLayout(); //标题内部
     titlelyt2->setMargin(0);
     titlelyt2->setSpacing(0);
     titlelyt2->addSpacing(16);
     titlelyt2->addWidget(rootDialogTitleText);
-    QVBoxLayout *titlelyt3 = new QVBoxLayout; //标题外部
+    QVBoxLayout *titlelyt3 = new QVBoxLayout(); //标题外部
     titlelyt3->setMargin(0);
     titlelyt3->setSpacing(0);
     titlelyt3->addSpacing(10);
     titlelyt3->addLayout(titlelyt2);
     titlelyt3->addStretch(99);
-    QHBoxLayout *titlelyt4=new QHBoxLayout;//标题栏
+    QHBoxLayout *titlelyt4=new QHBoxLayout();//标题栏
     titlelyt4->setMargin(0);
     titlelyt4->setSpacing(0);
-    QLabel *fill = new QLabel; //填充label
+    QLabel *fill = new QLabel(); //填充label
     fill->setFixedHeight(38);
     titlelyt4->addLayout(titlelyt3);
     titlelyt4->addWidget(fill);
     titlelyt4->addStretch();
     titlelyt4->addLayout(titlelyt1);
 
-
     divingLine = new QLabel;
     divingLine->setFixedSize(424,1);
-    dialogWarningIcon = new QLabel(authDialog);
+    dialogWarningIcon = new QLabel();
     dialogWarningIcon->setStyleSheet("border-image:url(:data/warning.png);border:0px;");
     dialogWarningIcon->setFixedSize(24,24);
-    dialogWarningLable=new QLabel(authDialog);
-    dialogWarningLable->setText(tr("当前存在敏感操作，您需要进行验证："));
-    dialogWarningLable2=new QLabel(authDialog);
-    dialogWarningLable2->setText(tr("一个程序正试图执行一个需要特权的动作。要求授权以执行该动作。"));
+    dialogWarningLable=new QLabel();
+    dialogWarningLable->setText(tr("These operations needs to be verified:"));
+    dialogWarningLable2=new QLabel();
+    dialogWarningLable2->setText(tr("Request authorization:"));
     dialogWarningLable2->setWordWrap(true);
-    QLabel *dialogKeyLable=new QLabel(authDialog);
-    dialogKeyLable->setText(tr("输入密码:"));
-    dialogKeyLable->setStyleSheet("font-size:14px;");
+    dialogKeyLable=new QLabel();
+    dialogKeyLable->setText(tr("Password："));
     authDialog->dialogKey->setFixedSize(296,32);
-    authDialog->dialogKey->setStyleSheet("font-size:14px;");
 
-
-
-
-    QHBoxLayout *hlt1=new QHBoxLayout;
+    QHBoxLayout *hlt1=new QHBoxLayout();
     hlt1->setMargin(0);
     hlt1->setSpacing(0);
     hlt1->addSpacing(19);
@@ -243,13 +217,13 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     hlt1->addSpacing(4);
     hlt1->addWidget(dialogWarningLable);
     hlt1->addStretch(9);
-    QHBoxLayout *hlt2=new QHBoxLayout;
+    QHBoxLayout *hlt2=new QHBoxLayout();
     hlt2->setMargin(0);
     hlt2->setSpacing(0);
     hlt2->addSpacing(44);
     hlt2->addWidget(dialogWarningLable2);
     hlt2->addSpacing(16);
-    QHBoxLayout *hlt3=new QHBoxLayout;
+    QHBoxLayout *hlt3=new QHBoxLayout();
     hlt3->setMargin(0);
     hlt3->setSpacing(0);
     hlt3->addSpacing(44);
@@ -257,15 +231,15 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     hlt3->addSpacing(6);
     hlt3->addWidget(authDialog->dialogKey);
     hlt3->addSpacing(16);
-    QHBoxLayout *hlt4=new QHBoxLayout;
+    QHBoxLayout *hlt4=new QHBoxLayout();
     hlt4->setMargin(0);
     hlt4->setSpacing(0);
     hlt4->addStretch(2);
     hlt4->addWidget(authDialog->btnCancel);
     hlt4->addSpacing(16);
     hlt4->addWidget(authDialog->btnOk);
-    hlt4->addSpacing(16+page_swa.shadow);
-    QVBoxLayout *vlt1=new QVBoxLayout;
+    hlt4->addSpacing(22);
+    QVBoxLayout *vlt1=new QVBoxLayout();
     vlt1->setMargin(0);
     vlt1->setSpacing(0);
     vlt1->addLayout(titlelyt4);
@@ -279,35 +253,44 @@ void Page1::dialogInitControlQss(StyleWidgetAttribute page_swa)
     vlt1->addSpacing(31);
     vlt1->addLayout(hlt4);
     vlt1->addSpacing(24);
-    authDialog->setLayout(vlt1);
+    authDialogContentWidget->setLayout(vlt1);
 }
 
 void Page1::getStorageInfo()
 {
-    diskRefreshDelay->stop();//U盘动态刷新
+    diskRefreshDelay->stop();//U盘动态刷新相关
     QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes();//获取磁盘列表
-
+    comboUdisk->clearDiskList();
     for(QStorageInfo& disk : diskList)
     {
         if(""==disk.displayName())//名称为空的磁盘不显示
             continue;
         if("/"==disk.displayName())//系统分区不显示
             continue;
-        if(disk.bytesTotal()/1048576<4096 || disk.bytesTotal()/1048576>1024*65)//小于4G或大于65G的磁盘不显示
+        if(disk.bytesTotal()/1000000<=2000 || disk.bytesTotal()/1000000>1000*65)//小于2G或大于65G的磁盘不显示
             continue;
         if("tmpfs"==disk.fileSystemType())//tmpfs类型的磁盘不显示
             continue;
         if("/boot"==disk.displayName())//boot分区不显示
             continue;
+        if(disk.displayName().contains("BACKUP")) //还原分区不显示
+            continue;
+        if(disk.device().contains("/dev/sr0")) //光盘不显示
+            continue;
+        if(disk.device().contains("/dev/sda0")) //内置硬盘不显示
+            continue;
+        if(disk.device().contains("/dev/nvm")) //nvme类型的设备不显示
+            continue;
 
+        
         QString displayName=disk.displayName();
         if(displayName.length()>UDISK_NAME_MAX_LENGTH)
             displayName=displayName.mid(0,UDISK_NAME_MAX_LENGTH -1)+"…";
 
         float diskSize=disk.bytesTotal();
-        diskSize=diskSize/1048576/1024;
-
+        diskSize=diskSize/1000000/1000;
         QString diskUrl=disk.device();
+//        qDebug()<<"******"<<disk.device();
         diskUrl=diskUrl.mid(0,8);
 
         QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
@@ -317,38 +300,48 @@ void Page1::getStorageInfo()
     }
     if(0==comboUdisk->listWidget->count())
     {
-        comboUdisk->addItem(tr("无可用U盘"),NOUDISK);
+        comboUdisk->addItem(tr("No USB drive available"),NOUDISK);
         warnningText->hide();
         warnningIcon->hide();
         creatStart->setEnabled(false);
     }
+    emit diskLabelRefresh();
+    ifStartBtnChange();
 }
 
 void Page1::allClose()
 {
     authDialog->close();
+    comboUdisk->closeListWidget();
 }
 
 void Page1::creatStartSlots()
 {
     creatStart->setEnabled(false);
-    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:6px;font-size:14px;");
+    if(DARKTHEME == themeStatus)
+    {
+        creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    }else
+    {
+        creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
+    }
+
     authDialog->show();
 }
 
 bool Page1::event(QEvent *event)
 {
-    if(comboUdisk->swshadow == nullptr)return QWidget::event(event);
+    if(comboUdisk->listWidget == nullptr)return QWidget::event(event);
     if (event->type() == QEvent::Leave)
     {
         if(mouseIsLeaveUdiskWidget())
         {
-            comboUdisk->deleteShadow();
+            comboUdisk->closeListWidget();
         }
     }
     else if (event->type() == QEvent::MouseButtonPress)
     {
-        comboUdisk->deleteShadow();
+        comboUdisk->closeListWidget();
     }
     return QWidget::event(event);
 }
@@ -364,22 +357,35 @@ bool Page1::mouseIsLeaveUdiskWidget()
         return false;
 }
 
-void Page1::ifStartBtnChange()
+bool Page1::ifStartBtnChange()
 {
+//    qDebug()<<"comboUdisk->getDiskPath()= "<<comboUdisk->getDiskPath()<<"  urlIso->text() = "<<urlIso->text();
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
-        creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);border-radius:15px;font-size:14px;}"
-                                  "QPushButton:hover{background-color:rgba(130,140,255,1);border-radius:15px;font-size:14px;}"
-                                  "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:15px;font-size:14px;}");
-    }else
-    {
+        creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
+                                  "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
+                                  "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");
+        return true;
+    }else{
         creatStart->setEnabled(false);
-        creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
+        if(themeStatus == LIGHTTHEME)
+        {
+            creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
+        }else
+        {
+            creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+        }
+        return false;
     }
 }
 
 void Page1::dealDialogCancel()
+{
+    ifStartBtnChange();
+}
+
+void Page1::dealComboBoxChangeButton()
 {
     ifStartBtnChange();
 }
@@ -391,26 +397,28 @@ void Page1::dealRightPasswd()
 void Page1::dealAuthDialogClose()
 {
     creatStart->setEnabled(true);
-    creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);border-radius:15px;font-size:14px;}"
-                              "QPushButton:hover{background-color:rgba(130,140,255,1);border-radius:15px;font-size:14px;}"
-                              "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:15px;font-size:14px;}");
+    creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
+                              "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
+                              "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");
 }
 
 void Page1::setThemeStyleLight()
 {
-    tabIso->setStyleSheet("font-size:14px;");
+    themeStatus = LIGHTTHEME;
+    tabIso->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
+    tabUdisk->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
     warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
-    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
-
+    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    ifStartBtnChange();
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
     findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px;font-size:14px;}"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;");
-    comboUdisk->setStyleSheet("font-size:12px;");
+    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;border:1px  solid rgba(240,240,240,1);border-radius:4px;");
 //    root授权框部分
+    rootDialogTitleText->setStyleSheet("font-size:14px;font-weight:600;color:rgba(27,27,27,1);");
     rootDialogClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
                                     "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
                                     "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
@@ -419,41 +427,65 @@ void Page1::setThemeStyleLight()
                                  "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
     authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}"
                                          "QlineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
+    shadowEffect->setColor(Qt::lightGray);
+    authDialogContentWidget->setGraphicsEffect(shadowEffect);
+    dialogKeyLable->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
     divingLine->setStyleSheet("background-color:rgba(242,246,253,1);");
-    authDialog->setStyleSheet("background-color:rgba(255,255,255,1);border-radius:6px;");
     dialogWarningLable->setStyleSheet("font-size:14px;color:rgba(48,49,51,1);font-weight:600;");
-    dialogWarningLable2->setStyleSheet("font-size:14px;");
+    dialogWarningLable2->setStyleSheet("font-size:14px;color:rgba(48,49,51,1);");
     authDialog->btnCancel->setStyleSheet("QPushButton{background-color:rgba(221,223,231,0);border-radius:4px;border:0.7px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}"
                              "QPushButton:hover{background-color:rgba(242,246,253,1);border-radius:4px;border:0.7px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}"
                              "QPushButton:pressed{background-color:rgba(242,246,253,1);border-radius:4px;border:0.7px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}");
     authDialog->btnOk->setStyleSheet("QPushButton{background-color:rgba(100, 105, 241, 1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                      "QPushButton:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                      "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");
+    authDialogContentWidget->setStyleSheet("background-color:rgba(255,255,255,1);border-radius:6px;");
+    comboUdisk->setThemeLight();    //设置combobox响应浅色主题
+//    rootWindowTitle->setStyleSheet("border-top-left-radius:20px;border-top-right-radius:40px;border:1px solid blue;");
+//    rootDialogTitleText->setStyleSheet("border:1px solid blue;");
+    emit setStyleWidgetStyle(LIGHTTHEME);   //设置stylewidget响应浅色主题
 }
 
 void Page1::setThemeStyleDark()
 {
+    themeStatus = DARKTHEME;
     qDebug()<<"Page1::setThemeStyleDark被调用";
-//    styleDialog->setThemeDark();
-
+    tabUdisk->setStyleSheet("color:rgba(249,249,249,1);");
     tabIso->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
     warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");
-    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);border-radius:15px;font-size:14px;");
+    creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    ifStartBtnChange();
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
 
     findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
-    comboUdisk->setStyleSheet("font-size:12px;");
-//    authDialog->setStyleSheet("border-radius:6px;");
-    authDialog->dialogKey->setStyleSheet("border:1px solid rgba(221, 223, 231, 1);font-size:14px;");
-    dialogWarningLable->setStyleSheet("font-size:14px;");
-    dialogWarningLable2->setStyleSheet("font-size:20px;");
-    authDialog->btnCancel->setStyleSheet("StyleWidget #dialogNo{background-color:rgba(255,255,255,0);border-radius:4px;border:1px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}"
-                             "StyleWidget #dialogNo:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:#fff;}"
-                             "StyleWidget #dialogNo:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:#fff;}");
-    authDialog->btnOk->setStyleSheet("StyleWidget #dialogYes{background-color:rgba(100, 105, 241, 1);border-radius:4px;color:#fff;font-size:14px;}"
-                               "StyleWidget #dialogYes:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:#fff;}"
-                               "StyleWidget #dialogYes:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:#fff;}");
+
+
+    //    root授权框部分
+        authDialogContentWidget->setStyleSheet("background-color:rgba(61,61,65,1);border-radius:6px;");
+        rootDialogTitleText->setStyleSheet("font-size:14px;font-weight:600;color:rgba(249,249,249,1);");
+        rootDialogClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_dark/close.png);border-radius:4px;}"
+                                        "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/elements_dark/close.png);border-radius:4px;}"
+                                        "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/elements_dark/close.png);border-radius:4px;}");
+        rootDialogMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_dark/minimize.png);border-radius:4px;}"
+                                     " QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_dark/minimize.png);border-radius:4px;}"
+                                     "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_dark/minimize.png);border-radius:4px;}");
+        authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid #606265;font-size:14px;color:rgba(143,147,153,1);}");
+//                                             "QLineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
+        dialogKeyLable->setStyleSheet("color:rgba(192,196,204,1);font-size:14px;");
+        divingLine->setStyleSheet("background-color:rgba(72,72,76,1);");
+        shadowEffect->setColor(Qt::black);
+        authDialogContentWidget->setGraphicsEffect(shadowEffect);
+        dialogWarningLable->setStyleSheet("font-size:14px;color:rgba(192,196,204,1);font-weight:600;");
+        dialogWarningLable2->setStyleSheet("font-size:14px;color:rgba(192,196,204,1);");
+        authDialog->btnCancel->setStyleSheet("QPushButton{background-color:rgba(221,223,231,0);border-radius:4px;border:1px solid rgba(96, 98, 101, 1);color:rgba(192, 196, 204, 1);font-size:14px;}"
+                                 "QPushButton:hover{background-color:rgba(242,246,253,1);border-radius:4px;border:0.7px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}"
+                                 "QPushButton:pressed{background-color:rgba(242,246,253,1);border-radius:4px;border:0.7px solid rgba(221, 223, 231, 1);color:rgba(143, 147, 153, 1);font-size:14px;}");
+        authDialog->btnOk->setStyleSheet("QPushButton{background-color:rgba(100, 105, 241, 1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
+                                         "QPushButton:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
+                                         "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");;
+    comboUdisk->setThemeDark(); //设置combobox响应深色主题
+    emit setStyleWidgetStyle(DARKTHEME); //设置stylewidget响应黑色主题
 }
