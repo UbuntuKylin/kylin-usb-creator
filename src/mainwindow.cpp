@@ -161,11 +161,21 @@ int MainWindow::changePage()
 }
 void MainWindow::handleIconClickedSub()
 {
-    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
-    this->move((availableGeometry.width() - this->width())/2, (availableGeometry.height() - this->height())/2);
-    this->showNormal();
-    this->raise();
-    this->activateWindow();
+    qDebug()<<"handleIconClickedSub";
+//    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
+//    this->move((availableGeometry.width() - this->width())/2, (availableGeometry.height() - this->height())/2);
+//    this->showNormal();
+
+    Qt::WindowFlags flags = windowFlags();
+    flags |= Qt::WindowStaysOnTopHint;
+    setWindowFlags(flags);
+    show();
+    flags &= ~Qt::WindowStaysOnTopHint;
+    setWindowFlags(flags);
+    showNormal();
+
+//    this->raise();
+//    this->activateWindow();
 
 }
 

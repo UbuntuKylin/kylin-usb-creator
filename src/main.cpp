@@ -20,7 +20,6 @@ void activeMainwindow()
     if(QGSettings::isSchemaInstalled(APPDATA))
     {
         QGSettings *p = new QGSettings(APPDATA);
-//        p->get()
         qDebug()<<"main.cpp activeMainwindow value:"<<p->get("mode").toString();
         p->set("mode","stat4");
         qDebug()<<"main.cpp after set value:"<<p->get("mode").toString();
@@ -74,14 +73,14 @@ int main(int argc, char *argv[])
 
 
     if(a.isRunning()){
-//        a.sendMessage(nullptr);
-        activeMainwindow();
+        a.sendMessage(QApplication::arguments().length() > 1 ? QApplication::arguments().at(0):a.applicationFilePath());
         qDebug()<<"#### kylin-usb-creator is already running";
         return EXIT_SUCCESS;
     }else {
         MainWindow w;
+        a.setActiveWindow(&w);
         w.show();
-//        QObject::connect(&a,SIGNAL(messageReceived(const QString&)),&w,SLOT(handleIconClickedSub(const QString&)));
+        QObject::connect(&a,SIGNAL(messageReceived(const QString&)),&w,SLOT(handleIconClickedSub()));
         return a.exec();
     }
     a.setWindowIcon(QIcon(":data/logo/96.png"));

@@ -33,7 +33,7 @@ public slots:
     void makeStart(); //点击授权按钮后由页面1跳转到页面2
     void makeFinish();
     void returnMain();
-//    void handleIconClickedSub(const QString&);
+    void handleIconClickedSub();
 //    void passwdCheck();
 private:
     void init(); //初始化mainwindow相关的设置
@@ -44,7 +44,7 @@ private:
     void initGsetting();
     void setThemeStyle();
 
-    void handleIconClickedSub();
+//    void handleIconClickedSub();
     QTimer *dbustimer = nullptr;
     QStackedWidget *stackedWidget= nullptr;
     //页面小圆点

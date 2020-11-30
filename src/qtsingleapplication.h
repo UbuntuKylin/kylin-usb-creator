@@ -41,6 +41,7 @@
 #ifndef QTSINGLEAPPLICATION_H
 #define QTSINGLEAPPLICATION_H
 
+#include "mainwindow.h"
 #include <QApplication>
 
 class QtLocalPeer;
@@ -80,7 +81,7 @@ public:
     bool isRunning();
     QString id() const;
 
-    void setActivationWindow(QWidget* aw, bool activateOnMessage = true);
+    void setActivationWindow(MainWindow* aw, bool activateOnMessage = true);
     QWidget* activationWindow() const;
 
     // Obsolete:

@@ -284,13 +284,13 @@ QString QtSingleApplication::id() const
   \sa activateWindow(), messageReceived()
 */
 
-void QtSingleApplication::setActivationWindow(QWidget* aw, bool activateOnMessage)
+void QtSingleApplication::setActivationWindow(MainWindow* aw, bool activateOnMessage)
 {
     actWin = aw;
     if (activateOnMessage)
         connect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
-    else
-        disconnect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
+//    else
+//        disconnect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
 }
 
 
