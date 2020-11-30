@@ -1,4 +1,3 @@
-
 #ifndef PAGE2_H
 #define PAGE2_H
 

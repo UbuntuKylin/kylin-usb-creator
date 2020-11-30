@@ -2,7 +2,6 @@
 
 Page1::Page1()
 {
-
     initControlQss();//初始化样式
     dialogInitControlQss();
     getStorageInfo();//获取磁盘信息
@@ -277,7 +276,7 @@ void Page1::getStorageInfo()
             continue;
         if(disk.device().contains("/dev/sr0")) //光盘不显示
             continue;
-        if(disk.device().contains("/dev/sda0")) //内置硬盘不显示
+        if(disk.device().contains("/dev/sda")) //内置硬盘不显示
             continue;
         if(disk.device().contains("/dev/nvm")) //nvme类型的设备不显示
             continue;

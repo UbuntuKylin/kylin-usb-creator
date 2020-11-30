@@ -31,5 +31,5 @@ DbusAdaptor::~DbusAdaptor()
 
 void DbusAdaptor::showMainWindow()
 {
-    parent()->handleIconClickedSub();
+//    parent()->handleIconClickedSub();
 }

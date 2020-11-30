@@ -1,4 +1,4 @@
-QT       += core gui dbus
+QT       += core gui dbus network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,6 +21,10 @@ SOURCES += \
     src/mainwindow.cpp \
     src/page1.cpp \
     src/page2.cpp \
+    src/qtlocalpeer.cpp \
+    src/qtlockedfile.cpp \
+    src/qtlockedfile_unix.cpp \
+    src/qtsingleapplication.cpp \
     src/stylecombobox.cpp \
     src/rootauthdialog.cpp
 
@@ -29,6 +33,9 @@ HEADERS += \
     src/mainwindow.h \
     src/page1.h \
     src/page2.h \
+    src/qtlocalpeer.h \
+    src/qtlockedfile.h \
+    src/qtsingleapplication.h \
     src/stylecombobox.h \
     src/rootauthdialog.h
 
@@ -41,7 +48,7 @@ icons.files = data/kylin-usb-creator.png
 icons.path = /usr/share/pixmaps/
 
 # gsettings
-schemes.file = /data/org.kylin-usb.creator.gschema.xml
+schemes.file = data/org.kylin-usb-creator-data.gschema.xml
 schemes.path = /usr/share/glib-2.0/schemas/
 
 desktop.path = /usr/share/applications
