@@ -9,6 +9,7 @@ Page1::Page1()
 
 void Page1::initControlQss()
 {
+//    this->setWindowFlag(Qt::FramelessWindowHint,true);
     tabIso=new QLabel;
     tabUdisk=new QLabel;
     tabIso->setText(tr("Choose iso file"));
@@ -29,7 +30,6 @@ void Page1::initControlQss()
     urlIso=new QLineEdit;
     urlIso->setEnabled(false);
     urlIso->setFixedHeight(30);
-
     findIso=new QPushButton(this);
     findIso->setText(tr("Open"));
     findIso->setFixedSize(56,30);

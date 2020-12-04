@@ -59,7 +59,7 @@
     <message>
         <location filename="../page1.cpp" line="209"/>
         <source>These operations needs to be verified:</source>
-        <translation>要安装或卸载软件，您需要进行验证：</translation>
+        <translation>执行该动作需要root授权，您需要进行验证：</translation>
     </message>
     <message>
         <source>USB drive will be formatted,please backup your files</source>

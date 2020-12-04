@@ -1,4 +1,4 @@
-QT       += core gui dbus network
+QT       += core gui dbus network KWindowSystem x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,23 +21,30 @@ SOURCES += \
     src/mainwindow.cpp \
     src/page1.cpp \
     src/page2.cpp \
-    src/qtlocalpeer.cpp \
-    src/qtlockedfile.cpp \
-    src/qtlockedfile_unix.cpp \
-    src/qtsingleapplication.cpp \
+    src/include/qtlocalpeer.cpp \
+    src/include/qtlockedfile.cpp \
+    src/include/qtlockedfile_unix.cpp \
+    src/include/qtsingleapplication.cpp \
+    src/include/xatom-helper.cpp \
     src/stylecombobox.cpp \
-    src/rootauthdialog.cpp
+    src/rootauthdialog.cpp \
+    src/toolwindow.cpp
 
 HEADERS += \
     src/dbusadaptor.h \
     src/mainwindow.h \
     src/page1.h \
     src/page2.h \
-    src/qtlocalpeer.h \
-    src/qtlockedfile.h \
-    src/qtsingleapplication.h \
+    src/include/qtlocalpeer.h \
+    src/include/qtlockedfile.h \
+    src/include/qtsingleapplication.h \
+    src/include/xatom-helper.h \
     src/stylecombobox.h \
-    src/rootauthdialog.h
+    src/rootauthdialog.h \
+    src/toolwindow.h
+
+LIBS +=-lpthread
+LIBS +=-lX11
 
 # bin file output dir
 TARGET = kylin-usb-creator

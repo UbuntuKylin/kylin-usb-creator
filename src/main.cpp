@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "dbusadaptor.h"
-#include "qtsingleapplication.h"
+#include "include/xatom-helper.h"
+#include "include/qtsingleapplication.h"
 #define SHADOW 6//阴影宽度
 #define BUTTONRADIUS 0//按钮圆角
 #define SHADOWALPHA 0.16//阴影透明度
@@ -32,7 +33,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     QtSingleApplication a(argc,argv);
-
 //    TODO: 整合qt的标准翻译和自行定制的qm翻译
 //    标准对话框汉化(QT标准翻译
     #ifndef QT_NO_TRANSLATION
@@ -71,7 +71,6 @@ int main(int argc, char *argv[])
             }
         }
 
-
     if(a.isRunning()){
         a.sendMessage(QApplication::arguments().length() > 1 ? QApplication::arguments().at(0):a.applicationFilePath());
         qDebug()<<"#### kylin-usb-creator is already running";
@@ -79,6 +78,12 @@ int main(int argc, char *argv[])
     }else {
         MainWindow w;
         a.setActiveWindow(&w);
+        // 添加窗管协议
+        MotifWmHints hints;
+        hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
+        hints.functions = MWM_FUNC_ALL;
+        hints.decorations = MWM_DECOR_BORDER;
+        XAtomHelper::getInstance()->setWindowMotifHint(w.winId(), hints);
         w.show();
         QObject::connect(&a,SIGNAL(messageReceived(const QString&)),&w,SLOT(handleIconClickedSub()));
         return a.exec();
