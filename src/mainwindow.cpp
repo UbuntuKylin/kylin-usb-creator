@@ -133,7 +133,8 @@ void MainWindow::init(){
     this->setFixedSize(680,507);
 //    在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
-    this->move((availableGeometry.width()-this->width())/2,(availableGeometry.height()- this->height())/2);;
+    this->move((availableGeometry.width()-this->width())/2,(availableGeometry.height()- this->height())/2);
+    m_DaemonIpcDbus = new DaemonIpcDbus();
     //    QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(this);
     //    shadowEffect->setOffset(0,0);
     //    shadowEffect->setColor(QColor(0,0,0));
@@ -270,16 +271,9 @@ int MainWindow::changePage()
 }
 void MainWindow::handleIconClickedSub()
 {
-    qDebug()<<"handleIconClickedSub";
-    Qt::WindowFlags flags = windowFlags();
-    flags |= Qt::WindowStaysOnTopHint;
-    setWindowFlags(flags);
-    show();
-    flags &= ~Qt::WindowStaysOnTopHint;
-    setWindowFlags(flags);
+    this->setWindowFlag(Qt::WindowStaysOnTopHint,true);
+    this->setWindowFlag(Qt::WindowStaysOnTopHint,false);
     showNormal();
-
-
 }
 
 void MainWindow::makeFinish()
@@ -298,6 +292,15 @@ void MainWindow::returnMain()
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_F1)
+    {
+        if(!m_DaemonIpcDbus->daemonIsNotRunning()){
+            m_DaemonIpcDbus->showGuide("tools/kylin-usb-creator");
+        }
+    }
+}
 void MainWindow::setThemeDark()
 {
     titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_h.png);border-radius:4px;}"

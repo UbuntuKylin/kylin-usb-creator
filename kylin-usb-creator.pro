@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/dbusadaptor.cpp \
+    src/include/daemonipcdbus.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/page1.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
 
 HEADERS += \
     src/dbusadaptor.h \
+    src/include/daemonipcdbus.h \
     src/mainwindow.h \
     src/page1.h \
     src/page2.h \

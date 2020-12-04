@@ -9,9 +9,7 @@
 #define WIDGETRADIUS 6//窗口圆角
 #define SHADOWALPHA 0.16//阴影透明度
 
-//#include <qdatastream.h>
-//#include <qtextstream.h>
-//#include "include/xatom-helper.h"
+#include "include/daemonipcdbus.h" //拉起帮助手册
 #include "page1.h"
 #include "page2.h"
 #include <QWidget>
@@ -23,7 +21,7 @@
 #include <QWidget>
 #include <QStackedWidget>
 #include <QGraphicsDropShadowEffect>
-
+#include <QKeyEvent>
 
 class MainWindow : public QWidget
 {
@@ -57,6 +55,8 @@ private:
     QAction *actionHelp = nullptr;
     QAction *actionAbout = nullptr;
     QAction *actionQuit = nullptr;
+
+    void keyPressEvent(QKeyEvent* event);
     
     void init(); //初始化mainwindow相关的设置
     int changePage();
@@ -70,12 +70,12 @@ private:
     void aboutClick();
     QTimer *dbustimer = nullptr;
     QStackedWidget *stackedWidget= nullptr;
-    //页面小圆点
-    QLabel *pointLable1 = nullptr;
+    QLabel *pointLable1 = nullptr;  //页面小圆点
     QLabel *pointLable2 = nullptr;
     QLabel *pointLable3 = nullptr;
     Page1 *page1=nullptr;
     Page2 *page2=nullptr;
+    DaemonIpcDbus *m_DaemonIpcDbus = nullptr;   //拉起帮助手册
     QSystemTrayIcon *m_mainTray = nullptr;
     QTimer *timer;
     QGSettings *m_pGsettingThemeData = nullptr;
