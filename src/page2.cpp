@@ -2,24 +2,28 @@
 
 Page2::Page2(QWidget *parent) : QWidget(parent)
 {
-    if(DARKTHEME == themeStatus)
-    {
-        movieLoading = new QMovie(":/data/elements_dark/loading.gif");
-        movieFinish = new QMovie(":/data/elements_dark/finish.gif");
+//    if(DARKTHEME == themeStatus)
+//    {
+//        动态资源的加载逻辑是初始化两套，播的时候根据主题状态播一套
+        movieLoading_d = new QMovie(":/data/elements_dark/loading.gif");
+        movieFinish_d = new QMovie(":/data/elements_dark/finish.gif");
         errLabel = QPixmap::fromImage(QImage("/data/elements_dark/failed.png"));
-    }else{
-        movieLoading = new QMovie(":/data/elements_light/loading.gif");
-        movieFinish = new QMovie(":/data/elements_light/finish.gif");
+//    }else{
+        movieLoading_l = new QMovie(":/data/elements_light/loading.gif");
+        movieFinish_l = new QMovie(":/data/elements_light/finish.gif");
         errLabel = QPixmap::fromImage(QImage("/data/elements_light/failed.png"));
-    }
-    frameCount=movieFinish->frameCount();
-    connect(movieFinish,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish->stop();});
+//    }
+    frameCount=movieFinish_l->frameCount();
+    connect(movieFinish_l,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish_l->stop();});
+    connect(movieFinish_d,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish_d->stop();});
     lableMovie=new QLabel;
 
     QSize movieSize(95,95);
     lableMovie->setFixedSize(movieSize);
-    movieLoading->setScaledSize(movieSize);
-    movieFinish->setScaledSize(movieSize);
+    movieLoading_l->setScaledSize(movieSize);
+    movieFinish_l->setScaledSize(movieSize);
+    movieLoading_d->setScaledSize(movieSize);
+    movieFinish_d->setScaledSize(movieSize);
 
     lableText=new QLabel;
     lableNum=new QLabel(lableMovie);
@@ -73,14 +77,18 @@ void Page2::playLoadingGif()
     returnPushButton->setText(tr("USB starter in production"));
     if(LIGHTTHEME == themeStatus){
         returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(193, 193, 193, 1);font-size:14px;border-radius:15px;");
+        lableMovie->setMovie(movieLoading_l); //为label设置movie
+        movieLoading_l->start();         //开始播放动画
     }else
     {
         returnPushButton->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);font-size:14px;border-radius:15px;");
+        lableMovie->setMovie(movieLoading_d); //为label设置movie
+        movieLoading_d->start();         //开始播放动画
     }
     lableText->setText(tr("Please do not remove the USB driver or power off now"));
 
-    lableMovie->setMovie(movieLoading); //为label设置movie
-    movieLoading->start();         //开始播放动画
+
+
 }
 
 void Page2::playFinishGif()
@@ -94,8 +102,16 @@ void Page2::playFinishGif()
     lableText->setText(tr("Finish"));
 
     lableMovie->clear();
-    lableMovie->setMovie(movieFinish);
-    movieFinish->start();
+    if(themeStatus == DARKTHEME)
+    {
+        lableMovie->setMovie(movieFinish_d);
+        movieFinish_d->start();
+    }else
+    {
+        lableMovie->setMovie(movieFinish_l);
+        movieFinish_l->start();
+    }
+
 
 }
 

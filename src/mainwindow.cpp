@@ -184,7 +184,7 @@ void MainWindow::myStyle()
     QVBoxLayout *vlt =new QVBoxLayout;
     vlt->setMargin(0);
     vlt->setSpacing(0);
-    vlt->addWidget(title);
+//    vlt->addWidget(title);
     vlt->addWidget(stackedWidget,99);
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);
@@ -272,8 +272,10 @@ int MainWindow::changePage()
 void MainWindow::handleIconClickedSub()
 {
     this->setWindowFlag(Qt::WindowStaysOnTopHint,true);
-    this->setWindowFlag(Qt::WindowStaysOnTopHint,false);
+//    this->setWindowFlag(Qt::WindowStaysOnTopHint,false);
     showNormal();
+//    raise();
+    activateWindow();
 }
 
 void MainWindow::makeFinish()

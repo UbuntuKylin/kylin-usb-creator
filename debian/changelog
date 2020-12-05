@@ -1,3 +1,22 @@
+kylin-usb-creator (1.0.0-29kord) v101; urgency=medium
+
+  * KeyEvent rewrite。实现了F1拉起帮助菜单。增加了daemonipcdebus类
+  * 解决了主界面部分区域拖动失效的问题，具体参见BUG#27152
+  * UKUI-kwin功能因稳定性问题回滚（状态栏时而出现时而不出现），到了之前主题接管的状态
+  * 新增toolwindow类专门用来实例化工具窗口
+  * 增加了主界面圆角
+  * 部分解决BUG#26566 动态资源加载问题。播放时切换仍未实现
+  * 修改了一部分qtsingleappliciation类源码
+  * 项目结构细分微调，增加了src/include用来存轮子
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 15:38:52 +0800
+
+kylin-usb-creator (1.0.0-28kord) v101; urgency=medium
+
+  * 适配ukui-kwin
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 17:30:52 +0800
+
 kylin-usb-creator (1.0.0-27kord) v101; urgency=medium
 
   * 解决了BUG#24046 程序正在运行且处于最小化状态时，可以通过点击菜单栏图标拉起

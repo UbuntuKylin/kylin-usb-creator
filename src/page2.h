@@ -41,8 +41,10 @@ private:
     bool isMakingSuccess(); //进度到100%之后检查制作是否成功
     QString uDiskPath = ""; //U盘路径
     QString themeStatus = LIGHTTHEME;
-    QMovie *movieLoading=nullptr;
-    QMovie *movieFinish=nullptr;
+    QMovie *movieLoading_l=nullptr; //过程动画，黑白两套
+    QMovie *movieFinish_l=nullptr;
+    QMovie *movieLoading_d=nullptr;
+    QMovie *movieFinish_d=nullptr;
     QPixmap errLabel;
     QLabel *lableMovie=nullptr;
     QLabel *lableText=nullptr;

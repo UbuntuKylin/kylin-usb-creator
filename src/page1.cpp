@@ -289,7 +289,6 @@ void Page1::getStorageInfo()
         float diskSize=disk.bytesTotal();
         diskSize=diskSize/1000000/1000;
         QString diskUrl=disk.device();
-//        qDebug()<<"******"<<disk.device();
         diskUrl=diskUrl.mid(0,8);
 
         QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
@@ -358,7 +357,6 @@ bool Page1::mouseIsLeaveUdiskWidget()
 
 bool Page1::ifStartBtnChange()
 {
-//    qDebug()<<"comboUdisk->getDiskPath()= "<<comboUdisk->getDiskPath()<<"  urlIso->text() = "<<urlIso->text();
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
