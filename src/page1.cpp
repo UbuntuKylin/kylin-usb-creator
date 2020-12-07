@@ -262,6 +262,7 @@ void Page1::getStorageInfo()
     comboUdisk->clearDiskList();
     for(QStorageInfo& disk : diskList)
     {
+        qDebug()<<disk;
         if(""==disk.displayName())//名称为空的磁盘不显示
             continue;
         if("/"==disk.displayName())//系统分区不显示
@@ -289,7 +290,7 @@ void Page1::getStorageInfo()
         float diskSize=disk.bytesTotal();
         diskSize=diskSize/1000000/1000;
         QString diskUrl=disk.device();
-        diskUrl=diskUrl.mid(0,8);
+//        diskUrl=diskUrl.mid(0,8);
 
         QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
         comboUdisk->addItem(info,diskUrl);

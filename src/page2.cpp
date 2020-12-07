@@ -134,7 +134,16 @@ void Page2::playErrorGif()
 
 void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
 {
+//    制作开始之前卸载U盘
+    QProcess m_unmount;
+    QStringList m_unmount_arg;
+    m_unmount_arg <<"unmount"<<"-b"<<"/dev/sdb1";
+    connect(&m_unmount,&QProcess::readyReadStandardError,this,&Page2::readBashStandardErrorInfo);
+    m_unmount.start("udisksctl",m_unmount_arg);
+    m_unmount.waitForFinished();
+
     uDiskPath = targetPath; //保存U盘路径 用来做错误检查
+    qDebug()<<"uDiskPath:"<<uDiskPath;
     emit swToPage2();
     playLoadingGif();
     sourceFileSize = getFileSize(sourcePath);
@@ -181,6 +190,12 @@ void Page2::readBashStandardErrorInfo()
 
 void Page2::finishEvent()
 {
+//    制作开始之前卸载U盘
+    QProcess m_unmount;
+    QStringList m_unmount_arg;
+    m_unmount_arg <<"mount"<<"-b"<<"/dev/sdb1";
+    m_unmount.start("udisksctl",m_unmount_arg);
+    m_unmount.waitForFinished();
     if(isMakingSuccess())
     {
         playFinishGif();
@@ -199,7 +214,7 @@ bool Page2::isMakingSuccess()
     {
         qDebug()<<"目标比对设备"<<uDiskPath<<"***已挂载设备："<<disk.device();
         QString diskPath = disk.device();
-        diskPath = diskPath.mid(0,8);
+//        diskPath = diskPath.mid(0,8);
         if(uDiskPath == diskPath)
         {
             return true;
