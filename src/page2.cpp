@@ -2,17 +2,15 @@
 
 Page2::Page2(QWidget *parent) : QWidget(parent)
 {
-//    if(DARKTHEME == themeStatus)
-//    {
+
 //        动态资源的加载逻辑是初始化两套，播的时候根据主题状态播一套
-        movieLoading_d = new QMovie(":/data/elements_dark/loading.gif");
-        movieFinish_d = new QMovie(":/data/elements_dark/finish.gif");
-        errLabel = QPixmap::fromImage(QImage("/data/elements_dark/failed.png"));
-//    }else{
-        movieLoading_l = new QMovie(":/data/elements_light/loading.gif");
-        movieFinish_l = new QMovie(":/data/elements_light/finish.gif");
-        errLabel = QPixmap::fromImage(QImage("/data/elements_light/failed.png"));
-//    }
+    movieLoading_d = new QMovie(":/data/elements_dark/loading.gif");
+    movieFinish_d = new QMovie(":/data/elements_dark/finish.gif");
+    errLabel = QPixmap::fromImage(QImage("/data/elements_dark/failed.png"));
+
+    movieLoading_l = new QMovie(":/data/elements_light/loading.gif");
+    movieFinish_l = new QMovie(":/data/elements_light/finish.gif");
+    errLabel = QPixmap::fromImage(QImage("/data/elements_light/failed.png"));
     frameCount=movieFinish_l->frameCount();
     connect(movieFinish_l,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish_l->stop();});
     connect(movieFinish_d,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish_d->stop();});
@@ -137,10 +135,15 @@ void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
 //    制作开始之前卸载U盘
     QProcess m_unmount;
     QStringList m_unmount_arg;
-    m_unmount_arg <<"unmount"<<"-b"<<"/dev/sdb1";
+    m_unmount_arg <<"unmount"<<"-b"<<targetPath;
     connect(&m_unmount,&QProcess::readyReadStandardError,this,&Page2::readBashStandardErrorInfo);
     m_unmount.start("udisksctl",m_unmount_arg);
-    m_unmount.waitForFinished();
+    if(m_unmount.waitForStarted()){
+        qDebug()<<"#udisksctl# Unmount sucess! Unmount path :"<<targetPath;
+        m_unmount.waitForFinished();
+    }else{
+        qDebug()<<"#udisksctl# Warning:unmount failed! Unmount path :"<<targetPath;
+    }
 
     uDiskPath = targetPath; //保存U盘路径 用来做错误检查
     qDebug()<<"uDiskPath:"<<uDiskPath;
@@ -190,12 +193,19 @@ void Page2::readBashStandardErrorInfo()
 
 void Page2::finishEvent()
 {
-//    制作开始之前卸载U盘
+//  制作结束加载U盘
     QProcess m_unmount;
     QStringList m_unmount_arg;
-    m_unmount_arg <<"mount"<<"-b"<<"/dev/sdb1";
+    m_unmount_arg <<"mount"<<"-b"<<uDiskPath;
     m_unmount.start("udisksctl",m_unmount_arg);
-    m_unmount.waitForFinished();
+    if(m_unmount.waitForStarted()){
+        qDebug()<<"#udisksctl# mount sucess! mount path :"<<uDiskPath;
+        m_unmount.waitForFinished();
+    }else{
+        qDebug()<<"#udisksctl# Warning:mount failed! mount path :"<<uDiskPath;
+    }
+
+
     if(isMakingSuccess())
     {
         playFinishGif();
