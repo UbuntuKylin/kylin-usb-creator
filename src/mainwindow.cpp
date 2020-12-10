@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-
 }
 
 void MainWindow::statusbarInit()
@@ -53,7 +52,7 @@ void MainWindow::statusbarInit()
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
     hlt0->addStretch();
-    hlt0->addWidget(titleMenu,1);
+//    hlt0->addWidget(titleMenu,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(titleMin,1);
     hlt0->addSpacing(4);
@@ -184,14 +183,13 @@ void MainWindow::myStyle()
     QVBoxLayout *vlt =new QVBoxLayout;
     vlt->setMargin(0);
     vlt->setSpacing(0);
-//    vlt->addWidget(title);
+    vlt->addWidget(title);
     vlt->addWidget(stackedWidget,99);
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);
     this->setLayout(vlt);
     // 状态栏初始化部分，需要时打开注释
 //    createTrayActions();
-
 //     关于窗口绘制
     about = new QWidget();
 
@@ -269,12 +267,11 @@ int MainWindow::changePage()
     if (index >= count)index = 0;
     return index;
 }
+
 void MainWindow::handleIconClickedSub()
 {
     this->setWindowFlag(Qt::WindowStaysOnTopHint,true);
-//    this->setWindowFlag(Qt::WindowStaysOnTopHint,false);
     showNormal();
-//    raise();
     activateWindow();
 }
 

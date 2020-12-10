@@ -29,6 +29,17 @@
 #include <QScreen>
 #include <QCoreApplication>
 #include <QApplication>
+class AvailableDiskInfo
+{
+public:
+    AvailableDiskInfo(QString path,QString name,QString capacity):devicePath(path),displayName(name = "unknowname"),diskCapicity(capacity){}
+public:
+    QString devicePath;   //设备路径ex:/dev/sdb1
+    QString displayName;
+    QString diskCapicity;
+//    TODO:分区数获取，按照分区全部卸载。（目前只卸载了第一个分区然后就写入
+    qint8 partsNums = 0;    //为0时视作没有分区，直接向块设备写入
+};
 
 class Page1 : public QWidget
 {
@@ -61,7 +72,11 @@ private:
     bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
     void dealDialogCancel();     // 处理授权框关闭及取消
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
+    bool isCapicityAvailable(QString); //容量过滤
+    void getUdiskPathAndCap();    //获取U盘路径和容量
+    void getUdiskName();    //获取U盘第一个分区的命名
 
+    QList<AvailableDiskInfo*> diskInfos; // U盘信息
     QString themeStatus = LIGHTTHEME; //主题指示器
     QWidget *rootWindowTitle = nullptr; //root授权框状态栏
     QLabel *rootDialogTitleText = nullptr; //root授权框标题
@@ -92,5 +107,6 @@ private:
     bool leaveThis=true;
 
 };
+
 
 #endif // PAGE1_H

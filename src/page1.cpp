@@ -9,7 +9,6 @@ Page1::Page1()
 
 void Page1::initControlQss()
 {
-//    this->setWindowFlag(Qt::FramelessWindowHint,true);
     tabIso=new QLabel;
     tabUdisk=new QLabel;
     tabIso->setText(tr("Choose iso file"));
@@ -121,7 +120,6 @@ void Page1::dialogInitControlQss()
     shadowEffect->setOffset(0,0);
     shadowEffect->setBlurRadius(12);
 
-
 //    授权窗口在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     authDialog->move((availableGeometry.width() - authDialog->width())/2, (availableGeometry.height() - authDialog->height())/2);
@@ -150,7 +148,6 @@ void Page1::dialogInitControlQss()
     connect(rootDialogClose,&QPushButton::clicked,[=]{ifStartBtnChange();});
     rootDialogMin = new QPushButton(rootWindowTitle);
     rootDialogMin->setFixedSize(30,30);
-
     connect(rootDialogMin,&QPushButton::clicked,[=]{
         authDialog->showMinimized();
         ifStartBtnChange();
@@ -255,48 +252,136 @@ void Page1::dialogInitControlQss()
     authDialogContentWidget->setLayout(vlt1);
 }
 
+bool Page1::isCapicityAvailable(QString str)
+{
+    if(str[str.length()-1] == 'G')
+    {
+       str.chop(1);//去掉最后一位
+       if(str.toFloat() < 65 && str.toFloat() > 4)
+       {
+           return true;
+       }
+    }
+    return false;
+}
+
+//TODO：容量获取方法更新，目前获取的是1024进制单位。计划在将来改为和文件管理器一致的1000进位
+void Page1::getUdiskPathAndCap()
+{
+    diskInfos.clear();
+    QStringList diskInfo;
+    QString disk;
+    QProcess lsblk;
+    lsblk.start("lsblk");
+    lsblk.waitForFinished();
+    QString info = QString::fromLocal8Bit(lsblk.readAllStandardOutput());
+    foreach(disk,info.split("\n"))
+    {
+        if(disk == NULL)
+        {
+            continue;
+        }
+        disk.replace(QRegExp("[\\s]+")," ");
+        diskInfo = disk.split(" ");
+        if(diskInfo.at(5) == "disk"){
+            if(!isCapicityAvailable(diskInfo.at(3)))
+            {
+                continue;
+            }
+            AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + diskInfo.at(0),"NONAME",diskInfo.at(3));
+            diskInfos.append(tmp);
+        }
+    }
+}
+
+void Page1::getUdiskName()
+{
+    QList<QStorageInfo> storageInfo = QStorageInfo::mountedVolumes();
+    foreach(AvailableDiskInfo* tmp,diskInfos)
+    {
+        foreach(QStorageInfo disk,storageInfo)
+        {
+//            qDebug()<<disk.device()<<"####"<<disk.displayName();
+//            if(disk.device())
+            if(disk.device().length() == 8 && tmp->devicePath == disk.device())
+            {
+                tmp->displayName = disk.displayName();
+                continue;
+            }
+            if(tmp->devicePath + '1' == disk.device())  //使用第一个分区的名字做展示名
+            {
+                tmp->displayName = disk.displayName();
+            }
+        }
+    }
+}
+
 void Page1::getStorageInfo()
 {
     diskRefreshDelay->stop();//U盘动态刷新相关
-    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes();//获取磁盘列表
-    comboUdisk->clearDiskList();
-    for(QStorageInfo& disk : diskList)
+    getUdiskPathAndCap();
+    getUdiskName();
+//    foreach(AvailableDiskInfo* tmp,diskInfos)
+//    {
+//        qDebug()<<tmp->devicePath;
+//        qDebug()<<tmp->diskCapicity;
+//        qDebug()<<tmp->displayName;
+//    }
+    foreach(AvailableDiskInfo *diskInfo,diskInfos)
     {
-        qDebug()<<disk;
-        if(""==disk.displayName())//名称为空的磁盘不显示
-            continue;
-        if("/"==disk.displayName())//系统分区不显示
-            continue;
-        if(disk.bytesTotal()/1000000<=2000 || disk.bytesTotal()/1000000>1000*65)//小于2G或大于65G的磁盘不显示
-            continue;
-        if("tmpfs"==disk.fileSystemType())//tmpfs类型的磁盘不显示
-            continue;
-        if("/boot"==disk.displayName())//boot分区不显示
-            continue;
-        if(disk.displayName().contains("BACKUP")) //还原分区不显示
-            continue;
-        if(disk.device().contains("/dev/sr0")) //光盘不显示
-            continue;
-        if(disk.device().contains("/dev/sda")) //内置硬盘不显示
-            continue;
-        if(disk.device().contains("/dev/nvm")) //nvme类型的设备不显示
-            continue;
-
-        
-        QString displayName=disk.displayName();
-        if(displayName.length()>UDISK_NAME_MAX_LENGTH)
-            displayName=displayName.mid(0,UDISK_NAME_MAX_LENGTH -1)+"…";
-
-        float diskSize=disk.bytesTotal();
-        diskSize=diskSize/1000000/1000;
-        QString diskUrl=disk.device();
-//        diskUrl=diskUrl.mid(0,8);
-
-        QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
-        comboUdisk->addItem(info,diskUrl);
+        //过长的名称做去尾加省略号
+        if(diskInfo->displayName.length() > UDISK_NAME_MAX_LENGTH)
+        {
+            diskInfo->displayName = diskInfo->displayName.mid(0,UDISK_NAME_MAX_LENGTH - 1) + "…";
+        }
+        QString info = diskInfo->displayName+" ("+diskInfo->devicePath + ") " + diskInfo->diskCapicity;
+//        有分区就向第一分区里写，没分区就直接向块设备写
+        if(diskInfo->displayName == "unknowname")
+        {
+            comboUdisk->addItem(info,diskInfo->displayName);
+        }else{
+            comboUdisk->addItem(info,diskInfo->displayName + '1');
+        }
         warnningIcon->show();
         warnningText->show();
     }
+//    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes();//获取磁盘列表
+//    comboUdisk->clearDiskList();
+//    for(QStorageInfo& disk : diskList)
+//    {
+//        qDebug()<<disk;
+//        if(""==disk.displayName() ||   //名称为空的磁盘不显示
+//           "/"==disk.displayName() ||  //系统分区不显示
+//           "/boot"==disk.displayName()) //boot分区不显示
+//        {
+//            continue;
+//        }
+//        if(disk.bytesTotal()/1000000<=2000 || disk.bytesTotal()/1000000>1000*65)//小于2G或大于65G的磁盘不显示
+//            continue;
+//        if("tmpfs"==disk.fileSystemType())//tmpfs类型的磁盘不显示
+//            continue;
+//        if(disk.displayName().contains("BACKUP")) //还原分区不显示
+//            continue;
+//        if(disk.device().contains("/dev/sr0") ||   //光盘不显示
+//           disk.device().contains("/dev/sda") ||   //内置硬盘不显示
+//           disk.device().contains("/dev/nvm"))   //nvme类型的设备不显示
+//        {
+//            continue ;
+//        }
+//        qDebug()<<disk;
+//        QString displayName=disk.displayName();
+//        if(displayName.length()>UDISK_NAME_MAX_LENGTH)
+//            displayName=displayName.mid(0,UDISK_NAME_MAX_LENGTH -1)+"…";
+//        float diskSize=disk.bytesTotal();
+//        diskSize=diskSize/1000000/1000;
+//        QString diskUrl=disk.device();
+//        diskUrl=diskUrl.mid(0,8);
+
+//        QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
+//        comboUdisk->addItem(info,diskUrl);
+//        warnningIcon->show();
+//        warnningText->show();
+//    }
     if(0==comboUdisk->listWidget->count())
     {
         comboUdisk->addItem(tr("No USB drive available"),NOUDISK);

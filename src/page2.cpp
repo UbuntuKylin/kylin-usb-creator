@@ -139,12 +139,11 @@ void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
     connect(&m_unmount,&QProcess::readyReadStandardError,this,&Page2::readBashStandardErrorInfo);
     m_unmount.start("udisksctl",m_unmount_arg);
     if(m_unmount.waitForStarted()){
-        qDebug()<<"#udisksctl# Unmount sucess! Unmount path :"<<targetPath;
+//        qDebug()<<"#udisksctl# Unmount sucess! Unmount path :"<<targetPath;
         m_unmount.waitForFinished();
     }else{
-        qDebug()<<"#udisksctl# Warning:unmount failed! Unmount path :"<<targetPath;
+//        qDebug()<<"#udisksctl# Warning:unmount failed! Unmount path :"<<targetPath;
     }
-
     uDiskPath = targetPath; //保存U盘路径 用来做错误检查
     qDebug()<<"uDiskPath:"<<uDiskPath;
     emit swToPage2();

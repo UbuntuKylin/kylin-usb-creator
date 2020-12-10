@@ -1,3 +1,13 @@
+kylin-usb-creator (1.0.0-30kord) v101; urgency=medium
+
+  * 依赖udisks2的命令行工具实现了开始制作之前的设备卸载和制作完成之后的自动装载
+  * U盘下拉框展示逻辑优化，现展示逻辑为按照物理设备容量，1024进制为单位显示(4G,65G)区间的所有设备。之后功能升级会修改为1000进制
+  * 废弃了之前getstorageinfo中的获取逻辑
+  * 写入速度优化，当U盘存在分区时向分区写入，没有分区时直接向块设备写入，测试结果显示向分区写入相比直接向块设备写入有3-5倍的速度提升
+  * 增加了F1拉起帮助
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 20:38:52 +0800
+
 kylin-usb-creator (1.0.0-29kord) v101; urgency=medium
 
   * KeyEvent rewrite。实现了F1拉起帮助菜单。增加了daemonipcdebus类
@@ -9,7 +19,7 @@ kylin-usb-creator (1.0.0-29kord) v101; urgency=medium
   * 修改了一部分qtsingleappliciation类源码
   * 项目结构细分微调，增加了src/include用来存轮子
 
- -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 15:38:52 +0800
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 20:38:52 +0800
 
 kylin-usb-creator (1.0.0-28kord) v101; urgency=medium
 
