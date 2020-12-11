@@ -109,8 +109,6 @@ void Page2::playFinishGif()
         lableMovie->setMovie(movieFinish_l);
         movieFinish_l->start();
     }
-
-
 }
 
 void Page2::playErrorGif()
@@ -212,8 +210,14 @@ void Page2::finishEvent()
     {
         playErrorGif();
     }
+    QTimer diskRefreshDelay;
+    connect(&diskRefreshDelay,&QTimer::timeout,[&]{
+        diskRefreshDelay.stop();
+        emit makeFinish();
+    });
+    diskRefreshDelay.start(1000);
 
-    emit makeFinish();
+//    emit makeFinish();
 }
 bool Page2::isMakingSuccess()
 {

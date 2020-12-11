@@ -14,7 +14,9 @@
 #include <QString>
 #include <QFileInfo>
 #include <QStorageInfo>
-//#include <QDir>
+#include <QTimer>
+
+
 class Page2 : public QWidget
 {
     Q_OBJECT

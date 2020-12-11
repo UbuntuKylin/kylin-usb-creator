@@ -5,6 +5,7 @@ kylin-usb-creator (1.0.0-30kord) v101; urgency=medium
   * 废弃了之前getstorageinfo中的获取逻辑
   * 写入速度优化，当U盘存在分区时向分区写入，没有分区时直接向块设备写入，测试结果显示向分区写入相比直接向块设备写入有3-5倍的速度提升
   * 增加了F1拉起帮助
+  * 已卸载但未弹出的U盘也可以识别到了
 
  -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 20:38:52 +0800
 
