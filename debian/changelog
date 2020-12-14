@@ -1,3 +1,10 @@
+kylin-usb-creator (1.0.0-31kord) v101; urgency=medium
+
+  * 修复了制作中途拔出U盘提示制作成功的问题
+  * 
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 20:38:52 +0800
+
 kylin-usb-creator (1.0.0-30kord) v101; urgency=medium
 
   * 依赖udisks2的命令行工具实现了开始制作之前的设备卸载和制作完成之后的自动装载

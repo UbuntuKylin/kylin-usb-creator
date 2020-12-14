@@ -1,4 +1,3 @@
-
 #include "mainwindow.h"
 #include "dbusadaptor.h"
 #include "include/xatom-helper.h"
@@ -18,7 +17,6 @@
 // 拉起最小化窗口
 void activeMainwindow()
 {
-    qDebug()<<"gsetting state:"<<QGSettings::isSchemaInstalled(APPDATA);
     if(QGSettings::isSchemaInstalled(APPDATA))
     {
         QGSettings *p = new QGSettings(APPDATA);
@@ -78,6 +76,8 @@ int main(int argc, char *argv[])
         return EXIT_SUCCESS;
     }else {
         MainWindow w;
+
+//        qDebug()<<"****"<<IS_MIPS64EL_ARCHITECTURE;
         a.setActiveWindow(&w);
         // 添加窗管协议
         // TODO:窗管适配问题解决之后，打开此部分注释，还需要加上在布局中被注释的自绘状态栏

@@ -41,7 +41,6 @@ void MainWindow::statusbarInit()
 //    titleMenu->setProperty("useIconHighlightEffect",0x2);
 //    titleMenu->setFlat(true);
 //    titleMenu->setIcon(QIcon::fromTheme("application-menu"));
-
     titleClose = new QPushButton();
     titleClose->setIconSize(QSize(30,30));
     titleClose->setFixedSize(30,30);
@@ -129,7 +128,7 @@ void MainWindow::trigerMenu(QAction *act)
 
 void MainWindow::init(){
     this->setWindowTitle(tr("kylin usb creator"));
-    this->setFixedSize(680,507);
+    this->setFixedSize(680,467);
 //    在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     this->move((availableGeometry.width()-this->width())/2,(availableGeometry.height()- this->height())/2);
@@ -183,7 +182,7 @@ void MainWindow::myStyle()
     QVBoxLayout *vlt =new QVBoxLayout;
     vlt->setMargin(0);
     vlt->setSpacing(0);
-    vlt->addWidget(title);
+//    vlt->addWidget(title);
     vlt->addWidget(stackedWidget,99);
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);

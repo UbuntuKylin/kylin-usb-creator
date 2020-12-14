@@ -102,7 +102,7 @@ private:
     QLabel *dialogWarningLable2 = nullptr;
     QPushButton *dialogNo = nullptr;
     QPushButton *dialogYes = nullptr;
-
+    QString isoPath;    //iso文件的路径
     bool paintOnce=false;//只绘制一次
     bool leaveThis=true;
 

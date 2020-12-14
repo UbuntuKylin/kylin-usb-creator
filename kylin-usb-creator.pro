@@ -15,6 +15,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+#架构判断，龙芯机器时宏为1    暂时注释掉，手头没有龙芯主机，不清楚架构匹配关键字
+#unix{
+#    contains(QT_ARCH,mips){
+#DEFINES += IS_MIPS64EL_ARCHITECTURE=1
+#}else{
+#DEFINES += IS_MIPS64EL_ARCHITECTURE=0
+#}
+#}
+
 SOURCES += \
     src/dbusadaptor.cpp \
     src/include/daemonipcdbus.cpp \

@@ -33,7 +33,10 @@ void Page1::initControlQss()
     findIso->setText(tr("Open"));
     findIso->setFixedSize(56,30);
     connect(findIso,&QPushButton::clicked,this,[=]{
-        urlIso->setText( QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)"));
+            isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
+            if(isoPath != "" ){
+                urlIso->setText(isoPath);
+            }
         });
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
     creatStart=new QPushButton(this);
