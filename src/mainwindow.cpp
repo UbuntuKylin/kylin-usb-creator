@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
     init();
     myStyle();
     initGsetting();
-    this->show();
 }
 
 MainWindow::~MainWindow()
@@ -110,6 +109,7 @@ void MainWindow::statusbarInit()
     actionHelp->setMenu(helpMenu);
 
     connect(Menu,&QMenu::triggered,this,&MainWindow::trigerMenu);
+    title->show();
 }
 
 void MainWindow::trigerMenu(QAction *act)
@@ -121,9 +121,6 @@ void MainWindow::trigerMenu(QAction *act)
     {
         aboutClick();
     }
-//    switch(act->text())
-//    case "quit":
-//        this->close();
 }
 
 void MainWindow::init(){
@@ -182,7 +179,7 @@ void MainWindow::myStyle()
     QVBoxLayout *vlt =new QVBoxLayout;
     vlt->setMargin(0);
     vlt->setSpacing(0);
-//    vlt->addWidget(title);
+    vlt->addWidget(title);
     vlt->addWidget(stackedWidget,99);
     vlt->addLayout(hlt,1);
     vlt->addSpacing(7);

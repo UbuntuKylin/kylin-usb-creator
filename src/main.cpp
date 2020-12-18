@@ -81,12 +81,14 @@ int main(int argc, char *argv[])
         a.setActiveWindow(&w);
         // 添加窗管协议
         // TODO:窗管适配问题解决之后，打开此部分注释，还需要加上在布局中被注释的自绘状态栏
-//        MotifWmHints hints;
-//        hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-//        hints.functions = MWM_FUNC_ALL;
-//        hints.decorations = MWM_DECOR_BORDER;
-//        XAtomHelper::getInstance()->setWindowMotifHint(w.winId(), hints);
+        MotifWmHints hints;
+        hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
+        hints.functions = MWM_FUNC_ALL;
+        hints.decorations = MWM_DECOR_BORDER;
+        XAtomHelper::getInstance()->setWindowMotifHint(w.winId(), hints);
+//        w.hide();
         w.show();
+
         QObject::connect(&a,SIGNAL(messageReceived(const QString&)),&w,SLOT(handleIconClickedSub()));
         return a.exec();
     }

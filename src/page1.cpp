@@ -1,4 +1,6 @@
 #include "page1.h"
+#include "include/xatom-helper.h"
+
 
 Page1::Page1()
 {
@@ -23,7 +25,6 @@ void Page1::initControlQss()
     warnningIcon=new QLabel;
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
-    warnningIcon->show();
     warnningText=new QLabel;
 
     urlIso=new QLineEdit;
@@ -306,8 +307,6 @@ void Page1::getUdiskName()
     {
         foreach(QStorageInfo disk,storageInfo)
         {
-//            qDebug()<<disk.device()<<"####"<<disk.displayName();
-//            if(disk.device())
             if(disk.device().length() == 8 && tmp->devicePath == disk.device())
             {
                 tmp->displayName = disk.displayName();
@@ -326,12 +325,6 @@ void Page1::getStorageInfo()
     diskRefreshDelay->stop();//U盘动态刷新相关
     getUdiskPathAndCap();
     getUdiskName();
-//    foreach(AvailableDiskInfo* tmp,diskInfos)
-//    {
-//        qDebug()<<tmp->devicePath;
-//        qDebug()<<tmp->diskCapicity;
-//        qDebug()<<tmp->displayName;
-//    }
     foreach(AvailableDiskInfo *diskInfo,diskInfos)
     {
         //过长的名称做去尾加省略号
@@ -350,43 +343,7 @@ void Page1::getStorageInfo()
         warnningIcon->show();
         warnningText->show();
     }
-//    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes();//获取磁盘列表
-//    comboUdisk->clearDiskList();
-//    for(QStorageInfo& disk : diskList)
-//    {
-//        qDebug()<<disk;
-//        if(""==disk.displayName() ||   //名称为空的磁盘不显示
-//           "/"==disk.displayName() ||  //系统分区不显示
-//           "/boot"==disk.displayName()) //boot分区不显示
-//        {
-//            continue;
-//        }
-//        if(disk.bytesTotal()/1000000<=2000 || disk.bytesTotal()/1000000>1000*65)//小于2G或大于65G的磁盘不显示
-//            continue;
-//        if("tmpfs"==disk.fileSystemType())//tmpfs类型的磁盘不显示
-//            continue;
-//        if(disk.displayName().contains("BACKUP")) //还原分区不显示
-//            continue;
-//        if(disk.device().contains("/dev/sr0") ||   //光盘不显示
-//           disk.device().contains("/dev/sda") ||   //内置硬盘不显示
-//           disk.device().contains("/dev/nvm"))   //nvme类型的设备不显示
-//        {
-//            continue ;
-//        }
-//        qDebug()<<disk;
-//        QString displayName=disk.displayName();
-//        if(displayName.length()>UDISK_NAME_MAX_LENGTH)
-//            displayName=displayName.mid(0,UDISK_NAME_MAX_LENGTH -1)+"…";
-//        float diskSize=disk.bytesTotal();
-//        diskSize=diskSize/1000000/1000;
-//        QString diskUrl=disk.device();
-//        diskUrl=diskUrl.mid(0,8);
 
-//        QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
-//        comboUdisk->addItem(info,diskUrl);
-//        warnningIcon->show();
-//        warnningText->show();
-//    }
     if(0==comboUdisk->listWidget->count())
     {
         comboUdisk->addItem(tr("No USB drive available"),NOUDISK);
@@ -529,8 +486,6 @@ void Page1::setThemeStyleLight()
                                      "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");
     authDialogContentWidget->setStyleSheet("background-color:rgba(255,255,255,1);border-radius:6px;");
     comboUdisk->setThemeLight();    //设置combobox响应浅色主题
-//    rootWindowTitle->setStyleSheet("border-top-left-radius:20px;border-top-right-radius:40px;border:1px solid blue;");
-//    rootDialogTitleText->setStyleSheet("border:1px solid blue;");
     emit setStyleWidgetStyle(LIGHTTHEME);   //设置stylewidget响应浅色主题
 }
 

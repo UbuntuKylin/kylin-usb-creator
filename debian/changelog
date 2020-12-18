@@ -1,9 +1,9 @@
 kylin-usb-creator (1.0.0-31kord) v101; urgency=medium
 
   * 修复了制作中途拔出U盘提示制作成功的问题
-  * 
+  * 修复了文件对话框未选择文件时，无法保存上一次选择的结果的问题
 
- -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 20:38:52 +0800
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 14 Dec 2020 10:38:52 +0800
 
 kylin-usb-creator (1.0.0-30kord) v101; urgency=medium
 
