@@ -109,7 +109,7 @@ void MainWindow::statusbarInit()
     actionHelp->setMenu(helpMenu);
 
     connect(Menu,&QMenu::triggered,this,&MainWindow::trigerMenu);
-    title->show();
+//    title->show();
 }
 
 void MainWindow::trigerMenu(QAction *act)
@@ -125,16 +125,12 @@ void MainWindow::trigerMenu(QAction *act)
 
 void MainWindow::init(){
     this->setWindowTitle(tr("kylin usb creator"));
-    this->setFixedSize(680,467);
+    this->setFixedSize(680,507);
 //    在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     this->move((availableGeometry.width()-this->width())/2,(availableGeometry.height()- this->height())/2);
     m_DaemonIpcDbus = new DaemonIpcDbus();
-    //    QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(this);
-    //    shadowEffect->setOffset(0,0);
-    //    shadowEffect->setColor(QColor(0,0,0));
-    //    shadowEffect->setBlurRadius(30);
-    //    title->setGraphicsEffect(shadowEffect);
+
 }
 void MainWindow::aboutClick()
 {
