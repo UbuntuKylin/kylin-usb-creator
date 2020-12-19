@@ -72,7 +72,7 @@ private:
     bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
     void dealDialogCancel();     // 处理授权框关闭及取消
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
-    bool isCapicityAvailable(QString); //容量过滤
+    bool isCapicityAvailable(QString); //容量过滤s
     void getUdiskPathAndCap();    //获取U盘路径和容量
     void getUdiskName();    //获取U盘第一个分区的命名
 

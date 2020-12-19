@@ -86,7 +86,6 @@ int main(int argc, char *argv[])
         hints.functions = MWM_FUNC_ALL;
         hints.decorations = MWM_DECOR_BORDER;
         XAtomHelper::getInstance()->setWindowMotifHint(w.winId(), hints);
-//        w.hide();
         w.show();
 
         QObject::connect(&a,SIGNAL(messageReceived(const QString&)),&w,SLOT(handleIconClickedSub()));

@@ -271,7 +271,6 @@ bool Page1::isCapicityAvailable(QString str)
 
 //TODO：容量获取方法更新，目前获取的是1024进制单位。计划在将来改为和文件管理器一致的1000进位
 //TODO：设备类型判断，搭配lsblk -S只加入走USB协议的设备
-
 void Page1::getUdiskPathAndCap()
 {
     diskInfos.clear();
@@ -339,6 +338,7 @@ void Page1::getStorageInfo()
             comboUdisk->addItem(info,diskInfo->devicePath);
         }else{
             comboUdisk->addItem(info,diskInfo->devicePath + '1');
+//            comboUdisk->addItem(info,diskInfo->devicePath);
         }
         warnningIcon->show();
         warnningText->show();
@@ -377,7 +377,10 @@ void Page1::creatStartSlots()
 
 bool Page1::event(QEvent *event)
 {
-    if(comboUdisk->listWidget == nullptr)return QWidget::event(event);
+    if(comboUdisk->listWidget == nullptr)
+    {
+        return QWidget::event(event);
+    }
     if (event->type() == QEvent::Leave)
     {
         if(mouseIsLeaveUdiskWidget())
