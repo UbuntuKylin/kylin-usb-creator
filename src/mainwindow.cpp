@@ -50,7 +50,7 @@ void MainWindow::statusbarInit()
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
     hlt0->addStretch();
-    hlt0->addWidget(titleMenu,1);
+//    hlt0->addWidget(titleMenu,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(titleMin,1);
     hlt0->addSpacing(4);

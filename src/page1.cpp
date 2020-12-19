@@ -332,14 +332,16 @@ void Page1::getStorageInfo()
             diskInfo->displayName = diskInfo->displayName.mid(0,UDISK_NAME_MAX_LENGTH - 1) + "…";
         }
         QString info = diskInfo->displayName+" ("+diskInfo->devicePath + ") " + diskInfo->diskCapicity;
-//        有分区就向第一分区里写，没分区就直接向块设备写
-        if(diskInfo->displayName == "unknowname")
-        {
-            comboUdisk->addItem(info,diskInfo->devicePath);
-        }else{
-            comboUdisk->addItem(info,diskInfo->devicePath + '1');
+
+        comboUdisk->addItem(info,diskInfo->devicePath);
+//        有分区就向第一分区里写，没分区就直接向块设备写,该方法暂时停止使用——有文件系统但是没有分区的U盘会导致制作失败。
+//        if(diskInfo->displayName == "unknowname")
+//        {
 //            comboUdisk->addItem(info,diskInfo->devicePath);
-        }
+//        }else{
+//            comboUdisk->addItem(info,diskInfo->devicePath + '1');
+//        }
+
         warnningIcon->show();
         warnningText->show();
     }

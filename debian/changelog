@@ -1,3 +1,11 @@
+kylin-usb-creator (1.0.0-32kord) v101; urgency=medium
+
+  * 解决了高危BUG#29064 U盘制作在无分区有文件系统情况下制作100%失败
+  * 解决了BUG#24712 U盘下拉框在鼠标事件发出关闭后需要两次单击才能打开
+  * 解决了BUG#28717 双层标题栏问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 19 Dec 2020 10:38:52 +080
+
 kylin-usb-creator (1.0.0-31kord) v101; urgency=medium
 
   * 修复了制作中途拔出U盘提示制作成功的问题
