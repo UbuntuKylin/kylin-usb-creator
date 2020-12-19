@@ -443,6 +443,12 @@ void Page1::dealComboBoxChangeButton()
 void Page1::dealRightPasswd()
 {
     emit makeStart(authDialog->dialogKey->text(),urlIso->text(),comboUdisk->getDiskPath());
+    if(themeStatus == LIGHTTHEME)
+    {
+        authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}");
+    }else{
+        authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid #606265;font-size:14px;color:rgba(143,147,153,1);}");
+    }
 }
 void Page1::dealAuthDialogClose()
 {
@@ -475,8 +481,8 @@ void Page1::setThemeStyleLight()
     rootDialogMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
                                  " QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
                                  "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
-    authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}"
-                                         "QlineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
+    authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}");
+//                                         "QLineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
     shadowEffect->setColor(Qt::lightGray);
     authDialogContentWidget->setGraphicsEffect(shadowEffect);
     dialogKeyLable->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");

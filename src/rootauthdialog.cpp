@@ -66,6 +66,8 @@ void rootAuthDialog::dealWrongPasswd()
     dialogKey->setPlaceholderText(tr("Wrong password!Try again"));
     command_sudo->kill();
     command_sudo->waitForFinished(-1);
+    dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(245, 108, 108, 1);font-size:14px;}");
+
 }
 
 void rootAuthDialog::dealNotSudoers()
