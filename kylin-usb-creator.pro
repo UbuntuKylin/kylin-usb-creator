@@ -83,9 +83,9 @@ TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts \
                 src/translations/kylin-usb-creator_bo_CN.ts
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+#qnx: target.path = /tmp/$${TARGET}/bin
+#else: unix:!android: target.path = /opt/$${TARGET}/bin
+#!isEmpty(target.path): INSTALLS += target
 
 RESOURCES += data.qrc translations.qrc
 

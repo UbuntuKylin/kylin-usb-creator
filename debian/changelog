@@ -1,3 +1,9 @@
+kylin-usb-creator (1.0.0-33kord) v101; urgency=medium
+
+  * 解决了BUG23977 密码输入错误时，密码框边框会变为红色
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 19 Dec 2020 10:38:52 +0800
+
 kylin-usb-creator (1.0.0-32kord) v101; urgency=medium
 
   * 解决了高危BUG#29064 U盘制作在无分区有文件系统情况下制作100%失败
