@@ -82,7 +82,8 @@ int main(int argc, char *argv[])
         MainWindow w;
 
 //        qDebug()<<"****"<<IS_MIPS64EL_ARCHITECTURE;
-        a.setActiveWindow(&w);
+//        a.setActiveWindow(&w);
+//        a.setActivationWindow(&w);
         // 添加窗管协议
         // TODO:窗管适配问题解决之后，打开此部分注释，还需要加上在布局中被注释的自绘状态栏
         MotifWmHints hints;

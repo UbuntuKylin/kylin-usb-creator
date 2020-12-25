@@ -266,7 +266,9 @@ int MainWindow::changePage()
 
 void MainWindow::handleIconClickedSub()
 {
+    qDebug()<<"test";
     this->setWindowFlag(Qt::WindowStaysOnTopHint,true);
+    this->setWindowFlag(Qt::WindowStaysOnTopHint,false);
     showNormal();
     activateWindow();
 }

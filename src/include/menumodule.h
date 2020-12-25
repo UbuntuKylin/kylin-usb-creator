@@ -70,6 +70,7 @@ private:
     void setThemeDark();
     void updateTheme(); //点击菜单中的主题设置后更新一次主题
     void getLocalThemeSetting(); //监控程序gsetting文件修改
+    void themeUpdate();
 };
 
 #endif // MENUMODULE_H

@@ -8,7 +8,6 @@ menuModule::menuModule(QWidget *parent) : QWidget(parent)
 void menuModule::init(){
     initAction();
     setStyle();
-    initGsetting();
 }
 
 void menuModule::initAction(){
@@ -48,7 +47,9 @@ void menuModule::initAction(){
     menuButton->setMenu(m_menu);
     connect(m_menu,&QMenu::triggered,this,&menuModule::triggerMenu);
     connect(themeMenu,&QMenu::triggered,this,&menuModule::triggerThemeMenu);
+    initGsetting();
     getLocalThemeSetting();
+    themeUpdate();
 }
 void menuModule::getLocalThemeSetting()
 {
@@ -57,6 +58,7 @@ void menuModule::getLocalThemeSetting()
 #endif
     m_pGsettingThemeStatus = new QGSettings(confPath.toLocal8Bit());
     QString appConf = m_pGsettingThemeStatus->get("thememode").toString();
+    qDebug()<<appConf;
     if("lightonly" == appConf){
         themeStatus = themeLightOnly;
     }else if("darkonly" == appConf){
@@ -65,7 +67,16 @@ void menuModule::getLocalThemeSetting()
         themeStatus = themeAuto;
     }
 }
-
+void menuModule::themeUpdate(){
+    if(themeStatus == themeLightOnly)
+    {
+        setThemeLight();
+    }else if(themeStatus == themeBlackOnly){
+        setThemeDark();
+    }else{
+        setStyleByThemeGsetting();
+    }
+}
 void menuModule::setStyleByThemeGsetting(){
     QString nowThemeStyle = m_pGsettingThemeData->get("styleName").toString();
     if("ukui-dark" == nowThemeStyle || "ukui-black" == nowThemeStyle)
@@ -74,7 +85,7 @@ void menuModule::setStyleByThemeGsetting(){
         emit menuModuleSetThemeStyle("dark-theme");
     }else{
         emit menuModuleSetThemeStyle("light-theme");
-
+        setThemeLight();
     }
 }
 
@@ -232,13 +243,13 @@ void menuModule::initGsetting(){
 
 
 void menuModule::setThemeDark(){
-
+    qDebug()<<"set theme dark";
 }
 
 void menuModule::setThemeLight(){
-
+    qDebug()<<"set theme light";
 }
 
 void menuModule::updateTheme(){
-
+    qDebug()<<"update theme";
 }
