@@ -41,9 +41,9 @@
 #ifndef QTSINGLEAPPLICATION_H
 #define QTSINGLEAPPLICATION_H
 
-#include "../mainwindow.h"
-#include <QApplication>
 
+#include <QApplication>
+#include "../mainwindow.h"
 class QtLocalPeer;
 
 #if defined(Q_OS_WIN)

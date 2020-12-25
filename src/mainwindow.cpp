@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "include/menumodule.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -32,9 +33,13 @@ void MainWindow::statusbarInit()
     connect(titleMin,&QPushButton::clicked,[=](){
        this->setWindowState(Qt::WindowMinimized); 
     });
-    titleMenu = new QPushButton();
-    titleMenu->setIconSize(QSize(30,30));
-    titleMenu->setFixedSize(30,30);
+//    titleMenu = new QPushButton();
+    menuModule *menu  = new menuModule();
+    connect(menu,&menuModule::menuModuleClose,[=](){this->close();});
+//    menu->appName = "kylin usb creator";
+//    menu->appShowingName
+//    titleMenu->setIconSize(QSize(30,30));
+//    titleMenu->setFixedSize(30,30);
 //    使用主题效果
 //    titleMenu->setProperty("isWindowButton",0x1);
 //    titleMenu->setProperty("useIconHighlightEffect",0x2);
@@ -50,7 +55,7 @@ void MainWindow::statusbarInit()
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
     hlt0->addStretch();
-    hlt0->addWidget(titleMenu,1);
+    hlt0->addWidget(menu->menuButton,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(titleMin,1);
     hlt0->addSpacing(4);
@@ -74,54 +79,53 @@ void MainWindow::statusbarInit()
     hlyt->addLayout(hlt);
     title->setLayout(hlyt);
 
-    Menu = new QMenu();
-    QList<QAction *> actions ;
-    QList<QAction *> themeaction;
-    //一级菜单绘制
-    actionTheme = new QAction(Menu);
-    actionTheme->setText(tr("theme"));
-    actionHelp = new QAction(Menu);
-    actionHelp->setText(tr("help"));
-    actionAbout = new QAction(Menu);
-    actionAbout->setText(tr("about"));
-    actionQuit = new QAction(Menu);
-    actionQuit->setText(tr("quit"));
-    actions<<actionTheme<<actionHelp<<actionAbout<<actionQuit;
-    Menu->addActions(actions);
-    titleMenu->setMenu(Menu);
-//    主题菜单绘制
-//    TODO：参照帮助菜单部分精简代码
-    QMenu *themeMenu = new QMenu();
-    QAction *actionThemeAuto = new QAction(actionTheme);
-    actionThemeAuto->setText(tr("auto"));
-    QAction *actionThemeDark = new QAction(actionTheme);
-    actionThemeDark->setText("dark");
-    QAction *actionThemeLight = new QAction(actionTheme);
-    actionThemeLight->setText("light");
-    themeaction<<actionThemeAuto<<actionThemeDark<<actionThemeLight;
-    actionTheme->setMenu(themeMenu);
-    themeMenu->addActions(themeaction);
-//    帮助菜单绘制
-    QMenu *helpMenu = new QMenu();
-    helpMenu->addAction(tr("check for updates"));
-    helpMenu->addAction(tr("feedback"));
-    helpMenu->addAction(tr("offical website"));
-    actionHelp->setMenu(helpMenu);
+//    Menu = new QMenu();
+//    QList<QAction *> actions ;
+//    QList<QAction *> themeaction;
+//    //一级菜单绘制
+//    actionTheme = new QAction(Menu);
+//    actionTheme->setText(tr("theme"));
+//    actionHelp = new QAction(Menu);
+//    actionHelp->setText(tr("help"));
+//    actionAbout = new QAction(Menu);
+//    actionAbout->setText(tr("about"));
+//    actionQuit = new QAction(Menu);
+//    actionQuit->setText(tr("quit"));
+//    actions<<actionTheme<<actionHelp<<actionAbout<<actionQuit;
+//    Menu->addActions(actions);
+//    titleMenu->setMenu(Menu);
+////    主题菜单绘制
+////    TODO：参照帮助菜单部分精简代码
+//    QMenu *themeMenu = new QMenu();
+//    QAction *actionThemeAuto = new QAction(actionTheme);
+//    actionThemeAuto->setText(tr("auto"));
+//    QAction *actionThemeDark = new QAction(actionTheme);
+//    actionThemeDark->setText("dark");
+//    QAction *actionThemeLight = new QAction(actionTheme);
+//    actionThemeLight->setText("light");
+//    themeaction<<actionThemeAuto<<actionThemeDark<<actionThemeLight;
+//    actionTheme->setMenu(themeMenu);
+//    themeMenu->addActions(themeaction);
+////    帮助菜单绘制
+//    QMenu *helpMenu = new QMenu();
+//    helpMenu->addAction(tr("check for updates"));
+//    helpMenu->addAction(tr("feedback"));
+//    helpMenu->addAction(tr("offical website"));
+//    actionHelp->setMenu(helpMenu);
 
-    connect(Menu,&QMenu::triggered,this,&MainWindow::trigerMenu);
-//    title->show();
+//    connect(Menu,&QMenu::triggered,this,&MainWindow::trigerMenu);
 }
 
-void MainWindow::trigerMenu(QAction *act)
-{
-    if(act->text() == "quit")
-    {
-        this->close();
-    }else if(act->text() == "about")
-    {
-        aboutClick();
-    }
-}
+//void MainWindow::trigerMenu(QAction *act)
+//{
+//    if(act->text() == "quit")
+//    {
+//        this->close();
+//    }else if(act->text() == "about")
+//    {
+//        aboutClick();
+//    }
+//}
 
 void MainWindow::init(){
     this->setWindowTitle(tr("kylin usb creator"));
@@ -210,8 +214,8 @@ void MainWindow::initGsetting()
             {
                 setThemeStyle();
                 this->showNormal();
-                this->raise();
-                this->activateWindow();
+//                this->raise();
+//                this->activateWindow();
             }
         });
         setThemeStyle(); //主题安装成功之后默认做一次主题状态的判断
@@ -300,10 +304,10 @@ void MainWindow::setThemeDark()
     titleClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_h.png);border-radius:4px;}"
                                "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
                                "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
-    titleMenu->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
-                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
-                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
-                             "QPushButton::menu-indicator{image:None;}");
+//    titleMenu->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
+//                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
+//                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
+//                             "QPushButton::menu-indicator{image:None;}");
     titleText->setStyleSheet("color:rgba(249,249,249,1);font-size:14px;");
     page2->setThemeStyleDark();
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
@@ -318,10 +322,10 @@ void MainWindow::setThemeLight()
     titleClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
                                "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
                                "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
-    titleMenu->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
-                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
-                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
-                             "QPushButton::menu-indicator{image:None;}");
+//    titleMenu->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
+//                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
+//                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
+//                             "QPushButton::menu-indicator{image:None;}");
     titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
     this->setStyleSheet("background-color:rgba(255,255,255,1);");
     page1->setThemeStyleLight();

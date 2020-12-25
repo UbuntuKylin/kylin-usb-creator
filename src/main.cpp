@@ -1,10 +1,9 @@
-#include "mainwindow.h"
-#include "dbusadaptor.h"
-#include "include/xatom-helper.h"
-#include "include/qtsingleapplication.h"
+
+
 #define SHADOW 6//阴影宽度
 #define BUTTONRADIUS 0//按钮圆角
 #define SHADOWALPHA 0.16//阴影透明度
+#include "include/qtsingleapplication.h"
 #include <QTranslator>
 #include <QDebug>
 #include <QApplication>
@@ -13,6 +12,11 @@
 #include <fcntl.h>
 #include <QLibraryInfo>
 #include <syslog.h>
+#include "include/xatom-helper.h"
+
+#include "mainwindow.h"
+#include "dbusadaptor.h"
+#include "include/qtsingleapplication.h"
 
 // 拉起最小化窗口
 void activeMainwindow()

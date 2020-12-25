@@ -1,3 +1,9 @@
+kylin-usb-creator (1.0.0-34kord) v101; urgency=medium
+
+  * 解决了高危BUG#29795 软件运行时安装高版本失败且前端无感知
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Wed, 23 Dec 2020 10:38:52 +0800
+
 kylin-usb-creator (1.0.0-33kord) v101; urgency=medium
 
   * 解决了BUG23977 密码输入错误时，密码框边框会变为红色

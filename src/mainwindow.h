@@ -9,7 +9,11 @@
 #define WIDGETRADIUS 6//窗口圆角
 #define SHADOWALPHA 0.16//阴影透明度
 
-#include "include/daemonipcdbus.h" //拉起帮助手册
+
+//#ifndef MENUMODULE_H
+//#define MENUMODULE_H
+
+//#endif
 #include "page1.h"
 #include "page2.h"
 #include <QWidget>
@@ -22,6 +26,8 @@
 #include <QStackedWidget>
 #include <QGraphicsDropShadowEffect>
 #include <QKeyEvent>
+#include "include/daemonipcdbus.h" //拉起帮助手册
+//#include "include/menumodule.h"
 
 class MainWindow : public QWidget
 {
@@ -39,7 +45,7 @@ public slots:
     void makeFinish();
     void returnMain();
     void handleIconClickedSub();
-    void trigerMenu(QAction*);
+//    void trigerMenu(QAction*);
 
 private:
     // 标题栏资源
