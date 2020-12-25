@@ -33,7 +33,6 @@ void MainWindow::statusbarInit()
     connect(titleMin,&QPushButton::clicked,[=](){
        this->setWindowState(Qt::WindowMinimized); 
     });
-//    titleMenu = new QPushButton();
     menuModule *menu  = new menuModule();
     connect(menu,&menuModule::menuModuleClose,[=](){this->close();});
 //    menu->appName = "kylin usb creator";
@@ -55,7 +54,7 @@ void MainWindow::statusbarInit()
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
     hlt0->addStretch();
-    hlt0->addWidget(menu->menuButton,1);
+//    hlt0->addWidget(menu->menuButton,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(titleMin,1);
     hlt0->addSpacing(4);
@@ -78,54 +77,7 @@ void MainWindow::statusbarInit()
     hlt->addLayout(vlt0);
     hlyt->addLayout(hlt);
     title->setLayout(hlyt);
-
-//    Menu = new QMenu();
-//    QList<QAction *> actions ;
-//    QList<QAction *> themeaction;
-//    //一级菜单绘制
-//    actionTheme = new QAction(Menu);
-//    actionTheme->setText(tr("theme"));
-//    actionHelp = new QAction(Menu);
-//    actionHelp->setText(tr("help"));
-//    actionAbout = new QAction(Menu);
-//    actionAbout->setText(tr("about"));
-//    actionQuit = new QAction(Menu);
-//    actionQuit->setText(tr("quit"));
-//    actions<<actionTheme<<actionHelp<<actionAbout<<actionQuit;
-//    Menu->addActions(actions);
-//    titleMenu->setMenu(Menu);
-////    主题菜单绘制
-////    TODO：参照帮助菜单部分精简代码
-//    QMenu *themeMenu = new QMenu();
-//    QAction *actionThemeAuto = new QAction(actionTheme);
-//    actionThemeAuto->setText(tr("auto"));
-//    QAction *actionThemeDark = new QAction(actionTheme);
-//    actionThemeDark->setText("dark");
-//    QAction *actionThemeLight = new QAction(actionTheme);
-//    actionThemeLight->setText("light");
-//    themeaction<<actionThemeAuto<<actionThemeDark<<actionThemeLight;
-//    actionTheme->setMenu(themeMenu);
-//    themeMenu->addActions(themeaction);
-////    帮助菜单绘制
-//    QMenu *helpMenu = new QMenu();
-//    helpMenu->addAction(tr("check for updates"));
-//    helpMenu->addAction(tr("feedback"));
-//    helpMenu->addAction(tr("offical website"));
-//    actionHelp->setMenu(helpMenu);
-
-//    connect(Menu,&QMenu::triggered,this,&MainWindow::trigerMenu);
 }
-
-//void MainWindow::trigerMenu(QAction *act)
-//{
-//    if(act->text() == "quit")
-//    {
-//        this->close();
-//    }else if(act->text() == "about")
-//    {
-//        aboutClick();
-//    }
-//}
 
 void MainWindow::init(){
     this->setWindowTitle(tr("kylin usb creator"));
@@ -134,8 +86,8 @@ void MainWindow::init(){
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     this->move((availableGeometry.width()-this->width())/2,(availableGeometry.height()- this->height())/2);
     m_DaemonIpcDbus = new DaemonIpcDbus();
-
 }
+
 void MainWindow::aboutClick()
 {
     about->setFixedSize(424,298);
@@ -152,7 +104,6 @@ void MainWindow::myStyle()
     connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
     connect(page2,&Page2::returnMain,this,&MainWindow::returnMain);
-
     //内部样式
     QSize pointSize(8,8);
     pointLable1=new QLabel;
@@ -188,7 +139,6 @@ void MainWindow::myStyle()
 //    createTrayActions();
 //     关于窗口绘制
     about = new QWidget();
-
 }
 
 void MainWindow::initGsetting()
@@ -266,7 +216,6 @@ int MainWindow::changePage()
 
 void MainWindow::handleIconClickedSub()
 {
-    qDebug()<<"test";
     this->setWindowFlag(Qt::WindowStaysOnTopHint,true);
     this->setWindowFlag(Qt::WindowStaysOnTopHint,false);
     showNormal();

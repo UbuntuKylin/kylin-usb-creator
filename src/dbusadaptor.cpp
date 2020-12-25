@@ -7,7 +7,7 @@
  * This is an auto-generated file.
  * Do not edit! All changes made to it will be lost.
  */
-
+//Starting external tool "/usr/lib/qt5/bin/lupdate /home/andrew/work_dir/kylin-usb-creator-1/kylin-usb-creator.pro"
 #include "dbusadaptor.h"
 #include <QtCore/QMetaObject>
 #include <QtCore/QByteArray>
