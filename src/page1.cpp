@@ -334,7 +334,7 @@ void Page1::getStorageInfo()
         QString info = diskInfo->displayName+" ("+diskInfo->devicePath + ") " + diskInfo->diskCapicity;
 
         comboUdisk->addItem(info,diskInfo->devicePath);
-//        有分区就向第一分区里写，没分区就直接向块设备写,该方法暂时停止使用——有文件系统但是没有分区的U盘会导致制作失败。
+//        有分区就向第一分区里写，没分区就直接向块设备写,该方法暂时停止使用——有文件系统但是没有分区的U盘会导致制作失败向不存在的sd*1设备中写入
 //        if(diskInfo->displayName == "unknowname")
 //        {
 //            comboUdisk->addItem(info,diskInfo->devicePath);

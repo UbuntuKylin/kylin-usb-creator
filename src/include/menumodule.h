@@ -65,12 +65,13 @@ private:
     void aboutAction();
     void initAbout(); //关于窗口初始化
     void helpAction();
-    void setStyleByThemeGsetting();
+    void setThemeFromLocalThemeSetting(QList<QAction* >); //获取本地主题配置
+    void setStyleByThemeGsetting(); //通过外部主题配置设置主题
     void setThemeLight();
     void setThemeDark();
     void updateTheme(); //点击菜单中的主题设置后更新一次主题
-    void getLocalThemeSetting(); //监控程序gsetting文件修改
     void themeUpdate();
+    void refreshThemeBySystemConf(const QString);    //通
 };
 
 #endif // MENUMODULE_H

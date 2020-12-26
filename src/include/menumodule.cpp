@@ -42,49 +42,56 @@ void menuModule::initAction(){
     themeMenuGroup->addAction(darkTheme);
     themeMenu->addAction(darkTheme);
     darkTheme->setCheckable(true);
+    QList<QAction* > themeActions;
+    themeActions<<autoTheme<<lightTheme<<darkTheme;
 //    autoTheme->setChecked(true);
     actionTheme->setMenu(themeMenu);
     menuButton->setMenu(m_menu);
     connect(m_menu,&QMenu::triggered,this,&menuModule::triggerMenu);
     connect(themeMenu,&QMenu::triggered,this,&menuModule::triggerThemeMenu);
     initGsetting();
-    getLocalThemeSetting();
+    setThemeFromLocalThemeSetting(themeActions);
     themeUpdate();
 }
-void menuModule::getLocalThemeSetting()
+
+void menuModule::setThemeFromLocalThemeSetting(QList<QAction* > themeActions)
 {
 #if DEBUG_MENUMODULE
     confPath = "org.kylin-usb-creator-data.settings";
 #endif
     m_pGsettingThemeStatus = new QGSettings(confPath.toLocal8Bit());
     QString appConf = m_pGsettingThemeStatus->get("thememode").toString();
-    qDebug()<<appConf;
     if("lightonly" == appConf){
         themeStatus = themeLightOnly;
+        themeActions[1]->setChecked(true);   //程序gsetting中为浅色only的时候就给浅色按钮设置checked
+
     }else if("darkonly" == appConf){
         themeStatus = themeBlackOnly;
+        themeActions[2]->setChecked(true);
     }else{
         themeStatus = themeAuto;
+        themeActions[0]->setChecked(true);
     }
 }
+
 void menuModule::themeUpdate(){
     if(themeStatus == themeLightOnly)
     {
         setThemeLight();
+        disconnect(m_pGsettingThemeData,&QGSettings::changed,this,[=](const QString &key);
     }else if(themeStatus == themeBlackOnly){
         setThemeDark();
     }else{
         setStyleByThemeGsetting();
     }
 }
+
 void menuModule::setStyleByThemeGsetting(){
     QString nowThemeStyle = m_pGsettingThemeData->get("styleName").toString();
     if("ukui-dark" == nowThemeStyle || "ukui-black" == nowThemeStyle)
     {
         setThemeDark();
-        emit menuModuleSetThemeStyle("dark-theme");
     }else{
-        emit menuModuleSetThemeStyle("light-theme");
         setThemeLight();
     }
 }
@@ -232,22 +239,33 @@ void menuModule::initGsetting(){
 
     if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW)){
         m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
+        connect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::refreshThemeBySystemConf);
         connect(m_pGsettingThemeData,&QGSettings::changed,this,[=](const QString &key){
             if(key == "styleName"){
 //                setThemeStyle();
             }
         });
-//        setThemeStyle();
     }
 }
 
+void menuModule::refreshThemeBySystemConf(const QString str){
+    if(key == "styleName"){
+
+}
+}
+
+void menuModule::setThemeStyle(){
+    if()
+}
 
 void menuModule::setThemeDark(){
     qDebug()<<"set theme dark";
+    emit menuModuleSetThemeStyle("dark-theme");
 }
 
 void menuModule::setThemeLight(){
     qDebug()<<"set theme light";
+    emit menuModuleSetThemeStyle("light-theme");
 }
 
 void menuModule::updateTheme(){
