@@ -33,8 +33,8 @@ void MainWindow::statusbarInit()
     connect(titleMin,&QPushButton::clicked,[=](){
        this->setWindowState(Qt::WindowMinimized); 
     });
-    menuModule *menu  = new menuModule();
-    connect(menu,&menuModule::menuModuleClose,[=](){this->close();});
+//    menuModule *menu  = new menuModule(this);
+//    connect(menu,&menuModule::menuModuleClose,[=](){this->close();});
 //    menu->appName = "kylin usb creator";
 //    menu->appShowingName
 //    titleMenu->setIconSize(QSize(30,30));
@@ -54,7 +54,7 @@ void MainWindow::statusbarInit()
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
     hlt0->addStretch();
-    hlt0->addWidget(menu->menuButton,1);
+//    hlt0->addWidget(menu->menuButton,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(titleMin,1);
     hlt0->addSpacing(4);
@@ -231,6 +231,7 @@ void MainWindow::returnMain()
 {
     stackedWidget->setCurrentIndex(changePage());
     page1->ifStartBtnChange();
+    page1->urlIso->clear();
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");

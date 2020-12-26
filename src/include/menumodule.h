@@ -22,7 +22,7 @@ class menuModule : public QWidget
 {
     Q_OBJECT
 public:
-    explicit menuModule(QWidget *parent = nullptr);
+    explicit menuModule(QWidget *);
 
 signals:
     void menuModuleClose();
@@ -46,13 +46,13 @@ private:
     QWidget *aboutWindow = nullptr;
     QGSettings *m_pGsettingThemeData = nullptr;
     QGSettings *m_pGsettingThemeStatus = nullptr;
-
     enum typeThemeStatus {
         themeAuto = 0,
         themeBlackOnly = 1,
         themeLightOnly = 2
     } themeStatus;
-
+public slots:
+    void dealSystemGsettingChange(const QString);
 private:
     void init();
     QHBoxLayout* initTitleBar(); //关于窗口标题栏初始化
@@ -67,11 +67,12 @@ private:
     void helpAction();
     void setThemeFromLocalThemeSetting(QList<QAction* >); //获取本地主题配置
     void setStyleByThemeGsetting(); //通过外部主题配置设置主题
+    void setThemeStyle();
     void setThemeLight();
     void setThemeDark();
     void updateTheme(); //点击菜单中的主题设置后更新一次主题
     void themeUpdate();
-    void refreshThemeBySystemConf(const QString);    //通
+    void refreshThemeBySystemConf();    //通过系统配置更改主题
 };
 
 #endif // MENUMODULE_H

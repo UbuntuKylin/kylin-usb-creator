@@ -1,6 +1,6 @@
 #include "menumodule.h"
 #include "xatom-helper.h"
-menuModule::menuModule(QWidget *parent) : QWidget(parent)
+menuModule::menuModule(QWidget *parent = nullptr) : QWidget(parent)
 {
     init();
 }
@@ -48,10 +48,10 @@ void menuModule::initAction(){
     actionTheme->setMenu(themeMenu);
     menuButton->setMenu(m_menu);
     connect(m_menu,&QMenu::triggered,this,&menuModule::triggerMenu);
-    connect(themeMenu,&QMenu::triggered,this,&menuModule::triggerThemeMenu);
     initGsetting();
     setThemeFromLocalThemeSetting(themeActions);
     themeUpdate();
+    connect(themeMenu,&QMenu::triggered,this,&menuModule::triggerThemeMenu);
 }
 
 void menuModule::setThemeFromLocalThemeSetting(QList<QAction* > themeActions)
@@ -78,7 +78,7 @@ void menuModule::themeUpdate(){
     if(themeStatus == themeLightOnly)
     {
         setThemeLight();
-        disconnect(m_pGsettingThemeData,&QGSettings::changed,this,[=](const QString &key);
+//        disconnect(m_pGsettingThemeData,&QGSettings::changed,this,[=](const QString &key);
     }else if(themeStatus == themeBlackOnly){
         setThemeDark();
     }else{
@@ -97,6 +97,8 @@ void menuModule::setStyleByThemeGsetting(){
 }
 
 void menuModule::triggerMenu(QAction *act){
+
+
     QString str = act->text();
     if("Quit" == str){
         emit menuModuleClose();
@@ -108,20 +110,32 @@ void menuModule::triggerMenu(QAction *act){
 }
 
 void menuModule::triggerThemeMenu(QAction *act){
+    if(!m_pGsettingThemeStatus)
+    {
+        m_pGsettingThemeStatus = new QGSettings(confPath.toLocal8Bit());  //m_pGsettingThemeStatus指针重复使用避免占用栈空间
+    }
+
     QString str = act->text();
     if("Light" == str){
         themeStatus = themeLightOnly;
+        m_pGsettingThemeStatus->set("thememode","lightonly");
+//        disconnect()
+        setThemeLight();
     }else if("Dark" == str){
         themeStatus = themeBlackOnly;
+        m_pGsettingThemeStatus->set("thememode","darkonly");
+        setThemeDark();
     }else{
         themeStatus = themeAuto;
+        m_pGsettingThemeStatus->set("thememode","auto");
+//        setthe
+//        refreshThemeBySystemConf();
+        initGsetting();
     }
-    updateTheme();
 }
 
 void menuModule::aboutAction(){
 //    关于点击事件处理
-    qDebug()<<"关于点击事件处理";
     initAbout();
 }
 
@@ -232,30 +246,28 @@ QVBoxLayout* menuModule::initBody(){
 
 void menuModule::setStyle(){
     menuButton->setStyleSheet("QPushButton::menu-indicator{image:None;}");
-//    themeStatus = themeAuto; //准备废弃，预计逻辑为从gsetting中读取配置，选择状态每变化一次就往gsetting中固化一次
 }
 
 void menuModule::initGsetting(){
-
     if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW)){
         m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
-        connect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::refreshThemeBySystemConf);
-        connect(m_pGsettingThemeData,&QGSettings::changed,this,[=](const QString &key){
-            if(key == "styleName"){
-//                setThemeStyle();
-            }
-        });
+        connect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::dealSystemGsettingChange);
     }
 }
 
-void menuModule::refreshThemeBySystemConf(const QString str){
+void menuModule::dealSystemGsettingChange(const QString key){
     if(key == "styleName"){
-
+        refreshThemeBySystemConf();
+    }
 }
-}
 
-void menuModule::setThemeStyle(){
-    if()
+void menuModule::refreshThemeBySystemConf(){
+    QString themeNow = m_pGsettingThemeData->get("styleName").toString();
+    if("ukui-dark" == themeNow || "ukui-black" == themeNow){
+        setThemeDark();
+    }else{
+        setThemeLight();
+    }
 }
 
 void menuModule::setThemeDark(){
@@ -266,8 +278,4 @@ void menuModule::setThemeDark(){
 void menuModule::setThemeLight(){
     qDebug()<<"set theme light";
     emit menuModuleSetThemeStyle("light-theme");
-}
-
-void menuModule::updateTheme(){
-    qDebug()<<"update theme";
 }

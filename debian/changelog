@@ -1,3 +1,13 @@
+kylin-usb-creator (1.0.0-35kord) v101; urgency=medium
+
+  * 修复了BUG#30072 文件选择框不会自动清除选择
+  * 修复了BUG#30071 页面指示器异常
+  * 修复了BUG#30070 拉起最小化窗口双title栏
+  * 修复了BUG#30069 授权框边框显示异常
+  * 修复了BUG#30067 开始按钮状态异常
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 26 Dec 2020 10:38:52 +0800
+
 kylin-usb-creator (1.0.0-34kord) v101; urgency=medium
 
   * 解决了高危BUG#29795 软件运行时安装高版本失败且前端无感知

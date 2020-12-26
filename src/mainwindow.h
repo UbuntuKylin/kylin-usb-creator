@@ -45,7 +45,6 @@ public slots:
     void makeFinish();
     void returnMain();
     void handleIconClickedSub();
-//    void trigerMenu(QAction*);
 
 private:
     // 标题栏资源

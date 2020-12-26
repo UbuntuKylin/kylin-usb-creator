@@ -124,6 +124,7 @@ void Page2::playErrorGif()
     lableMovie->clear();
     lableMovie->setScaledContents(true);
     lableMovie->setPixmap(QPixmap::fromImage(QImage(":/data/elements_dark/failed.png")));
+    emit makeFinish();
 //    lableMovie->setpi
 
 }

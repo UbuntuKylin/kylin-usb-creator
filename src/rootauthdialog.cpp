@@ -27,11 +27,6 @@ void rootAuthDialog::checkPassWord()
     connect(command_sudo,&QProcess::readyReadStandardError,this,&rootAuthDialog::readBashOutput);
     command_sudo->start("bash");
     command_sudo->waitForStarted();
-//    if(m_key.isEmpty())
-//    {
-//        dealTooShort();
-//        return ;
-//    }
     QString str1 = "echo " + m_key + "| sudo -S -l ";
     command_sudo->write(str1.toLocal8Bit() + "\n");
 }

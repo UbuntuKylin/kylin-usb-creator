@@ -49,6 +49,7 @@ public:
     bool ifStartBtnChange();//开始制作按钮是否可以点击
     void setThemeStyleLight(); //设置浅色主题
     void setThemeStyleDark(); //设置深色主题
+    QLineEdit *urlIso = nullptr;//显示镜像路径
 
 signals:
     void makeStart(QString key,QString sourcePath,QString targetPath);
@@ -76,6 +77,7 @@ private:
     void getUdiskPathAndCap();    //获取U盘路径和容量
     void getUdiskName();    //获取U盘第一个分区的命名
 
+
     QList<AvailableDiskInfo*> diskInfos; // U盘信息
     QString themeStatus = LIGHTTHEME; //主题指示器
     QWidget *rootWindowTitle = nullptr; //root授权框状态栏
@@ -90,7 +92,7 @@ private:
     QLabel *tabUdisk = nullptr;//选择U盘标签
     QLabel *warnningIcon = nullptr;//警告标志
     QLabel *warnningText = nullptr;//警告标语tabUdisk
-    QLineEdit *urlIso = nullptr;//显示镜像路径
+    bool isAuthDialogShowing = false; //root授权框是否在显示
     QPushButton *findIso = nullptr;//浏览文件按钮
     QPushButton *creatStart = nullptr;//开始制作
     rootAuthDialog *authDialog = nullptr;//root授权对话框

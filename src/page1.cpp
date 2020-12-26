@@ -130,6 +130,7 @@ void Page1::dialogInitControlQss()
     connect(authDialog,&rootAuthDialog::passwdCorrect,this,&Page1::dealRightPasswd);
     connect(authDialog,&rootAuthDialog::cancelCheck,[=]{
         authDialog->dialogKey->clear();
+        isAuthDialogShowing = false;
         authDialog->close();
         ifStartBtnChange();
     });
@@ -148,7 +149,11 @@ void Page1::dialogInitControlQss()
     rootWindowTitle->setObjectName("title");
     rootDialogClose = new QPushButton(rootWindowTitle);
     rootDialogClose->setFixedSize(30,30);
-    connect(rootDialogClose,&QPushButton::clicked,authDialog,&rootAuthDialog::close);
+//    connect(rootDialogClose,&QPushButton::clicked,authDialog,&rootAuthDialog::close);
+    connect(rootDialogClose,&QPushButton::clicked,[=](){
+        authDialog->close();
+        isAuthDialogShowing = false;
+    });
     connect(rootDialogClose,&QPushButton::clicked,[=]{ifStartBtnChange();});
     rootDialogMin = new QPushButton(rootWindowTitle);
     rootDialogMin->setFixedSize(30,30);
@@ -365,15 +370,19 @@ void Page1::allClose()
 
 void Page1::creatStartSlots()
 {
+    isAuthDialogShowing = true;
     creatStart->setEnabled(false);
     if(DARKTHEME == themeStatus)
     {
         creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+
     }else
     {
         creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
     }
 
+    authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}");
+    authDialog->dialogKey->setPlaceholderText("请输入密码");
     authDialog->show();
 }
 
@@ -410,6 +419,10 @@ bool Page1::mouseIsLeaveUdiskWidget()
 
 bool Page1::ifStartBtnChange()
 {
+    if(isAuthDialogShowing)
+    {
+        return false;
+    }
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
@@ -442,6 +455,7 @@ void Page1::dealComboBoxChangeButton()
 
 void Page1::dealRightPasswd()
 {
+    isAuthDialogShowing = false;
     emit makeStart(authDialog->dialogKey->text(),urlIso->text(),comboUdisk->getDiskPath());
     if(themeStatus == LIGHTTHEME)
     {
