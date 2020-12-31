@@ -28,6 +28,7 @@ signals:
 
 public slots:
     void checkPassWord();
+    bool eventFilter(QObject *,QEvent *);                    //change
 
 private:
     void Init();

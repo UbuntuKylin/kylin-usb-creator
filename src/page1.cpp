@@ -425,7 +425,7 @@ bool Page1::ifStartBtnChange()
     }
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
-        creatStart->setEnabled(true);
+        creatStart->setEnabled(true);//true时，相当于激活了按钮，按钮的状态不再是死的,对触摸或者点击产生反应，响应触发事件。false时，按钮是灰色的，无论是否可点击（即使将setClickable()设置成true），都无法响应任何触发事件。
         creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
                                   "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
                                   "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");

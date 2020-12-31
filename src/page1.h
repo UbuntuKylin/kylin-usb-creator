@@ -46,13 +46,13 @@ class Page1 : public QWidget
     Q_OBJECT
 public:
     explicit Page1();
-    bool ifStartBtnChange();//开始制作按钮是否可以点击
+    bool ifStartBtnChange(); //开始制作按钮是否可以点击
     void setThemeStyleLight(); //设置浅色主题
     void setThemeStyleDark(); //设置深色主题
     QLineEdit *urlIso = nullptr;//显示镜像路径
 
 signals:
-    void makeStart(QString key,QString sourcePath,QString targetPath);
+    void makeStart(QString key,QString sourcePath,QString targetPath); //make start
     void diskLabelRefresh(); //  已选中U盘刷新
     void setStyleWidgetStyle(const QString);
 
@@ -66,10 +66,10 @@ public slots:
 
 private:
     bool event(QEvent *event); // 鼠标离开U盘列表事件
-    void creatStartSlots();//开始制作
+    void creatStartSlots();    //开始制作x
     void initControlQss();//初始化控件及其样式
     void getStorageInfo();//获取磁盘信息
-    void dialogInitControlQss();//初始化对话框控件及其样式
+    void dialogInitControlQss();  //初始化对话框控件及其样式
     bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
     void dealDialogCancel();     // 处理授权框关闭及取消
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
