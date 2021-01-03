@@ -64,7 +64,6 @@ void menuModule::setThemeFromLocalThemeSetting(QList<QAction* > themeActions)
     if("lightonly" == appConf){
         themeStatus = themeLightOnly;
         themeActions[1]->setChecked(true);   //程序gsetting中为浅色only的时候就给浅色按钮设置checked
-
     }else if("darkonly" == appConf){
         themeStatus = themeBlackOnly;
         themeActions[2]->setChecked(true);
@@ -78,7 +77,6 @@ void menuModule::themeUpdate(){
     if(themeStatus == themeLightOnly)
     {
         setThemeLight();
-//        disconnect(m_pGsettingThemeData,&QGSettings::changed,this,[=](const QString &key);
     }else if(themeStatus == themeBlackOnly){
         setThemeDark();
     }else{
@@ -114,23 +112,24 @@ void menuModule::triggerThemeMenu(QAction *act){
     {
         m_pGsettingThemeStatus = new QGSettings(confPath.toLocal8Bit());  //m_pGsettingThemeStatus指针重复使用避免占用栈空间
     }
-
     QString str = act->text();
     if("Light" == str){
         themeStatus = themeLightOnly;
+        disconnect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::dealSystemGsettingChange);
         m_pGsettingThemeStatus->set("thememode","lightonly");
 //        disconnect()
         setThemeLight();
     }else if("Dark" == str){
         themeStatus = themeBlackOnly;
+        disconnect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::dealSystemGsettingChange);
         m_pGsettingThemeStatus->set("thememode","darkonly");
         setThemeDark();
     }else{
         themeStatus = themeAuto;
         m_pGsettingThemeStatus->set("thememode","auto");
-//        setthe
-//        refreshThemeBySystemConf();
         initGsetting();
+//        updateTheme();
+        themeUpdate();
     }
 }
 
@@ -170,7 +169,7 @@ void menuModule::initAbout(){
     //TODO:在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     aboutWindow->move((availableGeometry.width()-aboutWindow->width())/2,(availableGeometry.height()- aboutWindow->height())/2);
-    aboutWindow->setStyleSheet("background-color:rgba(255,255,255,1);");
+//    aboutWindow->setStyleSheet("background-color:rgba(255,255,255,1);");
     aboutWindow->show();
 }
 
@@ -253,6 +252,7 @@ void menuModule::initGsetting(){
         m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
         connect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::dealSystemGsettingChange);
     }
+
 }
 
 void menuModule::dealSystemGsettingChange(const QString key){
@@ -272,10 +272,19 @@ void menuModule::refreshThemeBySystemConf(){
 
 void menuModule::setThemeDark(){
     qDebug()<<"set theme dark";
+    if(aboutWindow)
+    {
+        aboutWindow->setStyleSheet("background-color:rgba(31,32,34，1);");
+    }
     emit menuModuleSetThemeStyle("dark-theme");
 }
 
 void menuModule::setThemeLight(){
-    qDebug()<<"set theme light";
+//    qDebug()<<"set theme light";
+    if(aboutWindow)
+    {
+        aboutWindow->setStyleSheet("background-color:rgba(255，255，255，1);");
+    }
     emit menuModuleSetThemeStyle("light-theme");
+
 }

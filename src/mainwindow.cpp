@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "include/menumodule.h"
+//#include "include/menumodule.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     init();
     myStyle();
     initGsetting();
+    qDebug()<<menu;
+    menu->themeUpdate();  //画一次主题
 }
 
 MainWindow::~MainWindow()
@@ -33,8 +35,10 @@ void MainWindow::statusbarInit()
     connect(titleMin,&QPushButton::clicked,[=](){
        this->setWindowState(Qt::WindowMinimized); 
     });
-//    menuModule *menu  = new menuModule(this);
-//    connect(menu,&menuModule::menuModuleClose,[=](){this->close();});
+    menu  = new menuModule(this);
+    connect(menu,&menuModule::menuModuleClose,[=](){this->close();});
+    connect(menu,&menuModule::menuModuleSetThemeStyle,this,&MainWindow::setThemeStyle);
+
 //    menu->appName = "kylin usb creator";
 //    menu->appShowingName
 //    titleMenu->setIconSize(QSize(30,30));
@@ -54,7 +58,7 @@ void MainWindow::statusbarInit()
     hlt0->setMargin(0);
     hlt0->setSpacing(0);
     hlt0->addStretch();
-//    hlt0->addWidget(menu->menuButton,1);
+    hlt0->addWidget(menu->menuButton,1);
     hlt0->addSpacing(4);
     hlt0->addWidget(titleMin,1);
     hlt0->addSpacing(4);
@@ -146,35 +150,34 @@ void MainWindow::initGsetting()
     //应用主窗口状态
     if(QGSettings::isSchemaInstalled(APPDATA))
     {
-        m_pGsettingAppData = new QGSettings(APPDATA);
-        connect(m_pGsettingAppData,&QGSettings::changed,[=](){
-            this->showNormal();
-            this->raise();
-            this->activateWindow();
-        });
+//        m_pGsettingAppData = new QGSettings(APPDATA);
+//        connect(m_pGsettingAppData,&QGSettings::changed,[=](){
+//            this->showNormal();
+//            this->raise();
+//            this->activateWindow();
+//        });
     }
     // 主题适配
-    if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW))
-    {
-        m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
+//    if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW))
+//    {
+//        m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
 
-        connect(m_pGsettingThemeData,&QGSettings::changed,this, [=] (const QString &key)
-        {
-            if(key == "styleName")
-            {
-                setThemeStyle();
-                this->showNormal();
-            }
-        });
-        setThemeStyle(); //主题安装成功之后默认做一次主题状态的判断
-    }
+//        connect(m_pGsettingThemeData,&QGSettings::changed,this, [=] (const QString &key)
+//        {
+//            if(key == "styleName")
+//            {
+//                setThemeStyle();
+//                this->showNormal();
+//            }
+//        });
+//        setThemeStyle(); //主题安装成功之后默认做一次主题状态的判断
+//    }
     return ;
 }
 
-void MainWindow::setThemeStyle()
+void MainWindow::setThemeStyle(QString str)
 {
-    QString nowThemeStyle = m_pGsettingThemeData->get("styleName").toString();
-    if("ukui-dark" == nowThemeStyle || "ukui-black" == nowThemeStyle)
+    if("dark-theme" == str)
     {
         setThemeDark();
     }else{

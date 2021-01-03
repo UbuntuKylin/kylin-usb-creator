@@ -1,6 +1,6 @@
 #ifndef MENUMODULE_H
 #define MENUMODULE_H
-#define DEBUG_MENUMODULE 1
+#define DEBUG_MENUMODULE 1  //DEBUG模式开关，代码上线之前务必关掉
 #define FITTHEMEWINDOW "org.ukui.style"
 
 
@@ -23,6 +23,7 @@ class menuModule : public QWidget
     Q_OBJECT
 public:
     explicit menuModule(QWidget *);
+    void themeUpdate();
 
 signals:
     void menuModuleClose();
@@ -31,13 +32,14 @@ public:
     QPushButton *menuButton = nullptr;
 
 public:
-//    程序在实例化的时候需要传递的信息字段
+//    程序在实例化的时候需要传递的信息字段,打开debug开关后这些字段会被自动填充
     QString appName = "appName字段未填充!"; //格式kylin-usb-creator
     QString appShowingName = "app展示名字段未填充"; //格式kylin usb creator ,用来在前端展示
     QString appVersion = "appVersion字段未填充!";
     QString appDesc = "appDesc字段未填充!";
     QString iconPath = "iconPath字段未填充!";
     QString confPath = "gsetting文件路径未配置";
+
 private:
     QMenu *m_menu = nullptr;
     QMenu *themeMenu = nullptr;
@@ -60,7 +62,7 @@ private:
     void initGsetting();
     void initAction();
     void setStyle();
-    void triggerMenu(QAction* act); //主菜单动作
+    void triggerMenu(QAction* act); //主菜单动作4
     void triggerThemeMenu(QAction* act); //主题动作
     void aboutAction();
     void initAbout(); //关于窗口初始化
@@ -70,8 +72,8 @@ private:
     void setThemeStyle();
     void setThemeLight();
     void setThemeDark();
-    void updateTheme(); //点击菜单中的主题设置后更新一次主题
-    void themeUpdate();
+//    void updateTheme(); //点击菜单中的主题设置后更新一次主题
+
     void refreshThemeBySystemConf();    //通过系统配置更改主题
 };
 

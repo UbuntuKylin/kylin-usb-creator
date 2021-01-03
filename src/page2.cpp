@@ -228,7 +228,7 @@ bool Page2::isMakingSuccess()
     {
         qDebug()<<"目标比对设备"<<uDiskPath<<"***已挂载设备："<<disk.device();
         QString diskPath = disk.device();
-//        diskPath = diskPath.mid(0,8);
+        diskPath = diskPath.mid(0,8);
         if(uDiskPath == diskPath)
         {
             return true;

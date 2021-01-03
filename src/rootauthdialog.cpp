@@ -74,3 +74,8 @@ void rootAuthDialog::dealNotSudoers()
 }
 
 
+bool rootAuthDialog::event(QEvent *event){
+    qDebug()<<event->type();
+    return QWidget::event(event);
+}
+

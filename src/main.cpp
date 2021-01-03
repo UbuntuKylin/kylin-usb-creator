@@ -1,5 +1,3 @@
-
-
 #define SHADOW 6//阴影宽度
 #define BUTTONRADIUS 0//按钮圆角
 #define SHADOWALPHA 0.16//阴影透明度
@@ -38,7 +36,7 @@ int main(int argc, char *argv[])
     QtSingleApplication a(argc,argv);
 //    TODO: 整合qt的标准翻译和自行定制的qm翻译
 //    标准对话框汉化(QT标准翻译
-    #ifndef QT_NO_TRANSLATION
+#ifndef QT_NO_TRANSLATION
         QString translatorFileName = QLatin1String("qt_");
         translatorFileName += QLocale::system().name();
         QTranslator *translator = new QTranslator();
@@ -46,7 +44,7 @@ int main(int argc, char *argv[])
             a.installTranslator(translator);
         else
             qDebug() << "Failed to load Chinese translation file.";
-    #endif
+#endif
         // 应用内翻译
         QTranslator app_trans;
         QString locale = QLocale::system().name();
@@ -97,10 +95,5 @@ int main(int argc, char *argv[])
         return a.exec();
     }
     a.setWindowIcon(QIcon(":data/logo/96.png"));
-
-
-
-
-
     return a.exec();
 }

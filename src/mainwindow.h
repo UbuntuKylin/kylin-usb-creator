@@ -27,6 +27,7 @@
 #include <QGraphicsDropShadowEffect>
 #include <QKeyEvent>
 #include "include/daemonipcdbus.h" //拉起帮助手册
+#include "include/menumodule.h"
 //#include "include/menumodule.h"
 
 class MainWindow : public QWidget
@@ -45,6 +46,7 @@ public slots:
     void makeFinish();
     void returnMain();
     void handleIconClickedSub();
+    void setThemeStyle(QString);
 
 private:
     // 标题栏资源
@@ -68,11 +70,11 @@ private:
     void myStyle();//设定样式
     void createTrayActions();
     void initGsetting();
-    void setThemeStyle();
     void statusbarInit();
     void setThemeDark();
     void setThemeLight();
     void aboutClick();
+    menuModule *menu = nullptr;
     QTimer *dbustimer = nullptr;
     QStackedWidget *stackedWidget= nullptr;
     QLabel *pointLable1 = nullptr;  //页面小圆点
