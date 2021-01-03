@@ -1,6 +1,8 @@
 #include "rootauthdialog.h"
+#include "QEvent"                                   //change
 
-rootAuthDialog::rootAuthDialog(QWidget *parent)
+rootAuthDialog::rootAuthDialog(QWidget *parent):
+    QWidget(parent)                                 //change
 {
     Init();
 }
@@ -9,14 +11,32 @@ void rootAuthDialog::Init()
 {
     btnCancel = new QPushButton;
     btnOk = new QPushButton;
-    dialogKey = new QLineEdit;
-    dialogKey->setPlaceholderText(tr("Input password"));
+    dialogKey = new QLineEdit(this);
+    dialogKey->installEventFilter(this);                                                 //change
     dialogKey->setEchoMode(QLineEdit::Password);
     setWindowModality(Qt::WindowModal); //设置属性为模态窗口
     connect(btnOk,&QPushButton::clicked,this,&rootAuthDialog::checkPassWord);
     connect(btnCancel,&QPushButton::clicked,[=]{
         emit cancelCheck();}); //取消信号
     connect(dialogKey,&QLineEdit::returnPressed,btnOk,&QAbstractButton::click,Qt::UniqueConnection);
+}
+
+bool rootAuthDialog::eventFilter(QObject *watched, QEvent *event)                                           //change
+{
+     if (watched==dialogKey)         //判断控件dialogkey
+     {
+          if (event->type()==QEvent::FocusIn)     //判断控件dialogkey获得焦点事件
+          {
+             dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(100,105,241,1);font-size:14px;}");
+          }
+          else if (event->type()==QEvent::FocusOut)    //判断控件dialogkey失去焦点事件
+          {
+             dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221,223,231,1);font-size:14px;}");
+           }
+     }
+
+ return QWidget::eventFilter(watched,event);     // 事件交给上层对话框
+
 }
 
 void rootAuthDialog::checkPassWord()
@@ -73,9 +93,7 @@ void rootAuthDialog::dealNotSudoers()
     command_sudo->waitForFinished(-1);
 }
 
-
 bool rootAuthDialog::event(QEvent *event){
     qDebug()<<event->type();
     return QWidget::event(event);
 }
-
