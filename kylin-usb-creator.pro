@@ -1,4 +1,4 @@
-QT       += core gui dbus network  x11extras
+QT       += core gui dbus network  x11extras KWindowSystem
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,7 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #}
 #}
 
-INCLUDEPATH += /usr/include/KF5/KWindowSystem
+#INCLUDEPATH += /usr/include/KF5/KWindowSystem
 
 SOURCES += \
     src/dbusadaptor.cpp \

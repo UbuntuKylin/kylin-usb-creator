@@ -30,15 +30,15 @@ void menuModule::initAction(){
 //    互斥按钮组
     QMenu *themeMenu = new QMenu;
     QActionGroup *themeMenuGroup = new QActionGroup(this);
-    QAction *autoTheme = new QAction("Auto",this);
+    QAction *autoTheme = new QAction(tr("Auto"),this);
     themeMenuGroup->addAction(autoTheme);
     themeMenu->addAction(autoTheme);
     autoTheme->setCheckable(true);
-    QAction *lightTheme = new QAction("Light",this);
+    QAction *lightTheme = new QAction(tr("Light"),this);
     themeMenuGroup->addAction(lightTheme);
     themeMenu->addAction(lightTheme);
     lightTheme->setCheckable(true);
-    QAction *darkTheme = new QAction("Dark",this);
+    QAction *darkTheme = new QAction(tr("Dark"),this);
     themeMenuGroup->addAction(darkTheme);
     themeMenu->addAction(darkTheme);
     darkTheme->setCheckable(true);
@@ -98,11 +98,11 @@ void menuModule::triggerMenu(QAction *act){
 
 
     QString str = act->text();
-    if("Quit" == str){
+    if(tr("Quit") == str){
         emit menuModuleClose();
-    }else if("About" == str){
+    }else if(tr("About") == str){
         aboutAction();
-    }else if("Help" == str){
+    }else if(tr("Help") == str){
         helpAction();
     }
 }
@@ -113,13 +113,13 @@ void menuModule::triggerThemeMenu(QAction *act){
         m_pGsettingThemeStatus = new QGSettings(confPath.toLocal8Bit());  //m_pGsettingThemeStatus指针重复使用避免占用栈空间
     }
     QString str = act->text();
-    if("Light" == str){
+    if(tr("Light") == str){
         themeStatus = themeLightOnly;
         disconnect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::dealSystemGsettingChange);
         m_pGsettingThemeStatus->set("thememode","lightonly");
 //        disconnect()
         setThemeLight();
-    }else if("Dark" == str){
+    }else if(tr("Dark") == str){
         themeStatus = themeBlackOnly;
         disconnect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::dealSystemGsettingChange);
         m_pGsettingThemeStatus->set("thememode","darkonly");

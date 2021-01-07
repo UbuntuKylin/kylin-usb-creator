@@ -152,32 +152,32 @@
     <message>
         <location filename="../include/menumodule.cpp" line="21"/>
         <source>Theme</source>
-        <translation type="unfinished">主题</translation>
+        <translation>主题</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="23"/>
         <source>Help</source>
-        <translation type="unfinished">帮助</translation>
+        <translation>帮助</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="25"/>
         <source>About</source>
-        <translation type="unfinished">关于</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="27"/>
         <source>Quit</source>
-        <translation type="unfinished">退出</translation>
+        <translation>退出</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="224"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>版本：</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="228"/>
         <source>Support: support@kylinos.cn</source>
-        <translation type="unfinished"></translation>
+        <translation>支持：support@kylinos.cn</translation>
     </message>
 </context>
 <context>
