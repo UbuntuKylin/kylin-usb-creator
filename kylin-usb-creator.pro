@@ -1,4 +1,4 @@
-QT       += core gui dbus network  x11extras KWindowSystem
+QT       += core gui dbus network x11extras KWindowSystem
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -70,7 +70,7 @@ icons.files = data/kylin-usb-creator.png
 icons.path = /usr/share/pixmaps/
 
 # gsettings
-schemes.file = data/org.kylin-usb-creator-data.gschema.xml
+schemes.files = data/org.kylin-usb-creator-data.gschema.xml
 schemes.path = /usr/share/glib-2.0/schemas/
 
 desktop.path = /usr/share/applications

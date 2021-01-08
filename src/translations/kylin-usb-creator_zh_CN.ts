@@ -175,19 +175,19 @@
     <message>
         <location filename="../include/menumodule.cpp" line="33"/>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>自动</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="37"/>
         <location filename="../include/menumodule.cpp" line="116"/>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>浅色模式</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="41"/>
         <location filename="../include/menumodule.cpp" line="122"/>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>深色模式</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="224"/>

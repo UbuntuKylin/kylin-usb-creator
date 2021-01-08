@@ -1,10 +1,15 @@
+kylin-usb-creator (1.0.0-37kord) v101; urgency=medium
+
+  * 修复了一处因gsetting文件没有正确初始化导致的致命问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 08 Jan 2021 10:38:52 +0800
+
 kylin-usb-creator (1.0.0-36kord) v101; urgency=medium
 
   * 菜单模块接入，新增菜单中主题选择功能，关于功能以及退出功能。国际化ts文件更新
   * 修复了高危BUG#29064 制作100%失败。
 
-
- -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 26 Dec 2020 10:38:52 +0800
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 07 Jan 2021 10:38:52 +0800
 
 kylin-usb-creator (1.0.0-35kord) v101; urgency=medium
 
