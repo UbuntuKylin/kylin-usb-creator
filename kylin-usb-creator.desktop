@@ -11,5 +11,5 @@ GenericName[bo_CN]=འགོ་སློང་སྡེར་ལས་ལག་�
 Exec=/usr/bin/kylin-usb-creator %u
 Icon=/usr/share/pixmaps/kylin-usb-creator.png
 Type=Application
-Categories=Qt;USB;Generator,Setting
+Categories=System Settings Security
 Keywords=USB,System,Manage
