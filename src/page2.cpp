@@ -109,6 +109,7 @@ void Page2::playFinishGif()
         lableMovie->setMovie(movieFinish_l);
         movieFinish_l->start();
     }
+    emit makeFinish();
 }
 
 void Page2::playErrorGif()

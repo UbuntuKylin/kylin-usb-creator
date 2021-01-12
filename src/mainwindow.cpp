@@ -30,8 +30,8 @@ void MainWindow::statusbarInit()
     titleText = new QLabel();
     titleText->setText(tr("kylin usb creator"));
     titleMin = new QPushButton();
-    titleMin->setProperty("isWindowButton", 0x2);
-    titleMin->setProperty("useIconHighlightEffect", 0x8);
+    titleMin->setProperty("isWindowButton", 0x1);
+    titleMin->setProperty("useIconHighlightEffect", 0x2);
     titleMin->setFlat(true);
     titleMin->setFixedSize(30, 30);
     titleMin->setIconSize(QSize(16, 16));

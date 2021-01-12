@@ -1,3 +1,13 @@
+kylin-usb-creator (1.0.0-38kord) v101; urgency=medium
+
+  * 修复了BUG#32428 菜单按钮悬停样式异常
+  * 修复了BUG#32929 菜单按钮深色下未变色 
+  * 修复了BUG#31682 制作完成页面标识异常
+  * 三连按钮改为直接从主题中调用
+  * 
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 12 Jan 2021 10:38:52 +0800
+
 kylin-usb-creator (1.0.0-37kord) v101; urgency=medium
 
   * 修复了一处因gsetting文件没有正确初始化导致的致命问题
