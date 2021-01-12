@@ -13,8 +13,13 @@ void menuModule::init(){
 void menuModule::initAction(){
     iconSize = QSize(30,30);
     menuButton = new QPushButton;
-    menuButton->setIcon(QIcon::fromTheme("application-menu"));
-    menuButton->setFixedSize(iconSize);
+    menuButton->setProperty("isWindowButton", 0x1);
+    menuButton->setProperty("useIconHighlightEffect", 0x2);
+    menuButton->setFlat(true);
+    menuButton->setFixedSize(30, 30);
+    menuButton->setIconSize(QSize(16, 16));
+    menuButton->setIcon(QIcon::fromTheme("open-menu-symbolic"));
+
     m_menu = new QMenu();
     QList<QAction *> actions ;
     QAction *actionTheme = new QAction(m_menu);
@@ -244,7 +249,7 @@ QVBoxLayout* menuModule::initBody(){
 }
 
 void menuModule::setStyle(){
-    menuButton->setStyleSheet("QPushButton::menu-indicator{image:None;}");
+//    menuButton->setStyleSheet("QPushButton::menu-indicator{image:None;}");
 }
 
 void menuModule::initGsetting(){

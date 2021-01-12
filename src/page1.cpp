@@ -510,6 +510,7 @@ void Page1::setThemeStyleLight()
                                      "QPushButton:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                      "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");
     authDialogContentWidget->setStyleSheet("background-color:rgba(255,255,255,1);border-radius:6px;");
+    this->setStyleSheet("background-color:rgba(255,255,255,1);");
     comboUdisk->setThemeLight();    //设置combobox响应浅色主题
     emit setStyleWidgetStyle(LIGHTTHEME);   //设置stylewidget响应浅色主题
 }
@@ -529,8 +530,6 @@ void Page1::setThemeStyleDark()
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
-
-
     //    root授权框部分
         authDialogContentWidget->setStyleSheet("background-color:rgba(61,61,65,1);border-radius:6px;");
         rootDialogTitleText->setStyleSheet("font-size:14px;font-weight:600;color:rgba(249,249,249,1);");
@@ -555,5 +554,6 @@ void Page1::setThemeStyleDark()
                                          "QPushButton:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                          "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");;
     comboUdisk->setThemeDark(); //设置combobox响应深色主题
+    this->setStyleSheet("background-color:rgba(31,32,34,1);");
     emit setStyleWidgetStyle(DARKTHEME); //设置stylewidget响应黑色主题
 }

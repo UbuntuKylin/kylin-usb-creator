@@ -30,8 +30,12 @@ void MainWindow::statusbarInit()
     titleText = new QLabel();
     titleText->setText(tr("kylin usb creator"));
     titleMin = new QPushButton();
-    titleMin->setIconSize(QSize(30,30));
-    titleMin->setFixedSize(30,30);
+    titleMin->setProperty("isWindowButton", 0x2);
+    titleMin->setProperty("useIconHighlightEffect", 0x8);
+    titleMin->setFlat(true);
+    titleMin->setFixedSize(30, 30);
+    titleMin->setIconSize(QSize(16, 16));
+    titleMin->setIcon(QIcon::fromTheme("window-minimize-symbolic"));
     connect(titleMin,&QPushButton::clicked,[=](){
        this->setWindowState(Qt::WindowMinimized); 
     });
@@ -39,23 +43,19 @@ void MainWindow::statusbarInit()
     connect(menu,&menuModule::menuModuleClose,[=](){this->close();});
     connect(menu,&menuModule::menuModuleSetThemeStyle,this,&MainWindow::setThemeStyle);
 
-//    menu->appName = "kylin usb creator";
-//    menu->appShowingName
-//    titleMenu->setIconSize(QSize(30,30));
-//    titleMenu->setFixedSize(30,30);
-//    使用主题效果
-//    titleMenu->setProperty("isWindowButton",0x1);
-//    titleMenu->setProperty("useIconHighlightEffect",0x2);
-//    titleMenu->setFlat(true);
-//    titleMenu->setIcon(QIcon::fromTheme("application-menu"));
     titleClose = new QPushButton();
-    titleClose->setIconSize(QSize(30,30));
-    titleClose->setFixedSize(30,30);
+    titleClose->setProperty("isWindowButton", 0x2) ;
+    titleClose->setProperty("useIconHighlightEffect", 0x8);;
+    titleClose->setFlat(true);
+    titleClose->setFixedSize(30, 30);
+    titleClose->setIconSize(QSize(16, 16));
+    titleClose->setIcon(QIcon::fromTheme("window-close-symbolic"));
     connect(titleClose,&QPushButton::clicked,[=](){
        this->close();
     });
     QHBoxLayout *hlt0 = new QHBoxLayout;
-    hlt0->setMargin(0);
+//    hlt0->setMargin(0);
+    hlt0->setContentsMargins(0,0,0,0);
     hlt0->setSpacing(0);
     hlt0->addStretch();
     hlt0->addWidget(menu->menuButton,1);
@@ -131,13 +131,15 @@ void MainWindow::myStyle()
     hlt->addStretch(1);
     hlt->addWidget(pointLable3);
     hlt->addStretch(15);
+    bottomWidget = new QWidget();
+    bottomWidget->setLayout(hlt);
     QVBoxLayout *vlt =new QVBoxLayout;
     vlt->setMargin(0);
     vlt->setSpacing(0);
     vlt->addWidget(title);
     vlt->addWidget(stackedWidget,99);
-    vlt->addLayout(hlt,1);
-    vlt->addSpacing(7);
+//    vlt->addLayout(hlt,1);
+    vlt->addWidget(bottomWidget,1);
     this->setLayout(vlt);
     // 状态栏初始化部分，需要时打开注释
 //    createTrayActions();
@@ -251,36 +253,44 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 }
 void MainWindow::setThemeDark()
 {
-    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_h.png);border-radius:4px;}"
-                             "QPushButton:hover{background-color:rgba(61,61,61,1);border-image:url(:/data/min_h.png);border-radius:4px;}"
-                             "QPushButton:pressed{background-color:rgba(73,73,73,1);border-image:url(:/data/min_h.png);border-radius:4px;}");
-    titleClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_h.png);border-radius:4px;}"
-                               "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
-                               "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
+//    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_h.png);border-radius:4px;}"
+//                             "QPushButton:hover{background-color:rgba(61,61,61,1);border-image:url(:/data/min_h.png);border-radius:4px;}"
+//                             "QPushButton:pressed{background-color:rgba(73,73,73,1);border-image:url(:/data/min_h.png);border-radius:4px;}");
+//    titleClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_h.png);border-radius:4px;}"
+//                               "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
+//                               "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
 //    titleMenu->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                             "QPushButton::menu-indicator{image:None;}");
     titleText->setStyleSheet("color:rgba(249,249,249,1);font-size:14px;");
+    title->setStyleSheet(".QWidget{background-color:rgba(31,32,34,1)}");
+    stackedWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
+    bottomWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
     page2->setThemeStyleDark();
-    this->setStyleSheet("background-color:rgba(31,32,34,1);");
+//    this->setStyleSheet("background-color:rgba(31,32,34,1);");
+//    this->setStyleSheet(".QWidget{background-color:rgba(31,32,34,1);}");
     page1->setThemeStyleDark();
 }
 
 void MainWindow::setThemeLight()
 {
-    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "QPushButton:hover{background-color:rgba(0,0,0,0.15);border-image:url(:/data/min_d.png);border-radius:4px;}"
-                             "QPushButton:pressed{background-color:rgba(0,0,0,0.3);border-image:url(:/data/min_d.png);border-radius:4px;}");
-    titleClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
-                               "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
-                               "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
+//    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
+//                             "QPushButton:hover{background-color:rgba(0,0,0,0.15);border-image:url(:/data/min_d.png);border-radius:4px;}"
+//                             "QPushButton:pressed{background-color:rgba(0,0,0,0.3);border-image:url(:/data/min_d.png);border-radius:4px;}");
+//    titleClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
+//                               "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
+//                               "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
 //    titleMenu->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
 //                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
 //                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
 //                             "QPushButton::menu-indicator{image:None;}");
+    stackedWidget->setStyleSheet("background-color:rgba(255,255,255,1);");
+    title->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
+    bottomWidget->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
     titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
-    this->setStyleSheet("background-color:rgba(255,255,255,1);");
+//    this->setStyleSheet("background-color:rgba(255,255,255,1);");
+//    this->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1);}");
     page1->setThemeStyleLight();
     page2->setThemeStyleLight();
 }

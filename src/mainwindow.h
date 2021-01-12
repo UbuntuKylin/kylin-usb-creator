@@ -74,6 +74,7 @@ private:
     void setThemeDark();
     void setThemeLight();
     void aboutClick();
+    QWidget *bottomWidget = nullptr;
     menuModule *menu = nullptr;
     QTimer *dbustimer = nullptr;
     QStackedWidget *stackedWidget= nullptr;
