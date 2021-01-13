@@ -12,12 +12,13 @@ void menuModule::init(){
 
 void menuModule::initAction(){
     iconSize = QSize(30,30);
-    menuButton = new QPushButton;
+    menuButton = new QToolButton;
     menuButton->setProperty("isWindowButton", 0x1);
     menuButton->setProperty("useIconHighlightEffect", 0x2);
-    menuButton->setFlat(true);
-    menuButton->setFixedSize(30, 30);
+    menuButton->setPopupMode(QToolButton::InstantPopup);
+    menuButton->setFixedSize(30,30);
     menuButton->setIconSize(QSize(16, 16));
+    menuButton->setAutoRaise(true);
     menuButton->setIcon(QIcon::fromTheme("open-menu-symbolic"));
 
     m_menu = new QMenu();
@@ -57,6 +58,7 @@ void menuModule::initAction(){
     setThemeFromLocalThemeSetting(themeActions);
     themeUpdate();
     connect(themeMenu,&QMenu::triggered,this,&menuModule::triggerThemeMenu);
+    aboutWindow = new QWidget();
 }
 
 void menuModule::setThemeFromLocalThemeSetting(QList<QAction* > themeActions)
@@ -155,14 +157,12 @@ void menuModule::helpAction(){
 }
 
 void menuModule::initAbout(){
-    aboutWindow = new QWidget();
     MotifWmHints hints;
     hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
     hints.functions = MWM_FUNC_ALL;
     hints.decorations = MWM_DECOR_BORDER;
     XAtomHelper::getInstance()->setWindowMotifHint(aboutWindow->winId(), hints);
     aboutWindow->setFixedSize(420,324);
-    aboutWindow->setMinimumHeight(324);
     QVBoxLayout *mainlyt = new QVBoxLayout();
     QHBoxLayout *titleLyt = initTitleBar();
     QVBoxLayout *bodylyt = initBody();
@@ -174,7 +174,6 @@ void menuModule::initAbout(){
     //TODO:在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     aboutWindow->move((availableGeometry.width()-aboutWindow->width())/2,(availableGeometry.height()- aboutWindow->height())/2);
-//    aboutWindow->setStyleSheet("background-color:rgba(255,255,255,1);");
     aboutWindow->show();
 }
 
@@ -276,19 +275,22 @@ void menuModule::refreshThemeBySystemConf(){
 }
 
 void menuModule::setThemeDark(){
-    qDebug()<<"set theme dark";
     if(aboutWindow)
     {
-        aboutWindow->setStyleSheet("background-color:rgba(31,32,34，1);");
+        qDebug()<<"set aboutwindow dark";
+        aboutWindow->setStyleSheet("background-color:rgba(31,32,234，1);");
     }
+//    aboutWindow->setStyleSheet(".QWidget{background-color:rgba()}");
     emit menuModuleSetThemeStyle("dark-theme");
 }
 
 void menuModule::setThemeLight(){
-//    qDebug()<<"set theme light";
+    qDebug()<<aboutWindow<<"%%%%%%%%%aboutwindow";
     if(aboutWindow)
     {
-        aboutWindow->setStyleSheet("background-color:rgba(255，255，255，1);");
+        qDebug()<<"set aboutwindow light";
+//        aboutWindow->setStyleSheet("background-color:rgba(25，255，255，1);");
+        this->setStyleSheet(".QWidget{background-color:rgba(255，255，255，1);}");
     }
     emit menuModuleSetThemeStyle("light-theme");
 

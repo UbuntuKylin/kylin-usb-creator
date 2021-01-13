@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QMenu>
 #include <QPushButton>
+#include <QToolButton>
 #include <QDebug>
 #include <QString>
 #include <QLabel>
@@ -29,7 +30,7 @@ signals:
     void menuModuleClose();
     void menuModuleSetThemeStyle(QString);
 public:
-    QPushButton *menuButton = nullptr;
+    QToolButton *menuButton = nullptr;
 
 public:
 //    程序在实例化的时候需要传递的信息字段,打开debug开关后这些字段会被自动填充
