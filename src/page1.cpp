@@ -383,6 +383,7 @@ void Page1::creatStartSlots()
 
     authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}");
     authDialog->dialogKey->setPlaceholderText("请输入密码");
+    authDialog->dialogKey->clear();
     authDialog->show();
 }
 
@@ -518,7 +519,6 @@ void Page1::setThemeStyleLight()
 void Page1::setThemeStyleDark()
 {
     themeStatus = DARKTHEME;
-    qDebug()<<"Page1::setThemeStyleDark被调用";
     tabUdisk->setStyleSheet("color:rgba(249,249,249,1);");
     tabIso->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
     warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");

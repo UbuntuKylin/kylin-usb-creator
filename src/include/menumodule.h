@@ -1,6 +1,5 @@
 #ifndef MENUMODULE_H
 #define MENUMODULE_H
-#define DEBUG_MENUMODULE 0  //DEBUG模式开关，代码上线之前务必关掉
 #define FITTHEMEWINDOW "org.ukui.style"
 #define APPDATA "org.kylin-usb-creator-data.settings"
 
@@ -35,8 +34,8 @@ public:
 public:
 //    程序在实例化的时候需要传递的信息字段,打开debug开关后这些字段会被自动填充
     QString appName = "tools/kylin-usb-creator"; //格式kylin-usb-creator
-    QString appShowingName = "kylin usb creator"; //格式kylin usb creator ,用来在前端展示
-    QString appVersion = "1.0.0-36kord";
+//    QString appShowingName = "kylin usb creator"; //格式kylin usb creator ,用来在前端展示
+    QString appVersion = "1.0.0";
     QString appDesc = "appDesc字段未填充!";
     QString iconPath = ":/data/kylin-usb-creator.svg";
     QString confPath = "org.kylin-usb-creator-data.settings";
@@ -73,8 +72,10 @@ private:
     void setThemeStyle();
     void setThemeLight();
     void setThemeDark();
-//    void updateTheme(); //点击菜单中的主题设置后更新一次主题
-
+    QLabel* titleText = nullptr;
+    QLabel* bodyAppName = nullptr;
+    QLabel* bodyAppVersion = nullptr;
+    QLabel* bodySupport = nullptr;
     void refreshThemeBySystemConf();    //通过系统配置更改主题
 };
 

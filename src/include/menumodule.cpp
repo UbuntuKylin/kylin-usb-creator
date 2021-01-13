@@ -11,6 +11,11 @@ void menuModule::init(){
 }
 
 void menuModule::initAction(){
+    aboutWindow = new QWidget();
+    titleText = new QLabel();
+    bodyAppName = new QLabel();
+    bodyAppVersion = new QLabel();
+    bodySupport = new QLabel();
     iconSize = QSize(30,30);
     menuButton = new QToolButton;
     menuButton->setProperty("isWindowButton", 0x1);
@@ -58,14 +63,11 @@ void menuModule::initAction(){
     setThemeFromLocalThemeSetting(themeActions);
     themeUpdate();
     connect(themeMenu,&QMenu::triggered,this,&menuModule::triggerThemeMenu);
-    aboutWindow = new QWidget();
+
 }
 
 void menuModule::setThemeFromLocalThemeSetting(QList<QAction* > themeActions)
 {
-#if DEBUG_MENUMODULE
-    confPath = "org.kylin-usb-creator-data.settings";
-#endif
     m_pGsettingThemeStatus = new QGSettings(APPDATA);
     QString appConf = m_pGsettingThemeStatus->get("thememode").toString();
     if("lightonly" == appConf){
@@ -124,7 +126,6 @@ void menuModule::triggerThemeMenu(QAction *act){
         themeStatus = themeLightOnly;
         disconnect(m_pGsettingThemeData,&QGSettings::changed,this,&menuModule::dealSystemGsettingChange);
         m_pGsettingThemeStatus->set("thememode","lightonly");
-//        disconnect()
         setThemeLight();
     }else if(tr("Dark") == str){
         themeStatus = themeBlackOnly;
@@ -147,9 +148,6 @@ void menuModule::aboutAction(){
 
 void menuModule::helpAction(){
 //    帮助点击事件处理
-#if DEBUG_MENUMODULE
-    appName = "tools/kylin-usb-creator";
-#endif
     DaemonIpcDbus *ipcDbus = new DaemonIpcDbus();
     if(!ipcDbus->daemonIsNotRunning()){
         ipcDbus->showGuide(appName);
@@ -157,6 +155,7 @@ void menuModule::helpAction(){
 }
 
 void menuModule::initAbout(){
+    aboutWindow->setWindowFlag(Qt::Tool);
     MotifWmHints hints;
     hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
     hints.functions = MWM_FUNC_ALL;
@@ -179,13 +178,8 @@ void menuModule::initAbout(){
 
 QHBoxLayout* menuModule::initTitleBar(){
     QLabel* titleIcon = new QLabel();
-    QLabel* titleText = new QLabel();
     QPushButton *titleBtnClose = new QPushButton;
     titleIcon->setFixedSize(QSize(24,24));
-#if DEBUG_MENUMODULE
-    iconPath = ":/data/kylin-usb-creator.svg";
-    appShowingName = "kylin usb creator";
-#endif
     //TODO：直接从主题调图标，不会QIcon转qpixmap所以暂时从本地拿
     titleIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
 
@@ -197,7 +191,7 @@ QHBoxLayout* menuModule::initTitleBar(){
     titleBtnClose->setFlat(true);
     connect(titleBtnClose,&QPushButton::clicked,[=](){aboutWindow->close();});
     QHBoxLayout *hlyt = new QHBoxLayout;
-    titleText->setText(tr(appShowingName.toLocal8Bit()));
+    titleText->setText(tr("kylin usb creator"));
     titleText->setStyleSheet("font-size:14px;");
     hlyt->setSpacing(0);
     hlyt->setMargin(4);
@@ -211,24 +205,19 @@ QHBoxLayout* menuModule::initTitleBar(){
 }
 
 QVBoxLayout* menuModule::initBody(){
-#if DEBUG_MENUMODULE
-    appVersion = "2020.12.12-test";
-#endif
     QLabel* bodyIcon = new QLabel();
     bodyIcon->setFixedSize(96,96);
     bodyIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
     bodyIcon->setStyleSheet("font-size:14px;");
     bodyIcon->setScaledContents(true);
-    QLabel* bodyAppName = new QLabel();
     bodyAppName->setFixedHeight(28);
-    bodyAppName->setText(tr(appShowingName.toLocal8Bit()));
+//    bodyAppName->setText(tr(appShowingName.toLocal8Bit()));
+    bodyAppName->setText(tr("kylin usb creator"));
     bodyAppName->setStyleSheet("font-size:18px;");
-    QLabel* bodyAppVersion = new QLabel();
     bodyAppVersion->setFixedHeight(24);
     bodyAppVersion->setText(tr("Version: ") + appVersion);
     bodyAppVersion->setAlignment(Qt::AlignLeft);
     bodyAppVersion->setStyleSheet("font-size:14px;");
-    QLabel* bodySupport = new QLabel();
     bodySupport->setText(tr("Support: support@kylinos.cn"));
     bodySupport->setFixedHeight(24);
     bodySupport->setStyleSheet("font-size:14px;");
@@ -275,23 +264,14 @@ void menuModule::refreshThemeBySystemConf(){
 }
 
 void menuModule::setThemeDark(){
-    if(aboutWindow)
-    {
-        qDebug()<<"set aboutwindow dark";
-        aboutWindow->setStyleSheet("background-color:rgba(31,32,234，1);");
-    }
-//    aboutWindow->setStyleSheet(".QWidget{background-color:rgba()}");
+    aboutWindow->setStyleSheet(".QWidget{background-color:rgba(61,61,65,1);}");
+    this->setStyleSheet("QLabel{color:rgba(255,255,255,1);}");
+    titleText->setStyleSheet("color:rgba(255,255,255,1);");
     emit menuModuleSetThemeStyle("dark-theme");
 }
 
 void menuModule::setThemeLight(){
-    qDebug()<<aboutWindow<<"%%%%%%%%%aboutwindow";
-    if(aboutWindow)
-    {
-        qDebug()<<"set aboutwindow light";
-//        aboutWindow->setStyleSheet("background-color:rgba(25，255，255，1);");
-        this->setStyleSheet(".QWidget{background-color:rgba(255，255，255，1);}");
-    }
+    aboutWindow->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1);}");
     emit menuModuleSetThemeStyle("light-theme");
 
 }
