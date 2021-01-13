@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="31"/>
         <location filename="../mainwindow.cpp" line="87"/>
-        <location filename="../mainwindow.cpp" line="196"/>
+        <location filename="../mainwindow.cpp" line="198"/>
         <source>kylin usb creator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <location filename="../page2.cpp" line="96"/>
-        <location filename="../page2.cpp" line="118"/>
+        <location filename="../page2.cpp" line="119"/>
         <source>return</source>
         <translation type="unfinished"></translation>
     </message>
@@ -103,7 +103,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="122"/>
+        <location filename="../page2.cpp" line="123"/>
         <source>Creation Failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,52 +111,58 @@
 <context>
     <name>menuModule</name>
     <message>
-        <location filename="../include/menumodule.cpp" line="21"/>
+        <location filename="../include/menumodule.cpp" line="32"/>
         <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="23"/>
-        <location filename="../include/menumodule.cpp" line="105"/>
+        <location filename="../include/menumodule.cpp" line="34"/>
+        <location filename="../include/menumodule.cpp" line="114"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="25"/>
-        <location filename="../include/menumodule.cpp" line="103"/>
+        <location filename="../include/menumodule.cpp" line="36"/>
+        <location filename="../include/menumodule.cpp" line="112"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="27"/>
-        <location filename="../include/menumodule.cpp" line="101"/>
+        <location filename="../include/menumodule.cpp" line="38"/>
+        <location filename="../include/menumodule.cpp" line="110"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="33"/>
+        <location filename="../include/menumodule.cpp" line="44"/>
         <source>Auto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="37"/>
-        <location filename="../include/menumodule.cpp" line="116"/>
+        <location filename="../include/menumodule.cpp" line="48"/>
+        <location filename="../include/menumodule.cpp" line="125"/>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="41"/>
-        <location filename="../include/menumodule.cpp" line="122"/>
+        <location filename="../include/menumodule.cpp" line="52"/>
+        <location filename="../include/menumodule.cpp" line="130"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="224"/>
+        <location filename="../include/menumodule.cpp" line="194"/>
+        <location filename="../include/menumodule.cpp" line="215"/>
+        <source>kylin usb creator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../include/menumodule.cpp" line="218"/>
         <source>Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="228"/>
+        <location filename="../include/menumodule.cpp" line="221"/>
         <source>Support: support@kylinos.cn</source>
         <translation type="unfinished"></translation>
     </message>
