@@ -16,7 +16,6 @@ void menuModule::initAction(){
     bodyAppName = new QLabel();
     bodyAppVersion = new QLabel();
     bodySupport = new QLabel();
-    iconSize = QSize(30,30);
     menuButton = new QToolButton;
     menuButton->setProperty("isWindowButton", 0x1);
     menuButton->setProperty("useIconHighlightEffect", 0x2);

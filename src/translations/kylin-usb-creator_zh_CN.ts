@@ -193,7 +193,7 @@
         <location filename="../include/menumodule.cpp" line="194"/>
         <location filename="../include/menumodule.cpp" line="215"/>
         <source>kylin usb creator</source>
-        <translation type="unfinished">麒麟U盘启动器</translation>
+        <translation>麒麟U盘启动器</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="218"/>
