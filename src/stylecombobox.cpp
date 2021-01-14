@@ -5,7 +5,8 @@ StyleComboBox::StyleComboBox()
 {
 //    swa=scb_swa;
     //窗口设置
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);//无边框
+//    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint | Qt::Tool);//无边框
+//    this->setWindowFlags(Qt::Tool);
     this->setAttribute(Qt::WA_TranslucentBackground, true);//窗体透明
     this->setFixedSize(370,30);
 
@@ -23,7 +24,8 @@ StyleComboBox::StyleComboBox()
 
     //下拉弹窗以及阴影绘制
     listWidget=new QListWidget;
-    listWidget->setWindowFlag(Qt::FramelessWindowHint);  // 无边框
+//    listWidget->setWindowFlag(Qt::FramelessWindowHint);  // 无边框
+    listWidget->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
     listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //关闭水平滚动条
     connect(listWidget,&QListWidget::itemClicked,this,&StyleComboBox::setPushKey);
 
