@@ -47,6 +47,7 @@ public slots:
     void returnMain();
     void handleIconClickedSub();
     void setThemeStyle(QString);
+    void dealMenuModulePullupHelp();
 
 private:
     // 标题栏资源

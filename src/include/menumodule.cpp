@@ -246,7 +246,13 @@ void menuModule::initGsetting(){
     }
 
 }
-
+void menuModule::keyPressEvent(QKeyEvent *event){
+    if(event->key() == Qt::Key_F1){
+        emit pullupHelp();
+    }else{
+        QWidget::keyPressEvent(event);
+    }
+}
 void menuModule::dealSystemGsettingChange(const QString key){
     if(key == "styleName"){
         refreshThemeBySystemConf();

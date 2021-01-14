@@ -42,6 +42,7 @@ void MainWindow::statusbarInit()
     menu  = new menuModule(this);
     connect(menu,&menuModule::menuModuleClose,[=](){this->close();});
     connect(menu,&menuModule::menuModuleSetThemeStyle,this,&MainWindow::setThemeStyle);
+    connect(menu,&menuModule::pullupHelp,this,&MainWindow::dealMenuModulePullupHelp);
 
     titleClose = new QPushButton();
     titleClose->setProperty("isWindowButton", 0x2) ;
@@ -199,6 +200,11 @@ void MainWindow::createTrayActions()
     m_mainTray->show();
 }
 
+void MainWindow::dealMenuModulePullupHelp(){
+    if(!m_DaemonIpcDbus->daemonIsNotRunning()){
+        m_DaemonIpcDbus->showGuide("tools/kylin-usb-creator");
+    }
+}
 void MainWindow::makeStart()
 {
 //    isInPage2 = true;

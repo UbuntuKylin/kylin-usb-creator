@@ -7,6 +7,7 @@
 #include <QWidget>
 #include <QMenu>
 #include <QPushButton>
+#include <QKeyEvent>
 #include <QToolButton>
 #include <QDebug>
 #include <QString>
@@ -28,6 +29,7 @@ public:
 signals:
     void menuModuleClose();
     void menuModuleSetThemeStyle(QString);
+    void pullupHelp();
 public:
     QToolButton *menuButton = nullptr;
 
@@ -52,10 +54,12 @@ private:
         themeAuto = 0,
         themeBlackOnly = 1,
         themeLightOnly = 2
-    } themeStatus;
+        } themeStatus;
+
 public slots:
     void dealSystemGsettingChange(const QString);
 private:
+    void keyPressEvent(QKeyEvent *event);
     void init();
     QHBoxLayout* initTitleBar(); //关于窗口标题栏初始化
     QVBoxLayout* initBody();    // 关于窗口body初始化
