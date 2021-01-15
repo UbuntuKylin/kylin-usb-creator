@@ -319,6 +319,33 @@ void Page1::getUdiskName()
             if(tmp->devicePath + '1' == disk.device())  //使用第一个分区的名字做展示名
             {
                 tmp->displayName = disk.displayName();
+//                uchardet_t* type = new uchardet_t();
+//                type->uchardet_handle_data()
+//                QString target;
+//                QByteArray str = disk.displayName().toLatin1();
+//                QByteArray tmp = str.toLatin1();
+//                QTextCodec::ConverterState state;
+//                target = QTextCodec::codecForName("UTF-8")->toUnicode(str.constData(),str.size(),&state);
+//                qDebug()<<state.invalidChars;
+//                if(state.invalidChars > 0){
+//                    qDebug()<<state.invalidChars;
+//                    target = QTextCodec::codecForName("GBK")->toUnicode(str.constData(),str.size(),&state);
+//                    if(state.invalidChars > 0){
+//                        qDebug()<<"不支持的编码集";
+//                    }
+//                }
+//                target.replace("\n","");
+//                qDebug()<<target;
+//                QTextCodec *utf8 = QTextCodec::codecForName("UTF-8");
+//                QTextCodec::setCodecForLocale(utf8);
+//                QTextCodec::setCodecForCStrings(utf8);
+//                QTextCodec* gbk = QTextCodec::codecForName("gbk");
+//                char *p = str.toLocal8Bit().data();
+
+//                QString strUnicode=gbk->toUnicode(p);
+//                QByteArray utf8_bytes=utf8->fromUnicode(strUnicode);
+//                p = utf8_bytes.data();
+//                qDebug()<<QString(QLatin1String(p));
             }
         }
     }
