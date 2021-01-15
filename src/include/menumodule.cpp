@@ -35,7 +35,8 @@ void menuModule::initAction(){
     actionAbout->setText(tr("About"));
     QAction *actionQuit = new QAction(m_menu);
     actionQuit->setText(tr("Quit"));
-    actions<<actionTheme<<actionHelp<<actionAbout<<actionQuit;
+//    actions<<actionTheme<<actionHelp<<actionAbout<<actionQuit;
+    actions<<actionHelp<<actionAbout<<actionQuit;
     m_menu->addActions(actions);
 //    互斥按钮组
     QMenu *themeMenu = new QMenu;
