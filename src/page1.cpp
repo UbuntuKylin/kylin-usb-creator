@@ -307,18 +307,25 @@ void Page1::getUdiskPathAndCap()
 void Page1::getUdiskName()
 {
     QList<QStorageInfo> storageInfo = QStorageInfo::mountedVolumes();
-    foreach(AvailableDiskInfo* tmp,diskInfos)
+    foreach(AvailableDiskInfo* tmp,diskInfos)  //lsblk命令拿到的可用U盘信息
     {
+        qDebug()<<tmp->displayName<<"****";
         foreach(QStorageInfo disk,storageInfo)
         {
-            if(disk.device().length() == 8 && tmp->devicePath == disk.device())
+            if((disk.device().length() == 8 && tmp->devicePath == disk.device()))
             {
                 tmp->displayName = disk.displayName();
+                float cap = disk.bytesTotal();
+                tmp->diskCapicity = QString::number(cap/1000000000,'f',1) + 'G';
                 continue;
             }
             if(tmp->devicePath + '1' == disk.device())  //使用第一个分区的名字做展示名
             {
                 tmp->displayName = disk.displayName();
+                tmp->diskCapicity = disk.bytesTotal();
+                float cap = disk.bytesTotal();
+                tmp->diskCapicity = QString::number(cap / 1000000000,'f',1) + 'G';
+                continue;
 //                uchardet_t* type = new uchardet_t();
 //                type->uchardet_handle_data()
 //                QString target;
@@ -453,7 +460,7 @@ bool Page1::ifStartBtnChange()
     }
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
-        creatStart->setEnabled(true);//true时，相当于激活了按钮，按钮的状态不再是死的,对触摸或者点击产生反应，响应触发事件。false时，按钮是灰色的，无论是否可点击（即使将setClickable()设置成true），都无法响应任何触发事件。
+        creatStart->setEnabled(true);
         creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
                                   "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
                                   "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");

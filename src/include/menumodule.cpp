@@ -55,7 +55,6 @@ void menuModule::initAction(){
     darkTheme->setCheckable(true);
     QList<QAction* > themeActions;
     themeActions<<autoTheme<<lightTheme<<darkTheme;
-//    autoTheme->setChecked(true);
     actionTheme->setMenu(themeMenu);
     menuButton->setMenu(m_menu);
     connect(m_menu,&QMenu::triggered,this,&menuModule::triggerMenu);
@@ -63,7 +62,6 @@ void menuModule::initAction(){
     setThemeFromLocalThemeSetting(themeActions);
     themeUpdate();
     connect(themeMenu,&QMenu::triggered,this,&menuModule::triggerThemeMenu);
-
 }
 
 void menuModule::setThemeFromLocalThemeSetting(QList<QAction* > themeActions)

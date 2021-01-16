@@ -1,12 +1,8 @@
 #include "stylecombobox.h"
 
-//StyleComboBox::StyleComboBox(StyleWidgetAttribute scb_swa )
 StyleComboBox::StyleComboBox()
 {
-//    swa=scb_swa;
     //窗口设置
-//    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint | Qt::Tool);//无边框
-//    this->setWindowFlags(Qt::Tool);
     this->setAttribute(Qt::WA_TranslucentBackground, true);//窗体透明
     this->setFixedSize(370,30);
 
@@ -24,7 +20,6 @@ StyleComboBox::StyleComboBox()
 
     //下拉弹窗以及阴影绘制
     listWidget=new QListWidget;
-//    listWidget->setWindowFlag(Qt::FramelessWindowHint);  // 无边框
     listWidget->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
     listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //关闭水平滚动条
     connect(listWidget,&QListWidget::itemClicked,this,&StyleComboBox::setPushKey);
@@ -49,7 +44,6 @@ void StyleComboBox::clearDiskList()
 
 void StyleComboBox::on_diskButton_click()
 {
-    qDebug()<<"isDiskListOpen state:"<<isDiskListOpen;
     if(!isDiskListOpen)
     {
         qDebug()<<"disklist 显示触发";
@@ -61,9 +55,9 @@ void StyleComboBox::on_diskButton_click()
         QPoint point= pushButton->mapToGlobal(QPoint(0,0));
         icon->setStyleSheet("border-image:url(:/data/comboboxIcon_c.png);border:0px;");
         if(LIGHTTHEME == themeStatus){
-            pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(100, 105, 241, 1);}");
-//            .QListWidget{border:1px solid rgba(255,255,255,1);}"
-            listWidget->setStyleSheet("QListWidget::Item{background-color:rgba(255,255,255,1);border-radius:2px;padding-left:20px;color:rgba(96,98,102,1);}"
+            pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(100, 105, 241, 1);border-radius:4px;}");
+            listWidget->setStyleSheet("QListWIdget{color:rgba(161,61,65,1);border:4px soild blue;}"
+                                      "QListWidget::Item{background-color:rgba(255,255,255,1);border-radius:2px;padding-left:20px;color:rgba(96,98,102,1);}"
                                       "QListWidget::Item:hover{background-color:rgba(246,246,246,1);}");
         }else if(DARKTHEME == themeStatus){
             pushButton->setStyleSheet(".QPushButton{background-color:rgba(31,32,34,1);border:1px solid rgba(100,105,241,1);border-radius:4px;color:rgba(143,417,153,1);}");
@@ -79,7 +73,7 @@ void StyleComboBox::on_diskButton_click()
     {
         qDebug()<<"disklist 关闭触发";
         isDiskListOpen = false;
-
+        listWidget->close();
         icon->setStyleSheet("border-image:url(:/data/comboboxIcon_d.png);border:0px;");
         if(LIGHTTHEME == themeStatus){
             pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(192, 196,204,1);border-radius:4px;}"
@@ -142,8 +136,8 @@ void StyleComboBox::setThemeDark()
 {
     themeStatus = DARKTHEME;
     text->setStyleSheet("background-color:rgba(31,32,34,1);color:rgba(143,147,153,1);border:0px;");
-    listWidget->setStyleSheet("QListWIdget{color:rgba(61,61,65,1);}"
-                "QListWidget::Item{background-color:rgba(61,61,65,1);color:rgba(249,249,249,1);padding-left:10px;}"
+    listWidget->setStyleSheet("QListWIdget{color:rgba(61,61,65,1);border:4px soild blue;}"
+                              "QListWidget::Item{background-color:rgba(61,61,65,1);color:rgba(249,249,249,1);padding-left:10px;}"
                               "QListWidget::Item:hover{background-color:(26,246,246,1);border:1px soild red};");
     icon->setStyleSheet("border-image:url(:/data/comboboxIcon_d.png);border:0px;");
     pushButton->setStyleSheet(".QPushButton{background-color:rgba(31,32,34,1);border:1px solid rgba(61,61,65,1);}");
@@ -153,7 +147,8 @@ void StyleComboBox::setThemeLight()
 {
     themeStatus = LIGHTTHEME;
     text->setStyleSheet("color:rgba(96,98,101,1);border:0px;");
-    listWidget->setStyleSheet("QListWidget::Item{background-color:rgba(255,255,255,1);color:rgba(96,98,102,1);padding-left:10px;}"
+    listWidget->setStyleSheet("QListWidget{border:4px soild blue;}"
+                              "QListWidget::Item{background-color:rgba(255,255,255,1);color:rgba(96,98,102,1);padding-left:10px;}"
                               "QListWidget::Item:hover{background-color:(246,246,246,1);border:1px soild red};");
     icon->setStyleSheet("border-image:url(:/data/comboboxIcon_d.png);border:0px;");
     pushButton->setStyleSheet(".QPushButton{background-color:#fff;border:1px solid rgba(192, 196,204,1);border-radius:4px;}"

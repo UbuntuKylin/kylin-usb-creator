@@ -15,7 +15,7 @@
 #include <QEvent>
 #include <QDebug>
 #include <QRect>
-#include <uchardet/uchardet.h>
+//#include <uchardet/uchardet.h>
 #include <QWidget> //控件
 #include <QLabel>
 #include <QComboBox>
