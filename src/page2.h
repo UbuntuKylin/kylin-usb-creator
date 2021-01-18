@@ -36,11 +36,16 @@ public slots:
     void finishEvent();
 
 private:
+    enum typeMovieStatus {
+        loading = 0,
+        finish = 1,
+        failed = 2
+        } movieStatus;   //枚举类型的动画进度
     void playLoadingGif();
     void playFinishGif();
     void playErrorGif();
-    void refreshGifStatus(); //更新动画资源状态
     bool isMakingSuccess(); //进度到100%之后检查制作是否成功
+    void movieRefresh(); //切换主题时重新加载动画
     QString uDiskPath = ""; //U盘路径
     QString themeStatus = LIGHTTHEME;
     QMovie *movieLoading_l=nullptr; //过程动画，黑白两套
