@@ -12,6 +12,7 @@
 #include <QStyleOption>
 #include <QPainter>
 #include <QPushButton>
+#include <QEvent>
 
 class rootAuthDialog:public QWidget
 {
@@ -28,6 +29,7 @@ signals:
 
 public slots:
     void checkPassWord();
+    bool eventFilter(QObject *,QEvent *);                    //change
 
 private:
     void Init();
@@ -39,6 +41,7 @@ private:
     QProcess *command_sudo = nullptr;
 
     QString m_key ;     //密码
+    bool event(QEvent *event);
 };
 
 #endif // ROOTAUTHDIALOG_H

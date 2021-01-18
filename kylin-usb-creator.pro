@@ -1,4 +1,4 @@
-QT       += core gui dbus
+QT       += core gui dbus network x11extras KWindowSystem
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,22 +15,51 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+#架构判断，龙芯机器时宏为1 不清楚架构匹配关键字暂时注释
+#unix{
+#    contains(QT_ARCH,mips){
+#DEFINES += IS_MIPS64EL_ARCHITECTURE=1
+#}else{
+#DEFINES += IS_MIPS64EL_ARCHITECTURE=0
+#}
+#}
+
+#INCLUDEPATH += /usr/include/KF5/KWindowSystem
+
 SOURCES += \
     src/dbusadaptor.cpp \
+    src/include/menumodule.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/page1.cpp \
     src/page2.cpp \
+    src/include/qtlocalpeer.cpp \
+    src/include/qtlockedfile.cpp \
+    src/include/qtlockedfile_unix.cpp \
+    src/include/qtsingleapplication.cpp \
+    src/include/xatom-helper.cpp \
+    src/include/daemonipcdbus.cpp \
     src/stylecombobox.cpp \
-    src/rootauthdialog.cpp
+    src/rootauthdialog.cpp \
+    src/toolwindow.cpp
 
 HEADERS += \
     src/dbusadaptor.h \
+    src/include/daemonipcdbus.h \
+    src/include/menumodule.h \
     src/mainwindow.h \
     src/page1.h \
     src/page2.h \
+    src/include/qtlocalpeer.h \
+    src/include/qtlockedfile.h \
+    src/include/qtsingleapplication.h \
+    src/include/xatom-helper.h \
     src/stylecombobox.h \
-    src/rootauthdialog.h
+    src/rootauthdialog.h \
+    src/toolwindow.h
+
+LIBS +=-lpthread
+LIBS +=-lX11
 
 # bin file output dir
 TARGET = kylin-usb-creator
@@ -41,7 +70,7 @@ icons.files = data/kylin-usb-creator.png
 icons.path = /usr/share/pixmaps/
 
 # gsettings
-schemes.file = /data/org.kylin-usb.creator.gschema.xml
+schemes.files = data/org.kylin-usb-creator-data.gschema.xml
 schemes.path = /usr/share/glib-2.0/schemas/
 
 desktop.path = /usr/share/applications
@@ -58,9 +87,9 @@ TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts \
                 src/translations/kylin-usb-creator_bo_CN.ts
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+#qnx: target.path = /tmp/$${TARGET}/bin
+#else: unix:!android: target.path = /opt/$${TARGET}/bin
+#!isEmpty(target.path): INSTALLS += target
 
 RESOURCES += data.qrc translations.qrc
 

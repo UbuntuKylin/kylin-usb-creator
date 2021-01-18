@@ -1,8 +1,118 @@
+kylin-usb-creator (1.0.0-38kord) v101; urgency=medium
+
+  * 修复了BUG#32428 菜单按钮悬停样式异常
+  * 修复了BUG#32929 菜单按钮深色下未变色 
+  * 修复了BUG#31682 制作完成页面标识异常
+  * 修复了BUG#34070 关于界面可以重复打开
+  * 修复了BUG#32441 下拉菜单设置透明后特效消失
+  * 修复了BUG#33542 U盘下拉框在任务栏有单独界面
+  * 修复了BUG#32592 关于窗口显示的时候，F1失效
+  * 修复了BUG#32590 关于弹窗不跟随主题变换
+  * 修复了BUG#29691 密码输完回车应用闪退
+  * 修复了BUG#25447 文件管理器中U盘重复显示
+  * 解决了BUG#33292 关于窗口标题栏没有汉化
+  * 解决了BUG#33300 任务栏关闭二级窗口预览
+  * 解决了BUG#34268 设置浅色only主题还是跟系统走
+  * 解决了BUG#32583 关于弹窗背景
+  * 解决了BUG#33290 授权框重新打开上次输入的密码还在
+  * 解决了BUG#25419 U盘容量显示由1024进制改1000进制
+  * 解决了BUG#26566 制作中且主题ui有问题
+  * 三连按钮改为直接从主题中调用
+  * 通过功能回滚的方式暂时关闭了BUG#32476 主题only引起的一些问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 12 Jan 2021 10:38:52 +0800
+
+kylin-usb-creator (1.0.0-37kord) v101; urgency=medium
+
+  * 修复了一处因gsetting文件没有正确初始化导致的致命问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 08 Jan 2021 10:38:52 +0800
+
+kylin-usb-creator (1.0.0-36kord) v101; urgency=medium
+
+  * 菜单模块接入，新增菜单中主题选择功能，关于功能以及退出功能。国际化ts文件更新
+  * 修复了高危BUG#29064 制作100%失败。
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 07 Jan 2021 10:38:52 +0800
+
+kylin-usb-creator (1.0.0-35kord) v101; urgency=medium
+
+  * 修复了BUG#30072 文件选择框不会自动清除选择
+  * 修复了BUG#30071 页面指示器异常
+  * 修复了BUG#30070 拉起最小化窗口双title栏
+  * 修复了BUG#30069 授权框边框显示异常
+  * 修复了BUG#30067 开始按钮状态异常
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 26 Dec 2020 10:38:52 +0800
+
+kylin-usb-creator (1.0.0-34kord) v101; urgency=medium
+
+  * 解决了高危BUG#29795 软件运行时安装高版本失败且前端无感知
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Wed, 23 Dec 2020 10:38:52 +0800
+
+kylin-usb-creator (1.0.0-33kord) v101; urgency=medium
+
+  * 解决了BUG23977 密码输入错误时，密码框边框会变为红色
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 19 Dec 2020 10:38:52 +0800
+
+kylin-usb-creator (1.0.0-32kord) v101; urgency=medium
+
+  * 解决了高危BUG#29064 U盘制作在无分区有文件系统情况下制作100%失败
+  * 解决了BUG#24712 U盘下拉框在鼠标事件发出关闭后需要两次单击才能打开
+  * 解决了BUG#28717 双层标题栏问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sat, 19 Dec 2020 10:38:52 +0800
+
+kylin-usb-creator (1.0.0-31kord) v101; urgency=medium
+
+  * 修复了制作中途拔出U盘提示制作成功的问题
+  * 修复了文件对话框未选择文件时，无法保存上一次选择的结果的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 14 Dec 2020 10:38:52 +0800
+
+kylin-usb-creator (1.0.0-30kord) v101; urgency=medium
+
+  * 依赖udisks2的命令行工具实现了开始制作之前的设备卸载和制作完成之后的自动装载
+  * U盘下拉框展示逻辑优化，现展示逻辑为按照物理设备容量，1024进制为单位显示(4G,65G)区间的所有设备。之后功能升级会修改为1000进制
+  * 废弃了之前getstorageinfo中的获取逻辑
+  * 写入速度优化，当U盘存在分区时向分区写入，没有分区时直接向块设备写入，测试结果显示向分区写入相比直接向块设备写入有3-5倍的速度提升
+  * 增加了F1拉起帮助
+  * 已卸载但未弹出的U盘也可以识别到了
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 20:38:52 +0800
+
+kylin-usb-creator (1.0.0-29kord) v101; urgency=medium
+
+  * KeyEvent rewrite。实现了F1拉起帮助菜单。增加了daemonipcdebus类
+  * 解决了主界面部分区域拖动失效的问题，具体参见BUG#27152
+  * UKUI-kwin功能因稳定性问题回滚（状态栏时而出现时而不出现），到了之前主题接管的状态
+  * 新增toolwindow类专门用来实例化工具窗口
+  * 增加了主界面圆角
+  * 部分解决BUG#26566 动态资源加载问题。播放时切换仍未实现
+  * 修改了一部分qtsingleappliciation类源码
+  * 项目结构细分微调，增加了src/include用来存轮子
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 20:38:52 +0800
+
+kylin-usb-creator (1.0.0-28kord) v101; urgency=medium
+
+  * 适配ukui-kwin
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 17:30:52 +0800
+
+kylin-usb-creator (1.0.0-27kord) v101; urgency=medium
+
+  * 解决了BUG#24046 程序正在运行且处于最小化状态时，可以通过点击菜单栏图标拉起
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 30 Nov 2020 15:38:52 +0800
+
 kylin-usb-creator (1.0.0-26kord) v101; urgency=medium
 
-  * 移除程序外部透明顶级窗口，改为主题接管状态栏样式及阴影圆角。
-  * 移除模块stylewidget、stylewidgetattribute、stylewidgetshadow。
-  * 注册Dbus服务。
+  * 移除程序外部透明顶级窗口，改为主题接管状态栏样式及阴影圆角
+  * 移除模块stylewidget、stylewidgetattribute、stylewidgetshadow
+  * 注册Dbus服务
 
  -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Fri, 27 Nov 2020 12:24:52 +0800
 

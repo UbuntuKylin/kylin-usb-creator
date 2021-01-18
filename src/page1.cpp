@@ -1,8 +1,9 @@
 #include "page1.h"
+#include "include/xatom-helper.h"
+
 
 Page1::Page1()
 {
-
     initControlQss();//初始化样式
     dialogInitControlQss();
     getStorageInfo();//获取磁盘信息
@@ -24,18 +25,19 @@ void Page1::initControlQss()
     warnningIcon=new QLabel;
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
-    warnningIcon->show();
     warnningText=new QLabel;
 
     urlIso=new QLineEdit;
     urlIso->setEnabled(false);
     urlIso->setFixedHeight(30);
-
     findIso=new QPushButton(this);
     findIso->setText(tr("Open"));
     findIso->setFixedSize(56,30);
     connect(findIso,&QPushButton::clicked,this,[=]{
-        urlIso->setText( QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)"));
+            isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
+            if(isoPath != "" ){
+                urlIso->setText(isoPath);
+            }
         });
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
     creatStart=new QPushButton(this);
@@ -122,13 +124,13 @@ void Page1::dialogInitControlQss()
     shadowEffect->setOffset(0,0);
     shadowEffect->setBlurRadius(12);
 
-
 //    授权窗口在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     authDialog->move((availableGeometry.width() - authDialog->width())/2, (availableGeometry.height() - authDialog->height())/2);
     connect(authDialog,&rootAuthDialog::passwdCorrect,this,&Page1::dealRightPasswd);
     connect(authDialog,&rootAuthDialog::cancelCheck,[=]{
         authDialog->dialogKey->clear();
+        isAuthDialogShowing = false;
         authDialog->close();
         ifStartBtnChange();
     });
@@ -147,11 +149,14 @@ void Page1::dialogInitControlQss()
     rootWindowTitle->setObjectName("title");
     rootDialogClose = new QPushButton(rootWindowTitle);
     rootDialogClose->setFixedSize(30,30);
-    connect(rootDialogClose,&QPushButton::clicked,authDialog,&rootAuthDialog::close);
+//    connect(rootDialogClose,&QPushButton::clicked,authDialog,&rootAuthDialog::close);
+    connect(rootDialogClose,&QPushButton::clicked,[=](){
+        authDialog->close();
+        isAuthDialogShowing = false;
+    });
     connect(rootDialogClose,&QPushButton::clicked,[=]{ifStartBtnChange();});
     rootDialogMin = new QPushButton(rootWindowTitle);
     rootDialogMin->setFixedSize(30,30);
-
     connect(rootDialogMin,&QPushButton::clicked,[=]{
         authDialog->showMinimized();
         ifStartBtnChange();
@@ -256,48 +261,130 @@ void Page1::dialogInitControlQss()
     authDialogContentWidget->setLayout(vlt1);
 }
 
+bool Page1::isCapicityAvailable(QString str)
+{
+    if(str[str.length()-1] == 'G')
+    {
+       str.chop(1);//去掉最后一位
+       if(str.toFloat() < 65 && str.toFloat() > 4)
+       {
+           return true;
+       }
+    }
+    return false;
+}
+
+//TODO：容量获取方法更新，目前获取的是1024进制单位。计划在将来改为和文件管理器一致的1000进位
+//TODO：设备类型判断，搭配lsblk -S只加入走USB协议的设备
+void Page1::getUdiskPathAndCap()
+{
+    diskInfos.clear();
+    QStringList diskInfo;
+    QString disk;
+    QProcess lsblk;
+    lsblk.start("lsblk");
+    lsblk.waitForFinished();
+    QString info = QString::fromLocal8Bit(lsblk.readAllStandardOutput());
+    foreach(disk,info.split("\n"))
+    {
+        if(disk == NULL)
+        {
+            continue;
+        }
+        disk.replace(QRegExp("[\\s]+")," ");
+        diskInfo = disk.split(" ");
+        if(diskInfo.at(5) == "disk"){
+            if(!isCapicityAvailable(diskInfo.at(3)))
+            {
+                continue;
+            }
+            AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + diskInfo.at(0),"NONAME",diskInfo.at(3));
+            diskInfos.append(tmp);
+        }
+    }
+}
+
+void Page1::getUdiskName()
+{
+    QList<QStorageInfo> storageInfo = QStorageInfo::mountedVolumes();
+    foreach(AvailableDiskInfo* tmp,diskInfos)  //lsblk命令拿到的可用U盘信息
+    {
+        qDebug()<<tmp->displayName<<"****";
+        foreach(QStorageInfo disk,storageInfo)
+        {
+            if((disk.device().length() == 8 && tmp->devicePath == disk.device()))
+            {
+                tmp->displayName = disk.displayName();
+                float cap = disk.bytesTotal();
+                tmp->diskCapicity = QString::number(cap/1000000000,'f',1) + 'G';
+                continue;
+            }
+            if(tmp->devicePath + '1' == disk.device())  //使用第一个分区的名字做展示名
+            {
+                tmp->displayName = disk.displayName();
+                tmp->diskCapicity = disk.bytesTotal();
+                float cap = disk.bytesTotal();
+                tmp->diskCapicity = QString::number(cap / 1000000000,'f',1) + 'G';
+                continue;
+//                uchardet_t* type = new uchardet_t();
+//                type->uchardet_handle_data()
+//                QString target;
+//                QByteArray str = disk.displayName().toLatin1();
+//                QByteArray tmp = str.toLatin1();
+//                QTextCodec::ConverterState state;
+//                target = QTextCodec::codecForName("UTF-8")->toUnicode(str.constData(),str.size(),&state);
+//                qDebug()<<state.invalidChars;
+//                if(state.invalidChars > 0){
+//                    qDebug()<<state.invalidChars;
+//                    target = QTextCodec::codecForName("GBK")->toUnicode(str.constData(),str.size(),&state);
+//                    if(state.invalidChars > 0){
+//                        qDebug()<<"不支持的编码集";
+//                    }
+//                }
+//                target.replace("\n","");
+//                qDebug()<<target;
+//                QTextCodec *utf8 = QTextCodec::codecForName("UTF-8");
+//                QTextCodec::setCodecForLocale(utf8);
+//                QTextCodec::setCodecForCStrings(utf8);
+//                QTextCodec* gbk = QTextCodec::codecForName("gbk");
+//                char *p = str.toLocal8Bit().data();
+
+//                QString strUnicode=gbk->toUnicode(p);
+//                QByteArray utf8_bytes=utf8->fromUnicode(strUnicode);
+//                p = utf8_bytes.data();
+//                qDebug()<<QString(QLatin1String(p));
+            }
+        }
+    }
+}
+
 void Page1::getStorageInfo()
 {
     diskRefreshDelay->stop();//U盘动态刷新相关
-    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes();//获取磁盘列表
-    comboUdisk->clearDiskList();
-    for(QStorageInfo& disk : diskList)
+    getUdiskPathAndCap();
+    getUdiskName();
+    foreach(AvailableDiskInfo *diskInfo,diskInfos)
     {
-        if(""==disk.displayName())//名称为空的磁盘不显示
-            continue;
-        if("/"==disk.displayName())//系统分区不显示
-            continue;
-        if(disk.bytesTotal()/1000000<=2000 || disk.bytesTotal()/1000000>1000*65)//小于2G或大于65G的磁盘不显示
-            continue;
-        if("tmpfs"==disk.fileSystemType())//tmpfs类型的磁盘不显示
-            continue;
-        if("/boot"==disk.displayName())//boot分区不显示
-            continue;
-        if(disk.displayName().contains("BACKUP")) //还原分区不显示
-            continue;
-        if(disk.device().contains("/dev/sr0")) //光盘不显示
-            continue;
-        if(disk.device().contains("/dev/sda0")) //内置硬盘不显示
-            continue;
-        if(disk.device().contains("/dev/nvm")) //nvme类型的设备不显示
-            continue;
+        //过长的名称做去尾加省略号
+        if(diskInfo->displayName.length() > UDISK_NAME_MAX_LENGTH)
+        {
+            diskInfo->displayName = diskInfo->displayName.mid(0,UDISK_NAME_MAX_LENGTH - 1) + "…";
+        }
+        QString info = diskInfo->displayName+" ("+diskInfo->devicePath + ") " + diskInfo->diskCapicity;
 
-        
-        QString displayName=disk.displayName();
-        if(displayName.length()>UDISK_NAME_MAX_LENGTH)
-            displayName=displayName.mid(0,UDISK_NAME_MAX_LENGTH -1)+"…";
+        comboUdisk->addItem(info,diskInfo->devicePath);
+//        有分区就向第一分区里写，没分区就直接向块设备写,该方法暂时停止使用——有文件系统但是没有分区的U盘会导致制作失败向不存在的sd*1设备中写入
+//        if(diskInfo->displayName == "unknowname")
+//        {
+//            comboUdisk->addItem(info,diskInfo->devicePath);
+//        }else{
+//            comboUdisk->addItem(info,diskInfo->devicePath + '1');
+//        }
 
-        float diskSize=disk.bytesTotal();
-        diskSize=diskSize/1000000/1000;
-        QString diskUrl=disk.device();
-//        qDebug()<<"******"<<disk.device();
-        diskUrl=diskUrl.mid(0,8);
-
-        QString info=displayName+"  ( "+diskUrl+" ) "+QString::number(diskSize,'f',1)+"GB";
-        comboUdisk->addItem(info,diskUrl);
         warnningIcon->show();
         warnningText->show();
     }
+
     if(0==comboUdisk->listWidget->count())
     {
         comboUdisk->addItem(tr("No USB drive available"),NOUDISK);
@@ -317,21 +404,29 @@ void Page1::allClose()
 
 void Page1::creatStartSlots()
 {
+    isAuthDialogShowing = true;
     creatStart->setEnabled(false);
     if(DARKTHEME == themeStatus)
     {
         creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+
     }else
     {
         creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
     }
 
+    authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}");
+    authDialog->dialogKey->setPlaceholderText("请输入密码");
+    authDialog->dialogKey->clear();
     authDialog->show();
 }
 
 bool Page1::event(QEvent *event)
 {
-    if(comboUdisk->listWidget == nullptr)return QWidget::event(event);
+    if(comboUdisk->listWidget == nullptr)
+    {
+        return QWidget::event(event);
+    }
     if (event->type() == QEvent::Leave)
     {
         if(mouseIsLeaveUdiskWidget())
@@ -359,7 +454,10 @@ bool Page1::mouseIsLeaveUdiskWidget()
 
 bool Page1::ifStartBtnChange()
 {
-//    qDebug()<<"comboUdisk->getDiskPath()= "<<comboUdisk->getDiskPath()<<"  urlIso->text() = "<<urlIso->text();
+    if(isAuthDialogShowing)
+    {
+        return false;
+    }
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
@@ -392,7 +490,14 @@ void Page1::dealComboBoxChangeButton()
 
 void Page1::dealRightPasswd()
 {
+    isAuthDialogShowing = false;
     emit makeStart(authDialog->dialogKey->text(),urlIso->text(),comboUdisk->getDiskPath());
+    if(themeStatus == LIGHTTHEME)
+    {
+        authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}");
+    }else{
+        authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid #606265;font-size:14px;color:rgba(143,147,153,1);}");
+    }
 }
 void Page1::dealAuthDialogClose()
 {
@@ -425,8 +530,8 @@ void Page1::setThemeStyleLight()
     rootDialogMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
                                  " QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/min_d.png);border-radius:4px;}"
                                  "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/min_d.png);border-radius:4px;}");
-    authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}"
-                                         "QlineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
+    authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}");
+//                                         "QLineEdit:hover{border:1px solid rgba(100,105, 241, 1);font-size:14px;}");
     shadowEffect->setColor(Qt::lightGray);
     authDialogContentWidget->setGraphicsEffect(shadowEffect);
     dialogKeyLable->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
@@ -440,16 +545,14 @@ void Page1::setThemeStyleLight()
                                      "QPushButton:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                      "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");
     authDialogContentWidget->setStyleSheet("background-color:rgba(255,255,255,1);border-radius:6px;");
+    this->setStyleSheet("background-color:rgba(255,255,255,1);");
     comboUdisk->setThemeLight();    //设置combobox响应浅色主题
-//    rootWindowTitle->setStyleSheet("border-top-left-radius:20px;border-top-right-radius:40px;border:1px solid blue;");
-//    rootDialogTitleText->setStyleSheet("border:1px solid blue;");
     emit setStyleWidgetStyle(LIGHTTHEME);   //设置stylewidget响应浅色主题
 }
 
 void Page1::setThemeStyleDark()
 {
     themeStatus = DARKTHEME;
-    qDebug()<<"Page1::setThemeStyleDark被调用";
     tabUdisk->setStyleSheet("color:rgba(249,249,249,1);");
     tabIso->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
     warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");
@@ -461,8 +564,6 @@ void Page1::setThemeStyleDark()
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
-
-
     //    root授权框部分
         authDialogContentWidget->setStyleSheet("background-color:rgba(61,61,65,1);border-radius:6px;");
         rootDialogTitleText->setStyleSheet("font-size:14px;font-weight:600;color:rgba(249,249,249,1);");
@@ -487,5 +588,6 @@ void Page1::setThemeStyleDark()
                                          "QPushButton:hover{background-color:rgba(136,140,255,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}"
                                          "QPushButton:pressed{background-color:rgba(82,87,217,1);border-radius:4px;color:rgba(255,255,255,1);font-size:14px;}");;
     comboUdisk->setThemeDark(); //设置combobox响应深色主题
+    this->setStyleSheet("background-color:rgba(31,32,34,1);");
     emit setStyleWidgetStyle(DARKTHEME); //设置stylewidget响应黑色主题
 }

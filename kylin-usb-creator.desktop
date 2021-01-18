@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Kylin Usb Creator
+Name=Kylin USB Creator
 Name[zh_CN]=麒麟U盘启动器
 Name[bo_CN]=ཆི་ལིན་Uསྡེར་སྒུལ ཆས་
 Comment=A tooy for making USB flash disk made by Kylin software
@@ -11,5 +11,5 @@ GenericName[bo_CN]=འགོ་སློང་སྡེར་ལས་ལག་�
 Exec=/usr/bin/kylin-usb-creator %u
 Icon=/usr/share/pixmaps/kylin-usb-creator.png
 Type=Application
-Categories=Qt;USB;Generator,Setting
+Categories=System Settings Security
 Keywords=USB,System,Manage

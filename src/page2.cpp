@@ -2,24 +2,26 @@
 
 Page2::Page2(QWidget *parent) : QWidget(parent)
 {
-    if(DARKTHEME == themeStatus)
-    {
-        movieLoading = new QMovie(":/data/elements_dark/loading.gif");
-        movieFinish = new QMovie(":/data/elements_dark/finish.gif");
-        errLabel = QPixmap::fromImage(QImage("/data/elements_dark/failed.png"));
-    }else{
-        movieLoading = new QMovie(":/data/elements_light/loading.gif");
-        movieFinish = new QMovie(":/data/elements_light/finish.gif");
-        errLabel = QPixmap::fromImage(QImage("/data/elements_light/failed.png"));
-    }
-    frameCount=movieFinish->frameCount();
-    connect(movieFinish,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish->stop();});
+//        动态资源的加载逻辑是初始化两套，播的时候根据主题状态播一套
+    movieLoading_d = new QMovie(":/data/elements_dark/loading.gif");
+    movieFinish_d = new QMovie(":/data/elements_dark/finish.gif");
+    errLabel = QPixmap::fromImage(QImage("/data/elements_dark/failed.png"));
+
+    movieLoading_l = new QMovie(":/data/elements_light/loading.gif");
+    movieFinish_l = new QMovie(":/data/elements_light/finish.gif");
+
+    errLabel = QPixmap::fromImage(QImage("/data/elements_light/failed.png"));
+    frameCount=movieFinish_l->frameCount();
+    connect(movieFinish_l,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish_l->stop();});
+    connect(movieFinish_d,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish_d->stop();});
     lableMovie=new QLabel;
 
     QSize movieSize(95,95);
     lableMovie->setFixedSize(movieSize);
-    movieLoading->setScaledSize(movieSize);
-    movieFinish->setScaledSize(movieSize);
+    movieLoading_l->setScaledSize(movieSize);
+    movieFinish_l->setScaledSize(movieSize);
+    movieLoading_d->setScaledSize(movieSize);
+    movieFinish_d->setScaledSize(movieSize);
 
     lableText=new QLabel;
     lableNum=new QLabel(lableMovie);
@@ -28,6 +30,7 @@ Page2::Page2(QWidget *parent) : QWidget(parent)
     lableNum->setAlignment(Qt::AlignCenter);    //设置数字居中对齐
     returnPushButton=new QPushButton;
     connect(returnPushButton,&QPushButton::clicked,this,&Page2::returnMain);
+    connect(returnPushButton,&QPushButton::clicked,[=]{movieStatus = loading;});
     returnPushButton->setFixedSize(200,30);
     QLabel *filling1 = new QLabel;
     QLabel *filling2 = new QLabel;
@@ -71,16 +74,18 @@ void Page2::playLoadingGif()
     lableNum->show();
     returnPushButton->setEnabled(false);
     returnPushButton->setText(tr("USB starter in production"));
+    movieStatus = loading;
     if(LIGHTTHEME == themeStatus){
         returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(193, 193, 193, 1);font-size:14px;border-radius:15px;");
+        lableMovie->setMovie(movieLoading_l); //为label设置movie
+        movieLoading_l->start();         //开始播放动画
     }else
     {
         returnPushButton->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);font-size:14px;border-radius:15px;");
+        lableMovie->setMovie(movieLoading_d); //为label设置movie
+        movieLoading_d->start();         //开始播放动画
     }
     lableText->setText(tr("Please do not remove the USB driver or power off now"));
-
-    lableMovie->setMovie(movieLoading); //为label设置movie
-    movieLoading->start();         //开始播放动画
 }
 
 void Page2::playFinishGif()
@@ -92,10 +97,17 @@ void Page2::playFinishGif()
                           ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
     lableText->setText(tr("Finish"));
-
     lableMovie->clear();
-    lableMovie->setMovie(movieFinish);
-    movieFinish->start();
+    movieStatus = finish;
+    if(themeStatus == DARKTHEME)
+    {
+        lableMovie->setMovie(movieFinish_d);
+        movieFinish_d->start();
+    }else
+    {
+        lableMovie->setMovie(movieFinish_l);
+        movieFinish_l->start();
+    }
 
 }
 
@@ -104,6 +116,7 @@ void Page2::playErrorGif()
     lableNum->hide();
     returnPushButton->setEnabled(true);
     returnPushButton->setText(tr("return"));
+    movieStatus = failed;
     returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:15px;font-size:14px;}"
                           ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
@@ -112,13 +125,25 @@ void Page2::playErrorGif()
     lableMovie->clear();
     lableMovie->setScaledContents(true);
     lableMovie->setPixmap(QPixmap::fromImage(QImage(":/data/elements_dark/failed.png")));
+//    emit makeFinish();
 //    lableMovie->setpi
 
 }
 
 void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
 {
+//    制作开始之前卸载U盘
+    QProcess m_unmount;
+    QStringList m_unmount_arg;
+    m_unmount_arg <<"unmount"<<"-b"<<targetPath;
+    m_unmount.start("udisksctl",m_unmount_arg);
+    if(m_unmount.waitForStarted()){
+        m_unmount.waitForFinished();
+    }else{
+        qDebug()<<"#udisksctl# Warning:unmount failed! Unmount path :"<<targetPath;
+    }
     uDiskPath = targetPath; //保存U盘路径 用来做错误检查
+    qDebug()<<"uDiskPath:"<<uDiskPath;
     emit swToPage2();
     playLoadingGif();
     sourceFileSize = getFileSize(sourcePath);
@@ -165,15 +190,31 @@ void Page2::readBashStandardErrorInfo()
 
 void Page2::finishEvent()
 {
-    if(isMakingSuccess())
-    {
-        playFinishGif();
-    }else
-    {
-        playErrorGif();
+//  制作结束加载U盘
+    QProcess m_unmount;
+    QStringList m_unmount_arg;
+    m_unmount_arg <<"mount"<<"-b"<<uDiskPath;
+    m_unmount.start("udisksctl",m_unmount_arg);
+    if(m_unmount.waitForStarted()){
+        qDebug()<<"#udisksctl# mount sucess! mount path :"<<uDiskPath;
+        m_unmount.waitForFinished();
+    }else{
+        qDebug()<<"#udisksctl# Warning:mount failed! mount path :"<<uDiskPath;
     }
+    QTimer *diskRefreshDelay = new QTimer;
+    connect(diskRefreshDelay,&QTimer::timeout,[=]{
+        diskRefreshDelay->stop();
+        if(isMakingSuccess())
+        {
+            playFinishGif();
+        }else
+        {
+            playErrorGif();
+        }
+        emit makeFinish();
 
-    emit makeFinish();
+    });
+    diskRefreshDelay->start(1000);
 }
 bool Page2::isMakingSuccess()
 {
@@ -181,7 +222,7 @@ bool Page2::isMakingSuccess()
     QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //已挂载设备
     for(QStorageInfo& disk : diskList)
     {
-        qDebug()<<"目标比对设备"<<uDiskPath<<"***已挂载设备："<<disk.device();
+//        qDebug()<<"目标比对设备"<<uDiskPath<<"***已挂载设备："<<disk.device();
         QString diskPath = disk.device();
         diskPath = diskPath.mid(0,8);
         if(uDiskPath == diskPath)
@@ -191,37 +232,32 @@ bool Page2::isMakingSuccess()
     }
     return false;
 }
-void Page2::refreshGifStatus()
-{
-//    qDebug()<<"void Page2::refreshGifStatus()";
-//    if(movieLoading != nullptr)
-//    {
-//        delete movieLoading;
-//        delete movieFinish;
-//    }
-//    if(DARKTHEME == themeStatus)
-//    {
-//        movieLoading = new QMovie(":/data/elements_dark/loading.gif");
-//        movieFinish = new QMovie(":/data/elements_dark/finish.gif");
-//    }else{
-//        movieLoading = new QMovie(":/data/elements_light/loading.gif");
-//        movieFinish = new QMovie(":/data/elements_light/finish.gif");
-//    }
-//    frameCount=movieFinish->frameCount();
-//    connect(movieFinish,&QMovie::frameChanged,this,[=](int num){if(frameCount-1==num)movieFinish->stop();});
-//    lableMovie=new QLabel;
 
-//    QSize movieSize(95,95);
-//    lableMovie->setFixedSize(movieSize);
-//    movieLoading->setScaledSize(movieSize);
-//    movieFinish->setScaledSize(movieSize);
+void Page2::movieRefresh()
+{
+    lableNum->hide();
+    lableMovie->clear();
+    switch(movieStatus)
+    {
+    case 0:
+        playLoadingGif();
+        break;
+    case 1:
+        playFinishGif();
+        break;
+    case 2:
+        playErrorGif();
+        break;
+    }
 }
+
 void Page2::setThemeStyleLight()
 {
     themeStatus = LIGHTTHEME;
 //    this->setStyleSheet("background-color:rgba(255,5,5,1);");
     lableNum->setStyleSheet("background-color:rgba(236, 236, 236,0);color:rgba(100, 105, 241, 1);font-size:16px;");
     lableText->setStyleSheet("font-size:14px;");
+    movieRefresh();
 
 }
 
@@ -231,4 +267,5 @@ void Page2::setThemeStyleDark()
     themeStatus = DARKTHEME;
     lableNum->setStyleSheet("background-color:rgba(236, 236, 236,0);color:rgba(100, 105, 241, 1);font-size:16px;");
     lableText->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
+    movieRefresh();
 }

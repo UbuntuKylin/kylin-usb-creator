@@ -18,12 +18,9 @@ class StyleComboBox : public QWidget
 {
     Q_OBJECT
 public:
-//    explicit StyleComboBox(StyleWidgetAttribute scb_swa);
     explicit StyleComboBox();
-//    void deleteShadow();
     void closeListWidget();
     QListWidget *listWidget = nullptr;//U盘列表列表部分
-//    QListWidget *menuListWidget = nullptr;//菜单列表部分
     void addItem(QString lable, QString data);//添加到列表
     void clearDiskList(); //清空U盘的listWidget
     void setThemeDark(); //深色模式
@@ -41,7 +38,6 @@ signals:
 private:
     QPushButton *pushButton = nullptr;//点击部分
     void on_diskButton_click(); //U盘栏点击事件
-//    void on_menuButton_click(); //菜单栏点击事件
     bool isDiskListOpen = false;
     bool mouseInListWidget=false;
     QLabel *text=nullptr; // U盘框选中的部分
