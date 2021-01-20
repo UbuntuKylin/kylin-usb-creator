@@ -23,6 +23,7 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QWidget>
+#include <QMessageBox>
 #include <QStackedWidget>
 #include <QGraphicsDropShadowEffect>
 #include <QKeyEvent>
@@ -48,6 +49,7 @@ public slots:
     void handleIconClickedSub();
     void setThemeStyle(QString);
     void dealMenuModulePullupHelp();
+    void doubleCheck();
 
 private:
     // 标题栏资源

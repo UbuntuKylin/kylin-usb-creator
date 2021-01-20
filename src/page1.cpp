@@ -36,9 +36,15 @@ void Page1::initControlQss()
     connect(findIso,&QPushButton::clicked,this,[=]{
             isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
             if(isoPath != "" ){
-                urlIso->setText(isoPath);
+                QString tmp = isoPath;
+                qDebug()<<"isopath = "<<isoPath<<"  len="<<isoPath.length();
+                if(isoPath.length() > 45){
+                    tmp = isoPath.mid(0,44) + "…";
+                }
+                urlIso->setText(tmp);
             }
         });
+
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
     creatStart=new QPushButton(this);
     creatStart->setFixedSize(200,30);
@@ -149,7 +155,6 @@ void Page1::dialogInitControlQss()
     rootWindowTitle->setObjectName("title");
     rootDialogClose = new QPushButton(rootWindowTitle);
     rootDialogClose->setFixedSize(30,30);
-//    connect(rootDialogClose,&QPushButton::clicked,authDialog,&rootAuthDialog::close);
     connect(rootDialogClose,&QPushButton::clicked,[=](){
         authDialog->close();
         isAuthDialogShowing = false;
@@ -491,7 +496,7 @@ void Page1::dealComboBoxChangeButton()
 void Page1::dealRightPasswd()
 {
     isAuthDialogShowing = false;
-    emit makeStart(authDialog->dialogKey->text(),urlIso->text(),comboUdisk->getDiskPath());
+    emit makeStart(authDialog->dialogKey->text(),isoPath,comboUdisk->getDiskPath());
     if(themeStatus == LIGHTTHEME)
     {
         authDialog->dialogKey->setStyleSheet("QLineEdit{border:1px solid rgba(221, 223, 231, 1);font-size:14px;}");
