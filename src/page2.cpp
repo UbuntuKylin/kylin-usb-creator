@@ -70,7 +70,7 @@ Page2::Page2(QWidget *parent) : QWidget(parent)
 }
 void Page2::playLoadingGif()
 {
-    lableNum->setText("0%");
+//    lableNum->setText("0%");
     lableNum->show();
     returnPushButton->setEnabled(false);
     returnPushButton->setText(tr("USB starter in production"));
@@ -145,6 +145,7 @@ void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
     uDiskPath = targetPath; //保存U盘路径 用来做错误检查
     qDebug()<<"uDiskPath:"<<uDiskPath;
     emit swToPage2();
+    lableNum->setText("0%");
     playLoadingGif();
     sourceFileSize = getFileSize(sourcePath);
     command_dd = new QProcess();
@@ -181,7 +182,7 @@ void Page2::readBashStandardErrorInfo()
          bool ok = false;
          qulonglong progress_num = size_progress.toDouble(&ok)/1048576;
          int mission_percent = progress_num*100/sourceFileSize;
-         lableNum->setText(QString::number(mission_percent)+ "0%");
+         lableNum->setText(QString::number(mission_percent)+ "%");
          if(bytes2.count() == 1 || !ok){
              finishEvent();
          }

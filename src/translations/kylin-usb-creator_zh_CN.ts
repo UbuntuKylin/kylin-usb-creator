@@ -17,12 +17,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="221"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="221"/>
         <source>USB driver is in production.Are you sure you want to stop task and exit the program?</source>
-        <translation type="unfinished"></translation>
+        <translation>启动盘正在制作中，是否停止任务并退出程序？</translation>
     </message>
 </context>
 <context>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../include/menumodule.cpp" line="219"/>
         <source>Service &amp; Support: </source>
-        <translation type="unfinished"></translation>
+        <translation>服务与支持团队</translation>
     </message>
     <message>
         <source>Support: support@kylinos.cn</source>
