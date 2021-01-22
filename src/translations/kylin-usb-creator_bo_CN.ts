@@ -5,9 +5,19 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.cpp" line="31"/>
-        <location filename="../mainwindow.cpp" line="87"/>
-        <location filename="../mainwindow.cpp" line="198"/>
+        <location filename="../mainwindow.cpp" line="88"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>kylin usb creator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="221"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="221"/>
+        <source>USB driver is in production.Are you sure you want to stop task and exit the program?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19,17 +29,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="87"/>
+        <location filename="../page1.cpp" line="93"/>
         <source>USB drive will be formatted,please backup your files!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="167"/>
+        <location filename="../page1.cpp" line="172"/>
         <source>Authorization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="143"/>
+        <location filename="../page1.cpp" line="149"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49,32 +59,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="45"/>
+        <location filename="../page1.cpp" line="51"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="209"/>
+        <location filename="../page1.cpp" line="214"/>
         <source>These operations needs to be verified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="139"/>
+        <location filename="../page1.cpp" line="145"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="211"/>
+        <location filename="../page1.cpp" line="216"/>
         <source>Request authorization:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="214"/>
+        <location filename="../page1.cpp" line="219"/>
         <source>Password：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="356"/>
+        <location filename="../page1.cpp" line="395"/>
         <source>No USB drive available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -82,23 +92,23 @@
 <context>
     <name>Page2</name>
     <message>
-        <location filename="../page2.cpp" line="75"/>
+        <location filename="../page2.cpp" line="76"/>
         <source>USB starter in production</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="86"/>
+        <location filename="../page2.cpp" line="88"/>
         <source>Please do not remove the USB driver or power off now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="96"/>
-        <location filename="../page2.cpp" line="119"/>
+        <location filename="../page2.cpp" line="95"/>
+        <location filename="../page2.cpp" line="118"/>
         <source>return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="100"/>
+        <location filename="../page2.cpp" line="99"/>
         <source>Finish</source>
         <translation type="unfinished"></translation>
     </message>
@@ -109,27 +119,53 @@
     </message>
 </context>
 <context>
+    <name>QApplication</name>
+    <message>
+        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="320"/>
+        <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="322"/>
+        <source>Incompatible Qt Library Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>T::QApplication</name>
+    <message>
+        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="320"/>
+        <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="322"/>
+        <source>Incompatible Qt Library Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>menuModule</name>
     <message>
-        <location filename="../include/menumodule.cpp" line="32"/>
+        <location filename="../include/menumodule.cpp" line="31"/>
         <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="34"/>
-        <location filename="../include/menumodule.cpp" line="114"/>
+        <location filename="../include/menumodule.cpp" line="33"/>
+        <location filename="../include/menumodule.cpp" line="112"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="36"/>
-        <location filename="../include/menumodule.cpp" line="112"/>
+        <location filename="../include/menumodule.cpp" line="35"/>
+        <location filename="../include/menumodule.cpp" line="110"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="38"/>
-        <location filename="../include/menumodule.cpp" line="110"/>
+        <location filename="../include/menumodule.cpp" line="37"/>
+        <location filename="../include/menumodule.cpp" line="108"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -140,30 +176,30 @@
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="48"/>
-        <location filename="../include/menumodule.cpp" line="125"/>
+        <location filename="../include/menumodule.cpp" line="123"/>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="52"/>
-        <location filename="../include/menumodule.cpp" line="130"/>
+        <location filename="../include/menumodule.cpp" line="128"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="194"/>
-        <location filename="../include/menumodule.cpp" line="215"/>
+        <location filename="../include/menumodule.cpp" line="192"/>
+        <location filename="../include/menumodule.cpp" line="213"/>
         <source>kylin usb creator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="218"/>
+        <location filename="../include/menumodule.cpp" line="216"/>
         <source>Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="221"/>
-        <source>Support: support@kylinos.cn</source>
+        <location filename="../include/menumodule.cpp" line="219"/>
+        <source>Service &amp; Support: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

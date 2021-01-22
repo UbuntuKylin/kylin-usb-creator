@@ -9,10 +9,20 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="31"/>
-        <location filename="../mainwindow.cpp" line="87"/>
-        <location filename="../mainwindow.cpp" line="198"/>
+        <location filename="../mainwindow.cpp" line="88"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>kylin usb creator</source>
         <translation>麒麟U盘启动器</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="221"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="221"/>
+        <source>USB driver is in production.Are you sure you want to stop task and exit the program?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -23,17 +33,17 @@
         <translation>选择光盘镜像文件</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="87"/>
+        <location filename="../page1.cpp" line="93"/>
         <source>USB drive will be formatted,please backup your files!</source>
         <translation>制作启动盘的U盘将被格式化，请先备份好重要文件！</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="167"/>
+        <location filename="../page1.cpp" line="172"/>
         <source>Authorization</source>
         <translation>授权</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="143"/>
+        <location filename="../page1.cpp" line="149"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -53,12 +63,12 @@
         <translation>浏览</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="45"/>
+        <location filename="../page1.cpp" line="51"/>
         <source>Start</source>
         <translation>开始制作</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="209"/>
+        <location filename="../page1.cpp" line="214"/>
         <source>These operations needs to be verified:</source>
         <translation>执行该动作需要root授权，您需要进行验证：</translation>
     </message>
@@ -67,7 +77,7 @@
         <translation type="vanished">制作启动盘的U盘将被格式化，请先备份好重要文件</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="139"/>
+        <location filename="../page1.cpp" line="145"/>
         <source>OK</source>
         <translation>授权</translation>
     </message>
@@ -76,17 +86,17 @@
         <translation type="vanished">要安装或卸载软件，您需要进行验证。</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="211"/>
+        <location filename="../page1.cpp" line="216"/>
         <source>Request authorization:</source>
         <translation>一个程序正试图执行一个需要特权的动作。要求授权以执行该动作：</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="214"/>
+        <location filename="../page1.cpp" line="219"/>
         <source>Password：</source>
         <translation>输入密码：</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="356"/>
+        <location filename="../page1.cpp" line="395"/>
         <source>No USB drive available</source>
         <translation>无可用U盘</translation>
     </message>
@@ -94,7 +104,7 @@
 <context>
     <name>Page2</name>
     <message>
-        <location filename="../page2.cpp" line="75"/>
+        <location filename="../page2.cpp" line="76"/>
         <source>USB starter in production</source>
         <translation>正在制作中</translation>
     </message>
@@ -103,18 +113,18 @@
         <translation type="obsolete">制作时请不要移除U盘或关机。</translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="86"/>
+        <location filename="../page2.cpp" line="88"/>
         <source>Please do not remove the USB driver or power off now</source>
         <translation>制作时请不要移除U盘或关机</translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="96"/>
-        <location filename="../page2.cpp" line="119"/>
+        <location filename="../page2.cpp" line="95"/>
+        <location filename="../page2.cpp" line="118"/>
         <source>return</source>
         <translation>返回</translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="100"/>
+        <location filename="../page2.cpp" line="99"/>
         <source>Finish</source>
         <translation>制作完成</translation>
     </message>
@@ -122,6 +132,19 @@
         <location filename="../page2.cpp" line="123"/>
         <source>Creation Failed</source>
         <translation>制作失败，请检查后重试</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="320"/>
+        <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="322"/>
+        <source>Incompatible Qt Library Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -148,27 +171,40 @@
     </message>
 </context>
 <context>
+    <name>T::QApplication</name>
+    <message>
+        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="320"/>
+        <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="322"/>
+        <source>Incompatible Qt Library Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>menuModule</name>
     <message>
-        <location filename="../include/menumodule.cpp" line="32"/>
+        <location filename="../include/menumodule.cpp" line="31"/>
         <source>Theme</source>
         <translation>主题</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="34"/>
-        <location filename="../include/menumodule.cpp" line="114"/>
+        <location filename="../include/menumodule.cpp" line="33"/>
+        <location filename="../include/menumodule.cpp" line="112"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="36"/>
-        <location filename="../include/menumodule.cpp" line="112"/>
+        <location filename="../include/menumodule.cpp" line="35"/>
+        <location filename="../include/menumodule.cpp" line="110"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="38"/>
-        <location filename="../include/menumodule.cpp" line="110"/>
+        <location filename="../include/menumodule.cpp" line="37"/>
+        <location filename="../include/menumodule.cpp" line="108"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
@@ -179,31 +215,35 @@
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="48"/>
-        <location filename="../include/menumodule.cpp" line="125"/>
+        <location filename="../include/menumodule.cpp" line="123"/>
         <source>Light</source>
         <translation>浅色模式</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="52"/>
-        <location filename="../include/menumodule.cpp" line="130"/>
+        <location filename="../include/menumodule.cpp" line="128"/>
         <source>Dark</source>
         <translation>深色模式</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="194"/>
-        <location filename="../include/menumodule.cpp" line="215"/>
+        <location filename="../include/menumodule.cpp" line="192"/>
+        <location filename="../include/menumodule.cpp" line="213"/>
         <source>kylin usb creator</source>
         <translation>麒麟U盘启动器</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="218"/>
+        <location filename="../include/menumodule.cpp" line="216"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="221"/>
+        <location filename="../include/menumodule.cpp" line="219"/>
+        <source>Service &amp; Support: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Support: support@kylinos.cn</source>
-        <translation>支持：support@kylinos.cn</translation>
+        <translation type="vanished">支持：support@kylinos.cn</translation>
     </message>
 </context>
 <context>
