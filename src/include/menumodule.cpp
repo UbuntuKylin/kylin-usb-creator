@@ -216,7 +216,14 @@ QVBoxLayout* menuModule::initBody(){
     bodyAppVersion->setText(tr("Version: ") + appVersion);
     bodyAppVersion->setAlignment(Qt::AlignLeft);
     bodyAppVersion->setStyleSheet("font-size:14px;");
-    bodySupport->setText(tr("Service&Support:") + "support@kylinos.cn");
+    bodySupport->setText(tr("Service & Support: ") +
+                         "<a href=\"mailto://support@kylinos.cn\""
+                         "style=\"color:palttte(buttonText)\">"
+                         "support@kylinos.cn</a>");
+    connect(bodySupport,&QLabel::linkActivated,this,[=](const QString url){
+        QDesktopServices::openUrl(QUrl(url));
+    });
+    bodySupport->setContextMenuPolicy(Qt::NoContextMenu);
     bodySupport->setFixedHeight(24);
     bodySupport->setStyleSheet("font-size:14px;");
     QVBoxLayout *vlyt = new QVBoxLayout;
