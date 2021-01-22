@@ -239,7 +239,7 @@
     <message>
         <location filename="../include/menumodule.cpp" line="219"/>
         <source>Service &amp; Support: </source>
-        <translation>服务与支持团队</translation>
+        <translation>服务与支持团队：</translation>
     </message>
     <message>
         <source>Support: support@kylinos.cn</source>
