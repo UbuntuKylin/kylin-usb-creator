@@ -207,6 +207,9 @@ void MainWindow::dealMenuModulePullupHelp(){
 }
 void MainWindow::makeStart()
 {
+    disconnect(titleClose,&QPushButton::clicked,0,0); //开始制作之后取消之前click触发的应用关闭功能
+    connect(titleClose,&QPushButton::clicked,this,&MainWindow::doubleCheck);
+//    connect(
 //    isInPage2 = true;
     stackedWidget->setCurrentIndex(changePage());
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
@@ -214,6 +217,18 @@ void MainWindow::makeStart()
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
 }
 
+void MainWindow::doubleCheck(){
+    QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("USB driver is in production.Are you sure you want to stop task and exit the program?"),
+                         QMessageBox::Yes | QMessageBox::No,QMessageBox::No);
+    switch (result)
+    {
+    case QMessageBox::Yes:
+        this->close();
+        break;
+    case QMessageBox::No:
+        break;
+    }
+}
 int MainWindow::changePage()
 {
     int count = stackedWidget->count();
@@ -240,6 +255,10 @@ void MainWindow::makeFinish()
 
 void MainWindow::returnMain()
 {
+    disconnect(titleClose,&QPushButton::clicked,0,0); //开始制作之后取消之前click触发的应用关闭功能
+    connect(titleClose,&QPushButton::clicked,[=](){
+       this->close();
+    });
     stackedWidget->setCurrentIndex(changePage());
     page1->ifStartBtnChange();
     page1->urlIso->clear();

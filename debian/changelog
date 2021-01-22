@@ -1,3 +1,9 @@
+kylin-usb-creator (1.0.0-39kord) v101; urgency=medium
+
+  * 修复了因为缓存文件导致的在非arm架构机器下编译失败的问题
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 18 Jan 2021 10:38:52 +0800
+
 kylin-usb-creator (1.0.0-38kord) v101; urgency=medium
 
   * 修复了BUG#32428 菜单按钮悬停样式异常

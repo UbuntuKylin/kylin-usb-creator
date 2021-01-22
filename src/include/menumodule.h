@@ -14,7 +14,9 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QDesktopServices>
 #include <QRect>
+#include <QUrl>
 #include <QScreen>
 #include <QGSettings>
 #include <QMetaEnum>

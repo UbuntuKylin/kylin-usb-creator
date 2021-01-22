@@ -25,7 +25,7 @@ Page2::Page2(QWidget *parent) : QWidget(parent)
 
     lableText=new QLabel;
     lableNum=new QLabel(lableMovie);
-    lableNum->setFixedSize(36,22);
+    lableNum->setFixedSize(40,26);
     lableNum->move((lableMovie->width()-lableNum->width())/2,(lableMovie->height()-lableNum->height())/2);
     lableNum->setAlignment(Qt::AlignCenter);    //设置数字居中对齐
     returnPushButton=new QPushButton;
@@ -181,7 +181,7 @@ void Page2::readBashStandardErrorInfo()
          bool ok = false;
          qulonglong progress_num = size_progress.toDouble(&ok)/1048576;
          int mission_percent = progress_num*100/sourceFileSize;
-         lableNum->setText(QString::number(mission_percent)+ "%");
+         lableNum->setText(QString::number(mission_percent)+ "0%");
          if(bytes2.count() == 1 || !ok){
              finishEvent();
          }
