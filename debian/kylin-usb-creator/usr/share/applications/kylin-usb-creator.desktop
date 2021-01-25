@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Kylin USB Creator
+Name[zh_CN]=麒麟U盘启动器
+Name[bo_CN]=ཆི་ལིན་Uསྡེར་སྒུལ ཆས་
+Comment=A tooy for making USB flash disk made by Kylin software
+Comment[zh_CN]=由麒麟软件开发的一款制作U盘启动盘的软件
+Comment[bo_CN]=ཆི་ལིན་མཉེན་ཆས་གསར་སྤེལ་གྱི་ནང་གསེས་དོན་ཚན་གཅིག་བཟོས་Uསྡེར་འགོ་བརྩམས་པའི་མཉེན་ཆས།
+GenericName=Startup disk making tool
+GenericName[zh_CN]=启动盘制作工具
+GenericName[bo_CN]=འགོ་སློང་སྡེར་ལས་ལག་ཆ་
+Exec=/usr/bin/kylin-usb-creator %u
+Icon=/usr/share/pixmaps/kylin-usb-creator.png
+Type=Application
+Categories=System Settings Security
+Keywords=USB,System,Manage

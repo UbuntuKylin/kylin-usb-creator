@@ -1,0 +1,9 @@
+<schemalist gettext-domain="kylin-usb-creator">
+     <schema id="org.kylin-usb-creator-data.settings"  path="/org/ukui/kylin-usb-creator/">
+        <key name="thememode" type="s">
+            <default>"auto"</default>
+            <summary>"record theme mode"</summary>
+            <description>record theme mode.there's three mode.auto,lightonly and darkonly</description>
+        </key>
+      </schema>
+</schemalist>
