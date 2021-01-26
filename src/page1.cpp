@@ -37,10 +37,26 @@ void Page1::initControlQss()
             isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
             if(isoPath != "" ){
                 QString tmp = isoPath;
-                qDebug()<<"isopath = "<<isoPath<<"  len="<<isoPath.length();
+                QFile isoFile(isoPath);
+                if(isoFile.open(QIODevice::ReadOnly)){
+                    int size = isoFile.size()/1000/1000;
+                    if(size <= 200){    //文件小于200M不给制作
+                        emit isoIllegal();
+                        isoPath.clear();tmp.clear();
+                        QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("ISO Invalid,please make sure you choose a vavlid image!"),
+                                             QMessageBox::Yes);
+                        switch (result)
+                        {
+                        case QMessageBox::Yes:
+//                            this->close();
+                            break;
+                        }
+                    }
+                }
                 if(isoPath.length() > 45){
                     tmp = isoPath.mid(0,44) + "…";
                 }
+                qDebug()<<"tmp="<<tmp;
                 urlIso->setText(tmp);
             }
         });
