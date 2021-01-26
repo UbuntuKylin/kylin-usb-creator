@@ -65,12 +65,12 @@
     <message>
         <location filename="../page1.cpp" line="46"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../page1.cpp" line="46"/>
         <source>ISO Invalid,please make sure you choose a vavlid image!</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO镜像无效，请选择正确的镜像！</translation>
     </message>
     <message>
         <location filename="../page1.cpp" line="67"/>
