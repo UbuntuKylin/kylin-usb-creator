@@ -29,17 +29,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="93"/>
+        <location filename="../page1.cpp" line="109"/>
         <source>USB drive will be formatted,please backup your files!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="172"/>
+        <location filename="../page1.cpp" line="188"/>
         <source>Authorization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="149"/>
+        <location filename="../page1.cpp" line="165"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -59,32 +59,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="51"/>
+        <location filename="../page1.cpp" line="46"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../page1.cpp" line="46"/>
+        <source>ISO Invalid,please make sure you choose a vavlid image!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../page1.cpp" line="67"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="214"/>
+        <location filename="../page1.cpp" line="230"/>
         <source>These operations needs to be verified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="145"/>
+        <location filename="../page1.cpp" line="161"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="216"/>
+        <location filename="../page1.cpp" line="232"/>
         <source>Request authorization:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="219"/>
+        <location filename="../page1.cpp" line="235"/>
         <source>Password：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="395"/>
+        <location filename="../page1.cpp" line="411"/>
         <source>No USB drive available</source>
         <translation type="unfinished"></translation>
     </message>
