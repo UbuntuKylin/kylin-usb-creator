@@ -216,10 +216,7 @@ QVBoxLayout* menuModule::initBody(){
     bodyAppVersion->setText(tr("Version: ") + appVersion);
     bodyAppVersion->setAlignment(Qt::AlignLeft);
     bodyAppVersion->setStyleSheet("font-size:14px;");
-    bodySupport->setText(tr("Service & Support: ") +
-                         "<a href=\"mailto://support@kylinos.cn\""
-                         "style=\"color:palttte(buttonText)\">"
-                         "support@kylinos.cn</a>");
+
     connect(bodySupport,&QLabel::linkActivated,this,[=](const QString url){
         QDesktopServices::openUrl(QUrl(url));
     });
@@ -279,10 +276,18 @@ void menuModule::setThemeDark(){
     this->setStyleSheet("QLabel{color:rgba(255,255,255,1);}");
     titleText->setStyleSheet("color:rgba(255,255,255,1);");
     emit menuModuleSetThemeStyle("dark-theme");
+    bodySupport->setText(tr("Service & Support: ") +
+                         "<a href=\"mailto://support@kylinos.cn\""
+                         "style=\"color:rgba(225,225,225,1)\">"
+                         "support@kylinos.cn</a>");
 }
 
 void menuModule::setThemeLight(){
     aboutWindow->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1);}");
     emit menuModuleSetThemeStyle("light-theme");
+    bodySupport->setText(tr("Service & Support: ") +
+                         "<a href=\"mailto://support@kylinos.cn\""
+                         "style=\"color:rgba(0,0,0,1)\">"
+                         "support@kylinos.cn</a>");
 
 }
