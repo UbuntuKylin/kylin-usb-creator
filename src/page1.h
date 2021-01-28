@@ -19,6 +19,7 @@
 #include <QWidget> //控件
 #include <QLabel>
 #include <QComboBox>
+#include <QMessageBox>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTimer>
@@ -57,6 +58,7 @@ signals:
     void makeStart(QString key,QString sourcePath,QString targetPath); //make start
     void diskLabelRefresh(); //  已选中U盘刷新
     void setStyleWidgetStyle(const QString);
+    void isoIllegal();
 
 public slots:
     void allClose();

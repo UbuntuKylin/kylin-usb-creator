@@ -248,6 +248,10 @@ void MainWindow::handleIconClickedSub()
 
 void MainWindow::makeFinish()
 {
+    disconnect(titleClose,&QPushButton::clicked,0,0); //开始制作之后取消之前click触发的应用关闭功能
+    connect(titleClose,&QPushButton::clicked,[=](){
+       this->close();
+    });
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
@@ -255,10 +259,6 @@ void MainWindow::makeFinish()
 
 void MainWindow::returnMain()
 {
-    disconnect(titleClose,&QPushButton::clicked,0,0); //开始制作之后取消之前click触发的应用关闭功能
-    connect(titleClose,&QPushButton::clicked,[=](){
-       this->close();
-    });
     stackedWidget->setCurrentIndex(changePage());
     page1->ifStartBtnChange();
     page1->urlIso->clear();
