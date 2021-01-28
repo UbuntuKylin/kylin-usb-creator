@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/">
+        <file>data/min_h.png</file>
+        <file>data/close_h.png</file>
+        <file>data/min_d.png</file>
+        <file>data/close_d.png</file>
+        <file>data/comboboxIcon_d.png</file>
+        <file>data/comboboxIcon_c.png</file>
+        <file>data/warning.png</file>
+        <file>data/logo/16.png</file>
+        <file>data/logo/22.png</file>
+        <file>data/logo/24.png</file>
+        <file>data/logo/32.png</file>
+        <file>data/logo/48.png</file>
+        <file>data/logo/64.png</file>
+        <file>data/logo/96.png</file>
+        <file>data/logo/128.png</file>
+        <file>data/logo/256.png</file>
+        <file>data/logo/512.png</file>
+        <file>data/kylin-usb-creator.png</file>
+        <file>data/elements_dark/close.png</file>
+        <file>data/elements_dark/minimize.png</file>
+        <file>data/kylin-usb-creator.svg</file>
+        <file>data/elements_dark/finish.gif</file>
+        <file>data/elements_dark/loading.gif</file>
+        <file>data/elements_light/finish.gif</file>
+        <file>data/elements_light/loading.gif</file>
+        <file>data/elements_light/failed.png</file>
+        <file>data/elements_dark/failed.png</file>
+        <file>data/elements_light/menu.png</file>
+        <file>data/elements_dark/menu.png</file>
+    </qresource>
+</RCC>

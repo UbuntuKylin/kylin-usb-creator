@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>src/translations/kylin-usb-creator_bo_CN.qm</file>
-        <file>src/translations/kylin-usb-creator_zh_CN.qm</file>
-    </qresource>
-</RCC>
