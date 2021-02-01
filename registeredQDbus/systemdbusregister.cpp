@@ -12,28 +12,19 @@ SystemDbusRegister::SystemDbusRegister()
 
 }
 
-QString SystemDbusRegister::GetComputerInfo()
-{
-    QByteArray ba;
-    FILE * fp = NULL;
-    char cmd[128];
-    char buf[1024];
-    sprintf(cmd, "dmidecode -t system");
-
-    if ((fp = popen(cmd, "r")) != NULL){
-        rewind(fp);
-        while (!feof(fp)) {
-            fgets(buf, sizeof (buf), fp);
-            ba.append(buf);
-        }
-        pclose(fp);
-        fp = NULL;
-    }
-    return QString(ba);
-}
-
-//执行了制作命令
+//excute dd command
 void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
+    //root authorization
+    Authority::Result result;
+    SystemBusNameSubject subject(message().service());
+    result = Authority::instance()->checkAuthorizationSync("com.demo.systemdbus.exitservice",
+             subject , Authority::AllowUserInteraction);
+    if (result == Authority::No){
+        //TODO: send authorization failed dbus message
+        emit authorityFailed();
+        return ;
+    }
+
     uDiskPath = targetPath;
     QFileInfo info(sourcePath);
     sourceFileSize = info.size()/1000000;
@@ -43,10 +34,6 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
     command_dd->waitForStarted();
     QString ddshell = "dd if='"+sourcePath.toLocal8Bit()+"' of="+targetPath.toLocal8Bit()+" status=progress";
     command_dd->write(ddshell.toLocal8Bit() + '\n');
-
-    QProcess *dfeet = new QProcess;
-    dfeet->start("d-feet");
-    dfeet->waitForStarted();
     return ;
 }
 
@@ -64,7 +51,8 @@ void SystemDbusRegister::readBashStandardErrorInfo()
          bool ok = false;
          qulonglong progress_num = size_progress.toDouble(&ok)/1048576;
          int mission_percent = progress_num*100/sourceFileSize;
-//         lableNum->setText(QString::number(mission_percent)+ "%");
+         //send mission percent debus message every output
+        emit workingProgress(mission_percent);
          if(bytes2.count() == 1 || !ok){
              finishEvent();
          }
@@ -75,21 +63,21 @@ void SystemDbusRegister::finishEvent(){
     QTimer *diskRefreshDelay = new QTimer;
     connect(diskRefreshDelay,&QTimer::timeout,[=]{
         if(isMakingSucess()){
-            //发送制作成功dbus信号
+            //send production success dbus message
+            emit makeFinish("success");
         }else{
-            //发送制作失败dbus信号
+            //send production failure dbus message
+            emit makeFinish("fail");
         }
-       //发送制作完成信号
     });
     diskRefreshDelay->start(1000);
 }
 
 bool SystemDbusRegister::isMakingSucess()
 {
-    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //已挂载设备
+    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //mounted devices
     for(QStorageInfo& disk : diskList)
     {
-//        qDebug()<<"目标比对设备"<<uDiskPath<<"***已挂载设备："<<disk.device();
         QString diskPath = disk.device();
         diskPath = diskPath.mid(0,8);
         if(uDiskPath == diskPath)

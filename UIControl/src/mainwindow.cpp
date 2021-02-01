@@ -4,12 +4,16 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
+    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","test",this,SLOT(dealTest()));
     statusbarInit();
     init();
     myStyle();
     initGsetting();
     qDebug()<<menu;
     menu->themeUpdate();  //画一次主题
+}
+void MainWindow::dealTest(){
+    qDebug()<<"sxs# test";
 }
 
 MainWindow::~MainWindow()

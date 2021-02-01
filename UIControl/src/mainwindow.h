@@ -50,7 +50,7 @@ public slots:
     void setThemeStyle(QString);
     void dealMenuModulePullupHelp();
     void doubleCheck();
-
+    void dealTest();
 private:
     // 标题栏资源
     QWidget *title = nullptr;

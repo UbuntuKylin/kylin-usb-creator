@@ -14,19 +14,24 @@
 class SystemDbusRegister : public QObject, protected QDBusContext
 {
     Q_OBJECT
+//    Q_CLASSINFO("D-Bus Interface", "com.kylinusbcreator.interface")
     Q_CLASSINFO("D-Bus Interface", "com.kylinusbcreator.interface")
 public:
     SystemDbusRegister();
 //    ~SystemDbusRegister();
 
-signals:
+Q_SIGNALS:
+    void workingProgress(int);
+    void makeFinish(QString);
+    void authorityFailed();
+
 public slots:
-    Q_SCRIPTABLE QString GetComputerInfo();
     Q_SCRIPTABLE void MakeStart(QString sourcePath,QString targetPath);
 private:
     void readBashStandardErrorInfo();
     void finishEvent();
     bool isMakingSucess();
+
 private:
     QString uDiskPath = "";
     qint64 sourceFileSize = 0;

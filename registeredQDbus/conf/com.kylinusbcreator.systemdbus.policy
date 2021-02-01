@@ -5,7 +5,7 @@
 <policyconfig>
   <vendor>kylin os</vendor>
   <vendor_url>http://github.com/ubuntukylin/</vendor_url>
-  <action id="com.kylinusbcreator.systemdbus.exitservice">
+  <action id="com.kylinusbcreator.systemdbus.getcomputerinfo">
     <description>kylin-usb-creator</description>
     <message>system policy of kylin-usb-creator</message>
     <defaults>
