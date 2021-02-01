@@ -4,7 +4,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
-#添加子工程
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use

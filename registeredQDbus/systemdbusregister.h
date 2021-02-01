@@ -7,7 +7,10 @@
 #include <QProcess>
 #include <QFile>
 #include <QSettings>
-
+#include <QFileInfo>
+#include <QProcess>
+#include <QTimer>
+#include <QStorageInfo>
 class SystemDbusRegister : public QObject, protected QDBusContext
 {
     Q_OBJECT
@@ -19,6 +22,16 @@ public:
 signals:
 public slots:
     Q_SCRIPTABLE QString GetComputerInfo();
+    Q_SCRIPTABLE void MakeStart(QString sourcePath,QString targetPath);
+private:
+    void readBashStandardErrorInfo();
+    void finishEvent();
+    bool isMakingSucess();
+private:
+    QString uDiskPath = "";
+    qint64 sourceFileSize = 0;
+    QProcess *command_dd = nullptr;
+
 };
 
 #endif // SYSTEMDBUSREGISTER_H

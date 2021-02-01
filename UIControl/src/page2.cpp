@@ -219,7 +219,6 @@ void Page2::finishEvent()
 }
 bool Page2::isMakingSuccess()
 {
-
     QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //已挂载设备
     for(QStorageInfo& disk : diskList)
     {
