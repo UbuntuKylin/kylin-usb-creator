@@ -53,7 +53,9 @@ void Page1::initControlQss()
                         }
                     }
                 }
+                urlIso->setToolTip("");
                 if(isoPath.length() > 45){
+                    urlIso->setToolTip(tmp);
                     tmp = isoPath.mid(0,44) + "…";
                 }
                 qDebug()<<"tmp="<<tmp;
