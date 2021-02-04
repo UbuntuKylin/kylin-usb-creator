@@ -26,7 +26,6 @@ void Page1::initControlQss()
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
     warnningText=new QLabel;
-
     urlIso=new QLineEdit;
     urlIso->setEnabled(false);
     urlIso->setFixedHeight(30);
@@ -37,14 +36,12 @@ void Page1::initControlQss()
             isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
             if(isoPath != "" ){
                 QString tmp = isoPath;
-                qDebug()<<"isopath = "<<isoPath<<"  len="<<isoPath.length();
                 if(isoPath.length() > 45){
                     tmp = isoPath.mid(0,44) + "…";
                 }
                 urlIso->setText(tmp);
             }
         });
-
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
     creatStart=new QPushButton(this);
     creatStart->setFixedSize(200,30);

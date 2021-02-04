@@ -9,11 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     init();
     myStyle();
     initGsetting();
-    qDebug()<<menu;
     menu->themeUpdate();  //画一次主题
-}
-void MainWindow::dealTest(){
-    qDebug()<<"sxs# test";
 }
 
 MainWindow::~MainWindow()
@@ -109,10 +105,10 @@ void MainWindow::myStyle()
     timer = new QTimer(this);
     page1 = new Page1();
     page2 = new Page2();
-    connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
-    connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
-    connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
-    connect(page2,&Page2::returnMain,this,&MainWindow::returnMain);
+//    connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
+//    connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
+//    connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
+//    connect(page2,&Page2::returnMain,this,&MainWindow::returnMain);
     //内部样式
     QSize pointSize(8,8);
     pointLable1=new QLabel;

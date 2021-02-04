@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
     //regist object
-    if (!systemBus.registerObject("/", new SystemDbusRegister(), QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)){
+    if (!systemBus.registerObject("/org/freedesktop/KylinUSBCreator", new SystemDbusRegister(), QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)){
         qCritical() << "QDbus register object failed reason:" << systemBus.lastError();
         exit(2);
     }
