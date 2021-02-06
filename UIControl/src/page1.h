@@ -11,16 +11,17 @@
 #define LIGHTTHEME "light"
 
 #include "stylecombobox.h"
-#include "rootauthdialog.h"
 #include <QEvent>
 #include <QDebug>
 #include <QRect>
-//#include <uchardet/uchardet.h>
 #include <QWidget> //控件
 #include <QLabel>
+#include <QProcess>
 #include <QComboBox>
 #include <QMessageBox>
 #include <QLineEdit>
+#include <QDBusMessage>
+#include <QDBusConnection>
 #include <QPushButton>
 #include <QTimer>
 #include <QBoxLayout> //布局
@@ -55,7 +56,7 @@ public:
     QLineEdit *urlIso = nullptr;//显示镜像路径
 
 signals:
-    void makeStart(QString key,QString sourcePath,QString targetPath); //make start
+    void makeStart(QString sourcePath,QString targetPath); //make start
     void diskLabelRefresh(); //  已选中U盘刷新
     void setStyleWidgetStyle(const QString);
     void isoIllegal();
@@ -73,39 +74,25 @@ private:
     void creatStartSlots();    //开始制作x
     void initControlQss();//初始化控件及其样式
     void getStorageInfo();//获取磁盘信息
-    void dialogInitControlQss();  //初始化对话框控件及其样式
     bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
     void dealDialogCancel();     // 处理授权框关闭及取消
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
-    bool isCapicityAvailable(QString); //容量过滤s
+    bool isCapicityAvailable(QString); //容量过滤
     void getUdiskPathAndCap();    //获取U盘路径和容量
     void getUdiskName();    //获取U盘第一个分区的命名
 
 
     QList<AvailableDiskInfo*> diskInfos; // U盘信息
     QString themeStatus = LIGHTTHEME; //主题指示器
-    QWidget *rootWindowTitle = nullptr; //root授权框状态栏
-    QLabel *rootDialogTitleText = nullptr; //root授权框标题
-    QPushButton *rootDialogClose = nullptr; //root授权框关闭按钮
-    QPushButton *rootDialogMin = nullptr; //root授权框最小化按钮
-    QLabel *dialogKeyLable = nullptr; //root授权框输入密码label
-    QLabel *divingLine = nullptr;    //授权框1px分割线
     QTimer *diskRefreshDelay = nullptr; //U盘插入后等待系统挂载的时间
     StyleComboBox *comboUdisk = nullptr;//U盘列表
     QLabel *tabIso = nullptr;//选择镜像标签
     QLabel *tabUdisk = nullptr;//选择U盘标签
     QLabel *warnningIcon = nullptr;//警告标志
     QLabel *warnningText = nullptr;//警告标语tabUdisk
-    bool isAuthDialogShowing = false; //root授权框是否在显示
     QPushButton *findIso = nullptr;//浏览文件按钮
     QPushButton *creatStart = nullptr;//开始制作
-    rootAuthDialog *authDialog = nullptr;//root授权对话框
-    QGraphicsDropShadowEffect *shadowEffect = nullptr; //root授权框阴影
-    QWidget *authDialogContentWidget = nullptr; //root授权对话框的子窗口，用来在上边加载控件。
     QFileSystemWatcher *udiskplugwatcher = nullptr; //U盘插拔监控器
-    QLabel *dialogWarningIcon = nullptr; //授权框警告Icon
-    QLabel *dialogWarningLable = nullptr; //授权框警告label
-    QLabel *dialogWarningLable2 = nullptr;
     QPushButton *dialogNo = nullptr;
     QPushButton *dialogYes = nullptr;
     QString isoPath;    //iso文件的路径

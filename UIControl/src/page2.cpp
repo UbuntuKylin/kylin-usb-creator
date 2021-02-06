@@ -27,7 +27,7 @@ Page2::Page2(QWidget *parent) : QWidget(parent)
     lableNum=new QLabel(lableMovie);
     lableNum->setFixedSize(40,26);
     lableNum->move((lableMovie->width()-lableNum->width())/2,(lableMovie->height()-lableNum->height())/2);
-    lableNum->setAlignment(Qt::AlignCenter);    //设置数字居中对齐
+    lableNum->setAlignment(Qt::AlignCenter);    //set numbers align center
     returnPushButton=new QPushButton;
     connect(returnPushButton,&QPushButton::clicked,this,&Page2::returnMain);
     connect(returnPushButton,&QPushButton::clicked,[=]{movieStatus = loading;});
@@ -70,20 +70,19 @@ Page2::Page2(QWidget *parent) : QWidget(parent)
 }
 void Page2::playLoadingGif()
 {
-//    lableNum->setText("0%");
     lableNum->show();
     returnPushButton->setEnabled(false);
     returnPushButton->setText(tr("USB starter in production"));
     movieStatus = loading;
     if(LIGHTTHEME == themeStatus){
         returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(193, 193, 193, 1);font-size:14px;border-radius:15px;");
-        lableMovie->setMovie(movieLoading_l); //为label设置movie
-        movieLoading_l->start();         //开始播放动画
+        lableMovie->setMovie(movieLoading_l); //set movie for qlabel
+        movieLoading_l->start();         //play loading gif
     }else
     {
         returnPushButton->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);font-size:14px;border-radius:15px;");
-        lableMovie->setMovie(movieLoading_d); //为label设置movie
-        movieLoading_d->start();         //开始播放动画
+        lableMovie->setMovie(movieLoading_d);
+        movieLoading_d->start();
     }
     lableText->setText(tr("Please do not remove the USB driver or power off now"));
 }
@@ -108,7 +107,6 @@ void Page2::playFinishGif()
         lableMovie->setMovie(movieFinish_l);
         movieFinish_l->start();
     }
-
 }
 
 void Page2::playErrorGif()
@@ -121,45 +119,55 @@ void Page2::playErrorGif()
                           ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
     lableText->setText(tr("Creation Failed"));
-
     lableMovie->clear();
     lableMovie->setScaledContents(true);
     lableMovie->setPixmap(QPixmap::fromImage(QImage(":/data/elements_dark/failed.png")));
-//    emit makeFinish();
-//    lableMovie->setpi
-
 }
 
-void Page2::startMaking(QString key,QString sourcePath,QString targetPath)
+void Page2::startMaking()
 {
-//    制作开始之前卸载U盘
-    QProcess m_unmount;
-    QStringList m_unmount_arg;
-    m_unmount_arg <<"unmount"<<"-b"<<targetPath;
-    m_unmount.start("udisksctl",m_unmount_arg);
-    if(m_unmount.waitForStarted()){
-        m_unmount.waitForFinished();
-    }else{
-        qDebug()<<"#udisksctl# Warning:unmount failed! Unmount path :"<<targetPath;
-    }
-    uDiskPath = targetPath; //保存U盘路径 用来做错误检查
-    qDebug()<<"uDiskPath:"<<uDiskPath;
-    emit swToPage2();
-    lableNum->setText("0%");
     playLoadingGif();
-    sourceFileSize = getFileSize(sourcePath);
-    command_dd = new QProcess();
-    connect(command_dd,&QProcess::readyReadStandardError,this,&Page2::readBashStandardErrorInfo);
-    command_dd->start("bash");
-    command_dd->waitForStarted();
-    QString ddshell = "echo '"+key.toLocal8Bit()+"'| sudo -S dd if='"+sourcePath.toLocal8Bit()+"' of="+targetPath.toLocal8Bit()+" status=progress conv=fsync";
-    
-//    测试用shell
-//    QString ddshell = "dd if=/dev/zero of=/home/kylin/test.iso  bs=1M count=2000  status=progress";
-//    QString ddshell = "echo "+key.toLocal8Bit()+"| sudo -S dd if="+sourcePath.toLocal8Bit()+" of=/dev/null status=progress";
+    lableNum->setText("0%");
+    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","workingProgress",this,SLOT(dealWorkingProgress(int)));
+    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","makeFinish",this,SLOT(dealMakeFinish(QString)));
+//    QProcess m_unmount;
+//    QStringList m_unmount_arg;
+//    m_unmount_arg <<"unmount"<<"-b"<<targetPath;
+//    m_unmount.start("udisksctl",m_unmount_arg);
+//    if(m_unmount.waitForStarted()){
+//        m_unmount.waitForFinished();
+//    }else{
+//        qDebug()<<"#udisksctl# Warning:unmount failed! Unmount path :"<<targetPath;
+//    }
+//    uDiskPath = targetPath;
+//    qDebug()<<"uDiskPath:"<<uDiskPath;
+//    emit swToPage2();
+//    lableNum->setText("0%");
+//    playLoadingGif();
+//    sourceFileSize = getFileSize(sourcePath);
+//    command_dd = new QProcess();
+//    connect(command_dd,&QProcess::readyReadStandardError,this,&Page2::readBashStandardErrorInfo);
+//    command_dd->start("bash");
+//    command_dd->waitForStarted();
+//    QString ddshell = "echo '"+key.toLocal8Bit()+"'| sudo -S dd if='"+sourcePath.toLocal8Bit()+"' of="+targetPath.toLocal8Bit()+" status=progress";
+//    qDebug()<<"ddshell is: "<<ddshell;
+//    command_dd->write(ddshell.toLocal8Bit() + '\n');
+}
+void Page2::dealWorkingProgress(int progress){
+    lableNum->setText(QString::number(progress) + "%");
+}
 
-    qDebug()<<"ddshell is: "<<ddshell;
-    command_dd->write(ddshell.toLocal8Bit() + '\n');
+void Page2::dealMakeFinish(QString status)
+{
+    qDebug()<<"receive signal make finish";
+    if("success" == status){
+        //TODO:success action
+        lableNum->setText("100%");
+        playFinishGif();
+    }else{
+        playErrorGif();
+    }
+    emit makeFinish();
 }
 
 qint64 Page2::getFileSize(QString filePath)
@@ -168,36 +176,14 @@ qint64 Page2::getFileSize(QString filePath)
     return info.size()/1048576;
 }
 
-void Page2::readBashStandardErrorInfo()
-{
-    QByteArray cmdout = command_dd->readAllStandardError();
-    if(!cmdout.isEmpty() && cmdout != "\r" && cmdout != "\n"){
-        QString str = cmdout;
-        qDebug()<<str;
-        str = str.replace(" ","");
-        if(str =="" || str.contains("[sudo]")) {return;}
-        str = str.replace("\r","");
-        QStringList bytes2 =  str.split("bytes");
-         QString size_progress = bytes2.first();
-         bool ok = false;
-         qulonglong progress_num = size_progress.toDouble(&ok)/1048576;
-         int mission_percent = progress_num*100/sourceFileSize;
-         lableNum->setText(QString::number(mission_percent)+ "%");
-         if(bytes2.count() == 1 || !ok){
-             finishEvent();
-         }
-    }
-}
-
 void Page2::finishEvent()
 {
-//  制作结束加载U盘
+    //mount disk at end of production
     QProcess m_unmount;
     QStringList m_unmount_arg;
     m_unmount_arg <<"mount"<<"-b"<<uDiskPath;
     m_unmount.start("udisksctl",m_unmount_arg);
     if(m_unmount.waitForStarted()){
-        qDebug()<<"#udisksctl# mount sucess! mount path :"<<uDiskPath;
         m_unmount.waitForFinished();
     }else{
         qDebug()<<"#udisksctl# Warning:mount failed! mount path :"<<uDiskPath;
@@ -219,11 +205,9 @@ void Page2::finishEvent()
 }
 bool Page2::isMakingSuccess()
 {
-
-    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //已挂载设备
+    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //mounted volumes
     for(QStorageInfo& disk : diskList)
     {
-//        qDebug()<<"目标比对设备"<<uDiskPath<<"***已挂载设备："<<disk.device();
         QString diskPath = disk.device();
         diskPath = diskPath.mid(0,8);
         if(uDiskPath == diskPath)
@@ -237,8 +221,7 @@ bool Page2::isMakingSuccess()
 void Page2::movieRefresh()
 {
     lableNum->hide();
-    lableMovie->clear();
-    switch(movieStatus)
+    lableMovie->clear();4
     {
     case 0:
         playLoadingGif();
