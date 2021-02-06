@@ -17,14 +17,18 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
     //root authorization
     Authority::Result result;
     SystemBusNameSubject subject(message().service());
-    result = Authority::instance()->checkAuthorizationSync("com.demo.systemdbus.exitservice",
+    result = Authority::instance()->checkAuthorizationSync("com.kylinusbcreator.systemdbus.authoritycheck",
              subject , Authority::AllowUserInteraction);
-    if (result == Authority::No){
+    if (result == Authority::Yes){
         //TODO: send authorization failed dbus message
-        emit authorityFailed();
+        qDebug()<<"authority success!";
+        emit authorityStatus("success");
+    }else{
+        //there's two cases NO and Challenge
+        emit authorityStatus("failed");
+        qDebug()<<"suthority failed";
         return ;
     }
-
     uDiskPath = targetPath;
     QFileInfo info(sourcePath);
     sourceFileSize = info.size()/1000000;
@@ -52,6 +56,7 @@ void SystemDbusRegister::readBashStandardErrorInfo()
          qulonglong progress_num = size_progress.toDouble(&ok)/1048576;
          int mission_percent = progress_num*100/sourceFileSize;
          //send mission percent debus message every output
+         qDebug()<<"working progress = "<<mission_percent;
         emit workingProgress(mission_percent);
          if(bytes2.count() == 1 || !ok){
              finishEvent();
@@ -62,11 +67,14 @@ void SystemDbusRegister::readBashStandardErrorInfo()
 void SystemDbusRegister::finishEvent(){
     QTimer *diskRefreshDelay = new QTimer;
     connect(diskRefreshDelay,&QTimer::timeout,[=]{
+        diskRefreshDelay->stop();
         if(isMakingSucess()){
             //send production success dbus message
+            qDebug()<<"make success";
             emit makeFinish("success");
         }else{
             //send production failure dbus message
+            qDebug()<<"make failed";
             emit makeFinish("fail");
         }
     });

@@ -23,7 +23,7 @@ public:
 Q_SIGNALS:
     void workingProgress(int);
     void makeFinish(QString);
-    void authorityFailed();
+    void authorityStatus(QString);
 
 public slots:
     Q_SCRIPTABLE void MakeStart(QString sourcePath,QString targetPath);

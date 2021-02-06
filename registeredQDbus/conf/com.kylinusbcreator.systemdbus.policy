@@ -5,9 +5,9 @@
 <policyconfig>
   <vendor>kylin os</vendor>
   <vendor_url>http://github.com/ubuntukylin/</vendor_url>
-  <action id="com.kylinusbcreator.systemdbus.getcomputerinfo">
+  <action id="com.kylinusbcreator.systemdbus.authoritycheck">
     <description>kylin-usb-creator</description>
-    <message>system policy of kylin-usb-creator</message>
+    <message>执行此操作需要root授权</message>
     <defaults>
       <allow_any>auth_admin</allow_any>
       <allow_inactive>auth_admin</allow_inactive>
