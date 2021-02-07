@@ -161,8 +161,7 @@ void menuModule::initAbout(){
     hints.functions = MWM_FUNC_ALL;
     hints.decorations = MWM_DECOR_BORDER;
     XAtomHelper::getInstance()->setWindowMotifHint(aboutWindow->winId(), hints);
-//    aboutWindow->setFixedSize(420,324);
-    aboutWindow->setFixedWidth(420);
+    aboutWindow->setFixedSize(420,380);
     QVBoxLayout *mainlyt = new QVBoxLayout();
     QHBoxLayout *titleLyt = initTitleBar();
     QVBoxLayout *bodylyt = initBody();
@@ -216,7 +215,7 @@ QVBoxLayout* menuModule::initBody(){
                             "The operation process is simple and easy."
                             "You can choose ISO image and usb driver,"
                             "and make boot driver with a few clicks."));
-    bodyAppDesc->setFixedWidth(356);
+    bodyAppDesc->setFixedWidth(360);
     bodyAppDesc->setStyleSheet("font-size:14px;");
     bodyAppDesc->setWordWrap(true);
     bodyAppName->setFixedHeight(28);
