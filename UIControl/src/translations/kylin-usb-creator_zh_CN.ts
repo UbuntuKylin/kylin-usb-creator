@@ -258,7 +258,7 @@
     <message>
         <location filename="../include/menumodule.cpp" line="215"/>
         <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks</source>
-        <translation type="unfinished"></translation>
+        <translation>麒麟U盘启动器提供系统盘制作功能。操作流程简单便捷。用户可以自行选择ISO镜像和U盘，一键轻松制作U盘启动器。</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="226"/>

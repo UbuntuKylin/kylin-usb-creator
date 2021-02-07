@@ -215,7 +215,7 @@ QVBoxLayout* menuModule::initBody(){
     bodyAppDesc->setText(tr("Kylin USB Creator provides system image making function."
                             "The operation process is simple and easy."
                             "You can choose ISO image and usb driver,"
-                            "and make boot driver with a few clicks"));
+                            "and make boot driver with a few clicks."));
     bodyAppDesc->setFixedWidth(356);
     bodyAppDesc->setStyleSheet("font-size:14px;");
     bodyAppDesc->setWordWrap(true);
