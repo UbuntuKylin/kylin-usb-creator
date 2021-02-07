@@ -9,18 +9,28 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="32"/>
-        <location filename="../mainwindow.cpp" line="89"/>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="91"/>
+        <location filename="../mainwindow.cpp" line="182"/>
         <source>kylin usb creator</source>
         <translation>麒麟U盘启动器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="34"/>
+        <source>minimize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="50"/>
+        <source>close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>USB driver is in production.Are you sure you want to stop task and exit the program?</source>
         <translation>启动盘正在制作中，是否停止任务并退出程序？</translation>
     </message>
@@ -190,59 +200,69 @@
 <context>
     <name>menuModule</name>
     <message>
-        <location filename="../include/menumodule.cpp" line="31"/>
+        <location filename="../include/menumodule.cpp" line="20"/>
+        <source>menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../include/menumodule.cpp" line="32"/>
         <source>Theme</source>
         <translation>主题</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="33"/>
-        <location filename="../include/menumodule.cpp" line="112"/>
+        <location filename="../include/menumodule.cpp" line="34"/>
+        <location filename="../include/menumodule.cpp" line="113"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="35"/>
-        <location filename="../include/menumodule.cpp" line="110"/>
+        <location filename="../include/menumodule.cpp" line="36"/>
+        <location filename="../include/menumodule.cpp" line="111"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="37"/>
-        <location filename="../include/menumodule.cpp" line="108"/>
+        <location filename="../include/menumodule.cpp" line="38"/>
+        <location filename="../include/menumodule.cpp" line="109"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="44"/>
+        <location filename="../include/menumodule.cpp" line="45"/>
         <source>Auto</source>
         <translation>自动</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="48"/>
-        <location filename="../include/menumodule.cpp" line="123"/>
+        <location filename="../include/menumodule.cpp" line="49"/>
+        <location filename="../include/menumodule.cpp" line="124"/>
         <source>Light</source>
         <translation>浅色模式</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="52"/>
-        <location filename="../include/menumodule.cpp" line="128"/>
+        <location filename="../include/menumodule.cpp" line="53"/>
+        <location filename="../include/menumodule.cpp" line="129"/>
         <source>Dark</source>
         <translation>深色模式</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="192"/>
-        <location filename="../include/menumodule.cpp" line="213"/>
+        <location filename="../include/menumodule.cpp" line="191"/>
+        <source>close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../include/menumodule.cpp" line="194"/>
+        <location filename="../include/menumodule.cpp" line="215"/>
         <source>kylin usb creator</source>
         <translation>麒麟U盘启动器</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="216"/>
+        <location filename="../include/menumodule.cpp" line="218"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="279"/>
-        <location filename="../include/menumodule.cpp" line="288"/>
+        <location filename="../include/menumodule.cpp" line="280"/>
+        <location filename="../include/menumodule.cpp" line="289"/>
         <source>Service &amp; Support: </source>
         <translation>服务与支持团队：</translation>
     </message>
