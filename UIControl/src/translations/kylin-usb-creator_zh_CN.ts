@@ -200,69 +200,74 @@
 <context>
     <name>menuModule</name>
     <message>
-        <location filename="../include/menumodule.cpp" line="20"/>
+        <location filename="../include/menumodule.cpp" line="21"/>
         <source>menu</source>
         <translation>菜单</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="32"/>
+        <location filename="../include/menumodule.cpp" line="33"/>
         <source>Theme</source>
         <translation>主题</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="34"/>
-        <location filename="../include/menumodule.cpp" line="113"/>
+        <location filename="../include/menumodule.cpp" line="35"/>
+        <location filename="../include/menumodule.cpp" line="114"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="36"/>
-        <location filename="../include/menumodule.cpp" line="111"/>
+        <location filename="../include/menumodule.cpp" line="37"/>
+        <location filename="../include/menumodule.cpp" line="112"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="38"/>
-        <location filename="../include/menumodule.cpp" line="109"/>
+        <location filename="../include/menumodule.cpp" line="39"/>
+        <location filename="../include/menumodule.cpp" line="110"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="45"/>
+        <location filename="../include/menumodule.cpp" line="46"/>
         <source>Auto</source>
         <translation>自动</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="49"/>
-        <location filename="../include/menumodule.cpp" line="124"/>
+        <location filename="../include/menumodule.cpp" line="50"/>
+        <location filename="../include/menumodule.cpp" line="125"/>
         <source>Light</source>
         <translation>浅色模式</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="53"/>
-        <location filename="../include/menumodule.cpp" line="129"/>
+        <location filename="../include/menumodule.cpp" line="54"/>
+        <location filename="../include/menumodule.cpp" line="130"/>
         <source>Dark</source>
         <translation>深色模式</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="191"/>
+        <location filename="../include/menumodule.cpp" line="193"/>
         <source>close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="194"/>
-        <location filename="../include/menumodule.cpp" line="215"/>
+        <location filename="../include/menumodule.cpp" line="196"/>
+        <location filename="../include/menumodule.cpp" line="223"/>
         <source>kylin usb creator</source>
         <translation>麒麟U盘启动器</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="218"/>
+        <location filename="../include/menumodule.cpp" line="215"/>
+        <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../include/menumodule.cpp" line="226"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="280"/>
-        <location filename="../include/menumodule.cpp" line="289"/>
+        <location filename="../include/menumodule.cpp" line="290"/>
+        <location filename="../include/menumodule.cpp" line="299"/>
         <source>Service &amp; Support: </source>
         <translation>服务与支持团队：</translation>
     </message>
