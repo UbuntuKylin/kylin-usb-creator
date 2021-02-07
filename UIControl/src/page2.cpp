@@ -221,7 +221,8 @@ bool Page2::isMakingSuccess()
 void Page2::movieRefresh()
 {
     lableNum->hide();
-    lableMovie->clear();4
+    lableMovie->clear();
+    switch(movieStatus)
     {
     case 0:
         playLoadingGif();

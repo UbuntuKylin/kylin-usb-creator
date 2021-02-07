@@ -31,6 +31,7 @@ void MainWindow::statusbarInit()
     titleText = new QLabel();
     titleText->setText(tr("kylin usb creator"));
     titleMin = new QPushButton();
+    titleMin->setToolTip(tr("minimize"));
     titleMin->setProperty("isWindowButton", 0x1);
     titleMin->setProperty("useIconHighlightEffect", 0x2);
     titleMin->setFlat(true);
@@ -46,6 +47,7 @@ void MainWindow::statusbarInit()
     connect(menu,&menuModule::pullupHelp,this,&MainWindow::dealMenuModulePullupHelp);
 
     titleClose = new QPushButton();
+    titleClose->setToolTip(tr("close"));
     titleClose->setProperty("isWindowButton", 0x2) ;
     titleClose->setProperty("useIconHighlightEffect", 0x8);;
     titleClose->setFlat(true);
