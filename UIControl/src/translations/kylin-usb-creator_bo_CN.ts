@@ -4,19 +4,19 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="31"/>
-        <location filename="../mainwindow.cpp" line="88"/>
-        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.cpp" line="32"/>
+        <location filename="../mainwindow.cpp" line="89"/>
+        <location filename="../mainwindow.cpp" line="180"/>
         <source>kylin usb creator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="201"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="201"/>
         <source>USB driver is in production.Are you sure you want to stop task and exit the program?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24,77 +24,47 @@
 <context>
     <name>Page1</name>
     <message>
-        <location filename="../page1.cpp" line="37"/>
+        <location filename="../page1.cpp" line="35"/>
         <source>choose iso file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="109"/>
+        <location filename="../page1.cpp" line="116"/>
         <source>USB drive will be formatted,please backup your files!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="188"/>
-        <source>Authorization</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../page1.cpp" line="165"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../page1.cpp" line="16"/>
+        <location filename="../page1.cpp" line="15"/>
         <source>Choose iso file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="17"/>
+        <location filename="../page1.cpp" line="16"/>
         <source>Select USB drive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="34"/>
+        <location filename="../page1.cpp" line="32"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="46"/>
+        <location filename="../page1.cpp" line="44"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="46"/>
+        <location filename="../page1.cpp" line="44"/>
         <source>ISO Invalid,please make sure you choose a vavlid image!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="67"/>
+        <location filename="../page1.cpp" line="66"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="230"/>
-        <source>These operations needs to be verified:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../page1.cpp" line="161"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../page1.cpp" line="232"/>
-        <source>Request authorization:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../page1.cpp" line="235"/>
-        <source>Password：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../page1.cpp" line="411"/>
+        <location filename="../page1.cpp" line="267"/>
         <source>No USB drive available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -102,28 +72,28 @@
 <context>
     <name>Page2</name>
     <message>
-        <location filename="../page2.cpp" line="76"/>
+        <location filename="../page2.cpp" line="75"/>
         <source>USB starter in production</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="88"/>
+        <location filename="../page2.cpp" line="87"/>
         <source>Please do not remove the USB driver or power off now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="95"/>
-        <location filename="../page2.cpp" line="118"/>
+        <location filename="../page2.cpp" line="94"/>
+        <location filename="../page2.cpp" line="116"/>
         <source>return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="99"/>
+        <location filename="../page2.cpp" line="98"/>
         <source>Finish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page2.cpp" line="123"/>
+        <location filename="../page2.cpp" line="121"/>
         <source>Creation Failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -131,12 +101,12 @@
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="320"/>
+        <location filename="../../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="320"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="322"/>
+        <location filename="../../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="322"/>
         <source>Incompatible Qt Library Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -144,12 +114,12 @@
 <context>
     <name>T::QApplication</name>
     <message>
-        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="320"/>
+        <location filename="../../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="320"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="322"/>
+        <location filename="../../../../../Qt5.12.8/5.12.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h" line="322"/>
         <source>Incompatible Qt Library Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -208,7 +178,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="219"/>
+        <location filename="../include/menumodule.cpp" line="279"/>
+        <location filename="../include/menumodule.cpp" line="288"/>
         <source>Service &amp; Support: </source>
         <translation type="unfinished"></translation>
     </message>
