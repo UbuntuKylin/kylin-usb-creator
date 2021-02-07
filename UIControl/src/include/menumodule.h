@@ -81,6 +81,7 @@ private:
     QLabel* titleText = nullptr;
     QLabel* bodyAppName = nullptr;
     QLabel* bodyAppVersion = nullptr;
+    QLabel* bodyAppDesc = nullptr;
     QLabel* bodySupport = nullptr;
     void refreshThemeBySystemConf();    //通过系统配置更改主题
 };

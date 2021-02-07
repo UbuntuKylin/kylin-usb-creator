@@ -14,6 +14,7 @@ void menuModule::initAction(){
     aboutWindow = new QWidget();
     titleText = new QLabel();
     bodyAppName = new QLabel();
+    bodyAppDesc = new QLabel();
     bodyAppVersion = new QLabel();
     bodySupport = new QLabel();
     menuButton = new QToolButton;
@@ -160,7 +161,8 @@ void menuModule::initAbout(){
     hints.functions = MWM_FUNC_ALL;
     hints.decorations = MWM_DECOR_BORDER;
     XAtomHelper::getInstance()->setWindowMotifHint(aboutWindow->winId(), hints);
-    aboutWindow->setFixedSize(420,324);
+//    aboutWindow->setFixedSize(420,324);
+    aboutWindow->setFixedWidth(420);
     QVBoxLayout *mainlyt = new QVBoxLayout();
     QHBoxLayout *titleLyt = initTitleBar();
     QVBoxLayout *bodylyt = initBody();
@@ -210,8 +212,14 @@ QVBoxLayout* menuModule::initBody(){
     bodyIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
     bodyIcon->setStyleSheet("font-size:14px;");
     bodyIcon->setScaledContents(true);
+    bodyAppDesc->setText(tr("Kylin USB Creator provides system image making function."
+                            "The operation process is simple and easy."
+                            "You can choose ISO image and usb driver,"
+                            "and make boot driver with a few clicks"));
+    bodyAppDesc->setFixedWidth(356);
+    bodyAppDesc->setStyleSheet("font-size:14px;");
+    bodyAppDesc->setWordWrap(true);
     bodyAppName->setFixedHeight(28);
-//    bodyAppName->setText(tr(appShowingName.toLocal8Bit()));
     bodyAppName->setText(tr("kylin usb creator"));
     bodyAppName->setStyleSheet("font-size:18px;");
     bodyAppVersion->setFixedHeight(24);
@@ -235,6 +243,8 @@ QVBoxLayout* menuModule::initBody(){
     vlyt->addSpacing(12);
     vlyt->addWidget(bodyAppVersion,0,Qt::AlignHCenter);
     vlyt->addSpacing(12);
+    vlyt->addWidget(bodyAppDesc,0,Qt::AlignHCenter);
+    vlyt->addSpacing(24);
     vlyt->addWidget(bodySupport,0,Qt::AlignHCenter);
     vlyt->addStretch();
     return vlyt;
