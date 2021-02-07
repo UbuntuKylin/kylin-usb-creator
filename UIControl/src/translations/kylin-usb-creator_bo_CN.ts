@@ -194,7 +194,7 @@
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="215"/>
-        <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks</source>
+        <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
