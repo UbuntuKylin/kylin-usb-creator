@@ -31,7 +31,6 @@ SOURCES += \
     src/include/xatom-helper.cpp \
     src/include/daemonipcdbus.cpp \
     src/stylecombobox.cpp \
-    src/rootauthdialog.cpp \
     src/toolwindow.cpp
 
 HEADERS += \
@@ -46,7 +45,6 @@ HEADERS += \
     src/include/qtsingleapplication.h \
     src/include/xatom-helper.h \
     src/stylecombobox.h \
-    src/rootauthdialog.h \
     src/toolwindow.h
 
 LIBS +=-lpthread
