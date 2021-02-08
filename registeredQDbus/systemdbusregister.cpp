@@ -26,7 +26,7 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
     }else{
         //there's two cases NO and Challenge
         emit authorityStatus("failed");
-        qDebug()<<"suthority failed";
+        qDebug()<<"authority failed";
         return ;
     }
     uDiskPath = targetPath;
