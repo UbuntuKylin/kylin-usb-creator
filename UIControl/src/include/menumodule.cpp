@@ -18,7 +18,7 @@ void menuModule::initAction(){
     bodyAppVersion = new QLabel();
     bodySupport = new QLabel();
     menuButton = new QToolButton;
-    menuButton->setToolTip(tr("menu"));
+    menuButton->setToolTip(tr("Menu"));
     menuButton->setProperty("isWindowButton", 0x1);
     menuButton->setProperty("useIconHighlightEffect", 0x2);
     menuButton->setPopupMode(QToolButton::InstantPopup);
@@ -190,7 +190,7 @@ QHBoxLayout* menuModule::initTitleBar(){
     titleBtnClose->setProperty("isWindowButton",0x2);
     titleBtnClose->setProperty("useIconHighlightEffect",0x8);
     titleBtnClose->setFlat(true);
-    titleBtnClose->setToolTip(tr("close"));
+    titleBtnClose->setToolTip(tr("Quit"));
     connect(titleBtnClose,&QPushButton::clicked,[=](){aboutWindow->close();});
     QHBoxLayout *hlyt = new QHBoxLayout;
     titleText->setText(tr("kylin usb creator"));

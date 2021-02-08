@@ -41,6 +41,15 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
     return ;
 }
 
+//kill task process
+void SystemDbusRegister::MakeExit(){
+    qDebug()<<"exit dd process";
+    if(!command_dd) return ;
+    if(command_dd->Running){
+        command_dd->kill();
+    }
+    return ;
+}
 void SystemDbusRegister::readBashStandardErrorInfo()
 {
     QByteArray cmdout = command_dd->readAllStandardError();

@@ -27,6 +27,7 @@ Q_SIGNALS:
 
 public slots:
     Q_SCRIPTABLE void MakeStart(QString sourcePath,QString targetPath);
+    Q_SCRIPTABLE void MakeExit();
 private:
     void readBashStandardErrorInfo();
     void finishEvent();
