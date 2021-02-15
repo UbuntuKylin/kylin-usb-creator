@@ -35,13 +35,17 @@ void Page1::initControlQss()
             isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
             if(isoPath != "" ){
                 if(!checkISO(isoPath)){
-                    isoPath.clear();
-                    QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("ISO Invalid,please make sure you choose a vavlid image!"),
-                                         QMessageBox::Yes);
+                    QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("MBR signature not detected,continue anyway?"),
+                                         QMessageBox::Yes | QMessageBox::No);
                     switch (result)
                     {
+
                     case QMessageBox::Yes:
                         break;
+                    case QMessageBox::No:
+                        isoPath.clear();
+                        break;
+
                     }
                 }
 
@@ -145,7 +149,8 @@ bool Page1::isCapicityAvailable(QString str)
     return false;
 }
 
-bool Page1::checkISO(const QString fileName){
+bool
+Page1::checkISO(const QString fileName){
     // Check if there's an MBR signature
     // MBR signature will be in last two bytes of the boot record
     QByteArray mbr;
@@ -155,6 +160,7 @@ bool Page1::checkISO(const QString fileName){
     mbr = mbrTest.read(2);
     mbrTest.close();
     if (mbr.toHex() != "55aa"){ //MBR signature "55aa"
+        qDebug()<<"wrong iso,filename = "<<fileName<<"MBR signature = "<<mbr.toHex();
         return false;
     }
     return true;
