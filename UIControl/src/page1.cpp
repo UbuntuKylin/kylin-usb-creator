@@ -34,30 +34,24 @@ void Page1::initControlQss()
     connect(findIso,&QPushButton::clicked,this,[=]{
             isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
             if(isoPath != "" ){
-                QString tmp = isoPath;
-                QFile isoFile(isoPath);
-                if(isoFile.open(QIODevice::ReadOnly)){
-                    int size = isoFile.size()/1000/1000;
-                    if(size <= 200){    //文件小于200M不给制作
-                        emit isoIllegal();
-                        isoPath.clear();tmp.clear();
-                        QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("ISO Invalid,please make sure you choose a vavlid image!"),
-                                             QMessageBox::Yes);
-                        switch (result)
-                        {
-                        case QMessageBox::Yes:
-//                            this->close();
-                            break;
-                        }
+                if(!checkISO(isoPath)){
+                    isoPath.clear();
+                    QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("ISO Invalid,please make sure you choose a vavlid image!"),
+                                         QMessageBox::Yes);
+                    switch (result)
+                    {
+                    case QMessageBox::Yes:
+                        break;
                     }
                 }
+
                 urlIso->setToolTip("");
                 if(isoPath.length() > 45){
-                    urlIso->setToolTip(tmp);
-                    tmp = isoPath.mid(0,44) + "…";
+                    urlIso->setToolTip(isoPath);
+                    urlIso->setText(isoPath.mid(0,44) + "...");
+                }else{
+                    urlIso->setText(isoPath);
                 }
-                qDebug()<<"tmp="<<tmp;
-                urlIso->setText(tmp);
             }
         });
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
@@ -151,7 +145,21 @@ bool Page1::isCapicityAvailable(QString str)
     return false;
 }
 
-//TODO：容量获取方法更新，目前获取的是1024进制单位。计划在将来改为和文件管理器一致的1000进位
+bool Page1::checkISO(const QString fileName){
+    // Check if there's an MBR signature
+    // MBR signature will be in last two bytes of the boot record
+    QByteArray mbr;
+    QFile mbrTest(fileName);
+    mbrTest.open(QIODevice::ReadOnly);
+    mbrTest.seek(510);
+    mbr = mbrTest.read(2);
+    mbrTest.close();
+    if (mbr.toHex() != "55aa"){ //MBR signature "55aa"
+        return false;
+    }
+    return true;
+}
+
 //TODO：设备类型判断，搭配lsblk -S只加入走USB协议的设备
 void Page1::getUdiskPathAndCap()
 {

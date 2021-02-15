@@ -71,7 +71,7 @@ public slots:
 
 private:
     bool event(QEvent *event); // 鼠标离开U盘列表事件
-    void creatStartSlots();    //开始制作x
+    void creatStartSlots();    //开始制作
     void initControlQss();//初始化控件及其样式
     void getStorageInfo();//获取磁盘信息
     bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
@@ -80,7 +80,7 @@ private:
     bool isCapicityAvailable(QString); //容量过滤
     void getUdiskPathAndCap();    //获取U盘路径和容量
     void getUdiskName();    //获取U盘第一个分区的命名
-
+    bool checkISO(const QString fileName); //ISO合法性检验
 
     QList<AvailableDiskInfo*> diskInfos; // U盘信息
     QString themeStatus = LIGHTTHEME; //主题指示器

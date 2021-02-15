@@ -130,28 +130,6 @@ void Page2::startMaking()
     lableNum->setText("0%");
     QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","workingProgress",this,SLOT(dealWorkingProgress(int)));
     QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","makeFinish",this,SLOT(dealMakeFinish(QString)));
-//    QProcess m_unmount;
-//    QStringList m_unmount_arg;
-//    m_unmount_arg <<"unmount"<<"-b"<<targetPath;
-//    m_unmount.start("udisksctl",m_unmount_arg);
-//    if(m_unmount.waitForStarted()){
-//        m_unmount.waitForFinished();
-//    }else{
-//        qDebug()<<"#udisksctl# Warning:unmount failed! Unmount path :"<<targetPath;
-//    }
-//    uDiskPath = targetPath;
-//    qDebug()<<"uDiskPath:"<<uDiskPath;
-//    emit swToPage2();
-//    lableNum->setText("0%");
-//    playLoadingGif();
-//    sourceFileSize = getFileSize(sourcePath);
-//    command_dd = new QProcess();
-//    connect(command_dd,&QProcess::readyReadStandardError,this,&Page2::readBashStandardErrorInfo);
-//    command_dd->start("bash");
-//    command_dd->waitForStarted();
-//    QString ddshell = "echo '"+key.toLocal8Bit()+"'| sudo -S dd if='"+sourcePath.toLocal8Bit()+"' of="+targetPath.toLocal8Bit()+" status=progress";
-//    qDebug()<<"ddshell is: "<<ddshell;
-//    command_dd->write(ddshell.toLocal8Bit() + '\n');
 }
 void Page2::dealWorkingProgress(int progress){
     lableNum->setText(QString::number(progress) + "%");
