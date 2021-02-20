@@ -1,3 +1,16 @@
+kylin-usb-creator (1.1.0-0kord) v101; urgency=medium
+
+  * 提权逻辑修改，现使用系统授权框来给应用提权
+  * 解决了BUG#34913 iso名过长是使用省略号代替，加上了tooltip显示（仅在过长时会有tooltip）
+  * 解决了BUG#25523 进度条的显示问题
+  * 解决了BUG#29064 100%制作失败
+  * 增加了三联tooltip显示
+  * 关于窗口改模态
+  * 增加了mbr校验，校验失败的镜像会弹出提醒框，目前UEFI引导的镜像校验还在开发中
+  * 修复了一个由于内存的重复开辟引起的内存泄露
+ 
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn> Sat, 20 Feb 2021 10:38:52 +0800
+
 kylin-usb-creator (1.0.0-40kord) v101; urgency=medium
 
   * 解决了BUG#25233 ISO文件小于1M时会引起软件闪退的问题
