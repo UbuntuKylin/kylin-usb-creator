@@ -77,6 +77,7 @@ private:
     void setStyleByThemeGsetting(); //通过外部主题配置设置主题
     void setThemeStyle();
     void setThemeLight();
+    DaemonIpcDbus *ipcDbus = nullptr;
     void setThemeDark();
     QLabel* titleText = nullptr;
     QLabel* bodyAppName = nullptr;

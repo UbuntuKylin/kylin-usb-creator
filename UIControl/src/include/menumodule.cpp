@@ -148,7 +148,10 @@ void menuModule::aboutAction(){
 
 void menuModule::helpAction(){
 //    帮助点击事件处理
-    DaemonIpcDbus *ipcDbus = new DaemonIpcDbus();
+    if(!ipcDbus)
+    {
+        ipcDbus = new DaemonIpcDbus();
+    }
     if(!ipcDbus->daemonIsNotRunning()){
         ipcDbus->showGuide(appName);
     }
