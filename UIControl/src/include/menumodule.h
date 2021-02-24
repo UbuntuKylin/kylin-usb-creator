@@ -39,7 +39,7 @@ public:
 //    程序在实例化的时候需要传递的信息字段,打开debug开关后这些字段会被自动填充
     QString appName = "tools/kylin-usb-creator"; //格式kylin-usb-creator
 //    QString appShowingName = "kylin usb creator"; //格式kylin usb creator ,用来在前端展示
-    QString appVersion = "1.0.0";
+    QString appVersion = "1.1.0";
     QString appDesc = "appDesc字段未填充!";
     QString iconPath = ":/data/kylin-usb-creator.svg";
     QString confPath = "org.kylin-usb-creator-data.settings";

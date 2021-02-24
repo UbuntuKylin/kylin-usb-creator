@@ -406,7 +406,7 @@ void Page1::setThemeStyleLight()
 void Page1::setThemeStyleDark()
 {
     themeStatus = DARKTHEME;
-    tabUdisk->setStyleSheet("color:rgba(249,249,249,1);");
+    tabUdisk->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
     tabIso->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
     warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");

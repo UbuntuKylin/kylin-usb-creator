@@ -174,9 +174,12 @@ void menuModule::initAbout(){
     mainlyt->addLayout(bodylyt);
     mainlyt->addStretch();
     aboutWindow->setLayout(mainlyt);
-    //TODO:在屏幕中央显示
-    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
-    aboutWindow->move((availableGeometry.width()-aboutWindow->width())/2,(availableGeometry.height()- aboutWindow->height())/2);
+//    //TODO:在屏幕中央显示
+//    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
+//    aboutWindow->move((availableGeometry.width()-aboutWindow->width())/2,(availableGeometry.height()- aboutWindow->height())/2);
+    //弹窗位置应用居中
+    QRect availableGeometry = this->parentWidget()->geometry();
+    aboutWindow->move(availableGeometry.center()-aboutWindow->rect().center());
     aboutWindow->show();
 }
 
