@@ -170,31 +170,41 @@ Page1::checkISO(const QString fileName){
 void Page1::getUdiskPathAndCap()
 {
     diskInfos.clear();
-    QStringList diskInfo;
-    QString disk;
     QProcess lsblk;
-    lsblk.start("lsblk");
+    lsblk.start("lsblk -J");
     lsblk.waitForFinished();
-    QString info = QString::fromLocal8Bit(lsblk.readAllStandardOutput());
-    foreach(disk,info.split("\n"))
-    {
-        if(disk == NULL)
-        {
-            continue;
-        }
-        disk.replace(QRegExp("[\\s]+")," ");
-        diskInfo = disk.split(" ");
-        if(diskInfo.at(5) == "disk"){
-            if(!isCapicityAvailable(diskInfo.at(3)))
-            {
-                continue;
+
+    QProcess lsblk2;
+    lsblk2.start("lsblk -JS");
+    lsblk2.waitForFinished();
+    QJsonArray arr1 = QStringToJsonArray(QString::fromLocal8Bit(lsblk.readAllStandardOutput()));  //获取json类型的shell执行结果
+    QJsonArray arr2 = QStringToJsonArray(QString::fromLocal8Bit(lsblk2.readAllStandardOutput()));
+    foreach (const QJsonValue& value, arr1) {
+        QJsonObject jsonObj1 = value.toObject();
+        foreach (const QJsonValue& value, arr2) {
+            QJsonObject jsonObj2 = value.toObject();
+            if(jsonObj1["name"] == jsonObj2["name"] && jsonObj2["tran"] == "usb"){
+                AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + jsonObj1["name"].toString(),"NONAME",jsonObj1["size"].toString());
+                diskInfos.append(tmp);
             }
-            AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + diskInfo.at(0),"NONAME",diskInfo.at(3));
-            diskInfos.append(tmp);
         }
     }
 }
-
+QJsonArray  Page1::QStringToJsonArray(const QString jsonString){
+    QJsonParseError err;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toLocal8Bit().data(),&err);
+    if(jsonDocument.isNull())
+    {
+        qDebug()<< "String NULL"<< jsonString.toLocal8Bit().data();
+    }
+    if(err.error != QJsonParseError::NoError){
+        qDebug()<<"Parase json"<<jsonString<<" error:"<<err.error;
+        //TODO：这里的错误处理后期还可以优化,目前处理错误了就会调用exit()退出程序
+        exit(-1);
+    }
+    QJsonObject obj = jsonDocument.object();
+    return obj["blockdevices"].toArray();
+}
 void Page1::getUdiskName()
 {
     QList<QStorageInfo> storageInfo = QStorageInfo::mountedVolumes();
