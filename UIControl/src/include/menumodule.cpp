@@ -200,7 +200,7 @@ QHBoxLayout* menuModule::initTitleBar(){
     connect(titleBtnClose,&QPushButton::clicked,[=](){aboutWindow->close();});
     QHBoxLayout *hlyt = new QHBoxLayout;
     titleText->setText(tr("kylin usb creator"));
-    titleText->setStyleSheet("font-size:14px;");
+//    titleText->setStyleSheet("font-size:14px;");
     hlyt->setSpacing(0);
     hlyt->setMargin(4);
     hlyt->addSpacing(4);
@@ -216,29 +216,29 @@ QVBoxLayout* menuModule::initBody(){
     QLabel* bodyIcon = new QLabel();
     bodyIcon->setFixedSize(96,96);
     bodyIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
-    bodyIcon->setStyleSheet("font-size:14px;");
+//    bodyIcon->setStyleSheet("font-size:14px;");
     bodyIcon->setScaledContents(true);
     bodyAppDesc->setText(tr("Kylin USB Creator provides system image making function."
                             "The operation process is simple and easy."
                             "You can choose ISO image and usb driver,"
                             "and make boot driver with a few clicks."));
     bodyAppDesc->setFixedWidth(360);
-    bodyAppDesc->setStyleSheet("font-size:14px;");
+//    bodyAppDesc->setStyleSheet("font-size:14px;");
     bodyAppDesc->setWordWrap(true);
     bodyAppName->setFixedHeight(28);
     bodyAppName->setText(tr("kylin usb creator"));
-    bodyAppName->setStyleSheet("font-size:18px;");
+//    bodyAppName->setStyleSheet("font-size:18px;");
     bodyAppVersion->setFixedHeight(24);
     bodyAppVersion->setText(tr("Version: ") + appVersion);
     bodyAppVersion->setAlignment(Qt::AlignLeft);
-    bodyAppVersion->setStyleSheet("font-size:14px;");
+//    bodyAppVersion->setStyleSheet("font-size:14px;");
 
     connect(bodySupport,&QLabel::linkActivated,this,[=](const QString url){
         QDesktopServices::openUrl(QUrl(url));
     });
     bodySupport->setContextMenuPolicy(Qt::NoContextMenu);
     bodySupport->setFixedHeight(24);
-    bodySupport->setStyleSheet("font-size:14px;");
+//    bodySupport->setStyleSheet("font-size:14px;");
     QVBoxLayout *vlyt = new QVBoxLayout;
     vlyt->setMargin(0);
     vlyt->setSpacing(0);

@@ -282,7 +282,7 @@ void MainWindow::setThemeDark()
 //                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                             "QPushButton::menu-indicator{image:None;}");
-    titleText->setStyleSheet("color:rgba(249,249,249,1);font-size:14px;");
+    titleText->setStyleSheet("color:rgba(249,249,249,1);");
     title->setStyleSheet(".QWidget{background-color:rgba(31,32,34,1)}");
     stackedWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
     bottomWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
@@ -307,7 +307,7 @@ void MainWindow::setThemeLight()
     stackedWidget->setStyleSheet("background-color:rgba(255,255,255,1);");
     title->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
     bottomWidget->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
-    titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
+    titleText->setStyleSheet("color:rgba(48,49,51,1);");
 //    this->setStyleSheet("background-color:rgba(255,255,255,1);");
 //    this->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1);}");
     page1->setThemeStyleLight();

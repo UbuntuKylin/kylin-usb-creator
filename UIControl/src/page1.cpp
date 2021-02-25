@@ -307,11 +307,11 @@ void Page1::creatStartSlots()
     creatStart->setEnabled(false);
     if(DARKTHEME == themeStatus)
     {
-        creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+        creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;");
 
     }else
     {
-        creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
+        creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;");
     }
 }
 
@@ -351,18 +351,18 @@ bool Page1::ifStartBtnChange()
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
-        creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
-                                  "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
-                                  "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");
+        creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px; }"
+                                  "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px; }"
+                                  "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px; }");
         return true;
     }else{
         creatStart->setEnabled(false);
         if(themeStatus == LIGHTTHEME)
         {
-            creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
+            creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px; ");
         }else
         {
-            creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+            creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px; ");
         }
         return false;
     }
@@ -386,26 +386,26 @@ void Page1::dealRightPasswd()
 void Page1::dealAuthDialogClose()
 {
     creatStart->setEnabled(true);
-    creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
-                              "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
-                              "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");
+    creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px; }"
+                              "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px; }"
+                              "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px; }");
 }
 
 void Page1::setThemeStyleLight()
 {
     themeStatus = LIGHTTHEME;
-    tabIso->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
-    tabUdisk->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
-    warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
-    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    tabIso->setStyleSheet(" color:rgba(0,0,0,1);");
+    tabUdisk->setStyleSheet(" color:rgba(0,0,0,1);");
+    warnningText->setStyleSheet("color:rgba(96, 98, 102, 1); ");
+    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);color:rgba(249,249,249,1);border-radius:15px; ");
     ifStartBtnChange();
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px;font-size:14px;}"
+    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px; }"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;border:1px  solid rgba(240,240,240,1);border-radius:4px;");
+    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);border:1px  solid rgba(240,240,240,1);border-radius:4px;");
 
 
     this->setStyleSheet("background-color:rgba(255,255,255,1);");
@@ -416,17 +416,17 @@ void Page1::setThemeStyleLight()
 void Page1::setThemeStyleDark()
 {
     themeStatus = DARKTHEME;
-    tabUdisk->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
-    tabIso->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
-    warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");
-    creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    tabUdisk->setStyleSheet(" color:rgba(249,249,249,1);");
+    tabIso->setStyleSheet(" color:rgba(249,249,249,1);");
+    warnningText->setStyleSheet("color:rgba(249, 249, 249, 1); ");
+    creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px; ");
     ifStartBtnChange();
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
 
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"
+    findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px; }"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-    urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
+    urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);");
 
 
     comboUdisk->setThemeDark(); //设置combobox响应深色主题

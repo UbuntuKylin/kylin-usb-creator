@@ -24,11 +24,11 @@ StyleComboBox::StyleComboBox()
     listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //关闭水平滚动条
     connect(listWidget,&QListWidget::itemClicked,this,&StyleComboBox::setPushKey);
 
-    QFont ft;
-    ft.setPixelSize(14);
-    listWidget->setFont(ft);
-    ft.setPixelSize(12);
-    text->setFont(ft);
+//    QFont ft;
+//    ft.setPixelSize(14);
+//    listWidget->setFont(ft);
+//    ft.setPixelSize(12);
+//    text->setFont(ft);
 }
 
 void StyleComboBox::clearDiskList()
