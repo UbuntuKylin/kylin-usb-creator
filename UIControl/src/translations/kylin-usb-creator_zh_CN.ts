@@ -38,7 +38,7 @@
     <message>
         <location filename="../page1.cpp" line="38"/>
         <source>MBR signature not detected,continue anyway?</source>
-        <translation>未选择MBR签名，是否继续？</translation>
+        <translation>未检测到MBR签名，是否继续？</translation>
     </message>
     <message>
         <location filename="../page1.cpp" line="114"/>
