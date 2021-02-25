@@ -34,11 +34,28 @@ void Page1::initControlQss()
     connect(findIso,&QPushButton::clicked,this,[=]{
             isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
             if(isoPath != "" ){
-                QString tmp = isoPath;
-                if(isoPath.length() > 45){
-                    tmp = isoPath.mid(0,44) + "…";
+                if(!checkISO(isoPath)){
+                    QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("MBR signature not detected,continue anyway?"),
+                                         QMessageBox::Yes | QMessageBox::No);
+                    switch (result)
+                    {
+
+                    case QMessageBox::Yes:
+                        break;
+                    case QMessageBox::No:
+                        isoPath.clear();
+                        break;
+
+                    }
                 }
-                urlIso->setText(tmp);
+
+                urlIso->setToolTip("");
+                if(isoPath.length() > 45){
+                    urlIso->setToolTip(isoPath);
+                    urlIso->setText(isoPath.mid(0,44) + "...");
+                }else{
+                    urlIso->setText(isoPath);
+                }
             }
         });
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
@@ -132,36 +149,62 @@ bool Page1::isCapicityAvailable(QString str)
     return false;
 }
 
-//TODO：容量获取方法更新，目前获取的是1024进制单位。计划在将来改为和文件管理器一致的1000进位
+bool
+Page1::checkISO(const QString fileName){
+    // Check if there's an MBR signature
+    // MBR signature will be in last two bytes of the boot record
+    QByteArray mbr;
+    QFile mbrTest(fileName);
+    mbrTest.open(QIODevice::ReadOnly);
+    mbrTest.seek(510);
+    mbr = mbrTest.read(2);
+    mbrTest.close();
+    if (mbr.toHex() != "55aa"){ //MBR signature "55aa"
+        qDebug()<<"wrong iso,filename = "<<fileName<<"MBR signature = "<<mbr.toHex();
+        return false;
+    }
+    return true;
+}
+
 //TODO：设备类型判断，搭配lsblk -S只加入走USB协议的设备
 void Page1::getUdiskPathAndCap()
 {
     diskInfos.clear();
-    QStringList diskInfo;
-    QString disk;
     QProcess lsblk;
-    lsblk.start("lsblk");
+    lsblk.start("lsblk -J");
     lsblk.waitForFinished();
-    QString info = QString::fromLocal8Bit(lsblk.readAllStandardOutput());
-    foreach(disk,info.split("\n"))
-    {
-        if(disk == NULL)
-        {
-            continue;
-        }
-        disk.replace(QRegExp("[\\s]+")," ");
-        diskInfo = disk.split(" ");
-        if(diskInfo.at(5) == "disk"){
-            if(!isCapicityAvailable(diskInfo.at(3)))
-            {
-                continue;
+
+    QProcess lsblk2;
+    lsblk2.start("lsblk -JS");
+    lsblk2.waitForFinished();
+    QJsonArray arr1 = QStringToJsonArray(QString::fromLocal8Bit(lsblk.readAllStandardOutput()));  //获取json类型的shell执行结果
+    QJsonArray arr2 = QStringToJsonArray(QString::fromLocal8Bit(lsblk2.readAllStandardOutput()));
+    foreach (const QJsonValue& value, arr1) {
+        QJsonObject jsonObj1 = value.toObject();
+        foreach (const QJsonValue& value, arr2) {
+            QJsonObject jsonObj2 = value.toObject();
+            if(jsonObj1["name"] == jsonObj2["name"] && jsonObj2["tran"] == "usb"){
+                AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + jsonObj1["name"].toString(),"NONAME",jsonObj1["size"].toString());
+                diskInfos.append(tmp);
             }
-            AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + diskInfo.at(0),"NONAME",diskInfo.at(3));
-            diskInfos.append(tmp);
         }
     }
 }
-
+QJsonArray  Page1::QStringToJsonArray(const QString jsonString){
+    QJsonParseError err;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toLocal8Bit().data(),&err);
+    if(jsonDocument.isNull())
+    {
+        qDebug()<< "String NULL"<< jsonString.toLocal8Bit().data();
+    }
+    if(err.error != QJsonParseError::NoError){
+        qDebug()<<"Parase json"<<jsonString<<" error:"<<err.error;
+        //TODO：这里的错误处理后期还可以优化,目前处理错误了就会调用exit()退出程序
+        exit(-1);
+    }
+    QJsonObject obj = jsonDocument.object();
+    return obj["blockdevices"].toArray();
+}
 void Page1::getUdiskName()
 {
     QList<QStorageInfo> storageInfo = QStorageInfo::mountedVolumes();
@@ -264,11 +307,11 @@ void Page1::creatStartSlots()
     creatStart->setEnabled(false);
     if(DARKTHEME == themeStatus)
     {
-        creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+        creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;");
 
     }else
     {
-        creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
+        creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;");
     }
 }
 
@@ -308,18 +351,18 @@ bool Page1::ifStartBtnChange()
     if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
-        creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
-                                  "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
-                                  "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");
+        creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px; }"
+                                  "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px; }"
+                                  "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px; }");
         return true;
     }else{
         creatStart->setEnabled(false);
         if(themeStatus == LIGHTTHEME)
         {
-            creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px;font-size:14px;");
+            creatStart->setStyleSheet("background-color:rgba(242,242,242,1);color:rgba(193,193,193,1);border-radius:15px; ");
         }else
         {
-            creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+            creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px; ");
         }
         return false;
     }
@@ -343,26 +386,26 @@ void Page1::dealRightPasswd()
 void Page1::dealAuthDialogClose()
 {
     creatStart->setEnabled(true);
-    creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
-                              "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
-                              "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}");
+    creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px; }"
+                              "QPushButton:hover{background-color:rgba(130,140,255,1);color:rgba(249,249,249,1);border-radius:15px; }"
+                              "QPushButton:pressed{background-color:rgba(82,87,217,1);color:rgba(249,249,249,1);border-radius:15px; }");
 }
 
 void Page1::setThemeStyleLight()
 {
     themeStatus = LIGHTTHEME;
-    tabIso->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
-    tabUdisk->setStyleSheet("font-size:14px;color:rgba(0,0,0,1);");
-    warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
-    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    tabIso->setStyleSheet(" color:rgba(0,0,0,1);");
+    tabUdisk->setStyleSheet(" color:rgba(0,0,0,1);");
+    warnningText->setStyleSheet("color:rgba(96, 98, 102, 1); ");
+    creatStart->setStyleSheet("background-color:rgba(236,236,236,1);color:rgba(249,249,249,1);border-radius:15px; ");
     ifStartBtnChange();
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px;font-size:14px;}"
+    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px; }"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;border:1px  solid rgba(240,240,240,1);border-radius:4px;");
+    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);border:1px  solid rgba(240,240,240,1);border-radius:4px;");
 
 
     this->setStyleSheet("background-color:rgba(255,255,255,1);");
@@ -373,17 +416,17 @@ void Page1::setThemeStyleLight()
 void Page1::setThemeStyleDark()
 {
     themeStatus = DARKTHEME;
-    tabUdisk->setStyleSheet("color:rgba(249,249,249,1);");
-    tabIso->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");
-    warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");
-    creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
+    tabUdisk->setStyleSheet(" color:rgba(249,249,249,1);");
+    tabIso->setStyleSheet(" color:rgba(249,249,249,1);");
+    warnningText->setStyleSheet("color:rgba(249, 249, 249, 1); ");
+    creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px; ");
     ifStartBtnChange();
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
 
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"
+    findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px; }"
                            ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
                            ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-    urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
+    urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);");
 
 
     comboUdisk->setThemeDark(); //设置combobox响应深色主题

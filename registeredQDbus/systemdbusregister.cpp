@@ -26,7 +26,7 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
     }else{
         //there's two cases NO and Challenge
         emit authorityStatus("failed");
-        qDebug()<<"suthority failed";
+        qDebug()<<"authority failed";
         return ;
     }
     uDiskPath = targetPath;
@@ -41,6 +41,15 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
     return ;
 }
 
+//kill task process
+void SystemDbusRegister::MakeExit(){
+    qDebug()<<"exit dd process";
+    if(!command_dd) return ;
+    if(command_dd->Running){
+        command_dd->kill();
+    }
+    return ;
+}
 void SystemDbusRegister::readBashStandardErrorInfo()
 {
     QByteArray cmdout = command_dd->readAllStandardError();

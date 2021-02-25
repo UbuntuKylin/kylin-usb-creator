@@ -1,9 +1,0 @@
-eaf48a6bac6245327a5546f7786a8241  usr/bin/kylin-usb-creator-sysdbus
-4148f111828cb59d358ade024a2923ae  usr/bin/kylin-usb-creator-ui-control
-a9546795456a1eeb42d47476184c1ab9  usr/share/applications/kylin-usb-creator.desktop
-6b0e7d0e64bca1fb4f569886ffc69e2b  usr/share/dbus-1/system-services/com.kylinusbcreator.systemdbus.service
-3553c90df8b5dc99499132e8b9681fa7  usr/share/doc/kylin-usb-creator/changelog.Debian.gz
-2ee24278ff28c05ea242519f71f9cf90  usr/share/doc/kylin-usb-creator/copyright
-dd3dd8e93f3df4ca3d0941d8f10e7d48  usr/share/glib-2.0/schemas/org.kylin-usb-creator-data.gschema.xml
-de8caf83e173d3bc2ead817ff005a946  usr/share/pixmaps/kylin-usb-creator.png
-9f38b03183ca920b7e0b134ea8667610  usr/share/polkit-1/actions/com.kylinusbcreator.systemdbus.policy

@@ -1,5 +1,6 @@
 # 二进制文件
 kylin-usb-creator
+kylin-usb-creator-sysdbus
 # C++ objects and libs
 *.slo
 *.lo

@@ -31,6 +31,7 @@ void MainWindow::statusbarInit()
     titleText = new QLabel();
     titleText->setText(tr("kylin usb creator"));
     titleMin = new QPushButton();
+    titleMin->setToolTip(tr("Minimize"));
     titleMin->setProperty("isWindowButton", 0x1);
     titleMin->setProperty("useIconHighlightEffect", 0x2);
     titleMin->setFlat(true);
@@ -46,6 +47,7 @@ void MainWindow::statusbarInit()
     connect(menu,&menuModule::pullupHelp,this,&MainWindow::dealMenuModulePullupHelp);
 
     titleClose = new QPushButton();
+    titleClose->setToolTip(tr("Quit"));
     titleClose->setProperty("isWindowButton", 0x2) ;
     titleClose->setProperty("useIconHighlightEffect", 0x8);;
     titleClose->setFlat(true);
@@ -200,13 +202,16 @@ void MainWindow::makeStart()
 void MainWindow::doubleCheck(){
     QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("USB driver is in production.Are you sure you want to stop task and exit the program?"),
                          QMessageBox::Yes | QMessageBox::No,QMessageBox::No);
-    switch (result)
-    {
-    case QMessageBox::Yes:
-        this->close();
-        break;
-    case QMessageBox::No:
-        break;
+    switch (result){
+        case QMessageBox::Yes:{//exit_proc在其他case中也有效，不加花括号exit_proc的生命周期就不会终结，在其他case中就会成为一个没有初始化的变量
+            // exit progress and close mainwindow
+            QDBusMessage exit_proc = QDBusMessage::createMethodCall("com.kylinusbcreator.systemdbus","/","com.kylinusbcreator.interface","MakeExit");
+            QDBusConnection::systemBus().call(exit_proc);
+            this->close();
+            break;
+        }
+        case QMessageBox::No:
+            break;
     }
 }
 int MainWindow::changePage()
@@ -277,7 +282,7 @@ void MainWindow::setThemeDark()
 //                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                             "QPushButton::menu-indicator{image:None;}");
-    titleText->setStyleSheet("color:rgba(249,249,249,1);font-size:14px;");
+    titleText->setStyleSheet("color:rgba(249,249,249,1);");
     title->setStyleSheet(".QWidget{background-color:rgba(31,32,34,1)}");
     stackedWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
     bottomWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
@@ -302,7 +307,7 @@ void MainWindow::setThemeLight()
     stackedWidget->setStyleSheet("background-color:rgba(255,255,255,1);");
     title->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
     bottomWidget->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
-    titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
+    titleText->setStyleSheet("color:rgba(48,49,51,1);");
 //    this->setStyleSheet("background-color:rgba(255,255,255,1);");
 //    this->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1);}");
     page1->setThemeStyleLight();
