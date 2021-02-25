@@ -1,3 +1,12 @@
+kylin-usb-creator (1.1.0-1kord) v101; urgency=medium
+
+  * 解决了BUG#39133 应用弹窗希望出现在应用居中，而不是桌面居中
+  * 解决了BUG#28858 深色主题、16号字体下，主界面“选择U盘”字体异常
+  * 解决了BUG#38855 选择非正常iso文件时弹出的警示弹窗未汉化
+  * 解决了BUG#38830 关于弹窗版本显示不对
+
+ -- fengyongfan123 <fengyongfan@kylinos.cn>  Wed, 24 Feb 2021 14:41:46 +0800
+
 kylin-usb-creator (1.1.0-0kord) v101; urgency=medium
 
   * 提权逻辑修改，现使用系统授权框来给应用提权
