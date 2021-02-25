@@ -1,3 +1,9 @@
+kylin-usb-creator (1.1.0-2kord) v101; urgency=medium
+
+  * 取消限制应用字体，字体大小全部跟随主题
+
+ -- fengyongfan123 <fengyongfan@kylinos.cn>  Thu, 25 Feb 2021 14:41:46 +0800
+ 
 kylin-usb-creator (1.1.0-1kord) v101; urgency=medium
 
   * 解决了BUG#39133 应用弹窗希望出现在应用居中，而不是桌面居中
