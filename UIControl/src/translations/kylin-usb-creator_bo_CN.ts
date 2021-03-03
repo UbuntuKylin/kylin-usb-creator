@@ -12,12 +12,12 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="34"/>
-        <source>minimize</source>
+        <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="50"/>
-        <source>close</source>
+        <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -44,7 +44,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="116"/>
+        <location filename="../page1.cpp" line="114"/>
         <source>USB drive will be formatted,please backup your files!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -64,22 +64,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="44"/>
+        <location filename="../page1.cpp" line="38"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="44"/>
-        <source>ISO Invalid,please make sure you choose a vavlid image!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../page1.cpp" line="66"/>
+        <location filename="../page1.cpp" line="64"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="267"/>
+        <location filename="../page1.cpp" line="291"/>
         <source>No USB drive available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -143,7 +138,7 @@
     <name>menuModule</name>
     <message>
         <location filename="../include/menumodule.cpp" line="21"/>
-        <source>menu</source>
+        <source>Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -166,6 +161,7 @@
     <message>
         <location filename="../include/menumodule.cpp" line="39"/>
         <location filename="../include/menumodule.cpp" line="110"/>
+        <location filename="../include/menumodule.cpp" line="199"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -187,48 +183,25 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="193"/>
-        <source>close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../include/menumodule.cpp" line="196"/>
-        <location filename="../include/menumodule.cpp" line="223"/>
+        <location filename="../include/menumodule.cpp" line="202"/>
+        <location filename="../include/menumodule.cpp" line="229"/>
         <source>kylin usb creator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="215"/>
+        <location filename="../include/menumodule.cpp" line="221"/>
         <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="226"/>
+        <location filename="../include/menumodule.cpp" line="232"/>
         <source>Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../include/menumodule.cpp" line="290"/>
-        <location filename="../include/menumodule.cpp" line="299"/>
+        <location filename="../include/menumodule.cpp" line="296"/>
+        <location filename="../include/menumodule.cpp" line="305"/>
         <source>Service &amp; Support: </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>rootAuthDialog</name>
-    <message>
-        <location filename="../rootauthdialog.cpp" line="64"/>
-        <source>please enter the password</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../rootauthdialog.cpp" line="81"/>
-        <source>Wrong password!Try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../rootauthdialog.cpp" line="91"/>
-        <source>Current user is not in the sudoers file,please change another account or change authority</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
