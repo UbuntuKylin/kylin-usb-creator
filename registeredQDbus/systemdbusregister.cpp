@@ -87,7 +87,7 @@ void SystemDbusRegister::finishEvent(){
             emit makeFinish("fail");
         }
     });
-    diskRefreshDelay->start(1000);
+    diskRefreshDelay->start(2000);
 }
 
 bool SystemDbusRegister::isMakingSucess()
