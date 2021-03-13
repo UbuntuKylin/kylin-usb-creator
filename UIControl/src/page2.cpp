@@ -226,7 +226,6 @@ void Page2::setThemeStyleLight()
 
 void Page2::setThemeStyleDark()
 {
-    qDebug()<<"void Page2::setThemeStyleDark()";
     themeStatus = DARKTHEME;
     lableNum->setStyleSheet("background-color:rgba(236, 236, 236,0);color:rgba(100, 105, 241, 1);font-size:16px;");
     lableText->setStyleSheet("font-size:14px;color:rgba(249,249,249,1);");

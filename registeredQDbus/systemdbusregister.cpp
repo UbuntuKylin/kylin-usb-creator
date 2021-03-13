@@ -21,12 +21,10 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
              subject , Authority::AllowUserInteraction);
     if (result == Authority::Yes){
         //TODO: send authorization failed dbus message
-        qDebug()<<"authority success!";
         emit authorityStatus("success");
     }else{
         //there's two cases NO and Challenge
         emit authorityStatus("failed");
-        qDebug()<<"authority failed";
         return ;
     }
     uDiskPath = targetPath;
@@ -65,7 +63,6 @@ void SystemDbusRegister::readBashStandardErrorInfo()
          qulonglong progress_num = size_progress.toDouble(&ok)/1048576;
          int mission_percent = progress_num*100/sourceFileSize;
          //send mission percent debus message every output
-         qDebug()<<"working progress = "<<mission_percent;
         emit workingProgress(mission_percent);
          if(bytes2.count() == 1 || !ok){
              finishEvent();

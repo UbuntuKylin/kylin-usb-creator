@@ -195,12 +195,12 @@ QJsonArray  Page1::QStringToJsonArray(const QString jsonString){
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toLocal8Bit().data(),&err);
     if(jsonDocument.isNull())
     {
-        qDebug()<< "String NULL"<< jsonString.toLocal8Bit().data();
+        qDebug()<< "JsonDocument is NULL.Origin data is:"<< jsonString.toLocal8Bit().data();
     }
     if(err.error != QJsonParseError::NoError){
         qDebug()<<"Parase json"<<jsonString<<" error:"<<err.error;
         //TODO：这里的错误处理后期还可以优化,目前处理错误了就会调用exit()退出程序
-        exit(-1);
+//        exit(-1);
     }
     QJsonObject obj = jsonDocument.object();
     return obj["blockdevices"].toArray();
