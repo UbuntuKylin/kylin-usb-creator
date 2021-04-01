@@ -183,7 +183,7 @@ void Page1::getUdiskPathAndCap()
         QJsonObject jsonObj1 = value.toObject();
         foreach (const QJsonValue& value, arr2) {
             QJsonObject jsonObj2 = value.toObject();
-            if(jsonObj1["name"] == jsonObj2["name"] && jsonObj2["tran"] == "usb"){
+            if(jsonObj1["name"] == jsonObj2["name"] && jsonObj2["tran"] == "usb" && jsonObj2["type"] == "disk"){
                 AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + jsonObj1["name"].toString(),"NONAME",jsonObj1["size"].toString());
                 diskInfos.append(tmp);
             }
