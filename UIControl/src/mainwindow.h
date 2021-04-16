@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #define FITTHEMEWINDOW "org.ukui.style"
-#define APPDATA "org.kylin-usb-creator-data.settings"
+#define APPDATA "org.usb-boot-maker-data.settings"
 #define WINDOWW 680 //窗口宽度
 #define WINDOWH 510//窗口高度
 #define TITLEH 40//标题栏高度

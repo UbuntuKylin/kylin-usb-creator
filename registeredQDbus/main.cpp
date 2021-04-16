@@ -7,10 +7,10 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     a.setOrganizationName("Kylin Team");
-    a.setApplicationName("system-bus-kylinusbcreator-service");
+    a.setApplicationName("system-bus-usbbootmaker-service");
     //regist service
     QDBusConnection systemBus = QDBusConnection::systemBus();
-    if (!systemBus.registerService("com.kylinusbcreator.systemdbus")){
+    if (!systemBus.registerService("com.usbbootmaker.systemdbus")){
         qCritical() << "QDbus register service failed reason:" << systemBus.lastError();
         exit(1);
     }

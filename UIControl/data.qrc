@@ -17,10 +17,8 @@
         <file>data/logo/128.png</file>
         <file>data/logo/256.png</file>
         <file>data/logo/512.png</file>
-        <file>data/kylin-usb-creator.png</file>
         <file>data/elements_dark/close.png</file>
         <file>data/elements_dark/minimize.png</file>
-        <file>data/kylin-usb-creator.svg</file>
         <file>data/elements_dark/finish.gif</file>
         <file>data/elements_dark/loading.gif</file>
         <file>data/elements_light/finish.gif</file>
@@ -29,5 +27,7 @@
         <file>data/elements_dark/failed.png</file>
         <file>data/elements_light/menu.png</file>
         <file>data/elements_dark/menu.png</file>
+        <file>data/usb-boot-maker.png</file>
+        <file>data/usb-boot-maker.svg</file>
     </qresource>
 </RCC>

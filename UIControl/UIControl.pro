@@ -51,19 +51,19 @@ LIBS +=-lpthread
 LIBS +=-lX11
 
 # bin file output dir
-TARGET = kylin-usb-creator
+TARGET = USB-Boot-Maker
 target.source += $$TARGET
 target.path = /usr/bin
 
-icons.files = data/kylin-usb-creator.png
+icons.files = data/USB-Boot-Maker.png
 icons.path = /usr/share/pixmaps/
 
 # gsettings
-schemes.files = data/org.kylin-usb-creator-data.gschema.xml
+schemes.files = data/org.usb-boot-maker-data.gschema.xml
 schemes.path = /usr/share/glib-2.0/schemas/
 
 desktop.path = /usr/share/applications
-desktop.files = kylin-usb-creator.desktop
+desktop.files = usb-boot-maker.desktop
 
 INSTALLS += target desktop icons schemes
 CONFIG += link_pkgconfig
@@ -72,8 +72,8 @@ PKGCONFIG += gsettings-qt
 # translations
 #qm_files.files = src/translations/*.pm
 #qm_files.path = /usr/share/kylin
-TRANSLATIONS += src/translations/kylin-usb-creator_zh_CN.ts \
-                src/translations/kylin-usb-creator_bo_CN.ts
+TRANSLATIONS += src/translations/usb-boot-maker_zh_CN.ts \
+                src/translations/usb-boot-maker_bo_CN.ts
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin
@@ -85,5 +85,5 @@ RESOURCES += data.qrc translations.qrc
 QMAKE_CXXFLAGS +=  -Wno-unused-parameter
 
 DISTFILES += src/translations/qt_zh_CN.qm \
-    src/translations/kylin-usb-creator_bo_CN.qm \
-    src/translations/kylin-usb-creator_zh_CN.qm
+    src/translations/usb-boot-maker_bo_CN.qm \
+    src/translations/usb-boot-maker_zh_CN.qm

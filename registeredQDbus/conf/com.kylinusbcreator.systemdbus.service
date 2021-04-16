@@ -1,4 +1,4 @@
 [D-BUS Service]
-Name=com.kylinusbcreator.systemdbus
-Exec=/usr/bin/kylin-usb-creator-sysdbus
+Name=com.usbbootmaker.systemdbus
+Exec=/usr/bin/usb-boot-maker-sysdbus
 User=root

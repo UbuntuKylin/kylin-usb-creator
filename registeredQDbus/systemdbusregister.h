@@ -14,8 +14,8 @@
 class SystemDbusRegister : public QObject, protected QDBusContext
 {
     Q_OBJECT
-//    Q_CLASSINFO("D-Bus Interface", "com.kylinusbcreator.interface")
-    Q_CLASSINFO("D-Bus Interface", "com.kylinusbcreator.interface")
+//    Q_CLASSINFO("D-Bus Interface", "com.usbbootmaker.interface")
+    Q_CLASSINFO("D-Bus Interface", "com.usbbootmaker.interface")
 public:
     SystemDbusRegister();
 //    ~SystemDbusRegister();

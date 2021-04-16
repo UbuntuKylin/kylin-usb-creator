@@ -1,7 +1,7 @@
 QT -= gui
 QT += core dbus
 
-TARGET = kylin-usb-creator-sysdbus
+TARGET = usb-boot-maker-sysdbus
 TEMPLATE = app
 
 CONFIG += c++11 console link_pkgconfig
@@ -20,11 +20,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += . \
     /usr/include/polkit-qt5-1/
 
-inst1.files += conf/com.kylinusbcreator.systemdbus.service
+inst1.files += conf/com.usbbootmaker.systemdbus.service
 inst1.path = /usr/share/dbus-1/system-services/
-inst2.files += conf/com.kylinusbcreator.systemdbus.conf
+inst2.files += conf/com.usbbootmaker.systemdbus.conf
 inst2.path = /etc/dbus-1/system.d/
-inst3.files += conf/com.kylinusbcreator.systemdbus.policy
+inst3.files += conf/com.usbbootmaker.systemdbus.policy
 inst3.path = /usr/share/polkit-1/actions/
 
 target.source += $$TARGET
@@ -46,6 +46,6 @@ HEADERS += \
     systemdbusregister.h
 
 DISTFILES += \
-    conf/com.kylinusbcreator.systemdbus.conf \
-    conf/com.kylinusbcreator.systemdbus.policy \
-    conf/com.kylinusbcreator.systemdbus.service
+    conf/com.usbbootmaker.systemdbus.conf \
+    conf/com.usbbootmaker.systemdbus.policy \
+    conf/com.usbbootmaker.systemdbus.service
