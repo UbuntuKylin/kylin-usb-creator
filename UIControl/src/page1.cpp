@@ -63,8 +63,8 @@ void Page1::initControlQss()
 //    connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
     connect(creatStart,&QPushButton::clicked,[=]{/*
         emit makeStart(isoPath,comboUdisk->getDiskPath());*/
-        QDBusMessage m = QDBusMessage::createMethodCall("com.usbbootdriver.systemdbus","/",
-                                                        "com.usbbootdriver.interface","MakeStart");
+        QDBusMessage m = QDBusMessage::createMethodCall("com.usbbootmaker.systemdbus","/",
+                                                        "com.usbbootmaker.interface","MakeStart");
         m<<isoPath;m<<comboUdisk->getDiskPath();
         QDBusConnection::systemBus().call(m);
     });

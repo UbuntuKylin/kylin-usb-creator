@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     a.setOrganizationName("Kylin Team");
-    a.setApplicationName("system-bus-usbbootmaker-service");
+    a.setApplicationName("usb-boot-maker-sysdbus");
     //regist service
     QDBusConnection systemBus = QDBusConnection::systemBus();
     if (!systemBus.registerService("com.usbbootmaker.systemdbus")){

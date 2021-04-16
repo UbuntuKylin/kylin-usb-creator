@@ -1,9 +1,0 @@
-<schemalist gettext-domain="usb-boot-maker">
-     <schema id="org.usb-boot-maker-data.settings"  path="/org/ukui/usb-boot-maker/">
-        <key name="thememode" type="s">
-            <default>"auto"</default>
-            <summary>"record theme mode"</summary>
-            <description>record theme mode.there's three mode.auto,lightonly and darkonly</description>
-        </key>
-      </schema>
-</schemalist>
