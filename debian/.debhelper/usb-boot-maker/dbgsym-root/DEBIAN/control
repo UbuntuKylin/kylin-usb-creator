@@ -1,0 +1,13 @@
+Package: usb-boot-maker-dbgsym
+Package-Type: ddeb
+Source: usb-boot-maker
+Version: 1.1.1-0kord
+Auto-Built-Package: debug-symbols
+Architecture: arm64
+Maintainer: liuyuhui <liuyuhui@kylinos.cn>
+Installed-Size: 2913
+Depends: usb-boot-maker (= 1.1.1-0kord)
+Section: debug
+Priority: optional
+Description: debug symbols for usb-boot-maker
+Build-Ids: 47b62ee69a6eccd3dfd66f0fdf035491e802c76c 81e96590811130fc4bf13344cac94a2ea0926fc8

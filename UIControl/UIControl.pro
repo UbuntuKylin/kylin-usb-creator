@@ -51,7 +51,7 @@ LIBS +=-lpthread
 LIBS +=-lX11
 
 # bin file output dir
-TARGET = USB-Boot-Maker
+TARGET = usb-boot-maker
 target.source += $$TARGET
 target.path = /usr/bin
 

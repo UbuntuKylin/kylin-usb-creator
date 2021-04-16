@@ -1,3 +1,11 @@
+usb-boot-maker (1.1.1-0kord) v101; urgency=medium
+
+  * 解决禅道BUG#24272 部分机型上，未插入U盘可能导致程序启动失败
+  * 解决禅道BUG#41686 制作中途拔出U盘，偶现提示制作成功
+  * 解决禅道BUG#39530 U盘列表中出现了非USB设备
+
+ -- fengyongfan <fengyongfan@kylinos.cn>  Sat, 13 Mar 2021 10:42:46 +0800
+
 kylin-usb-creator (1.1.0-4kord) v101; urgency=medium
 
   * 解决禅道BUG#24272 部分机型上，未插入U盘可能导致程序启动失败

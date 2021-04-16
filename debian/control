@@ -1,4 +1,4 @@
-Source: kylin-usb-creator
+Source: usb-boot-maker
 Section: utils
 Priority: optional
 Maintainer: liuyuhui <liuyuhui@kylinos.cn>
@@ -16,11 +16,11 @@ Build-Depends: debhelper,
 			libpolkit-qt5-1-dev,
             pkgconf,
 Standards-Version: 4.4.1
-Homepage: https://github.com/ubuntukylin/kylin-usb-creator
-#Vcs-Browser: https://github.com/ubuntukylin/kylin-usb-creator
-#Vcs-Git: https://github.com/ubuntukylin/kylin-usb-creator.git
+Homepage: https://github.com/ubuntukylin/USB-Boot-Maker
+#Vcs-Browser: https://github.com/ubuntukylin/usb-boot-maker
+#Vcs-Git: https://github.com/ubuntukylin/usb-boot-maker.git
 
-Package: kylin-usb-creator
+Package: usb-boot-maker
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: kylin-usb-creator
+Description: usb-boot-maker

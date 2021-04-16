@@ -28,7 +28,7 @@ void MainWindow::statusbarInit()
     titleIcon->setPixmap(QPixmap::fromImage(QImage(":/data/usb-boot-maker.svg")));
     titleIcon->setScaledContents(true);
     titleText = new QLabel();
-    titleText->setText(tr("usb boot maker"));
+    titleText->setText(tr("USB Boot Maker"));
     titleMin = new QPushButton();
     titleMin->setToolTip(tr("Minimize"));
     titleMin->setProperty("isWindowButton", 0x1);
@@ -87,7 +87,7 @@ void MainWindow::statusbarInit()
 }
 
 void MainWindow::init(){
-    this->setWindowTitle(tr("usb boot maker"));
+    this->setWindowTitle(tr("USB Boot Maker"));
     this->setFixedSize(680,507);
 //    在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
@@ -178,7 +178,7 @@ void MainWindow::createTrayActions()
     }
     m_mainTray = new QSystemTrayIcon(this);
     m_mainTray->setIcon(QIcon(":/data/logo/48.png"));
-    m_mainTray->setToolTip(tr("usb boot maker"));
+    m_mainTray->setToolTip(tr("USB Boot Maker"));
     m_mainTray->show();
 }
 

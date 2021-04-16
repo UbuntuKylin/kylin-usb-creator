@@ -1,0 +1,9 @@
+b5f67b1b493b6db6a5a885ae069db359  usr/bin/usb-boot-maker
+922041505c2e858e0bb491e2d0f1dee9  usr/bin/usb-boot-maker-sysdbus
+7641848fa00d904e1eb55d0acda47782  usr/share/applications/usb-boot-maker.desktop
+cddcf11dfe3724fb3fddbc3cb44e9bee  usr/share/dbus-1/system-services/com.usbbootmaker.systemdbus.service
+ccbf6bb79b6f5dc8937835f5b205b0e9  usr/share/doc/usb-boot-maker/changelog.Debian.gz
+1974a204c6ae8dd090c4743a73e68b32  usr/share/doc/usb-boot-maker/copyright
+b4bffa80832022622e54f06b5c44a855  usr/share/glib-2.0/schemas/org.usb-boot-maker-data.gschema.xml
+de8caf83e173d3bc2ead817ff005a946  usr/share/pixmaps/usb-boot-maker.png
+9f0ff55eb50ef4ad4c97b906dd448d1a  usr/share/polkit-1/actions/com.usbbootmaker.systemdbus.policy

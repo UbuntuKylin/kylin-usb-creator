@@ -1,5 +1,5 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: kylin-usb-creator
+Upstream-Name: usb-boot-maker
 Source: <url://example.com>
 
 Files: *
