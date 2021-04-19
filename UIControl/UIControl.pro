@@ -49,6 +49,7 @@ HEADERS += \
 
 LIBS +=-lpthread
 LIBS +=-lX11
+LIBS +=-lukui-log4qt
 
 # bin file output dir
 TARGET = usb-boot-maker

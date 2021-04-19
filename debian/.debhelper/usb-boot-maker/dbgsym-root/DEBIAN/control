@@ -10,4 +10,4 @@ Depends: usb-boot-maker (= 1.1.1-0kord)
 Section: debug
 Priority: optional
 Description: debug symbols for usb-boot-maker
-Build-Ids: 81e18e5ff6543f6c6146b1d22f22d630e31e16e9 f87a97f90a2503e7a2ac5aa0ef2a31e2b27e3756
+Build-Ids: f72354ce2f73ecd8943c47138d485c47906b3b34 f87a97f90a2503e7a2ac5aa0ef2a31e2b27e3756

@@ -9,6 +9,7 @@
 #include <QStandardPaths>
 #include <fcntl.h>
 #include <QLibraryInfo>
+#include <ukui-log4qt.h>
 #include "include/xatom-helper.h"
 #include "mainwindow.h"
 #include "dbusadaptor.h"
@@ -27,6 +28,7 @@ void activeMainwindow()
 }
 int main(int argc, char *argv[])
 {
+    initUkuiLog4qt("usb-boot-maker");
 //    高清屏幕自适应
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
