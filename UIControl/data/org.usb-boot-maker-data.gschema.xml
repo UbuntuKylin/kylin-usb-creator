@@ -1,5 +1,5 @@
-<schemalist gettext-domain="kylin-usb-creator">
-     <schema id="org.kylin-usb-creator-data.settings"  path="/org/ukui/kylin-usb-creator/">
+<schemalist gettext-domain="usb-boot-maker">
+     <schema id="org.usb-boot-maker-data.settings"  path="/org/ukui/usb-boot-maker/">
         <key name="thememode" type="s">
             <default>"auto"</default>
             <summary>"record theme mode"</summary>

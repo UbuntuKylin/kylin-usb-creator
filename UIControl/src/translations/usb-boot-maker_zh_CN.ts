@@ -8,11 +8,8 @@
         <translation type="vanished">麒麟U盘启动器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="32"/>
-        <location filename="../mainwindow.cpp" line="91"/>
-        <location filename="../mainwindow.cpp" line="182"/>
         <source>kylin usb creator</source>
-        <translation>麒麟U盘启动器</translation>
+        <translation type="vanished">麒麟U盘启动器</translation>
     </message>
     <message>
         <source>minimize</source>
@@ -23,22 +20,29 @@
         <translation type="vanished">关闭</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="34"/>
+        <location filename="../mainwindow.cpp" line="31"/>
+        <location filename="../mainwindow.cpp" line="90"/>
+        <location filename="../mainwindow.cpp" line="181"/>
+        <source>USB Boot Maker</source>
+        <translation>麒麟U盘启动器</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="33"/>
         <source>Minimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="50"/>
+        <location filename="../mainwindow.cpp" line="49"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>USB driver is in production.Are you sure you want to stop task and exit the program?</source>
         <translation>启动盘正在制作中，是否停止任务并退出程序？</translation>
     </message>
@@ -53,10 +57,10 @@
     <message>
         <location filename="../page1.cpp" line="38"/>
         <source>MBR signature not detected,continue anyway?</source>
-        <translation>未选择MBR签名，是否继续？</translation>
+        <translation>未检测到MBR签名，是否继续？</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="114"/>
+        <location filename="../page1.cpp" line="111"/>
         <source>USB drive will be formatted,please backup your files!</source>
         <translation>制作启动盘的U盘将被格式化，请先备份好重要文件！</translation>
     </message>
@@ -93,7 +97,7 @@
         <translation type="vanished">ISO镜像无效，请选择正确的镜像！</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="64"/>
+        <location filename="../page1.cpp" line="61"/>
         <source>Start</source>
         <translation>开始制作</translation>
     </message>
@@ -122,7 +126,7 @@
         <translation type="vanished">输入密码：</translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="291"/>
+        <location filename="../page1.cpp" line="288"/>
         <source>No USB drive available</source>
         <translation>无可用U盘</translation>
     </message>
@@ -262,19 +266,31 @@
         <translation>深色模式</translation>
     </message>
     <message>
-        <source>close</source>
-        <translation type="vanished">关闭</translation>
-    </message>
-    <message>
         <location filename="../include/menumodule.cpp" line="202"/>
-        <location filename="../include/menumodule.cpp" line="229"/>
-        <source>kylin usb creator</source>
+        <source>USB Boot Maker</source>
         <translation>麒麟U盘启动器</translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="221"/>
-        <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
+        <source>USB Boot Maker provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
         <translation>麒麟U盘启动器提供系统盘制作功能，操作流程简单便捷。用户可以自行选择ISO镜像和U盘，一键轻松制作U盘启动盘。</translation>
+    </message>
+    <message>
+        <location filename="../include/menumodule.cpp" line="229"/>
+        <source>usb boot maker</source>
+        <translation>麒麟U盘启动器</translation>
+    </message>
+    <message>
+        <source>close</source>
+        <translation type="vanished">关闭</translation>
+    </message>
+    <message>
+        <source>kylin usb creator</source>
+        <translation type="vanished">麒麟U盘启动器</translation>
+    </message>
+    <message>
+        <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
+        <translation type="vanished">麒麟U盘启动器提供系统盘制作功能，操作流程简单便捷。用户可以自行选择ISO镜像和U盘，一键轻松制作U盘启动盘。</translation>
     </message>
     <message>
         <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks</source>

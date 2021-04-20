@@ -1,6 +1,7 @@
 # 二进制文件
-kylin-usb-creator
-kylin-usb-creator-sysdbus
+usb-boot-maker
+usb-boot-maker-sysdbus
+
 # C++ objects and libs
 *.slo
 *.lo
@@ -19,6 +20,7 @@ object_script.*.Debug
 *_plugin_import.cpp
 /.qmake.cache
 /.qmake.stash
+*.qmake.stash
 *.pro.user
 *.pro.user.*
 *.qbs.user

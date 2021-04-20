@@ -1,10 +1,8 @@
 #include "mainwindow.h"
-//#include "include/menumodule.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
-//    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","test",this,SLOT(dealTest()));
     init();
     statusbarInit();
     myStyle();
@@ -26,10 +24,10 @@ void MainWindow::statusbarInit()
     hlyt->setSpacing(0);
     titleIcon = new QLabel;
     titleIcon->setFixedSize(24,24);
-    titleIcon->setPixmap(QPixmap::fromImage(QImage(":/data/kylin-usb-creator.svg")));
+    titleIcon->setPixmap(QPixmap::fromImage(QImage(":/data/usb-boot-maker.svg")));
     titleIcon->setScaledContents(true);
     titleText = new QLabel();
-    titleText->setText(tr("kylin usb creator"));
+    titleText->setText(tr("USB Boot Maker"));
     titleMin = new QPushButton();
     titleMin->setToolTip(tr("Minimize"));
     titleMin->setProperty("isWindowButton", 0x1);
@@ -88,7 +86,7 @@ void MainWindow::statusbarInit()
 }
 
 void MainWindow::init(){
-    this->setWindowTitle(tr("kylin usb creator"));
+    this->setWindowTitle(tr("USB Boot Maker"));
     this->setFixedSize(680,507);
 //    在屏幕中央显示
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
@@ -96,7 +94,7 @@ void MainWindow::init(){
     m_DaemonIpcDbus = new DaemonIpcDbus();
 
 //    连结systembus进程消息
-    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","authorityStatus",this,SLOT(dealAuthorityStatus(QString)));
+    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.usbbootmaker.interface","authorityStatus",this,SLOT(dealAuthorityStatus(QString)));
 
 }
 
@@ -179,13 +177,13 @@ void MainWindow::createTrayActions()
     }
     m_mainTray = new QSystemTrayIcon(this);
     m_mainTray->setIcon(QIcon(":/data/logo/48.png"));
-    m_mainTray->setToolTip(tr("kylin usb creator"));
+    m_mainTray->setToolTip(tr("USB Boot Maker"));
     m_mainTray->show();
 }
 
 void MainWindow::dealMenuModulePullupHelp(){
     if(!m_DaemonIpcDbus->daemonIsNotRunning()){
-        m_DaemonIpcDbus->showGuide("tools/kylin-usb-creator");
+        m_DaemonIpcDbus->showGuide("tools/usb-boot-maker");
     }
 }
 void MainWindow::makeStart()
@@ -205,7 +203,7 @@ void MainWindow::doubleCheck(){
     switch (result){
         case QMessageBox::Yes:{//exit_proc在其他case中也有效，不加花括号exit_proc的生命周期就不会终结，在其他case中就会成为一个没有初始化的变量
             // exit progress and close mainwindow
-            QDBusMessage exit_proc = QDBusMessage::createMethodCall("com.kylinusbcreator.systemdbus","/","com.kylinusbcreator.interface","MakeExit");
+            QDBusMessage exit_proc = QDBusMessage::createMethodCall("com.usbbootmaker.systemdbus","/","com.usbbootmaker.interface","MakeExit");
             QDBusConnection::systemBus().call(exit_proc);
             this->close();
             break;
@@ -257,7 +255,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_F1)
     {
         if(!m_DaemonIpcDbus->daemonIsNotRunning()){
-            m_DaemonIpcDbus->showGuide("tools/kylin-usb-creator");
+            m_DaemonIpcDbus->showGuide("tools/usb-boot-maker");
         }
     }
 }

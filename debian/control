@@ -1,26 +1,27 @@
-Source: kylin-usb-creator
+Source: usb-boot-maker
 Section: utils
 Priority: optional
 Maintainer: liuyuhui <liuyuhui@kylinos.cn>
 Build-Depends: debhelper,
-			qtbase5-dev,
-            qt5-qmake,
-            qtchooser,
-			libkf5windowsystem-dev,
-			libx11-dev,
-			libqt5x11extras5-dev,
-            qtscript5-dev,
-            qttools5-dev-tools,
-            qtbase5-dev-tools,	
-            libgsettings-qt-dev,
-			libpolkit-qt5-1-dev,
-            pkgconf,
+    qtbase5-dev,
+    qt5-qmake,
+    qtchooser,
+    libkf5windowsystem-dev,
+    libx11-dev,
+    libqt5x11extras5-dev,
+    qtscript5-dev,
+    qttools5-dev-tools,
+    qtbase5-dev-tools,	
+    libgsettings-qt-dev,
+    libpolkit-qt5-1-dev,
+    pkgconf,
+    libukui-log4qt-dev,
 Standards-Version: 4.4.1
-Homepage: https://github.com/ubuntukylin/kylin-usb-creator
-#Vcs-Browser: https://github.com/ubuntukylin/kylin-usb-creator
-#Vcs-Git: https://github.com/ubuntukylin/kylin-usb-creator.git
+Homepage: https://github.com/ubuntukylin/USB-Boot-Maker
+#Vcs-Browser: https://github.com/ubuntukylin/usb-boot-maker
+#Vcs-Git: https://github.com/ubuntukylin/usb-boot-maker.git
 
-Package: kylin-usb-creator
+Package: usb-boot-maker
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: kylin-usb-creator
+Description: usb-boot-maker

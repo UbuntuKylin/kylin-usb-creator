@@ -128,8 +128,8 @@ void Page2::startMaking()
 {
     playLoadingGif();
     lableNum->setText("0%");
-    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","workingProgress",this,SLOT(dealWorkingProgress(int)));
-    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","makeFinish",this,SLOT(dealMakeFinish(QString)));
+    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.usbbootmaker.interface","workingProgress",this,SLOT(dealWorkingProgress(int)));
+    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.usbbootmaker.interface","makeFinish",this,SLOT(dealMakeFinish(QString)));
 }
 void Page2::dealWorkingProgress(int progress){
     lableNum->setText(QString::number(progress) + "%");

@@ -39,16 +39,13 @@ void Page1::initControlQss()
                                          QMessageBox::Yes | QMessageBox::No);
                     switch (result)
                     {
-
                     case QMessageBox::Yes:
                         break;
                     case QMessageBox::No:
                         isoPath.clear();
                         break;
-
                     }
                 }
-
                 urlIso->setToolTip("");
                 if(isoPath.length() > 45){
                     urlIso->setToolTip(isoPath);
@@ -66,8 +63,8 @@ void Page1::initControlQss()
 //    connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
     connect(creatStart,&QPushButton::clicked,[=]{/*
         emit makeStart(isoPath,comboUdisk->getDiskPath());*/
-        QDBusMessage m = QDBusMessage::createMethodCall("com.kylinusbcreator.systemdbus","/",
-                                                        "com.kylinusbcreator.interface","MakeStart");
+        QDBusMessage m = QDBusMessage::createMethodCall("com.usbbootmaker.systemdbus","/",
+                                                        "com.usbbootmaker.interface","MakeStart");
         m<<isoPath;m<<comboUdisk->getDiskPath();
         QDBusConnection::systemBus().call(m);
     });

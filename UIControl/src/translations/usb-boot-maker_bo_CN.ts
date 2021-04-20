@@ -4,29 +4,29 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="32"/>
-        <location filename="../mainwindow.cpp" line="91"/>
-        <location filename="../mainwindow.cpp" line="182"/>
-        <source>kylin usb creator</source>
+        <location filename="../mainwindow.cpp" line="31"/>
+        <location filename="../mainwindow.cpp" line="90"/>
+        <location filename="../mainwindow.cpp" line="181"/>
+        <source>USB Boot Maker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="34"/>
+        <location filename="../mainwindow.cpp" line="33"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="50"/>
+        <location filename="../mainwindow.cpp" line="49"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>USB driver is in production.Are you sure you want to stop task and exit the program?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -44,7 +44,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="114"/>
+        <location filename="../page1.cpp" line="111"/>
         <source>USB drive will be formatted,please backup your files!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -69,12 +69,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="64"/>
+        <location filename="../page1.cpp" line="61"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../page1.cpp" line="291"/>
+        <location filename="../page1.cpp" line="288"/>
         <source>No USB drive available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -184,13 +184,17 @@
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="202"/>
-        <location filename="../include/menumodule.cpp" line="229"/>
-        <source>kylin usb creator</source>
+        <source>USB Boot Maker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="221"/>
-        <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
+        <source>USB Boot Maker provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../include/menumodule.cpp" line="229"/>
+        <source>usb boot maker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

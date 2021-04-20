@@ -17,7 +17,7 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
     //root authorization
     Authority::Result result;
     SystemBusNameSubject subject(message().service());
-    result = Authority::instance()->checkAuthorizationSync("com.kylinusbcreator.systemdbus.authoritycheck",
+    result = Authority::instance()->checkAuthorizationSync("com.usb-boot-maker.systemdbus.authoritycheck",
              subject , Authority::AllowUserInteraction);
     if (result == Authority::Yes){
         //TODO: send authorization failed dbus message

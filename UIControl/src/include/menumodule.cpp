@@ -199,7 +199,7 @@ QHBoxLayout* menuModule::initTitleBar(){
     titleBtnClose->setToolTip(tr("Quit"));
     connect(titleBtnClose,&QPushButton::clicked,[=](){aboutWindow->close();});
     QHBoxLayout *hlyt = new QHBoxLayout;
-    titleText->setText(tr("kylin usb creator"));
+    titleText->setText(tr("USB Boot Maker"));
     titleText->setStyleSheet("font-size:14px;");
     hlyt->setSpacing(0);
     hlyt->setMargin(4);
@@ -218,7 +218,7 @@ QVBoxLayout* menuModule::initBody(){
     bodyIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
     bodyIcon->setStyleSheet("font-size:14px;");
     bodyIcon->setScaledContents(true);
-    bodyAppDesc->setText(tr("Kylin USB Creator provides system image making function."
+    bodyAppDesc->setText(tr("USB Boot Maker provides system image making function."
                             "The operation process is simple and easy."
                             "You can choose ISO image and usb driver,"
                             "and make boot driver with a few clicks."));
@@ -226,7 +226,7 @@ QVBoxLayout* menuModule::initBody(){
     bodyAppDesc->setStyleSheet("font-size:14px;");
     bodyAppDesc->setWordWrap(true);
     bodyAppName->setFixedHeight(28);
-    bodyAppName->setText(tr("kylin usb creator"));
+    bodyAppName->setText(tr("usb boot maker"));
     bodyAppName->setStyleSheet("font-size:18px;");
     bodyAppVersion->setFixedHeight(24);
     bodyAppVersion->setText(tr("Version: ") + appVersion);

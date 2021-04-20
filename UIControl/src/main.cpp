@@ -9,6 +9,7 @@
 #include <QStandardPaths>
 #include <fcntl.h>
 #include <QLibraryInfo>
+#include <ukui-log4qt.h>
 #include "include/xatom-helper.h"
 #include "mainwindow.h"
 #include "dbusadaptor.h"
@@ -27,6 +28,7 @@ void activeMainwindow()
 }
 int main(int argc, char *argv[])
 {
+    initUkuiLog4qt("usb-boot-maker");
 //    高清屏幕自适应
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -47,24 +49,24 @@ int main(int argc, char *argv[])
         QTranslator app_trans;
         QString locale = QLocale::system().name();
         QString trans_path;
-        if(QDir("/usr/share/kylin-usb-creator/src/translations").exists()){
-            trans_path = "/usr/share/kylin-usb-creator/translations";
+        if(QDir("/usr/share/usb-boot-maker/src/translations").exists()){
+            trans_path = "/usr/share/usb-boot-maker/translations";
         }else{
             trans_path = qApp->applicationDirPath() + ":/src/translations";
         }
         if(locale == "zh_CN"){
-            qDebug()<<app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm");
-            if(!app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm"))
+            qDebug()<<app_trans.load(":/src/translations/usb-boot-maker_zh_CN.qm");
+            if(!app_trans.load(":/src/translations/usb-boot-maker_zh_CN.qm"))
             {
-                qDebug()<<"Load translation file kylin-usb-creator_zh_CN.qm error";
+                qDebug()<<"Load translation file usb-boot-maker_zh_CN.qm error";
             }else{
                 a.installTranslator(&app_trans);
             }
         }else if(locale == "bo_CN")
         {
-            if(!app_trans.load("kylin-usb-creator_bo_CN.qm",trans_path))
+            if(!app_trans.load("usb-boot-maker_bo_CN.qm",trans_path))
             {
-                qDebug()<<"Load translation file kylin-usb-creator_bo_CN.qm error";
+                qDebug()<<"Load translation file usb-boot-maker_bo_CN.qm error";
             }else{
                 a.installTranslator(&app_trans);
             }
@@ -72,7 +74,7 @@ int main(int argc, char *argv[])
 
     if(a.isRunning()){
         a.sendMessage(QApplication::arguments().length() > 1 ? QApplication::arguments().at(0):a.applicationFilePath());
-        qDebug()<<"#### kylin-usb-creator is already running";
+        qDebug()<<"usb-boot-maker is already running";
         return EXIT_SUCCESS;
     }else {
         MainWindow w;
