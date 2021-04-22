@@ -40,7 +40,8 @@ SOURCES += \
         main.cpp \
         systemdbusregister.cpp
 
-LIBS    += -L/usr/lib/x86_64-linux-gnu/ -lpolkit-qt5-core-1
+LIBS += -L/usr/lib/x86_64-linux-gnu/ -lpolkit-qt5-core-1
+LIBS += -lukui-log4qt
 
 HEADERS += \
     systemdbusregister.h

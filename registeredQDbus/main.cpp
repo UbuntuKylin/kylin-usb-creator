@@ -1,10 +1,13 @@
 #include <QCoreApplication>
 #include <QDebug>
+#include <ukui-log4qt.h>
 #include <QDBusConnection>
 #include "systemdbusregister.h"
 
 int main(int argc, char *argv[])
 {
+    //init log module
+    initUkuiLog4qt("usb-boot-maker-service");
     QCoreApplication a(argc, argv);
     a.setOrganizationName("Kylin Team");
     a.setApplicationName("system-bus-kylinusbcreator-service");
