@@ -15,7 +15,7 @@
 #include <QFileInfo>
 #include <QStorageInfo>
 #include <QTimer>
-#include <QDBusConnection>
+
 
 class Page2 : public QWidget
 {
@@ -32,10 +32,9 @@ signals:
     void swToPage2();//
 
 public slots:
-    void startMaking();
+    void startMaking(QString key,QString sourcePath,QString targetPath); //接收page1传来的制作参数
     void finishEvent();
-    void dealWorkingProgress(int);
-    void dealMakeFinish(QString);
+
 private:
     enum typeMovieStatus {
         loading = 0,
@@ -61,6 +60,7 @@ private:
     QProcess *command_dd;
 
     int frameCount=0;
+    void readBashStandardErrorInfo();
     qint64 sourceFileSize = 0;
     QTimer *timer;
 };
