@@ -7,10 +7,11 @@
 #include <QApplication>
 #include <QStringList>
 #include <QStandardPaths>
-#include <ukui-log4qt.h>
 #include <fcntl.h>
 #include <QLibraryInfo>
+#include <syslog.h>
 #include "include/xatom-helper.h"
+
 #include "mainwindow.h"
 #include "dbusadaptor.h"
 #include "include/qtsingleapplication.h"
@@ -28,8 +29,6 @@ void activeMainwindow()
 }
 int main(int argc, char *argv[])
 {
-    //init log module
-    initUkuiLog4qt("usb-boot-maker");
 //    高清屏幕自适应
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -59,7 +58,7 @@ int main(int argc, char *argv[])
             qDebug()<<app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm");
             if(!app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm"))
             {
-                qDebug()<<"Load translation file kylin-usb-creator_zh_CN.qm error";
+                syslog(LOG_ERR, "Load translation file kylin-usb-creator_zh_CN.qm error",trans_path);
             }else{
                 a.installTranslator(&app_trans);
             }
@@ -67,7 +66,7 @@ int main(int argc, char *argv[])
         {
             if(!app_trans.load("kylin-usb-creator_bo_CN.qm",trans_path))
             {
-                qDebug()<<"Load translation file kylin-usb-creator_bo_CN.qm error";
+                syslog(LOG_ERR, "Load translation file kylin-usb-creator_bo_CN.qm error",trans_path);
             }else{
                 a.installTranslator(&app_trans);
             }
