@@ -15,6 +15,7 @@ Build-Depends: debhelper,
             libgsettings-qt-dev,
 			libpolkit-qt5-1-dev,
             pkgconf,
+			libukui-log4qt-dev,
 Standards-Version: 4.4.1
 Homepage: https://github.com/ubuntukylin/kylin-usb-creator
 #Vcs-Browser: https://github.com/ubuntukylin/kylin-usb-creator

@@ -14,9 +14,11 @@ void menuModule::initAction(){
     aboutWindow = new QWidget();
     titleText = new QLabel();
     bodyAppName = new QLabel();
+    bodyAppDesc = new QLabel();
     bodyAppVersion = new QLabel();
     bodySupport = new QLabel();
     menuButton = new QToolButton;
+    menuButton->setToolTip(tr("Menu"));
     menuButton->setProperty("isWindowButton", 0x1);
     menuButton->setProperty("useIconHighlightEffect", 0x2);
     menuButton->setPopupMode(QToolButton::InstantPopup);
@@ -146,20 +148,24 @@ void menuModule::aboutAction(){
 
 void menuModule::helpAction(){
 //    帮助点击事件处理
-    DaemonIpcDbus *ipcDbus = new DaemonIpcDbus();
+    if(!ipcDbus)
+    {
+        ipcDbus = new DaemonIpcDbus();
+    }
     if(!ipcDbus->daemonIsNotRunning()){
         ipcDbus->showGuide(appName);
     }
 }
 
 void menuModule::initAbout(){
+    aboutWindow->setWindowModality(Qt::ApplicationModal);
     aboutWindow->setWindowFlag(Qt::Tool);
     MotifWmHints hints;
     hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
     hints.functions = MWM_FUNC_ALL;
     hints.decorations = MWM_DECOR_BORDER;
     XAtomHelper::getInstance()->setWindowMotifHint(aboutWindow->winId(), hints);
-    aboutWindow->setFixedSize(420,324);
+    aboutWindow->setFixedSize(420,380);
     QVBoxLayout *mainlyt = new QVBoxLayout();
     QHBoxLayout *titleLyt = initTitleBar();
     QVBoxLayout *bodylyt = initBody();
@@ -168,9 +174,12 @@ void menuModule::initAbout(){
     mainlyt->addLayout(bodylyt);
     mainlyt->addStretch();
     aboutWindow->setLayout(mainlyt);
-    //TODO:在屏幕中央显示
-    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
-    aboutWindow->move((availableGeometry.width()-aboutWindow->width())/2,(availableGeometry.height()- aboutWindow->height())/2);
+//    //TODO:在屏幕中央显示
+//    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
+//    aboutWindow->move((availableGeometry.width()-aboutWindow->width())/2,(availableGeometry.height()- aboutWindow->height())/2);
+    //弹窗位置应用居中
+    QRect availableGeometry = this->parentWidget()->geometry();
+    aboutWindow->move(availableGeometry.center()-aboutWindow->rect().center());
     aboutWindow->show();
 }
 
@@ -187,9 +196,10 @@ QHBoxLayout* menuModule::initTitleBar(){
     titleBtnClose->setProperty("isWindowButton",0x2);
     titleBtnClose->setProperty("useIconHighlightEffect",0x8);
     titleBtnClose->setFlat(true);
+    titleBtnClose->setToolTip(tr("Quit"));
     connect(titleBtnClose,&QPushButton::clicked,[=](){aboutWindow->close();});
     QHBoxLayout *hlyt = new QHBoxLayout;
-    titleText->setText(tr("kylin usb creator"));
+    titleText->setText(tr("usb boot maker"));
     titleText->setStyleSheet("font-size:14px;");
     hlyt->setSpacing(0);
     hlyt->setMargin(4);
@@ -208,9 +218,15 @@ QVBoxLayout* menuModule::initBody(){
     bodyIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
     bodyIcon->setStyleSheet("font-size:14px;");
     bodyIcon->setScaledContents(true);
+    bodyAppDesc->setText(tr("USB Boot Maker provides system image making function."
+                            "The operation process is simple and easy."
+                            "You can choose ISO image and usb driver,"
+                            "and make boot driver with a few clicks."));
+    bodyAppDesc->setFixedWidth(360);
+    bodyAppDesc->setStyleSheet("font-size:14px;");
+    bodyAppDesc->setWordWrap(true);
     bodyAppName->setFixedHeight(28);
-//    bodyAppName->setText(tr(appShowingName.toLocal8Bit()));
-    bodyAppName->setText(tr("kylin usb creator"));
+    bodyAppName->setText(tr("usb boot maker"));
     bodyAppName->setStyleSheet("font-size:18px;");
     bodyAppVersion->setFixedHeight(24);
     bodyAppVersion->setText(tr("Version: ") + appVersion);
@@ -233,13 +249,14 @@ QVBoxLayout* menuModule::initBody(){
     vlyt->addSpacing(12);
     vlyt->addWidget(bodyAppVersion,0,Qt::AlignHCenter);
     vlyt->addSpacing(12);
+    vlyt->addWidget(bodyAppDesc,0,Qt::AlignHCenter);
+    vlyt->addSpacing(24);
     vlyt->addWidget(bodySupport,0,Qt::AlignHCenter);
     vlyt->addStretch();
     return vlyt;
 }
 
 void menuModule::setStyle(){
-//    menuButton->setStyleSheet("QPushButton::menu-indicator{image:None;}");
 }
 
 void menuModule::initGsetting(){
