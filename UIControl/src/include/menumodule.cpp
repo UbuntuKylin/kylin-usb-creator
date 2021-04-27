@@ -14,11 +14,9 @@ void menuModule::initAction(){
     aboutWindow = new QWidget();
     titleText = new QLabel();
     bodyAppName = new QLabel();
-    bodyAppDesc = new QLabel();
     bodyAppVersion = new QLabel();
     bodySupport = new QLabel();
     menuButton = new QToolButton;
-    menuButton->setToolTip(tr("Menu"));
     menuButton->setProperty("isWindowButton", 0x1);
     menuButton->setProperty("useIconHighlightEffect", 0x2);
     menuButton->setPopupMode(QToolButton::InstantPopup);
@@ -148,24 +146,20 @@ void menuModule::aboutAction(){
 
 void menuModule::helpAction(){
 //    帮助点击事件处理
-    if(!ipcDbus)
-    {
-        ipcDbus = new DaemonIpcDbus();
-    }
+    DaemonIpcDbus *ipcDbus = new DaemonIpcDbus();
     if(!ipcDbus->daemonIsNotRunning()){
         ipcDbus->showGuide(appName);
     }
 }
 
 void menuModule::initAbout(){
-    aboutWindow->setWindowModality(Qt::ApplicationModal);
     aboutWindow->setWindowFlag(Qt::Tool);
     MotifWmHints hints;
     hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
     hints.functions = MWM_FUNC_ALL;
     hints.decorations = MWM_DECOR_BORDER;
     XAtomHelper::getInstance()->setWindowMotifHint(aboutWindow->winId(), hints);
-    aboutWindow->setFixedSize(420,380);
+    aboutWindow->setFixedSize(420,324);
     QVBoxLayout *mainlyt = new QVBoxLayout();
     QHBoxLayout *titleLyt = initTitleBar();
     QVBoxLayout *bodylyt = initBody();
@@ -174,12 +168,9 @@ void menuModule::initAbout(){
     mainlyt->addLayout(bodylyt);
     mainlyt->addStretch();
     aboutWindow->setLayout(mainlyt);
-//    //TODO:在屏幕中央显示
-//    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
-//    aboutWindow->move((availableGeometry.width()-aboutWindow->width())/2,(availableGeometry.height()- aboutWindow->height())/2);
-    //弹窗位置应用居中
-    QRect availableGeometry = this->parentWidget()->geometry();
-    aboutWindow->move(availableGeometry.center()-aboutWindow->rect().center());
+    //TODO:在屏幕中央显示
+    QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
+    aboutWindow->move((availableGeometry.width()-aboutWindow->width())/2,(availableGeometry.height()- aboutWindow->height())/2);
     aboutWindow->show();
 }
 
@@ -196,11 +187,10 @@ QHBoxLayout* menuModule::initTitleBar(){
     titleBtnClose->setProperty("isWindowButton",0x2);
     titleBtnClose->setProperty("useIconHighlightEffect",0x8);
     titleBtnClose->setFlat(true);
-    titleBtnClose->setToolTip(tr("Quit"));
     connect(titleBtnClose,&QPushButton::clicked,[=](){aboutWindow->close();});
     QHBoxLayout *hlyt = new QHBoxLayout;
     titleText->setText(tr("kylin usb creator"));
-//    titleText->setStyleSheet("font-size:14px;");
+    titleText->setStyleSheet("font-size:14px;");
     hlyt->setSpacing(0);
     hlyt->setMargin(4);
     hlyt->addSpacing(4);
@@ -216,29 +206,26 @@ QVBoxLayout* menuModule::initBody(){
     QLabel* bodyIcon = new QLabel();
     bodyIcon->setFixedSize(96,96);
     bodyIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
-//    bodyIcon->setStyleSheet("font-size:14px;");
+    bodyIcon->setStyleSheet("font-size:14px;");
     bodyIcon->setScaledContents(true);
-    bodyAppDesc->setText(tr("Kylin USB Creator provides system image making function."
-                            "The operation process is simple and easy."
-                            "You can choose ISO image and usb driver,"
-                            "and make boot driver with a few clicks."));
-    bodyAppDesc->setFixedWidth(360);
-//    bodyAppDesc->setStyleSheet("font-size:14px;");
-    bodyAppDesc->setWordWrap(true);
     bodyAppName->setFixedHeight(28);
+//    bodyAppName->setText(tr(appShowingName.toLocal8Bit()));
     bodyAppName->setText(tr("kylin usb creator"));
-//    bodyAppName->setStyleSheet("font-size:18px;");
+    bodyAppName->setStyleSheet("font-size:18px;");
     bodyAppVersion->setFixedHeight(24);
     bodyAppVersion->setText(tr("Version: ") + appVersion);
     bodyAppVersion->setAlignment(Qt::AlignLeft);
-//    bodyAppVersion->setStyleSheet("font-size:14px;");
-
+    bodyAppVersion->setStyleSheet("font-size:14px;");
+    bodySupport->setText(tr("Service & Support: ") +
+                         "<a href=\"mailto://support@kylinos.cn\""
+                         "style=\"color:palttte(buttonText)\">"
+                         "support@kylinos.cn</a>");
     connect(bodySupport,&QLabel::linkActivated,this,[=](const QString url){
         QDesktopServices::openUrl(QUrl(url));
     });
     bodySupport->setContextMenuPolicy(Qt::NoContextMenu);
     bodySupport->setFixedHeight(24);
-//    bodySupport->setStyleSheet("font-size:14px;");
+    bodySupport->setStyleSheet("font-size:14px;");
     QVBoxLayout *vlyt = new QVBoxLayout;
     vlyt->setMargin(0);
     vlyt->setSpacing(0);
@@ -249,14 +236,13 @@ QVBoxLayout* menuModule::initBody(){
     vlyt->addSpacing(12);
     vlyt->addWidget(bodyAppVersion,0,Qt::AlignHCenter);
     vlyt->addSpacing(12);
-    vlyt->addWidget(bodyAppDesc,0,Qt::AlignHCenter);
-    vlyt->addSpacing(24);
     vlyt->addWidget(bodySupport,0,Qt::AlignHCenter);
     vlyt->addStretch();
     return vlyt;
 }
 
 void menuModule::setStyle(){
+//    menuButton->setStyleSheet("QPushButton::menu-indicator{image:None;}");
 }
 
 void menuModule::initGsetting(){
@@ -293,18 +279,10 @@ void menuModule::setThemeDark(){
     this->setStyleSheet("QLabel{color:rgba(255,255,255,1);}");
     titleText->setStyleSheet("color:rgba(255,255,255,1);");
     emit menuModuleSetThemeStyle("dark-theme");
-    bodySupport->setText(tr("Service & Support: ") +
-                         "<a href=\"mailto://support@kylinos.cn\""
-                         "style=\"color:rgba(225,225,225,1)\">"
-                         "support@kylinos.cn</a>");
 }
 
 void menuModule::setThemeLight(){
     aboutWindow->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1);}");
     emit menuModuleSetThemeStyle("light-theme");
-    bodySupport->setText(tr("Service & Support: ") +
-                         "<a href=\"mailto://support@kylinos.cn\""
-                         "style=\"color:rgba(0,0,0,1)\">"
-                         "support@kylinos.cn</a>");
 
 }

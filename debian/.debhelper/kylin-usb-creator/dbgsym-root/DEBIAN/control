@@ -1,0 +1,13 @@
+Package: kylin-usb-creator-dbgsym
+Package-Type: ddeb
+Source: kylin-usb-creator
+Version: 1.0.0-39kord
+Auto-Built-Package: debug-symbols
+Architecture: arm64
+Maintainer: liuyuhui <liuyuhui@kylinos.cn>
+Installed-Size: 3092
+Depends: kylin-usb-creator (= 1.0.0-39kord)
+Section: debug
+Priority: optional
+Description: debug symbols for kylin-usb-creator
+Build-Ids: 2a5840e7d0fae1a08431acdf5d1275430d07bab1 967d276f8539143676b19921e0bcfc12c84d6235

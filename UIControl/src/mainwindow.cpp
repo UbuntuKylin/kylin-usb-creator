@@ -4,9 +4,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
-//    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","test",this,SLOT(dealTest()));
-    init();
     statusbarInit();
+    init();
     myStyle();
     initGsetting();
     qDebug()<<menu;
@@ -31,7 +30,6 @@ void MainWindow::statusbarInit()
     titleText = new QLabel();
     titleText->setText(tr("kylin usb creator"));
     titleMin = new QPushButton();
-    titleMin->setToolTip(tr("Minimize"));
     titleMin->setProperty("isWindowButton", 0x1);
     titleMin->setProperty("useIconHighlightEffect", 0x2);
     titleMin->setFlat(true);
@@ -47,7 +45,6 @@ void MainWindow::statusbarInit()
     connect(menu,&menuModule::pullupHelp,this,&MainWindow::dealMenuModulePullupHelp);
 
     titleClose = new QPushButton();
-    titleClose->setToolTip(tr("Quit"));
     titleClose->setProperty("isWindowButton", 0x2) ;
     titleClose->setProperty("useIconHighlightEffect", 0x8);;
     titleClose->setFlat(true);
@@ -94,10 +91,6 @@ void MainWindow::init(){
     QRect availableGeometry = qApp->primaryScreen()->availableGeometry();
     this->move((availableGeometry.width()-this->width())/2,(availableGeometry.height()- this->height())/2);
     m_DaemonIpcDbus = new DaemonIpcDbus();
-
-//    连结systembus进程消息
-    QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","authorityStatus",this,SLOT(dealAuthorityStatus(QString)));
-
 }
 
 void MainWindow::aboutClick()
@@ -112,6 +105,8 @@ void MainWindow::myStyle()
     timer = new QTimer(this);
     page1 = new Page1();
     page2 = new Page2();
+    connect(page1,&Page1::makeStart,page2,&Page2::startMaking);
+    connect(page2,&Page2::swToPage2,this,&MainWindow::makeStart);
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
     connect(page2,&Page2::returnMain,this,&MainWindow::returnMain);
     //内部样式
@@ -157,7 +152,29 @@ void MainWindow::initGsetting()
 {
     //应用主窗口状态
     if(QGSettings::isSchemaInstalled(APPDATA))
-    {}
+    {
+//        m_pGsettingAppData = new QGSettings(APPDATA);
+//        connect(m_pGsettingAppData,&QGSettings::changed,[=](){
+//            this->showNormal();
+//            this->raise();
+//            this->activateWindow();
+//        });
+    }
+    // 主题适配
+//    if(QGSettings::isSchemaInstalled(FITTHEMEWINDOW))
+//    {
+//        m_pGsettingThemeData = new QGSettings(FITTHEMEWINDOW);
+
+//        connect(m_pGsettingThemeData,&QGSettings::changed,this, [=] (const QString &key)
+//        {
+//            if(key == "styleName")
+//            {
+//                setThemeStyle();
+//                this->showNormal();
+//            }
+//        });
+//        setThemeStyle(); //主题安装成功之后默认做一次主题状态的判断
+//    }
     return ;
 }
 
@@ -192,7 +209,8 @@ void MainWindow::makeStart()
 {
     disconnect(titleClose,&QPushButton::clicked,0,0); //开始制作之后取消之前click触发的应用关闭功能
     connect(titleClose,&QPushButton::clicked,this,&MainWindow::doubleCheck);
-    page2->startMaking();
+//    connect(
+//    isInPage2 = true;
     stackedWidget->setCurrentIndex(changePage());
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
@@ -202,16 +220,13 @@ void MainWindow::makeStart()
 void MainWindow::doubleCheck(){
     QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("USB driver is in production.Are you sure you want to stop task and exit the program?"),
                          QMessageBox::Yes | QMessageBox::No,QMessageBox::No);
-    switch (result){
-        case QMessageBox::Yes:{//exit_proc在其他case中也有效，不加花括号exit_proc的生命周期就不会终结，在其他case中就会成为一个没有初始化的变量
-            // exit progress and close mainwindow
-            QDBusMessage exit_proc = QDBusMessage::createMethodCall("com.kylinusbcreator.systemdbus","/","com.kylinusbcreator.interface","MakeExit");
-            QDBusConnection::systemBus().call(exit_proc);
-            this->close();
-            break;
-        }
-        case QMessageBox::No:
-            break;
+    switch (result)
+    {
+    case QMessageBox::Yes:
+        this->close();
+        break;
+    case QMessageBox::No:
+        break;
     }
 }
 int MainWindow::changePage()
@@ -261,15 +276,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         }
     }
 }
-
-void MainWindow::dealAuthorityStatus(QString status){
-    if("success" == status){
-        makeStart();
-    }else{
-//        授权失败，回到到page1
-    }
-}
-
 void MainWindow::setThemeDark()
 {
 //    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_h.png);border-radius:4px;}"
@@ -282,7 +288,7 @@ void MainWindow::setThemeDark()
 //                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
 //                             "QPushButton::menu-indicator{image:None;}");
-    titleText->setStyleSheet("color:rgba(249,249,249,1);");
+    titleText->setStyleSheet("color:rgba(249,249,249,1);font-size:14px;");
     title->setStyleSheet(".QWidget{background-color:rgba(31,32,34,1)}");
     stackedWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
     bottomWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
@@ -307,7 +313,7 @@ void MainWindow::setThemeLight()
     stackedWidget->setStyleSheet("background-color:rgba(255,255,255,1);");
     title->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
     bottomWidget->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
-    titleText->setStyleSheet("color:rgba(48,49,51,1);");
+    titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
 //    this->setStyleSheet("background-color:rgba(255,255,255,1);");
 //    this->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1);}");
     page1->setThemeStyleLight();
