@@ -1,51 +1,3 @@
-kylin-usb-creator (1.1.0-5kord) v101; urgency=medium
-
-  * 应用改名为usb boot maker
-
- -- fengyongfan <fengyongfan@kylinos.cn>  Thur, 22 Apr 2021 10:41:46 +0800
-
-kylin-usb-creator (1.1.0-4kord) v101; urgency=medium
-
-  * 解决禅道BUG#24272 部分机型上，未插入U盘可能导致程序启动失败
-  * 解决禅道BUG#41686 制作中途拔出U盘，偶现提示制作成功
-  * 解决禅道BUG#39530 U盘列表中出现了非USB设备
-
- -- fengyongfan <fengyongfan@kylinos.cn>  Sat, 13 Mar 2021 10:41:46 +0800
-
-kylin-usb-creator (1.1.0-3kord) v101; urgency=medium
-
-  * 解决禅道BUG#41571 主题改变导致U盘U盘启动器界面字体模糊显示
-
- -- fengyongfan <fengyongfan@kylinos.cn>  Tue, 09 Mar 2021 10:41:46 +0800
-
-kylin-usb-creator (1.1.0-2kord) v101; urgency=medium
-
-  * 取消限制应用字体，字体大小全部跟随主题
-
- -- fengyongfan123 <fengyongfan@kylinos.cn>  Thu, 25 Feb 2021 14:41:46 +0800
-
-kylin-usb-creator (1.1.0-1kord) v101; urgency=medium
-
-  * 解决了BUG#39133 应用弹窗希望出现在应用居中，而不是桌面居中
-  * 解决了BUG#28858 深色主题、16号字体下，主界面“选择U盘”字体异常
-  * 解决了BUG#38855 选择非正常iso文件时弹出的警示弹窗未汉化
-  * 解决了BUG#38830 关于弹窗版本显示不对
-
- -- fengyongfan123 <fengyongfan@kylinos.cn>  Wed, 24 Feb 2021 14:41:46 +0800
-
-kylin-usb-creator (1.1.0-0kord) v101; urgency=medium
-
-  * 提权逻辑修改，现使用系统授权框来给应用提权
-  * 解决了BUG#34913 iso名过长是使用省略号代替，加上了tooltip显示（仅在过长时会有tooltip）
-  * 解决了BUG#25523 进度条的显示问题
-  * 解决了BUG#29064 100%制作失败
-  * 增加了三联tooltip显示
-  * 关于窗口改模态
-  * 增加了mbr校验，校验失败的镜像会弹出提醒框，目前UEFI引导的镜像校验还在开发中
-  * 修复了一个由于内存的重复开辟引起的内存泄露
-
- -- shixiaoshuo <shixiaoshuo@kylinos.cn> Sat, 20 Feb 2021 10:38:52 +0800
-
 kylin-usb-creator (1.0.0-40kord) v101; urgency=medium
 
   * 解决了BUG#25233 ISO文件小于1M时会引起软件闪退的问题
@@ -71,7 +23,7 @@ kylin-usb-creator (1.0.0-39kord) v101; urgency=medium
 kylin-usb-creator (1.0.0-38kord) v101; urgency=medium
 
   * 修复了BUG#32428 菜单按钮悬停样式异常
-  * 修复了BUG#32929 菜单按钮深色下未变色
+  * 修复了BUG#32929 菜单按钮深色下未变色 
   * 修复了BUG#31682 制作完成页面标识异常
   * 修复了BUG#34070 关于界面可以重复打开
   * 修复了BUG#32441 下拉菜单设置透明后特效消失

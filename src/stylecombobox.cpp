@@ -46,6 +46,7 @@ void StyleComboBox::on_diskButton_click()
 {
     if(!isDiskListOpen)
     {
+        qDebug()<<"disklist 显示触发";
         closeListWidget();
         int listWidgetHeight=listWidget->count() * ITEMHIGHT + SHADOW;
         listWidget->setFixedHeight(listWidgetHeight);
@@ -70,6 +71,7 @@ void StyleComboBox::on_diskButton_click()
     }
     else
     {
+        qDebug()<<"disklist 关闭触发";
         isDiskListOpen = false;
         listWidget->close();
         icon->setStyleSheet("border-image:url(:/data/comboboxIcon_d.png);border:0px;");
