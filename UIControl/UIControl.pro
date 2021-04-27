@@ -4,7 +4,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
-#添加子工程
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -32,7 +31,6 @@ SOURCES += \
     src/include/xatom-helper.cpp \
     src/include/daemonipcdbus.cpp \
     src/stylecombobox.cpp \
-    src/rootauthdialog.cpp \
     src/toolwindow.cpp
 
 HEADERS += \
@@ -47,7 +45,6 @@ HEADERS += \
     src/include/qtsingleapplication.h \
     src/include/xatom-helper.h \
     src/stylecombobox.h \
-    src/rootauthdialog.h \
     src/toolwindow.h
 
 LIBS +=-lpthread

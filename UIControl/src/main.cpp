@@ -9,9 +9,7 @@
 #include <QStandardPaths>
 #include <fcntl.h>
 #include <QLibraryInfo>
-#include <syslog.h>
 #include "include/xatom-helper.h"
-
 #include "mainwindow.h"
 #include "dbusadaptor.h"
 #include "include/qtsingleapplication.h"
@@ -58,7 +56,7 @@ int main(int argc, char *argv[])
             qDebug()<<app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm");
             if(!app_trans.load(":/src/translations/kylin-usb-creator_zh_CN.qm"))
             {
-                syslog(LOG_ERR, "Load translation file kylin-usb-creator_zh_CN.qm error",trans_path);
+                qDebug()<<"Load translation file kylin-usb-creator_zh_CN.qm error";
             }else{
                 a.installTranslator(&app_trans);
             }
@@ -66,7 +64,7 @@ int main(int argc, char *argv[])
         {
             if(!app_trans.load("kylin-usb-creator_bo_CN.qm",trans_path))
             {
-                syslog(LOG_ERR, "Load translation file kylin-usb-creator_bo_CN.qm error",trans_path);
+                qDebug()<<"Load translation file kylin-usb-creator_bo_CN.qm error";
             }else{
                 a.installTranslator(&app_trans);
             }
