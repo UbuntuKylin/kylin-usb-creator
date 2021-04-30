@@ -28,7 +28,7 @@ void activeMainwindow()
 }
 int main(int argc, char *argv[])
 {
-    //init log module
+//    init log module
     initUkuiLog4qt("usb-boot-maker");
 //    高清屏幕自适应
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
