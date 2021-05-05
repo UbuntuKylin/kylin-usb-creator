@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 //#include "include/menumodule.h"
+#include "include/xatom-helper.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -225,10 +226,29 @@ int MainWindow::changePage()
 
 void MainWindow::handleIconClickedSub()
 {
+    // 添加窗管协议
+    MotifWmHints hints;
+    hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
+    hints.functions = MWM_FUNC_ALL;
+    hints.decorations = MWM_DECOR_BORDER;
+    XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
+//    this->isActiveWindow()
+    QDesktopWidget* m = QApplication::desktop();
+    QRect desk_rect = m->screenGeometry(m->screenNumber(QCursor::pos()));
+    int desk_x = desk_rect.width();
+    int desk_y = desk_rect.height();
+    int x = this->width();
+    int y = this->height();
+    this->move(desk_x/2-x/2+desk_rect.left(),desk_y/2-y/2+desk_rect.top());
+
+
+    if(this->menu && this->menu->aboutWindow){
+        this->menu->aboutWindow->close();
+    }
     this->setWindowFlag(Qt::WindowStaysOnTopHint,true);
     this->setWindowFlag(Qt::WindowStaysOnTopHint,false);
-    showNormal();
-    activateWindow();
+    this->setWindowState(Qt::WindowActive | Qt::WindowNoState);
+    this->show();
 }
 
 void MainWindow::makeFinish()

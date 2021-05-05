@@ -27,6 +27,7 @@ class menuModule : public QWidget
 public:
     explicit menuModule(QWidget *);
     void themeUpdate();
+    QWidget *aboutWindow = nullptr;
 
 signals:
     void menuModuleClose();
@@ -48,7 +49,6 @@ private:
     QMenu *themeMenu = nullptr;
     QSize iconSize;
     QString appPath = "tools/kylin-usb-creator"; //拉起帮助菜单时使用appName字段
-    QWidget *aboutWindow = nullptr;
     QGSettings *m_pGsettingThemeData = nullptr;
     QGSettings *m_pGsettingThemeStatus = nullptr;
     enum typeThemeStatus {

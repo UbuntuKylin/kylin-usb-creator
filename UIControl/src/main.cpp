@@ -75,22 +75,11 @@ int main(int argc, char *argv[])
 
     if(a.isRunning()){
         a.sendMessage(QApplication::arguments().length() > 1 ? QApplication::arguments().at(0):a.applicationFilePath());
-        qDebug()<<"#### kylin-usb-creator is already running";
+        qWarning()<<"kylin-usb-creator is already running";
         return EXIT_SUCCESS;
     }else {
         MainWindow w;
-
-//        qDebug()<<"****"<<IS_MIPS64EL_ARCHITECTURE;
-//        a.setActiveWindow(&w);
-//        a.setActivationWindow(&w);
-        // 添加窗管协议
-        // TODO:窗管适配问题解决之后，打开此部分注释，还需要加上在布局中被注释的自绘状态栏
-        MotifWmHints hints;
-        hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-        hints.functions = MWM_FUNC_ALL;
-        hints.decorations = MWM_DECOR_BORDER;
-        XAtomHelper::getInstance()->setWindowMotifHint(w.winId(), hints);
-        w.show();
+        w.handleIconClickedSub();
 
         QObject::connect(&a,SIGNAL(messageReceived(const QString&)),&w,SLOT(handleIconClickedSub()));
         return a.exec();
