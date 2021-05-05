@@ -27,10 +27,24 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
         emit authorityStatus("failed");
         return ;
     }
+    QProcess m_unmount;
+    QStringList m_unmount_arg;
+    QString m_partionPath = targetPath + '1';
+    m_unmount_arg <<"unmount"<<"-b"<<m_partionPath;
+    m_unmount.start("udisksctl",m_unmount_arg);
+    if(m_unmount.waitForStarted()){
+        m_unmount.waitForFinished();
+    }else{
+        qWarning()<<"#udisksctl# Warning:unmount failed! mount path :"+sourcePath;
+    }
     uDiskPath = targetPath;
     QFileInfo info(sourcePath);
     sourceFileSize = info.size()/1000000;
     command_dd = new QProcess();
+    //指定输出语言
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    env.insert("LANGUAGE","en_US:en");
+    command_dd->setProcessEnvironment(env);
     connect(command_dd,&QProcess::readyReadStandardError,this,&SystemDbusRegister::readBashStandardErrorInfo);
     command_dd->start("bash");
     command_dd->waitForStarted();
@@ -71,6 +85,16 @@ void SystemDbusRegister::readBashStandardErrorInfo()
 }
 
 void SystemDbusRegister::finishEvent(){
+    QProcess m_mount;
+    QStringList m_mount_arg;
+    m_mount_arg <<"mount"<<"-b"<<uDiskPath+"1";
+    m_mount.start("udisksctl",m_mount_arg);
+    if(m_mount.waitForStarted()){
+        m_mount.waitForFinished();
+    }else{
+        qWarning()<<"#udisksctl# Warning:mount failed! mount path :"+uDiskPath;
+    }
+
     QTimer *diskRefreshDelay = new QTimer;
     connect(diskRefreshDelay,&QTimer::timeout,[=]{
         diskRefreshDelay->stop();
