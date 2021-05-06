@@ -89,6 +89,7 @@ void MainWindow::statusbarInit()
 }
 
 void MainWindow::init(){
+    this->setWindowIcon(QIcon::fromTheme("kylin-usb-creator"));
     this->setWindowTitle(tr("usb boot maker"));
     this->setFixedSize(680,507);
 //    在屏幕中央显示

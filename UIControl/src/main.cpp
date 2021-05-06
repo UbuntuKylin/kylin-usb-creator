@@ -84,6 +84,5 @@ int main(int argc, char *argv[])
         QObject::connect(&a,SIGNAL(messageReceived(const QString&)),&w,SLOT(handleIconClickedSub()));
         return a.exec();
     }
-    a.setWindowIcon(QIcon(":data/logo/96.png"));
     return a.exec();
 }
