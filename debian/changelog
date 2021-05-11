@@ -1,5 +1,13 @@
 kylin-usb-creator (1.1.0-5kord) v101; urgency=medium
 
+  * BUG号：52758，52286，43721，50632
+  * 需求号：无
+  * 其他改动说明：无
+
+ -- fengyongfan <fengyongfan@kylinos.cn>  Thur, 22 Apr 2021 10:41:46 +0800
+
+kylin-usb-creator (1.1.0-5kord) v101; urgency=medium
+
   * 应用改名为usb boot maker
 
  -- fengyongfan <fengyongfan@kylinos.cn>  Thur, 22 Apr 2021 10:41:46 +0800
