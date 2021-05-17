@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     QtSingleApplication a(argc,argv);
+    qApp->setProperty("noChangeSystemFontSize",true);
 //    TODO: 整合qt的标准翻译和自行定制的qm翻译
 //    标准对话框汉化(QT标准翻译
 #ifndef QT_NO_TRANSLATION

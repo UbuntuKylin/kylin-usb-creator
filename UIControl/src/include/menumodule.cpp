@@ -28,6 +28,7 @@ void menuModule::initAction(){
     menuButton->setIcon(QIcon::fromTheme("open-menu-symbolic"));
 
     m_menu = new QMenu();
+    m_menu->setStyleSheet("font-size:14px");
     QList<QAction *> actions ;
     QAction *actionTheme = new QAction(m_menu);
     actionTheme->setText(tr("Theme"));

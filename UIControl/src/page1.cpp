@@ -19,6 +19,7 @@ void Page1::initControlQss()
     tabIso->setObjectName("tabLable");
     tabUdisk->setObjectName("tabLable");
     comboUdisk=new StyleComboBox();
+    comboUdisk->setStyleSheet("font-size:14px");
     connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
     connect(comboUdisk,&StyleComboBox::ifStartButtonChange,this,&Page1::dealComboBoxChangeButton);
     warnningIcon=new QLabel;
