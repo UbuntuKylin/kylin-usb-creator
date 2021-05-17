@@ -69,18 +69,22 @@ void SystemDbusRegister::readBashStandardErrorInfo()
         QString str = cmdout;
         qDebug()<<str;
         str = str.replace(" ","");
-        if(str =="" || str.contains("[sudo]")) {return;}
+//        if(str =="" || str.contains("[sudo]")) {return;}
         str = str.replace("\r","");
         QStringList bytes2 =  str.split("bytes");
          QString size_progress = bytes2.first();
          bool ok = false;
          qulonglong progress_num = size_progress.toDouble(&ok)/1048576;
          int mission_percent = progress_num*100/sourceFileSize;
+         if(bytes2.count() == 1 || !ok){
+              finishEvent();
+         }
+        if(!mission_percent){
+            return ;
+        }
          //send mission percent debus message every output
         emit workingProgress(mission_percent);
-         if(bytes2.count() == 1 || !ok){
-             finishEvent();
-         }
+
     }
 }
 
