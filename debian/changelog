@@ -1,3 +1,25 @@
+kylin-usb-creator (1.1.0-7kord) v101; urgency=medium
+
+  * BUG号：46388,42845
+  * 需求号：无
+  * 其他改动说明：无
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Mon, 17 May 2021 10:41:46 +0800
+
+kylin-usb-creator (1.1.0-6kord) v101; urgency=medium
+
+  * BUG号：52758，52286，43721，50632
+  * 需求号：无
+  * 其他改动说明：无
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Tue, 11 May 2021 10:41:46 +0800
+
+kylin-usb-creator (1.1.0-5kord) v101; urgency=medium
+
+  * 应用改名为usb boot maker
+
+ -- fengyongfan <fengyongfan@kylinos.cn>  Thur, 22 Apr 2021 10:41:46 +0800
+
 kylin-usb-creator (1.1.0-4kord) v101; urgency=medium
 
   * 解决禅道BUG#24272 部分机型上，未插入U盘可能导致程序启动失败

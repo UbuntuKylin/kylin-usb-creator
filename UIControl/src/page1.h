@@ -40,7 +40,7 @@
 class AvailableDiskInfo
 {
 public:
-    AvailableDiskInfo(QString path,QString name,QString capacity):devicePath(path),displayName(name = "unknowname"),diskCapicity(capacity){}
+    AvailableDiskInfo(QString path = "unknowpath",QString name = "unknowmodel",QString capacity = "unknowcapacity"):devicePath(path),displayName(name),diskCapicity(capacity){}
 public:
     QString devicePath;   //设备路径ex:/dev/sdb1
     QString displayName;

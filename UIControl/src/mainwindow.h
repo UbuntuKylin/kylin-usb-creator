@@ -22,6 +22,7 @@
 #include <QStackedWidget>
 #include <QGraphicsDropShadowEffect>
 #include <QKeyEvent>
+#include <QDesktopWidget>
 #include "include/daemonipcdbus.h" //拉起帮助手册
 #include "include/menumodule.h"
 

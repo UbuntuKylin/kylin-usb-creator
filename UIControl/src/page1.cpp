@@ -19,6 +19,7 @@ void Page1::initControlQss()
     tabIso->setObjectName("tabLable");
     tabUdisk->setObjectName("tabLable");
     comboUdisk=new StyleComboBox();
+    comboUdisk->setStyleSheet("font-size:14px");
     connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
     connect(comboUdisk,&StyleComboBox::ifStartButtonChange,this,&Page1::dealComboBoxChangeButton);
     warnningIcon=new QLabel;
@@ -184,7 +185,7 @@ void Page1::getUdiskPathAndCap()
         foreach (const QJsonValue& value, arr2) {
             QJsonObject jsonObj2 = value.toObject();
             if(jsonObj1["name"] == jsonObj2["name"] && jsonObj2["tran"] == "usb" && jsonObj2["type"] == "disk"){
-                AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + jsonObj1["name"].toString(),"NONAME",jsonObj1["size"].toString());
+                AvailableDiskInfo *tmp = new AvailableDiskInfo("/dev/" + jsonObj1["name"].toString(),jsonObj2["model"].toString(),jsonObj1["size"].toString());
                 diskInfos.append(tmp);
             }
         }
@@ -210,7 +211,6 @@ void Page1::getUdiskName()
     QList<QStorageInfo> storageInfo = QStorageInfo::mountedVolumes();
     foreach(AvailableDiskInfo* tmp,diskInfos)  //lsblk命令拿到的可用U盘信息
     {
-        qDebug()<<tmp->displayName<<"****";
         foreach(QStorageInfo disk,storageInfo)
         {
             if((disk.device().length() == 8 && tmp->devicePath == disk.device()))
@@ -263,7 +263,7 @@ void Page1::getStorageInfo()
 {
     diskRefreshDelay->stop();//U盘动态刷新相关
     getUdiskPathAndCap();
-    getUdiskName();
+//    getUdiskName();
     foreach(AvailableDiskInfo *diskInfo,diskInfos)
     {
         //过长的名称做去尾加省略号

@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QStringList>
 #include <QStandardPaths>
+#include <ukui-log4qt.h>
 #include <fcntl.h>
 #include <QLibraryInfo>
 #include "include/xatom-helper.h"
@@ -27,11 +28,14 @@ void activeMainwindow()
 }
 int main(int argc, char *argv[])
 {
+//    init log module
+    initUkuiLog4qt("usb-boot-maker");
 //    高清屏幕自适应
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     QtSingleApplication a(argc,argv);
+    qApp->setProperty("noChangeSystemFontSize",true);
 //    TODO: 整合qt的标准翻译和自行定制的qm翻译
 //    标准对话框汉化(QT标准翻译
 #ifndef QT_NO_TRANSLATION
@@ -72,26 +76,14 @@ int main(int argc, char *argv[])
 
     if(a.isRunning()){
         a.sendMessage(QApplication::arguments().length() > 1 ? QApplication::arguments().at(0):a.applicationFilePath());
-        qDebug()<<"#### kylin-usb-creator is already running";
+        qWarning()<<"kylin-usb-creator is already running";
         return EXIT_SUCCESS;
     }else {
         MainWindow w;
-
-//        qDebug()<<"****"<<IS_MIPS64EL_ARCHITECTURE;
-//        a.setActiveWindow(&w);
-//        a.setActivationWindow(&w);
-        // 添加窗管协议
-        // TODO:窗管适配问题解决之后，打开此部分注释，还需要加上在布局中被注释的自绘状态栏
-        MotifWmHints hints;
-        hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-        hints.functions = MWM_FUNC_ALL;
-        hints.decorations = MWM_DECOR_BORDER;
-        XAtomHelper::getInstance()->setWindowMotifHint(w.winId(), hints);
-        w.show();
+        w.handleIconClickedSub();
 
         QObject::connect(&a,SIGNAL(messageReceived(const QString&)),&w,SLOT(handleIconClickedSub()));
         return a.exec();
     }
-    a.setWindowIcon(QIcon(":data/logo/96.png"));
     return a.exec();
 }

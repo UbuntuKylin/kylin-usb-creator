@@ -7,7 +7,7 @@
         <location filename="../mainwindow.cpp" line="32"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <location filename="../mainwindow.cpp" line="182"/>
-        <source>kylin usb creator</source>
+        <source>usb boot maker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -185,12 +185,12 @@
     <message>
         <location filename="../include/menumodule.cpp" line="202"/>
         <location filename="../include/menumodule.cpp" line="229"/>
-        <source>kylin usb creator</source>
+        <source>usb boot maker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../include/menumodule.cpp" line="221"/>
-        <source>Kylin USB Creator provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
+        <source>USB Boot Maker provides system image making function.The operation process is simple and easy.You can choose ISO image and usb driver,and make boot driver with a few clicks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
