@@ -50,7 +50,7 @@ private:
     // 标题栏资源
     QWidget *title = nullptr;
     QWidget *about = nullptr;
-    QLabel *titleIcon = nullptr;
+    QPushButton *titleIcon = nullptr;
     QLabel *titleText = nullptr;
     QPushButton *titleMin = nullptr;
     QPushButton *titleClose = nullptr;
