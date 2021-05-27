@@ -25,10 +25,12 @@ void MainWindow::statusbarInit()
     QHBoxLayout *hlyt = new QHBoxLayout();
     hlyt->setMargin(0);
     hlyt->setSpacing(0);
-    titleIcon = new QLabel;
+    titleIcon = new QPushButton;
     titleIcon->setFixedSize(24,24);
-    titleIcon->setPixmap(QPixmap::fromImage(QImage(":/data/kylin-usb-creator.svg")));
-    titleIcon->setScaledContents(true);
+
+    titleIcon->setIcon(QIcon::fromTheme("kylin-usb-creator"));
+    titleIcon->setIconSize(QSize(24,24));
+    titleIcon->setFocusPolicy(Qt::NoFocus);
     titleText = new QLabel();
     titleText->setText(tr("usb boot maker"));
     titleMin = new QPushButton();
@@ -80,7 +82,7 @@ void MainWindow::statusbarInit()
     hlt->setSpacing(0);
     hlt->addSpacing(8);
     hlt->addWidget(titleIcon,1);
-    hlt->addSpacing(8);
+    hlt->addSpacing(4);
     hlt->addWidget(titleText,1);
     hlt->addStretch(99);
     hlt->addLayout(vlt0);
@@ -293,6 +295,9 @@ void MainWindow::dealAuthorityStatus(QString status){
 
 void MainWindow::setThemeDark()
 {
+    titleIcon->setStyleSheet("QPushButton{border:0px;border-radius:4px;background:transparent;}"
+                             "QPushButton::hover{border:0px;border-radius:4px;background:transparent;}"
+                             "QPushButton::pressed{border:0px;border-radius:4px;background:transparent;}");
 //    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_h.png);border-radius:4px;}"
 //                             "QPushButton:hover{background-color:rgba(61,61,61,1);border-image:url(:/data/min_h.png);border-radius:4px;}"
 //                             "QPushButton:pressed{background-color:rgba(73,73,73,1);border-image:url(:/data/min_h.png);border-radius:4px;}");
@@ -315,6 +320,9 @@ void MainWindow::setThemeDark()
 
 void MainWindow::setThemeLight()
 {
+    titleIcon->setStyleSheet("QPushButton{border:0px;border-radius:0px;background:transparent;}"
+                             "QPushButton::hover{border:0px;border-radius:4px;background:transparent;}"
+                             "QPushButton::pressed{border:0px;border-radius:4px;background:transparent;}");
 //    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
 //                             "QPushButton:hover{background-color:rgba(0,0,0,0.15);border-image:url(:/data/min_d.png);border-radius:4px;}"
 //                             "QPushButton:pressed{background-color:rgba(0,0,0,0.3);border-image:url(:/data/min_d.png);border-radius:4px;}");
