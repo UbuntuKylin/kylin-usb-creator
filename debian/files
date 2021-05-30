@@ -1,1 +1,3 @@
-kylin-usb-creator_1.1.0-6kord_source.buildinfo utils optional
+kylin-usb-creator-dbgsym_1.1.0-7kord_amd64.ddeb debug optional automatic=yes
+kylin-usb-creator_1.1.0-7kord_amd64.buildinfo utils optional
+kylin-usb-creator_1.1.0-7kord_amd64.deb utils optional

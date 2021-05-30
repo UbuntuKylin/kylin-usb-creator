@@ -25,6 +25,7 @@ public:
     qint64 getFileSize(QString filePath); //获取文件大小，返回单位mb
     void setThemeStyleDark();
     void setThemeStyleLight();
+    QString uDiskPath = ""; //U盘路径
 
 signals:
     void makeFinish();
@@ -47,7 +48,7 @@ private:
     void playErrorGif();
     bool isMakingSuccess(); //进度到100%之后检查制作是否成功
     void movieRefresh(); //切换主题时重新加载动画
-    QString uDiskPath = ""; //U盘路径
+    bool mountDevice(QString);
     QString themeStatus = LIGHTTHEME;
     QMovie *movieLoading_l=nullptr; //过程动画，黑白两套
     QMovie *movieFinish_l=nullptr;

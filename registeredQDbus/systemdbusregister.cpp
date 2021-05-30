@@ -27,15 +27,10 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
         emit authorityStatus("failed");
         return ;
     }
-    QProcess m_unmount;
-    QStringList m_unmount_arg;
-    QString m_partionPath = targetPath + '1';
-    m_unmount_arg <<"unmount"<<"-b"<<m_partionPath;
-    m_unmount.start("udisksctl",m_unmount_arg);
-    if(m_unmount.waitForStarted()){
-        m_unmount.waitForFinished();
-    }else{
-        qWarning()<<"#udisksctl# Warning:unmount failed! mount path :"+sourcePath;
+    if(!unmountDevice(targetPath)){
+        emit makeFinish("unmount_error");
+//        TODO:Deal sbus message unmount_error
+//        return;
     }
     uDiskPath = targetPath;
     QFileInfo info(sourcePath);
@@ -51,6 +46,27 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
     QString ddshell = "dd if='"+sourcePath.toLocal8Bit()+"' of="+targetPath.toLocal8Bit()+" status=progress";
     command_dd->write(ddshell.toLocal8Bit() + '\n');
     return ;
+}
+
+bool SystemDbusRegister::unmountDevice(QString target)
+{
+    QProcess unmount;
+    unmount.start("udisksctl",QStringList{"unmount","-b",target+"1"});
+    qDebug()<<"Start unmount disk:"<<target+"1";
+    if(!unmount.waitForStarted()){
+        qWarning()<<"unmount process start failed.device path:"<<target;
+        return false;
+    }
+    if(!unmount.waitForFinished()){
+        qWarning()<<"unmount process finish failed,device path:"<<target;
+        return false;
+    }
+    if(QProcess::NormalExit == unmount.exitCode()){
+        qDebug()<<"unmount device success.device path:"<<target;
+        return true;
+    }
+    qWarning()<<"An unknow error occurred! unmount process exit code:"<<unmount.exitCode();
+    return false;
 }
 
 //kill task process
@@ -89,16 +105,6 @@ void SystemDbusRegister::readBashStandardErrorInfo()
 }
 
 void SystemDbusRegister::finishEvent(){
-    QProcess m_mount;
-    QStringList m_mount_arg;
-    m_mount_arg <<"mount"<<"-b"<<uDiskPath+"1";
-    m_mount.start("udisksctl",m_mount_arg);
-    if(m_mount.waitForStarted()){
-        m_mount.waitForFinished();
-    }else{
-        qWarning()<<"#udisksctl# Warning:mount failed! mount path :"+uDiskPath;
-    }
-
     QTimer *diskRefreshDelay = new QTimer;
     connect(diskRefreshDelay,&QTimer::timeout,[=]{
         diskRefreshDelay->stop();
@@ -117,15 +123,39 @@ void SystemDbusRegister::finishEvent(){
 
 bool SystemDbusRegister::isMakingSucess()
 {
-    QList<QStorageInfo> diskList = QStorageInfo::mountedVolumes(); //mounted devices
-    for(QStorageInfo& disk : diskList)
-    {
-        QString diskPath = disk.device();
-        diskPath = diskPath.mid(0,8);
-        if(uDiskPath == diskPath)
-        {
-            return true;
-        }
+    QProcess lsblk;
+    lsblk.start("lsblk -JS");
+//    lsblk.waitForStarted();
+    lsblk.waitForFinished();
+//    qDebug()<<"lsblk output"<<lsblk.readAllStandardError();
+    QJsonArray output = QStringToJsonArray(QString::fromLocal8Bit(lsblk.readAllStandardOutput()));
+    foreach (const QJsonValue& value, output) {
+        QString diskpath = value.toObject()["name"].toString();
+        if("/dev/"+diskpath == uDiskPath) return true;
     }
+//    for(QStorageInfo& disk : diskList)
+//    {
+//        QString diskPath = disk.device();
+//        diskPath = diskPath.mid(0,8);
+//        if(uDiskPath == diskPath)
+//        {
+//            return true;
+//        }
+//    }
     return false;
+}
+QJsonArray SystemDbusRegister::QStringToJsonArray(const QString jsonString){
+    QJsonParseError err;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toLocal8Bit().data(),&err);
+    if(jsonDocument.isNull())
+    {
+        qDebug()<< "JsonDocument is NULL.Origin data is:"<< jsonString.toLocal8Bit().data();
+    }
+    if(err.error != QJsonParseError::NoError){
+        qDebug()<<"Parase json"<<jsonString<<" error:"<<err.error;
+        //TODO：这里的错误处理后期还可以优化,目前处理错误了就会调用exit()退出程序
+//        exit(-1);
+    }
+    QJsonObject obj = jsonDocument.object();
+    return obj["blockdevices"].toArray();
 }
