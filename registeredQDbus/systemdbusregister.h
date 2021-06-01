@@ -11,6 +11,11 @@
 #include <QProcess>
 #include <QTimer>
 #include <QStorageInfo>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
+#include <QJsonArray>
+
 class SystemDbusRegister : public QObject, protected QDBusContext
 {
     Q_OBJECT
@@ -31,12 +36,14 @@ public slots:
 private:
     void readBashStandardErrorInfo();
     void finishEvent();
+    bool unmountDevice(QString);
     bool isMakingSucess();
 
 private:
     QString uDiskPath = "";
     qint64 sourceFileSize = 0;
     QProcess *command_dd = nullptr;
+    QJsonArray QStringToJsonArray(const QString);
 
 };
 

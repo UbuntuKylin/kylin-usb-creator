@@ -42,7 +42,7 @@ class AvailableDiskInfo
 public:
     AvailableDiskInfo(QString path = "unknowpath",QString name = "unknowmodel",QString capacity = "unknowcapacity"):devicePath(path),displayName(name),diskCapicity(capacity){}
 public:
-    QString devicePath;   //设备路径ex:/dev/sdb1
+    QString devicePath;   //设备路径ex:/dev/sdb
     QString displayName;
     QString diskCapicity;
 //    TODO:分区数获取，按照分区全部卸载。（目前只卸载了第一个分区然后就写入
@@ -58,6 +58,7 @@ public:
     void setThemeStyleLight(); //设置浅色主题
     void setThemeStyleDark(); //设置深色主题
     QLineEdit *urlIso = nullptr;//显示镜像路径
+    StyleComboBox *comboUdisk = nullptr;//U盘列表
 
 signals:
     void makeStart(QString sourcePath,QString targetPath); //make start
@@ -89,7 +90,6 @@ private:
     QList<AvailableDiskInfo*> diskInfos; // U盘信息
     QString themeStatus = LIGHTTHEME; //主题指示器
     QTimer *diskRefreshDelay = nullptr; //U盘插入后等待系统挂载的时间
-    StyleComboBox *comboUdisk = nullptr;//U盘列表
     QLabel *tabIso = nullptr;//选择镜像标签
     QLabel *tabUdisk = nullptr;//选择U盘标签
     QLabel *warnningIcon = nullptr;//警告标志

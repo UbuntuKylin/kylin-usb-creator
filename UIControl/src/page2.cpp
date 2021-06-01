@@ -137,6 +137,8 @@ void Page2::dealWorkingProgress(int progress){
 
 void Page2::dealMakeFinish(QString status)
 {
+    mountDevice(uDiskPath);
+    uDiskPath = "";
     qDebug()<<"receive signal make finish";
     if("success" == status){
         //TODO:success action
@@ -146,6 +148,31 @@ void Page2::dealMakeFinish(QString status)
         playErrorGif();
     }
     emit makeFinish();
+}
+bool Page2::mountDevice(QString target){
+
+    QProcess sync;
+    sync.start("sync");
+    sync.waitForStarted();
+    sync.waitForFinished();
+
+    QProcess mount;
+    qDebug()<<"start mounting disk:"<<target+"1";
+    mount.start("udisksctl",QStringList{"mount","-b",target+"1"});
+    if(!mount.waitForStarted()){
+        qWarning()<<"<ount process start failed";
+        return false;
+    }
+    if(!mount.waitForFinished()){
+        qWarning()<<"装载失败";
+        return false;
+    }
+    if(QProcess::NormalExit == mount.exitCode()){
+        qDebug()<<"Mount success!";
+        return true;
+    }
+    qWarning()<<"An unknow error occurred! Mount process exit code:"<<mount.exitCode();
+    return false;
 }
 
 qint64 Page2::getFileSize(QString filePath)
@@ -157,15 +184,15 @@ qint64 Page2::getFileSize(QString filePath)
 void Page2::finishEvent()
 {
     //mount disk at end of production
-    QProcess m_unmount;
-    QStringList m_unmount_arg;
-    m_unmount_arg <<"mount"<<"-b"<<uDiskPath;
-    m_unmount.start("udisksctl",m_unmount_arg);
-    if(m_unmount.waitForStarted()){
-        m_unmount.waitForFinished();
-    }else{
-        qDebug()<<"#udisksctl# Warning:mount failed! mount path :"<<uDiskPath;
-    }
+//    QProcess m_unmount;
+//    QStringList m_unmount_arg;
+//    m_unmount_arg <<"mount"<<"-b"<<uDiskPath;
+//    m_unmount.start("udisksctl",m_unmount_arg);
+//    if(m_unmount.waitForStarted()){
+//        m_unmount.waitForFinished();
+//    }else{
+//        qDebug()<<"#udisksctl# Warning:mount failed! mount path :"<<uDiskPath;
+//    }
     QTimer *diskRefreshDelay = new QTimer;
     connect(diskRefreshDelay,&QTimer::timeout,[=]{
         diskRefreshDelay->stop();
