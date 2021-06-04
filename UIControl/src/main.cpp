@@ -12,7 +12,9 @@
 #include <QLibraryInfo>
 #include "include/xatom-helper.h"
 #include "mainwindow.h"
+#if (QT_VERSION <= QT_VERSION_CHECK(5,15,0))
 #include "dbusadaptor.h"
+#endif
 #include "include/qtsingleapplication.h"
 
 // 拉起最小化窗口
