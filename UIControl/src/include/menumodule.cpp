@@ -11,7 +11,9 @@ void menuModule::init(){
 }
 
 void menuModule::initAction(){
+    titleIcon = new QPushButton();
     aboutWindow = new QWidget();
+    bodyIcon = new QPushButton();
     titleText = new QLabel();
     bodyAppName = new QLabel();
     bodyAppDesc = new QLabel();
@@ -185,13 +187,14 @@ void menuModule::initAbout(){
 }
 
 QHBoxLayout* menuModule::initTitleBar(){
-    QLabel* titleIcon = new QLabel();
     QPushButton *titleBtnClose = new QPushButton;
     titleIcon->setFixedSize(QSize(24,24));
+    titleIcon->setIconSize(QSize(24,24));
+    titleIcon->setFocusPolicy(Qt::NoFocus);
+    titleIcon->setIcon(QIcon::fromTheme("kylin-usb-creator",QIcon(iconPath)));
     //TODO：直接从主题调图标，不会QIcon转qpixmap所以暂时从本地拿
-    titleIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
-
-    titleIcon->setScaledContents(true);
+//    titleIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
+//    titleIcon->setScaledContents(true);
     titleBtnClose->setFixedSize(30,30);
     titleBtnClose->setIcon(QIcon::fromTheme("window-close-symbolic"));
     titleBtnClose->setProperty("isWindowButton",0x2);
@@ -214,11 +217,10 @@ QHBoxLayout* menuModule::initTitleBar(){
 }
 
 QVBoxLayout* menuModule::initBody(){
-    QLabel* bodyIcon = new QLabel();
     bodyIcon->setFixedSize(96,96);
-    bodyIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
-    bodyIcon->setStyleSheet("font-size:14px;");
-    bodyIcon->setScaledContents(true);
+    bodyIcon->setIcon(QIcon::fromTheme("kylin-usb-creator",QIcon(iconPath)));
+    bodyIcon->setFocusPolicy(Qt::NoFocus);
+    bodyIcon->setIconSize(QSize(96,96));
     bodyAppDesc->setText(tr("USB Boot Maker provides system image making function."
                             "The operation process is simple and easy."
                             "You can choose ISO image and usb driver,"
@@ -298,6 +300,14 @@ void menuModule::setThemeDark(){
                          "<a href=\"mailto://support@kylinos.cn\""
                          "style=\"color:rgba(225,225,225,1)\">"
                          "support@kylinos.cn</a>");
+    bodyIcon->setStyleSheet("QPushButton{border:0px;border-redius:4px;background:transparent;}"
+                            "QPushButton::hover{border:0px;border-redius:4px;background:transparent;}"
+                            "QPushButton::pressed{border:0px;border-redius:4px;background:transparent;}"
+                            );
+    titleIcon->setStyleSheet("QPushButton{border:0px;border-redius:4px;background:transparent;}"
+                            "QPushButton::hover{border:0px;border-redius:4px;background:transparent;}"
+                            "QPushButton::pressed{border:0px;border-redius:4px;background:transparent;}"
+                            );
 }
 
 void menuModule::setThemeLight(){
@@ -307,5 +317,14 @@ void menuModule::setThemeLight(){
                          "<a href=\"mailto://support@kylinos.cn\""
                          "style=\"color:rgba(0,0,0,1)\">"
                          "support@kylinos.cn</a>");
+    bodyIcon->setStyleSheet("QPushButton{border:0px;border-redius:4px;background:transparent;}"
+                            "QPushButton::hover{border:0px;border-redius:4px;background:transparent;}"
+                            "QPushButton::pressed{border:0px;border-redius:4px;background:transparent;}"
+                            );
+    titleIcon->setStyleSheet("QPushButton{border:0px;border-redius:4px;background:transparent;}"
+                                                           "QPushButton::hover{border:0px;border-redius:4px;background:transparent;}"
+                                                           "QPushButton::pressed{border:0px;border-redius:4px;background:transparent;}"
+                                                           );
+
 
 }
