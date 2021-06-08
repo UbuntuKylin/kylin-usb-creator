@@ -83,6 +83,8 @@ private:
     QLabel* bodyAppVersion = nullptr;
     QLabel* bodyAppDesc = nullptr;
     QLabel* bodySupport = nullptr;
+    QPushButton* bodyIcon = nullptr;
+    QPushButton* titleIcon = nullptr;
     void refreshThemeBySystemConf();    //通过系统配置更改主题
 };
 
