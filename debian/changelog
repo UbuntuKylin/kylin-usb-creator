@@ -1,8 +1,16 @@
-kylin-usb-creator (1.1.0-8hw) v101.hw; urgency=medium
+kylin-usb-creator (1.1.0-9kord) v101; urgency=medium
 
-  * BUG号：52286,50632,56967
+  * BUG号：56967
   * 需求号：无
-  * 其他改动说明:Add Qt 5.15 support
+  * 其他改动说明：无
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Tue, 08 June 2021 10:41:46 +0800
+
+kylin-usb-creator (1.1.0-8kord) v101; urgency=medium
+
+  * BUG号：52286
+  * 需求号：无
+  * 其他改动说明: Add Qt 5.15 support
 
  -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Sun, 30 May 2021 10:41:46 +0800
 
