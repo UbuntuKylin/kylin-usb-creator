@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
     QtSingleApplication a(argc,argv);
     a.setApplicationName("kylin-usb-creator");
     qApp->setProperty("noChangeSystemFontSize",true);
+    qApp->setWindowIcon(QIcon::fromTheme("kylin-usb-creator"));
 //    TODO: 整合qt的标准翻译和自行定制的qm翻译
 //    标准对话框汉化(QT标准翻译
 #ifndef QT_NO_TRANSLATION
