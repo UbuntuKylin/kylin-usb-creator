@@ -1,3 +1,11 @@
+kylin-usb-creator (1.1.0-11kord) v101; urgency=medium
+
+  * BUG号：53535,60364
+  * 需求号：无
+  * 其他改动说明：授权窗口增加了U盘启动器的图标
+
+ -- shixiaoshuo <shixiaoshuo@kylinos.cn>  Thu, 10 June 2021 21:41:46 +0800
+
 kylin-usb-creator (1.1.0-10kord) v101; urgency=medium
 
   * BUG号：56967
