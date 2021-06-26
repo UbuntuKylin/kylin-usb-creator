@@ -402,9 +402,9 @@ void Page1::setThemeStyleLight()
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px;font-size:14px;}"
-                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
-                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
+//    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px;font-size:14px;}"
+//                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
+//                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;border:1px  solid rgba(240,240,240,1);border-radius:4px;");
 
 
@@ -423,9 +423,9 @@ void Page1::setThemeStyleDark()
     ifStartBtnChange();
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
 
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"
-                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
-                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
+//    findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"
+//                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
+//                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
 
 
