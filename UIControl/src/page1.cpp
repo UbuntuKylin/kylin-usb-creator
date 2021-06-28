@@ -1,7 +1,6 @@
 #include "page1.h"
 #include "include/xatom-helper.h"
 
-
 Page1::Page1()
 {
     initControlQss();//初始化样式
@@ -61,7 +60,8 @@ void Page1::initControlQss()
     connect(creatStart,&QPushButton::clicked,[=]{
         QDBusMessage m = QDBusMessage::createMethodCall("com.kylinusbcreator.systemdbus","/",
                                                         "com.kylinusbcreator.interface","MakeStart");
-        m<<isoPath;m<<comboUdisk->currentText();
+        m<<isoPath;
+        m<<diskInfos[comboUdisk->currentIndex()]->devicePath;
         QDBusConnection::systemBus().call(m);
     });
 
@@ -181,6 +181,7 @@ void Page1::getUdiskPathAndCap()
         }
     }
 }
+
 QJsonArray  Page1::QStringToJsonArray(const QString jsonString){
     QJsonParseError err;
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toLocal8Bit().data(),&err);
@@ -292,20 +293,9 @@ void Page1::creatStartSlots()
     }
 }
 
-bool Page1::mouseIsLeaveUdiskWidget()
-{
-    QPoint mouse=QCursor::pos();
-    QPoint thisWidget=this->mapToGlobal(this->pos());
-    QSize thisWidgetSize=this->size();
-    if(mouse.rx()<=thisWidget.rx() || mouse.rx()>=thisWidget.rx()+thisWidgetSize.width() || mouse.ry()<=thisWidget.ry() || mouse.ry()>=thisWidget.ry()+thisWidgetSize.height())
-        return true;
-    else
-        return false;
-}
-
 bool Page1::ifStartBtnChange()
 {
-    if(comboUdisk->currentText() != NOUDISK && !urlIso->text().isEmpty())
+    if(comboUdisk->currentText() != tr("No USB drive available") && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
         creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
@@ -335,11 +325,6 @@ void Page1::dealComboBoxChangeButton()
     ifStartBtnChange();
 }
 
-void Page1::dealRightPasswd()
-{
-    emit makeStart(isoPath,comboUdisk->currentText());
-
-}
 void Page1::dealAuthDialogClose()
 {
     creatStart->setEnabled(true);

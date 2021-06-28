@@ -68,7 +68,6 @@ signals:
 
 public slots:
     void refreshDiskList();
-    void dealRightPasswd(); //处理密码正确
     void dealAuthDialogClose();  //处理授权框关闭
     void dealComboBoxChangeButton(); //combobox通知page1检查开始按钮是否可以亮起
 
@@ -76,7 +75,6 @@ private:
     void creatStartSlots();    //开始制作
     void initControlQss();//初始化控件及其样式
     void getStorageInfo();//获取磁盘信息
-    bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
     void dealDialogCancel();     // 处理授权框关闭及取消
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
     bool isCapicityAvailable(QString); //容量过滤
