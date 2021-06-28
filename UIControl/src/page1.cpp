@@ -18,10 +18,7 @@ void Page1::initControlQss()
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
     tabUdisk->setObjectName("tabLable");
-    comboUdisk=new StyleComboBox();
-    comboUdisk->setStyleSheet("font-size:14px");
-    connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
-    connect(comboUdisk,&StyleComboBox::ifStartButtonChange,this,&Page1::dealComboBoxChangeButton);
+    comboUdisk = new QComboBox();
     warnningIcon=new QLabel;
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
@@ -40,16 +37,13 @@ void Page1::initControlQss()
                                          QMessageBox::Yes | QMessageBox::No);
                     switch (result)
                     {
-
                     case QMessageBox::Yes:
                         break;
                     case QMessageBox::No:
                         isoPath.clear();
                         break;
-
                     }
                 }
-
                 urlIso->setToolTip("");
                 if(isoPath.length() > 45){
                     urlIso->setToolTip(isoPath);
@@ -64,12 +58,10 @@ void Page1::initControlQss()
     creatStart->setFixedSize(200,30);
     creatStart->setText(tr("Start"));
     creatStart->setEnabled(false);
-//    connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
-    connect(creatStart,&QPushButton::clicked,[=]{/*
-        emit makeStart(isoPath,comboUdisk->getDiskPath());*/
+    connect(creatStart,&QPushButton::clicked,[=]{
         QDBusMessage m = QDBusMessage::createMethodCall("com.kylinusbcreator.systemdbus","/",
                                                         "com.kylinusbcreator.interface","MakeStart");
-        m<<isoPath;m<<comboUdisk->getDiskPath();
+        m<<isoPath;m<<comboUdisk->currentText();
         QDBusConnection::systemBus().call(m);
     });
 
@@ -131,11 +123,9 @@ void Page1::refreshDiskList()
     {
         return;
     }
-    comboUdisk->clearDiskList();
+    comboUdisk->clear();
     diskRefreshDelay->start(1000);
 }
-
-
 
 bool Page1::isCapicityAvailable(QString str)
 {
@@ -274,32 +264,19 @@ void Page1::getStorageInfo()
         QString info = diskInfo->displayName+" ("+diskInfo->devicePath + ") " + diskInfo->diskCapicity;
 
         comboUdisk->addItem(info,diskInfo->devicePath);
-//        有分区就向第一分区里写，没分区就直接向块设备写,该方法暂时停止使用——有文件系统但是没有分区的U盘会导致制作失败向不存在的sd*1设备中写入
-//        if(diskInfo->displayName == "unknowname")
-//        {
-//            comboUdisk->addItem(info,diskInfo->devicePath);
-//        }else{
-//            comboUdisk->addItem(info,diskInfo->devicePath + '1');
-//        }
-
         warnningIcon->show();
         warnningText->show();
     }
 
-    if(0==comboUdisk->listWidget->count())
+    if(0==comboUdisk->count())
     {
-        comboUdisk->addItem(tr("No USB drive available"),NOUDISK);
+        comboUdisk->addItem(tr("No USB drive available"));
         warnningText->hide();
         warnningIcon->hide();
         creatStart->setEnabled(false);
     }
     emit diskLabelRefresh();
     ifStartBtnChange();
-}
-
-void Page1::allClose()
-{
-    comboUdisk->closeListWidget();
 }
 
 void Page1::creatStartSlots()
@@ -315,26 +292,6 @@ void Page1::creatStartSlots()
     }
 }
 
-bool Page1::event(QEvent *event)
-{
-    if(comboUdisk->listWidget == nullptr)
-    {
-        return QWidget::event(event);
-    }
-    if (event->type() == QEvent::Leave)
-    {
-        if(mouseIsLeaveUdiskWidget())
-        {
-            comboUdisk->closeListWidget();
-        }
-    }
-    else if (event->type() == QEvent::MouseButtonPress)
-    {
-        comboUdisk->closeListWidget();
-    }
-    return QWidget::event(event);
-}
-
 bool Page1::mouseIsLeaveUdiskWidget()
 {
     QPoint mouse=QCursor::pos();
@@ -348,7 +305,7 @@ bool Page1::mouseIsLeaveUdiskWidget()
 
 bool Page1::ifStartBtnChange()
 {
-    if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
+    if(comboUdisk->currentText() != NOUDISK && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
         creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
@@ -380,7 +337,7 @@ void Page1::dealComboBoxChangeButton()
 
 void Page1::dealRightPasswd()
 {
-    emit makeStart(isoPath,comboUdisk->getDiskPath());
+    emit makeStart(isoPath,comboUdisk->currentText());
 
 }
 void Page1::dealAuthDialogClose()
@@ -409,7 +366,6 @@ void Page1::setThemeStyleLight()
 
 
     this->setStyleSheet("background-color:rgba(255,255,255,1);");
-    comboUdisk->setThemeLight();    //设置combobox响应浅色主题
     emit setStyleWidgetStyle(LIGHTTHEME);   //设置stylewidget响应浅色主题
 }
 
@@ -428,8 +384,6 @@ void Page1::setThemeStyleDark()
 //                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
 
-
-    comboUdisk->setThemeDark(); //设置combobox响应深色主题
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
     emit setStyleWidgetStyle(DARKTHEME); //设置stylewidget响应黑色主题
 }

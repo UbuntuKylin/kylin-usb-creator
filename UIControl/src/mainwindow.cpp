@@ -197,7 +197,7 @@ void MainWindow::makeStart()
     disconnect(titleClose,&QPushButton::clicked,0,0); //开始制作之后取消之前click触发的应用关闭功能
     connect(titleClose,&QPushButton::clicked,this,&MainWindow::doubleCheck);
     page2->startMaking();
-    page2->uDiskPath = page1->comboUdisk->getDiskPath();
+    page2->uDiskPath = page1->comboUdisk->currentIndex();
     stackedWidget->setCurrentIndex(changePage());
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");

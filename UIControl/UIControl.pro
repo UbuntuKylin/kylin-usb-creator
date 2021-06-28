@@ -30,7 +30,6 @@ SOURCES += \
     src/include/qtsingleapplication.cpp \
     src/include/xatom-helper.cpp \
     src/include/daemonipcdbus.cpp \
-    src/stylecombobox.cpp \
     src/toolwindow.cpp
 
 HEADERS += \
@@ -44,7 +43,6 @@ HEADERS += \
     src/include/qtlockedfile.h \
     src/include/qtsingleapplication.h \
     src/include/xatom-helper.h \
-    src/stylecombobox.h \
     src/toolwindow.h
 
 LIBS +=-lpthread
