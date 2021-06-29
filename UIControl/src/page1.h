@@ -64,7 +64,6 @@ public:
 signals:
     void makeStart(QString sourcePath,QString targetPath); //make start
     void diskLabelRefresh(); //  已选中U盘刷新
-    void setStyleWidgetStyle(const QString);
     void isoIllegal();
 
 public slots:

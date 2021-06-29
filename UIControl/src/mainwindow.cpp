@@ -116,7 +116,6 @@ void MainWindow::myStyle()
     page1 = new Page1();
     page2 = new Page2();
     connect(page2,&Page2::makeFinish,this,&MainWindow::makeFinish);
-
     connect(page2,&Page2::returnMain,this,&MainWindow::returnMain);
     //内部样式
     QSize pointSize(8,8);
@@ -155,6 +154,9 @@ void MainWindow::myStyle()
 //    createTrayActions();
 //     关于窗口绘制
     about = new QWidget();
+
+    this->setAutoFillBackground(true);
+    this->setBackgroundRole(QPalette::Base);
 }
 
 void MainWindow::initGsetting()
@@ -311,7 +313,7 @@ void MainWindow::setThemeDark()
 //                             "QPushButton::menu-indicator{image:None;}");
     titleText->setStyleSheet("color:rgba(249,249,249,1);font-size:14px;");
     title->setStyleSheet(".QWidget{background-color:rgba(31,32,34,1)}");
-    stackedWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
+//    stackedWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
     bottomWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
     page2->setThemeStyleDark();
 //    this->setStyleSheet("background-color:rgba(31,32,34,1);");
@@ -334,7 +336,7 @@ void MainWindow::setThemeLight()
 //                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
 //                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
 //                             "QPushButton::menu-indicator{image:None;}");
-    stackedWidget->setStyleSheet("background-color:rgba(255,255,255,1);");
+//    stackedWidget->setStyleSheet("background-color:rgba(255,255,255,1);");
     title->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
     bottomWidget->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
     titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");

@@ -25,7 +25,7 @@ void Page1::initControlQss()
     urlIso=new QLineEdit;
     urlIso->setEnabled(false);
     urlIso->setFixedHeight(30);
-    findIso=new QPushButton(this);
+    findIso=new QPushButton();
     findIso->setText(tr("Open"));
     findIso->setFixedSize(56,30);
     connect(findIso,&QPushButton::clicked,this,[=]{
@@ -157,7 +157,6 @@ Page1::checkISO(const QString fileName){
     return true;
 }
 
-//TODO：设备类型判断，搭配lsblk -S只加入走USB协议的设备
 void Page1::getUdiskPathAndCap()
 {
     diskInfos.clear();
@@ -311,14 +310,6 @@ void Page1::setThemeStyleLight()
     warnningText->setStyleSheet("color:rgba(96, 98, 102, 1);font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(236,236,236,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
     ifStartBtnChange();
-    this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
-                        ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
-                        ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;border:1px  solid rgba(240,240,240,1);border-radius:4px;");
-
-
-    this->setStyleSheet("background-color:rgba(255,255,255,1);");
-    emit setStyleWidgetStyle(LIGHTTHEME);   //设置stylewidget响应浅色主题
 }
 
 void Page1::setThemeStyleDark()
@@ -329,9 +320,6 @@ void Page1::setThemeStyleDark()
     warnningText->setStyleSheet("color:rgba(249, 249, 249, 1);font-size:14px;");
     creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
     ifStartBtnChange();
-    this->setStyleSheet("background-color:rgba(31,32,34,1);");
-    this->setStyleSheet("background-color:rgba(31,32,34,1);");
-    emit setStyleWidgetStyle(DARKTHEME); //设置stylewidget响应黑色主题
 }
 
 QString Page1::getDevPath(){
