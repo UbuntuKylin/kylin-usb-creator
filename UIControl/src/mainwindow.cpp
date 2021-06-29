@@ -301,23 +301,8 @@ void MainWindow::setThemeDark()
     titleIcon->setStyleSheet("QPushButton{border:0px;border-radius:4px;background:transparent;}"
                              "QPushButton::hover{border:0px;border-radius:4px;background:transparent;}"
                              "QPushButton::pressed{border:0px;border-radius:4px;background:transparent;}");
-//    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_h.png);border-radius:4px;}"
-//                             "QPushButton:hover{background-color:rgba(61,61,61,1);border-image:url(:/data/min_h.png);border-radius:4px;}"
-//                             "QPushButton:pressed{background-color:rgba(73,73,73,1);border-image:url(:/data/min_h.png);border-radius:4px;}");
-//    titleClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_h.png);border-radius:4px;}"
-//                               "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
-//                               "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
-//    titleMenu->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
-//                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
-//                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_dark/menu.png);border-radius:4px;}"
-//                             "QPushButton::menu-indicator{image:None;}");
     titleText->setStyleSheet("color:rgba(249,249,249,1);font-size:14px;");
-    title->setStyleSheet(".QWidget{background-color:rgba(31,32,34,1)}");
-//    stackedWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
-    bottomWidget->setStyleSheet("background-color:rgba(31,32,34,1);");
     page2->setThemeStyleDark();
-//    this->setStyleSheet("background-color:rgba(31,32,34,1);");
-//    this->setStyleSheet(".QWidget{background-color:rgba(31,32,34,1);}");
     page1->setThemeStyleDark();
 }
 
@@ -326,22 +311,7 @@ void MainWindow::setThemeLight()
     titleIcon->setStyleSheet("QPushButton{border:0px;border-radius:0px;background:transparent;}"
                              "QPushButton::hover{border:0px;border-radius:4px;background:transparent;}"
                              "QPushButton::pressed{border:0px;border-radius:4px;background:transparent;}");
-//    titleMin->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/min_d.png);border-radius:4px;}"
-//                             "QPushButton:hover{background-color:rgba(0,0,0,0.15);border-image:url(:/data/min_d.png);border-radius:4px;}"
-//                             "QPushButton:pressed{background-color:rgba(0,0,0,0.3);border-image:url(:/data/min_d.png);border-radius:4px;}");
-//    titleClose->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/close_d.png);border-radius:4px;}"
-//                               "QPushButton:hover{background-color:rgba(253,149,149,1);border-image:url(:/data/close_h.png);border-radius:4px;}"
-//                               "QPushButton:pressed{background-color:rgba(237,100,100,1);border-image:url(:/data/close_h.png);border-radius:4px;}");
-//    titleMenu->setStyleSheet("QPushButton{background-color:rgba(255,255,255,0);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
-//                              "QPushButton:hover{background-color:rgba(0,0,0,0.04);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
-//                              "QPushButton:pressed{background-color:rgba(0,0,0,0.08);border-image:url(:/data/elements_light/menu.png);border-radius:4px;}"
-//                             "QPushButton::menu-indicator{image:None;}");
-//    stackedWidget->setStyleSheet("background-color:rgba(255,255,255,1);");
-    title->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
-    bottomWidget->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1)}");
     titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
-//    this->setStyleSheet("background-color:rgba(255,255,255,1);");
-//    this->setStyleSheet(".QWidget{background-color:rgba(255,255,255,1);}");
     page1->setThemeStyleLight();
     page2->setThemeStyleLight();
 }
