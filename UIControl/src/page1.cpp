@@ -1,7 +1,6 @@
 #include "page1.h"
 #include "include/xatom-helper.h"
 
-
 Page1::Page1()
 {
     initControlQss();//初始化样式
@@ -18,10 +17,7 @@ void Page1::initControlQss()
     tabUdisk->setFixedHeight(20);
     tabIso->setObjectName("tabLable");
     tabUdisk->setObjectName("tabLable");
-    comboUdisk=new StyleComboBox();
-    comboUdisk->setStyleSheet("font-size:14px");
-    connect(this,&Page1::diskLabelRefresh,comboUdisk,&StyleComboBox::dealDiskLabelRefresh);
-    connect(comboUdisk,&StyleComboBox::ifStartButtonChange,this,&Page1::dealComboBoxChangeButton);
+    comboUdisk = new QComboBox();
     warnningIcon=new QLabel;
     warnningIcon->setStyleSheet("border-image:url(:/data/warning.png);border:0px;");
     warnningIcon->setFixedSize(24,24);
@@ -40,16 +36,13 @@ void Page1::initControlQss()
                                          QMessageBox::Yes | QMessageBox::No);
                     switch (result)
                     {
-
                     case QMessageBox::Yes:
                         break;
                     case QMessageBox::No:
                         isoPath.clear();
                         break;
-
                     }
                 }
-
                 urlIso->setToolTip("");
                 if(isoPath.length() > 45){
                     urlIso->setToolTip(isoPath);
@@ -64,12 +57,11 @@ void Page1::initControlQss()
     creatStart->setFixedSize(200,30);
     creatStart->setText(tr("Start"));
     creatStart->setEnabled(false);
-//    connect(creatStart,&QPushButton::clicked,this,&Page1::creatStartSlots);
-    connect(creatStart,&QPushButton::clicked,[=]{/*
-        emit makeStart(isoPath,comboUdisk->getDiskPath());*/
+    connect(creatStart,&QPushButton::clicked,[=]{
         QDBusMessage m = QDBusMessage::createMethodCall("com.kylinusbcreator.systemdbus","/",
                                                         "com.kylinusbcreator.interface","MakeStart");
-        m<<isoPath;m<<comboUdisk->getDiskPath();
+        m<<isoPath;
+        m<<diskInfos[comboUdisk->currentIndex()]->devicePath;
         QDBusConnection::systemBus().call(m);
     });
 
@@ -131,11 +123,9 @@ void Page1::refreshDiskList()
     {
         return;
     }
-    comboUdisk->clearDiskList();
+    comboUdisk->clear();
     diskRefreshDelay->start(1000);
 }
-
-
 
 bool Page1::isCapicityAvailable(QString str)
 {
@@ -191,17 +181,16 @@ void Page1::getUdiskPathAndCap()
         }
     }
 }
+
 QJsonArray  Page1::QStringToJsonArray(const QString jsonString){
     QJsonParseError err;
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toLocal8Bit().data(),&err);
     if(jsonDocument.isNull())
     {
-        qDebug()<< "JsonDocument is NULL.Origin data is:"<< jsonString.toLocal8Bit().data();
+        qWarning()<< "JsonDocument is NULL.Origin data is:"<< jsonString.toLocal8Bit().data();
     }
     if(err.error != QJsonParseError::NoError){
-        qDebug()<<"Parase json"<<jsonString<<" error:"<<err.error;
-        //TODO：这里的错误处理后期还可以优化,目前处理错误了就会调用exit()退出程序
-//        exit(-1);
+        qWarning()<<"Parase json"<<jsonString<<" error:"<<err.error;
     }
     QJsonObject obj = jsonDocument.object();
     return obj["blockdevices"].toArray();
@@ -227,33 +216,6 @@ void Page1::getUdiskName()
                 float cap = disk.bytesTotal();
                 tmp->diskCapicity = QString::number(cap / 1000000000,'f',1) + 'G';
                 continue;
-//                uchardet_t* type = new uchardet_t();
-//                type->uchardet_handle_data()
-//                QString target;
-//                QByteArray str = disk.displayName().toLatin1();
-//                QByteArray tmp = str.toLatin1();
-//                QTextCodec::ConverterState state;
-//                target = QTextCodec::codecForName("UTF-8")->toUnicode(str.constData(),str.size(),&state);
-//                qDebug()<<state.invalidChars;
-//                if(state.invalidChars > 0){
-//                    qDebug()<<state.invalidChars;
-//                    target = QTextCodec::codecForName("GBK")->toUnicode(str.constData(),str.size(),&state);
-//                    if(state.invalidChars > 0){
-//                        qDebug()<<"不支持的编码集";
-//                    }
-//                }
-//                target.replace("\n","");
-//                qDebug()<<target;
-//                QTextCodec *utf8 = QTextCodec::codecForName("UTF-8");
-//                QTextCodec::setCodecForLocale(utf8);
-//                QTextCodec::setCodecForCStrings(utf8);
-//                QTextCodec* gbk = QTextCodec::codecForName("gbk");
-//                char *p = str.toLocal8Bit().data();
-
-//                QString strUnicode=gbk->toUnicode(p);
-//                QByteArray utf8_bytes=utf8->fromUnicode(strUnicode);
-//                p = utf8_bytes.data();
-//                qDebug()<<QString(QLatin1String(p));
             }
         }
     }
@@ -263,7 +225,6 @@ void Page1::getStorageInfo()
 {
     diskRefreshDelay->stop();//U盘动态刷新相关
     getUdiskPathAndCap();
-//    getUdiskName();
     foreach(AvailableDiskInfo *diskInfo,diskInfos)
     {
         //过长的名称做去尾加省略号
@@ -274,32 +235,19 @@ void Page1::getStorageInfo()
         QString info = diskInfo->displayName+" ("+diskInfo->devicePath + ") " + diskInfo->diskCapicity;
 
         comboUdisk->addItem(info,diskInfo->devicePath);
-//        有分区就向第一分区里写，没分区就直接向块设备写,该方法暂时停止使用——有文件系统但是没有分区的U盘会导致制作失败向不存在的sd*1设备中写入
-//        if(diskInfo->displayName == "unknowname")
-//        {
-//            comboUdisk->addItem(info,diskInfo->devicePath);
-//        }else{
-//            comboUdisk->addItem(info,diskInfo->devicePath + '1');
-//        }
-
         warnningIcon->show();
         warnningText->show();
     }
 
-    if(0==comboUdisk->listWidget->count())
+    if(0==comboUdisk->count())
     {
-        comboUdisk->addItem(tr("No USB drive available"),NOUDISK);
+        comboUdisk->addItem(tr("No USB drive available"));
         warnningText->hide();
         warnningIcon->hide();
         creatStart->setEnabled(false);
     }
     emit diskLabelRefresh();
     ifStartBtnChange();
-}
-
-void Page1::allClose()
-{
-    comboUdisk->closeListWidget();
 }
 
 void Page1::creatStartSlots()
@@ -315,40 +263,9 @@ void Page1::creatStartSlots()
     }
 }
 
-bool Page1::event(QEvent *event)
-{
-    if(comboUdisk->listWidget == nullptr)
-    {
-        return QWidget::event(event);
-    }
-    if (event->type() == QEvent::Leave)
-    {
-        if(mouseIsLeaveUdiskWidget())
-        {
-            comboUdisk->closeListWidget();
-        }
-    }
-    else if (event->type() == QEvent::MouseButtonPress)
-    {
-        comboUdisk->closeListWidget();
-    }
-    return QWidget::event(event);
-}
-
-bool Page1::mouseIsLeaveUdiskWidget()
-{
-    QPoint mouse=QCursor::pos();
-    QPoint thisWidget=this->mapToGlobal(this->pos());
-    QSize thisWidgetSize=this->size();
-    if(mouse.rx()<=thisWidget.rx() || mouse.rx()>=thisWidget.rx()+thisWidgetSize.width() || mouse.ry()<=thisWidget.ry() || mouse.ry()>=thisWidget.ry()+thisWidgetSize.height())
-        return true;
-    else
-        return false;
-}
-
 bool Page1::ifStartBtnChange()
 {
-    if(comboUdisk->getDiskPath() != NOUDISK && !urlIso->text().isEmpty())
+    if(comboUdisk->currentText() != tr("No USB drive available") && !urlIso->text().isEmpty())
     {
         creatStart->setEnabled(true);
         creatStart->setStyleSheet("QPushButton{background-color:rgba(100,105,241,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;}"
@@ -378,11 +295,6 @@ void Page1::dealComboBoxChangeButton()
     ifStartBtnChange();
 }
 
-void Page1::dealRightPasswd()
-{
-    emit makeStart(isoPath,comboUdisk->getDiskPath());
-
-}
 void Page1::dealAuthDialogClose()
 {
     creatStart->setEnabled(true);
@@ -402,14 +314,10 @@ void Page1::setThemeStyleLight()
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px;font-size:14px;}"
-                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
-                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;border:1px  solid rgba(240,240,240,1);border-radius:4px;");
 
 
     this->setStyleSheet("background-color:rgba(255,255,255,1);");
-    comboUdisk->setThemeLight();    //设置combobox响应浅色主题
     emit setStyleWidgetStyle(LIGHTTHEME);   //设置stylewidget响应浅色主题
 }
 
@@ -422,14 +330,10 @@ void Page1::setThemeStyleDark()
     creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
     ifStartBtnChange();
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
-
-    findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"
-                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
-                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-    urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
-
-
-    comboUdisk->setThemeDark(); //设置combobox响应深色主题
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
     emit setStyleWidgetStyle(DARKTHEME); //设置stylewidget响应黑色主题
+}
+
+QString Page1::getDevPath(){
+    return diskInfos[comboUdisk->currentIndex()]->devicePath;
 }

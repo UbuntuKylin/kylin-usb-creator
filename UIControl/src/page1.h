@@ -10,10 +10,10 @@
 #define DARKTHEME "dark"
 #define LIGHTTHEME "light"
 
-#include "stylecombobox.h"
 #include <QEvent>
 #include <QDebug>
 #include <QRect>
+#include <QComboBox>
 #include <QWidget> //控件
 #include <QLabel>
 #include <QProcess>
@@ -57,8 +57,9 @@ public:
     bool ifStartBtnChange(); //开始制作按钮是否可以点击
     void setThemeStyleLight(); //设置浅色主题
     void setThemeStyleDark(); //设置深色主题
+    QString getDevPath();
     QLineEdit *urlIso = nullptr;//显示镜像路径
-    StyleComboBox *comboUdisk = nullptr;//U盘列表
+    QComboBox *comboUdisk = nullptr;//U盘列表
 
 signals:
     void makeStart(QString sourcePath,QString targetPath); //make start
@@ -67,18 +68,14 @@ signals:
     void isoIllegal();
 
 public slots:
-    void allClose();
     void refreshDiskList();
-    void dealRightPasswd(); //处理密码正确
     void dealAuthDialogClose();  //处理授权框关闭
     void dealComboBoxChangeButton(); //combobox通知page1检查开始按钮是否可以亮起
 
 private:
-    bool event(QEvent *event); // 鼠标离开U盘列表事件
     void creatStartSlots();    //开始制作
     void initControlQss();//初始化控件及其样式
     void getStorageInfo();//获取磁盘信息
-    bool mouseIsLeaveUdiskWidget();//鼠标是否离开U盘列表
     void dealDialogCancel();     // 处理授权框关闭及取消
     void udiskPlugWatcherInit(); //U盘插拔监控初始化
     bool isCapicityAvailable(QString); //容量过滤

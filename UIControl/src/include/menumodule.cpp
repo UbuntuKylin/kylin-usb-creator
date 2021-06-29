@@ -192,9 +192,6 @@ QHBoxLayout* menuModule::initTitleBar(){
     titleIcon->setIconSize(QSize(24,24));
     titleIcon->setFocusPolicy(Qt::NoFocus);
     titleIcon->setIcon(QIcon::fromTheme("kylin-usb-creator",QIcon(iconPath)));
-    //TODO：直接从主题调图标，不会QIcon转qpixmap所以暂时从本地拿
-//    titleIcon->setPixmap(QPixmap::fromImage(QImage(iconPath)));
-//    titleIcon->setScaledContents(true);
     titleBtnClose->setFixedSize(30,30);
     titleBtnClose->setIcon(QIcon::fromTheme("window-close-symbolic"));
     titleBtnClose->setProperty("isWindowButton",0x2);
@@ -299,7 +296,8 @@ void menuModule::setThemeDark(){
     bodySupport->setText(tr("Service & Support: ") +
                          "<a href=\"mailto://support@kylinos.cn\""
                          "style=\"color:rgba(225,225,225,1)\">"
-                         "support@kylinos.cn</a>");
+                         "support@kylinos.cn</a>"
+                         );
     bodyIcon->setStyleSheet("QPushButton{border:0px;border-redius:4px;background:transparent;}"
                             "QPushButton::hover{border:0px;border-redius:4px;background:transparent;}"
                             "QPushButton::pressed{border:0px;border-redius:4px;background:transparent;}"
@@ -322,9 +320,7 @@ void menuModule::setThemeLight(){
                             "QPushButton::pressed{border:0px;border-redius:4px;background:transparent;}"
                             );
     titleIcon->setStyleSheet("QPushButton{border:0px;border-redius:4px;background:transparent;}"
-                                                           "QPushButton::hover{border:0px;border-redius:4px;background:transparent;}"
-                                                           "QPushButton::pressed{border:0px;border-redius:4px;background:transparent;}"
-                                                           );
-
-
+                            "QPushButton::hover{border:0px;border-redius:4px;background:transparent;}"
+                            "QPushButton::pressed{border:0px;border-redius:4px;background:transparent;}"
+                            );
 }
