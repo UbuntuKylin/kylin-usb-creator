@@ -183,16 +183,6 @@ qint64 Page2::getFileSize(QString filePath)
 
 void Page2::finishEvent()
 {
-    //mount disk at end of production
-//    QProcess m_unmount;
-//    QStringList m_unmount_arg;
-//    m_unmount_arg <<"mount"<<"-b"<<uDiskPath;
-//    m_unmount.start("udisksctl",m_unmount_arg);
-//    if(m_unmount.waitForStarted()){
-//        m_unmount.waitForFinished();
-//    }else{
-//        qDebug()<<"#udisksctl# Warning:mount failed! mount path :"<<uDiskPath;
-//    }
     QTimer *diskRefreshDelay = new QTimer;
     connect(diskRefreshDelay,&QTimer::timeout,[=]{
         diskRefreshDelay->stop();
@@ -244,7 +234,6 @@ void Page2::movieRefresh()
 void Page2::setThemeStyleLight()
 {
     themeStatus = LIGHTTHEME;
-//    this->setStyleSheet("background-color:rgba(255,5,5,1);");
     lableNum->setStyleSheet("background-color:rgba(236, 236, 236,0);color:rgba(100, 105, 241, 1);font-size:16px;");
     lableText->setStyleSheet("font-size:14px;");
     movieRefresh();

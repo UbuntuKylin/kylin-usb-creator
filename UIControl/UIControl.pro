@@ -29,8 +29,7 @@ SOURCES += \
     src/include/qtlockedfile_unix.cpp \
     src/include/qtsingleapplication.cpp \
     src/include/xatom-helper.cpp \
-    src/include/daemonipcdbus.cpp \
-    src/toolwindow.cpp
+    src/include/daemonipcdbus.cpp
 
 HEADERS += \
     src/dbusadaptor.h \
@@ -42,8 +41,7 @@ HEADERS += \
     src/include/qtlocalpeer.h \
     src/include/qtlockedfile.h \
     src/include/qtsingleapplication.h \
-    src/include/xatom-helper.h \
-    src/toolwindow.h
+    src/include/xatom-helper.h
 
 LIBS +=-lpthread
 LIBS +=-lX11

@@ -57,6 +57,7 @@ public:
     bool ifStartBtnChange(); //开始制作按钮是否可以点击
     void setThemeStyleLight(); //设置浅色主题
     void setThemeStyleDark(); //设置深色主题
+    QString getDevPath();
     QLineEdit *urlIso = nullptr;//显示镜像路径
     QComboBox *comboUdisk = nullptr;//U盘列表
 

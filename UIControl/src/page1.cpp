@@ -187,12 +187,10 @@ QJsonArray  Page1::QStringToJsonArray(const QString jsonString){
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toLocal8Bit().data(),&err);
     if(jsonDocument.isNull())
     {
-        qDebug()<< "JsonDocument is NULL.Origin data is:"<< jsonString.toLocal8Bit().data();
+        qWarning()<< "JsonDocument is NULL.Origin data is:"<< jsonString.toLocal8Bit().data();
     }
     if(err.error != QJsonParseError::NoError){
-        qDebug()<<"Parase json"<<jsonString<<" error:"<<err.error;
-        //TODO：这里的错误处理后期还可以优化,目前处理错误了就会调用exit()退出程序
-//        exit(-1);
+        qWarning()<<"Parase json"<<jsonString<<" error:"<<err.error;
     }
     QJsonObject obj = jsonDocument.object();
     return obj["blockdevices"].toArray();
@@ -218,33 +216,6 @@ void Page1::getUdiskName()
                 float cap = disk.bytesTotal();
                 tmp->diskCapicity = QString::number(cap / 1000000000,'f',1) + 'G';
                 continue;
-//                uchardet_t* type = new uchardet_t();
-//                type->uchardet_handle_data()
-//                QString target;
-//                QByteArray str = disk.displayName().toLatin1();
-//                QByteArray tmp = str.toLatin1();
-//                QTextCodec::ConverterState state;
-//                target = QTextCodec::codecForName("UTF-8")->toUnicode(str.constData(),str.size(),&state);
-//                qDebug()<<state.invalidChars;
-//                if(state.invalidChars > 0){
-//                    qDebug()<<state.invalidChars;
-//                    target = QTextCodec::codecForName("GBK")->toUnicode(str.constData(),str.size(),&state);
-//                    if(state.invalidChars > 0){
-//                        qDebug()<<"不支持的编码集";
-//                    }
-//                }
-//                target.replace("\n","");
-//                qDebug()<<target;
-//                QTextCodec *utf8 = QTextCodec::codecForName("UTF-8");
-//                QTextCodec::setCodecForLocale(utf8);
-//                QTextCodec::setCodecForCStrings(utf8);
-//                QTextCodec* gbk = QTextCodec::codecForName("gbk");
-//                char *p = str.toLocal8Bit().data();
-
-//                QString strUnicode=gbk->toUnicode(p);
-//                QByteArray utf8_bytes=utf8->fromUnicode(strUnicode);
-//                p = utf8_bytes.data();
-//                qDebug()<<QString(QLatin1String(p));
             }
         }
     }
@@ -254,7 +225,6 @@ void Page1::getStorageInfo()
 {
     diskRefreshDelay->stop();//U盘动态刷新相关
     getUdiskPathAndCap();
-//    getUdiskName();
     foreach(AvailableDiskInfo *diskInfo,diskInfos)
     {
         //过长的名称做去尾加省略号
@@ -344,9 +314,6 @@ void Page1::setThemeStyleLight()
     this->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:4px;}"
                         ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
                         ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
-//    findIso->setStyleSheet(".QPushButton{background-color:rgba(240, 240, 240, 1);color:rgba(96,98,101,1);border-radius:4px;font-size:14px;}"
-//                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
-//                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
     urlIso->setStyleSheet("background-color:rgba(240,240,240,1);color:rgba(96,98,101,1);font-size:12px;border:1px  solid rgba(240,240,240,1);border-radius:4px;");
 
 
@@ -363,12 +330,10 @@ void Page1::setThemeStyleDark()
     creatStart->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);border-radius:15px;font-size:14px;");
     ifStartBtnChange();
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
-
-//    findIso->setStyleSheet(".QPushButton{background-color:rgba(47, 48, 50, 1);;color:rgba(200,200,200,1);border-radius:4px;font-size:14px;}"
-//                           ".QPushButton:hover{background-color:rgba(136,140,255,1);color:#fff;}"
-//                           ".QPushButton:pressed{background-color:rgba(82,87,217,1);color:#fff;}");
-    urlIso->setStyleSheet("background-color:rgba(47, 48, 50, 1);color:rgba(200,200,200,1);font-size:12px;");
-
     this->setStyleSheet("background-color:rgba(31,32,34,1);");
     emit setStyleWidgetStyle(DARKTHEME); //设置stylewidget响应黑色主题
+}
+
+QString Page1::getDevPath(){
+    return diskInfos[comboUdisk->currentIndex()]->devicePath;
 }
