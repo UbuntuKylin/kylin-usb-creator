@@ -28,9 +28,12 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
         return ;
     }
     if(!unmountDevice(targetPath)){
-        emit makeFinish("unmount_error");
 //        TODO:Deal sbus message unmount_error
-//        return;
+        emit makeFinish("unmount_error");
+    }
+    if(!unmountDevice(targetPath + "1")){
+//        TODO:Deal sbus message unmount_error
+        emit makeFinish("unmount_error");
     }
     uDiskPath = targetPath;
     QFileInfo info(sourcePath);
@@ -51,8 +54,8 @@ void SystemDbusRegister::MakeStart(QString sourcePath,QString targetPath){
 bool SystemDbusRegister::unmountDevice(QString target)
 {
     QProcess unmount;
-    unmount.start("udisksctl",QStringList{"unmount","-b",target+"1"});
-    qDebug()<<"Start unmount disk:"<<target+"1";
+    unmount.start("udisksctl",QStringList{"unmount","-b",target});
+    qDebug()<<"Start unmount disk:"<<target;
     if(!unmount.waitForStarted()){
         qWarning()<<"unmount process start failed.device path:"<<target;
         return false;
