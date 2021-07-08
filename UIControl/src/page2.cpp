@@ -75,12 +75,10 @@ void Page2::playLoadingGif()
     returnPushButton->setText(tr("USB starter in production"));
     movieStatus = loading;
     if(LIGHTTHEME == themeStatus){
-        returnPushButton->setStyleSheet("background-color:rgba(236, 236, 236, 1);color:rgba(193, 193, 193, 1);font-size:14px;border-radius:15px;");
         lableMovie->setMovie(movieLoading_l); //set movie for qlabel
         movieLoading_l->start();         //play loading gif
     }else
     {
-        returnPushButton->setStyleSheet("background-color:rgba(48,49,51,1);color:rgba(249,249,249,1);font-size:14px;border-radius:15px;");
         lableMovie->setMovie(movieLoading_d);
         movieLoading_d->start();
     }
@@ -92,9 +90,6 @@ void Page2::playFinishGif()
     lableNum->hide();
     returnPushButton->setEnabled(true);
     returnPushButton->setText(tr("return"));
-    returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:15px;font-size:14px;}"
-                          ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
-                          ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
     lableText->setText(tr("Finish"));
     lableMovie->clear();
     movieStatus = finish;
@@ -115,9 +110,6 @@ void Page2::playErrorGif()
     returnPushButton->setEnabled(true);
     returnPushButton->setText(tr("return"));
     movieStatus = failed;
-    returnPushButton->setStyleSheet(".QPushButton{background-color:rgba(100, 105, 241, 1);color:#fff;border-radius:15px;font-size:14px;}"
-                          ".QPushButton:hover{background-color:rgba(136,140,255,1);}"
-                          ".QPushButton:pressed{background-color:rgba(82,87,217,1);}");
     lableText->setText(tr("Creation Failed"));
     lableMovie->clear();
     lableMovie->setScaledContents(true);
