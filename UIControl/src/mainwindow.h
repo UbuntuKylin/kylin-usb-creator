@@ -62,6 +62,7 @@ private:
     QAction *actionQuit = nullptr;
 
     void keyPressEvent(QKeyEvent* event);
+    void dragEnterEvent(QDragEnterEvent*);
     
     void init(); //初始化mainwindow相关的设置
     int changePage();

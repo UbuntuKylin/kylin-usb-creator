@@ -14,7 +14,7 @@
 #include <QDebug>
 #include <QRect>
 #include <QComboBox>
-#include <QWidget> //控件
+#include <QWidget>
 #include <QLabel>
 #include <QProcess>
 #include <QComboBox>

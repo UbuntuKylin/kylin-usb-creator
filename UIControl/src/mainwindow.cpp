@@ -101,6 +101,7 @@ void MainWindow::init(){
 //    连结systembus进程消息
     QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","authorityStatus",this,SLOT(dealAuthorityStatus(QString)));
 
+    this->setAcceptDrops(true);
 }
 
 void MainWindow::aboutClick()
@@ -295,7 +296,6 @@ void MainWindow::dealAuthorityStatus(QString status){
 //        授权失败，回到到page1
     }
 }
-
 void MainWindow::setThemeDark()
 {
     titleIcon->setStyleSheet("QPushButton{border:0px;border-radius:4px;background:transparent;}"
@@ -314,4 +314,14 @@ void MainWindow::setThemeLight()
     titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
     page1->setThemeStyleLight();
     page2->setThemeStyleLight();
+}
+void MainWindow::dragEnterEvent(QDragEnterEvent *event){
+#if 0
+    if(event->mimeData()->hasFormat("text/uri-list")){
+        event->acceptProposedAction();
+    }
+    for(auto i:event->mimeData()->urls()){
+    }
+#endif
+    return QWidget::dragEnterEvent(event);
 }
