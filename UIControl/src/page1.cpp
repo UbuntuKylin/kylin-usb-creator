@@ -30,27 +30,7 @@ void Page1::initControlQss()
     findIso->setFixedSize(56,30);
     connect(findIso,&QPushButton::clicked,this,[=]{
             isoPath = QFileDialog::getOpenFileName(0,tr("choose iso file"),QDir::homePath(),"ISO(*.iso)");
-            if(isoPath != "" ){
-                if(!checkISO(isoPath)){
-                    QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("MBR signature not detected,continue anyway?"),
-                                         QMessageBox::Yes | QMessageBox::No);
-                    switch (result)
-                    {
-                    case QMessageBox::Yes:
-                        break;
-                    case QMessageBox::No:
-                        isoPath.clear();
-                        break;
-                    }
-                }
-                urlIso->setToolTip("");
-                if(isoPath.length() > 45){
-                    urlIso->setToolTip(isoPath);
-                    urlIso->setText(isoPath.mid(0,44) + "...");
-                }else{
-                    urlIso->setText(isoPath);
-                }
-            }
+            dealSelectedFile(isoPath);
         });
     connect(urlIso,&QLineEdit::textChanged,this,&Page1::ifStartBtnChange);
     creatStart=new QPushButton(this);
@@ -301,4 +281,39 @@ void Page1::setThemeStyleDark()
 
 QString Page1::getDevPath(){
     return diskInfos[comboUdisk->currentIndex()]->devicePath;
+}
+
+void Page1::dealSelectedFile(QString isoPath){
+    if(isoPath.isEmpty())
+        return ;
+    if(!checkISO(isoPath)){
+        QMessageBox::StandardButton result =  QMessageBox::warning(this,tr("Warning"),tr("MBR signature not detected,continue anyway?"),
+                             QMessageBox::Yes | QMessageBox::No);
+        switch (result)
+        {
+        case QMessageBox::Yes:
+            break;
+        case QMessageBox::No:
+            isoPath.clear();
+            break;
+        }
+    }
+    urlIso->setToolTip("");
+    if(isoPath.length() > 45){
+        urlIso->setToolTip(isoPath);
+        urlIso->setText(isoPath.mid(0,44) + "...");
+    }else{
+        urlIso->setText(isoPath);
+    }
+    return ;
+}
+
+void Page1::dropEvent(QDropEvent *event){
+    auto urls = event->mimeData()->urls();
+    if(urls.isEmpty())
+        return ;
+    for(auto url:urls){
+        dealSelectedFile(url.toLocalFile());
+    }
+    return ;
 }

@@ -101,6 +101,7 @@ void MainWindow::init(){
 //    连结systembus进程消息
     QDBusConnection::systemBus().connect(QString(),QString("/"),"com.kylinusbcreator.interface","authorityStatus",this,SLOT(dealAuthorityStatus(QString)));
 
+    this->setAcceptDrops(true);
 }
 
 void MainWindow::aboutClick()
@@ -128,6 +129,7 @@ void MainWindow::myStyle()
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
+    pageIndex = PAGE_ONE;
     stackedWidget =new QStackedWidget(this);
     stackedWidget->addWidget(page1);
     stackedWidget->addWidget(page2);
@@ -204,6 +206,7 @@ void MainWindow::makeStart()
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
+    pageIndex = PAGE_TWO;
 }
 
 void MainWindow::doubleCheck(){
@@ -266,6 +269,7 @@ void MainWindow::makeFinish()
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
+    pageIndex = PAGE_THREE;
 }
 
 void MainWindow::returnMain()
@@ -276,6 +280,7 @@ void MainWindow::returnMain()
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
+    pageIndex = PAGE_ONE;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -295,7 +300,6 @@ void MainWindow::dealAuthorityStatus(QString status){
 //        授权失败，回到到page1
     }
 }
-
 void MainWindow::setThemeDark()
 {
     titleIcon->setStyleSheet("QPushButton{border:0px;border-radius:4px;background:transparent;}"
@@ -314,4 +318,27 @@ void MainWindow::setThemeLight()
     titleText->setStyleSheet("color:rgba(48,49,51,1);font-size:14px;");
     page1->setThemeStyleLight();
     page2->setThemeStyleLight();
+}
+void MainWindow::dragEnterEvent(QDragEnterEvent *event){
+    auto urls = event->mimeData()->urls();
+    if(urls.length() != 1){
+        return ;
+    }
+    QString filePath = urls.at(0).toLocalFile();
+    if("iso" != QFileInfo(filePath).suffix().toLower()){
+        return ;
+    }
+    if(event->mimeData()->hasFormat("text/uri-list")){
+        event->acceptProposedAction();
+    }
+    return QWidget::dragEnterEvent(event);
+}
+
+void MainWindow::dropEvent(QDropEvent *event){
+    if(pageIndex == PAGE_ONE){
+        if(page1){
+            page1->dropEvent(event);
+        }
+    }
+    return QWidget::dropEvent(event);
 }
