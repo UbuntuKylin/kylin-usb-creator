@@ -129,6 +129,7 @@ void MainWindow::myStyle()
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
+    pageIndex = PAGE_ONE;
     stackedWidget =new QStackedWidget(this);
     stackedWidget->addWidget(page1);
     stackedWidget->addWidget(page2);
@@ -205,6 +206,7 @@ void MainWindow::makeStart()
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1)");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1)");
+    pageIndex = PAGE_TWO;
 }
 
 void MainWindow::doubleCheck(){
@@ -267,6 +269,7 @@ void MainWindow::makeFinish()
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
+    pageIndex = PAGE_THREE;
 }
 
 void MainWindow::returnMain()
@@ -277,6 +280,7 @@ void MainWindow::returnMain()
     pointLable1->setStyleSheet("border-radius:4px;background:rgba(100, 105, 241, 1);");
     pointLable2->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
     pointLable3->setStyleSheet("border-radius:4px;background:rgba(151, 151, 151, 1);");
+    pageIndex = PAGE_ONE;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -316,12 +320,25 @@ void MainWindow::setThemeLight()
     page2->setThemeStyleLight();
 }
 void MainWindow::dragEnterEvent(QDragEnterEvent *event){
-#if 0
+    auto urls = event->mimeData()->urls();
+    if(urls.length() != 1){
+        return ;
+    }
+    QString filePath = urls.at(0).toLocalFile();
+    if("iso" != QFileInfo(filePath).suffix().toLower()){
+        return ;
+    }
     if(event->mimeData()->hasFormat("text/uri-list")){
         event->acceptProposedAction();
     }
-    for(auto i:event->mimeData()->urls()){
-    }
-#endif
     return QWidget::dragEnterEvent(event);
+}
+
+void MainWindow::dropEvent(QDropEvent *event){
+    if(pageIndex == PAGE_ONE){
+        if(page1){
+            page1->dropEvent(event);
+        }
+    }
+    return QWidget::dropEvent(event);
 }

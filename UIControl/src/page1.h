@@ -13,6 +13,9 @@
 #include <QEvent>
 #include <QDebug>
 #include <QRect>
+#include <QDropEvent>
+#include <QMimeData>
+#include <QDragEnterEvent>
 #include <QComboBox>
 #include <QWidget>
 #include <QLabel>
@@ -60,6 +63,7 @@ public:
     QString getDevPath();
     QLineEdit *urlIso = nullptr;//显示镜像路径
     QComboBox *comboUdisk = nullptr;//U盘列表
+    void dropEvent(QDropEvent*);
 
 signals:
     void makeStart(QString sourcePath,QString targetPath); //make start
@@ -81,6 +85,7 @@ private:
     void getUdiskPathAndCap();    //获取U盘路径和容量
     void getUdiskName();    //获取U盘第一个分区的命名
     bool checkISO(const QString fileName); //ISO合法性检验
+    void dealSelectedFile(QString);
     QJsonArray QStringToJsonArray(const QString jsonString);
 
     QList<AvailableDiskInfo*> diskInfos; // U盘信息

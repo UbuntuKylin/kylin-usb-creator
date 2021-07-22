@@ -16,6 +16,7 @@
 #include <QSystemTrayIcon> //状态栏
 #include <QGSettings>
 #include <QMenu>
+#include <QMimeData>
 #include <QPushButton>
 #include <QWidget>
 #include <QMessageBox>
@@ -25,6 +26,13 @@
 #include <QDesktopWidget>
 #include "include/daemonipcdbus.h" //拉起帮助手册
 #include "include/menumodule.h"
+
+enum {
+    PAGE_NONE,
+    PAGE_ONE,
+    PAGE_TWO,
+    PAGE_THREE
+}pageIndex;
 
 class MainWindow : public QWidget
 {
@@ -63,6 +71,7 @@ private:
 
     void keyPressEvent(QKeyEvent* event);
     void dragEnterEvent(QDragEnterEvent*);
+    void dropEvent(QDropEvent*);
     
     void init(); //初始化mainwindow相关的设置
     int changePage();
